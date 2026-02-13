@@ -35,6 +35,5 @@ nav:
   - Home: index.md
   - QoS Rules:
     - Overview: rules/index.md
-
     - IMP Rules: rules/IMP.md
     - EMP Rules: rules/EMP.md
