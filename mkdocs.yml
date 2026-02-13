@@ -6,8 +6,8 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
-  language: ko
-  palette: 
+  language: en  
+  palette:
     - scheme: default
       primary: indigo
       accent: indigo
@@ -28,7 +28,7 @@ theme:
 nav:
   - Home: index.md
   - QoS Rules:
-      - Base: rules/index.md
-        - STD: rules/STD.md
-        - IMP: rules/IMP.md
-        - EMP: rules/EMP.md
+      - Overview: rules/index.md 
+      - STD Rules: rules/STD.md
+      - IMP Rules: rules/IMP.md
+      - EMP Rules: rules/EMP.md
