@@ -1,0 +1,9 @@
+site_name: QoS Guard Documentation
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: indigo
+nav:
+  - Home: index.md
+  - Guide: guide.md
