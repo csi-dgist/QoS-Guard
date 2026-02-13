@@ -29,6 +29,6 @@ nav:
   - Home: index.md
   - QoS Rules:
       - Base: rules/index.md
-      - STD: rules/STD.md
-      - IMP: rules/IMP.md
-      - EMP: rules/EMP.md
+        - STD: rules/STD.md
+        - IMP: rules/IMP.md
+        - EMP: rules/EMP.md
