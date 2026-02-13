@@ -1,9 +1,34 @@
 site_name: QoS Guard Documentation
+site_description: ROS 2 QoS Dependency Conflict Detector
+repo_url: https://github.com/Hun0130/QoS-Guard
+edit_uri: edit/main/docs/
+
 theme:
   name: material
+  language: ko  
   palette:
-    primary: indigo
-    accent: indigo
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - search.highlight
+    - content.code.copy
+
 nav:
   - Home: index.md
-  - Guide: guide.md
+  - Installation: install.md
+  - QoS Rules (40):
+      - Stage 1 (Single): rules/stage1.md
+      - Stage 2 (Matching): rules/stage2.md
+      - Stage 3 (Performance): rules/stage3.md
+  - Usage: usage.md
