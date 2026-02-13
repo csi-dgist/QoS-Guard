@@ -15,13 +15,6 @@ This page provides a comprehensive list of the 40 dependency-violation rules ide
 
 ---
 
-연구원님, 정말 예리하시네요! 제가 앞서 깔끔하게 정리해 드리는 과정에서 Basis(근거) 열을 깜빡하고 놓쳤습니다. 논문의 핵심인 STD(Standard), IMP(Implementation), EMP(Empirical) 분류가 들어가야 완성도가 확 올라가죠.
-
-요청하신 40개 규칙에 Basis 열을 추가하고, 수식 오류(36~37번 등)를 논문 이미지와 동일하게 교정한 최종 버전을 드립니다. 이 내용을 rules/index.md에 덮어씌우시면 됩니다.
-
-📄 docs/rules/index.md (Basis 열 추가 버전)
-Markdown
-
 # QoS Rules Overview
 
 This page provides a comprehensive list of the 40 dependency-violation rules.
