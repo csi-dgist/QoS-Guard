@@ -1,8 +1,7 @@
-site_name: QoS Guard Documentation
+site_name: QoS Guard
 site_description: ROS 2 QoS Dependency Conflict Detector
 site_url: https://csi-dgist.github.io/QoS-Guard/
 repo_url: https://github.com/csi-dgist/QoS-Guard
-edit_uri: edit/main/docs/
 
 theme:
   name: material
@@ -10,33 +9,31 @@ theme:
   palette:
     - scheme: default
       primary: indigo
-      accent: indigo
       toggle:
         icon: material/brightness-7
-        name: Switch to dark mode
+        name: Dark mode
     - scheme: slate
       primary: indigo
-      accent: indigo
       toggle:
         icon: material/brightness-4
-        name: Switch to light mode
+        name: Light mode
   features:
     - navigation.tabs
-    - search.highlight
     - content.code.copy
+
+use_directory_urls: true
 
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
 
 extra_javascript:
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
   - Home: index.md
   - QoS Rules:
-      - Overview: rules/index.md
-      - STD Rules: rules/STD.md
-      - IMP Rules: rules/IMP.md
-      - EMP Rules: rules/EMP.md
+    - Overview: rules/index.md
+    - STD Rules: rules/STD.md
+    - IMP Rules: rules/IMP.md
+    - EMP Rules: rules/EMP.md
