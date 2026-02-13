@@ -26,9 +26,7 @@ theme:
 
 nav:
   - Home: index.md
-  - Installation: install.md
-  - QoS Rules (40):
-      - Stage 1 (Single): rules/stage1.md
-      - Stage 2 (Matching): rules/stage2.md
-      - Stage 3 (Performance): rules/stage3.md
-  - Usage: usage.md
+  - QoS Rules:
+      - Structural Rules: rules/structural.md
+      - RxO Compatibility: rules/rxo.md
+      - Dynamic Rules: rules/dynamic.md
