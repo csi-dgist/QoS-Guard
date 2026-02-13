@@ -19,6 +19,7 @@ theme:
         name: Light mode
   features:
     - navigation.tabs
+    - navigation.sections
     - content.code.copy
 
 use_directory_urls: true
