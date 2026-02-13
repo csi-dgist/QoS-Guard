@@ -28,6 +28,7 @@ theme:
 nav:
   - Home: index.md
   - QoS Rules:
-      - Structural Rules: rules/structural.md
-      - RxO Compatibility: rules/rxo.md
-      - Dynamic Rules: rules/dynamic.md
+      - Base: rules/index.md
+      - STD: rules/structural.md
+      - IMP: rules/rxo.md
+      - EMP: rules/dynamic.md
