@@ -21,6 +21,7 @@ theme:
     - navigation.tabs
     - navigation.sections
     - content.code.copy
+    - navigation.expand
 
 use_directory_urls: true
 
