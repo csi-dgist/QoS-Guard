@@ -7,7 +7,7 @@ edit_uri: edit/main/docs/
 theme:
   name: material
   language: ko
-  palette:
+  palette: 
     - scheme: default
       primary: indigo
       accent: indigo
