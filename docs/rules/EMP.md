@@ -287,7 +287,7 @@ $$[OWNST = EXCLUSIVE] \implies DEADLN.period \ge 2 \times PP$$
 
 * **QoS Profile:** Ownership = `EXCLUSIVE`, Liveliness = `AUTOMATIC`
 * **Variable (Lease Duration):** 50ms, 100ms, 300ms, 500ms, 800ms
-* **Network Condition:** Constant Packet Loss/Jitter (Simulated via `tc`)
+* **Network Condition:** 80% Packet Loss (Simulated via `tc`)
 * **Publication Period (PP):** 100ms
 * **Metric:** Total count of Liveliness Lost events
 
@@ -316,7 +316,7 @@ $$[OWNST = EXCLUSIVE] \implies lease\_duration \ge 2 \times PP$$
 ---
 
 
-## 📝 Notation Summary
+## Notation Summary
 * **mpi**: `max_samples_per_instance`
-* **PP**: `Publish Period` (Time interval between consecutive samples)
-* **RTT**: `Round Trip Time` (Network latency)
+* **PP**: `Publish Period` 
+* **RTT**: `Round Trip Time` 
