@@ -31,12 +31,164 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 *(Note: mpi = max_samples_per_instance, PP = Publish Period, RTT = Round Trip Time)*
 
-
 ##  Experimental Evidence Details
 
-### Rule 31
-## History Depth vs. Network Latency
-*Justifies the dependency between History Depth and RTT in Reliable communication.*
+### Rule 6 
+*.*
+
+**1. Experimental Setup**
+* **Network Condition:** (e.g., Simulated RTT using `tc`)
+* **Publication Rate (PP):** (e.g., 20ms / 50Hz)
+* **Variable:** History Depth ($1 \sim N$)
+
+**2. Scenario**
+(Describe how the test was performed, e.g., "Measuring message loss rate while increasing RTT and decreasing History Depth.")
+
+**3. Results & Graph**
+![Rule 31 Graph](images/rule31_result.png)
+> **Observation:** Data loss occurs when the buffer size is smaller than the outstanding unacknowledged samples required for retransmission.
+
+**4. Empirical Formula Derivation**
+* Based on the results, the minimum depth must satisfy: $depth \ge \lceil RTT/PP \rceil + 2$.
+
+---
+##  Experimental Evidence Details
+
+### Rule 31 
+*History Depth vs. Network Latency*
+
+**1. Experimental Setup**
+* **Network Condition:** (e.g., Simulated RTT using `tc`)
+* **Publication Rate (PP):** (e.g., 20ms / 50Hz)
+* **Variable:** History Depth ($1 \sim N$)
+
+**2. Scenario**
+(Describe how the test was performed, e.g., "Measuring message loss rate while increasing RTT and decreasing History Depth.")
+
+**3. Results & Graph**
+![Rule 31 Graph](images/rule31_result.png)
+> **Observation:** Data loss occurs when the buffer size is smaller than the outstanding unacknowledged samples required for retransmission.
+
+**4. Empirical Formula Derivation**
+* Based on the results, the minimum depth must satisfy: $depth \ge \lceil RTT/PP \rceil + 2$.
+
+---
+### Rule 32
+*.*
+
+**1. Experimental Setup**
+* **Network Condition:** (e.g., Simulated RTT using `tc`)
+* **Publication Rate (PP):** (e.g., 20ms / 50Hz)
+* **Variable:** History Depth ($1 \sim N$)
+
+**2. Scenario**
+(Describe how the test was performed, e.g., "Measuring message loss rate while increasing RTT and decreasing History Depth.")
+
+**3. Results & Graph**
+![Rule 31 Graph](images/rule31_result.png)
+> **Observation:** Data loss occurs when the buffer size is smaller than the outstanding unacknowledged samples required for retransmission.
+
+**4. Empirical Formula Derivation**
+* Based on the results, the minimum depth must satisfy: $depth \ge \lceil RTT/PP \rceil + 2$.
+
+---
+### Rule 33
+*.*
+
+**1. Experimental Setup**
+* **Network Condition:** (e.g., Simulated RTT using `tc`)
+* **Publication Rate (PP):** (e.g., 20ms / 50Hz)
+* **Variable:** History Depth ($1 \sim N$)
+
+**2. Scenario**
+(Describe how the test was performed, e.g., "Measuring message loss rate while increasing RTT and decreasing History Depth.")
+
+**3. Results & Graph**
+![Rule 31 Graph](images/rule31_result.png)
+> **Observation:** Data loss occurs when the buffer size is smaller than the outstanding unacknowledged samples required for retransmission.
+
+**4. Empirical Formula Derivation**
+* Based on the results, the minimum depth must satisfy: $depth \ge \lceil RTT/PP \rceil + 2$.
+
+---
+### Rule 36 
+*.*
+
+**1. Experimental Setup**
+* **Network Condition:** (e.g., Simulated RTT using `tc`)
+* **Publication Rate (PP):** (e.g., 20ms / 50Hz)
+* **Variable:** History Depth ($1 \sim N$)
+
+**2. Scenario**
+(Describe how the test was performed, e.g., "Measuring message loss rate while increasing RTT and decreasing History Depth.")
+
+**3. Results & Graph**
+![Rule 31 Graph](images/rule31_result.png)
+> **Observation:** Data loss occurs when the buffer size is smaller than the outstanding unacknowledged samples required for retransmission.
+
+**4. Empirical Formula Derivation**
+* Based on the results, the minimum depth must satisfy: $depth \ge \lceil RTT/PP \rceil + 2$.
+
+---
+### Rule 37
+*.*
+
+**1. Experimental Setup**
+* **Network Condition:** (e.g., Simulated RTT using `tc`)
+* **Publication Rate (PP):** (e.g., 20ms / 50Hz)
+* **Variable:** History Depth ($1 \sim N$)
+
+**2. Scenario**
+(Describe how the test was performed, e.g., "Measuring message loss rate while increasing RTT and decreasing History Depth.")
+
+**3. Results & Graph**
+![Rule 31 Graph](images/rule31_result.png)
+> **Observation:** Data loss occurs when the buffer size is smaller than the outstanding unacknowledged samples required for retransmission.
+
+**4. Empirical Formula Derivation**
+* Based on the results, the minimum depth must satisfy: $depth \ge \lceil RTT/PP \rceil + 2$.
+
+---
+### Rule 38
+*.*
+
+**1. Experimental Setup**
+* **Network Condition:** (e.g., Simulated RTT using `tc`)
+* **Publication Rate (PP):** (e.g., 20ms / 50Hz)
+* **Variable:** History Depth ($1 \sim N$)
+
+**2. Scenario**
+(Describe how the test was performed, e.g., "Measuring message loss rate while increasing RTT and decreasing History Depth.")
+
+**3. Results & Graph**
+![Rule 31 Graph](images/rule31_result.png)
+> **Observation:** Data loss occurs when the buffer size is smaller than the outstanding unacknowledged samples required for retransmission.
+
+**4. Empirical Formula Derivation**
+* Based on the results, the minimum depth must satisfy: $depth \ge \lceil RTT/PP \rceil + 2$.
+
+---
+### Rule 39
+*.*
+
+**1. Experimental Setup**
+* **Network Condition:** (e.g., Simulated RTT using `tc`)
+* **Publication Rate (PP):** (e.g., 20ms / 50Hz)
+* **Variable:** History Depth ($1 \sim N$)
+
+**2. Scenario**
+(Describe how the test was performed, e.g., "Measuring message loss rate while increasing RTT and decreasing History Depth.")
+
+**3. Results & Graph**
+![Rule 31 Graph](images/rule31_result.png)
+> **Observation:** Data loss occurs when the buffer size is smaller than the outstanding unacknowledged samples required for retransmission.
+
+**4. Empirical Formula Derivation**
+* Based on the results, the minimum depth must satisfy: $depth \ge \lceil RTT/PP \rceil + 2$.
+
+---
+### Rule 40
+*.*
 
 **1. Experimental Setup**
 * **Network Condition:** (e.g., Simulated RTT using `tc`)
@@ -55,34 +207,6 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 ---
 
-### Rule 38: Deadline Period vs. Publish Period
-*Validates the timing margin required for Deadline QoS to avoid false-positive violations.*
-
-
-
-**1. Experimental Setup**
-* **Entity:** Subscriber
-* **Publish Period (PP):** (e.g., 10ms)
-* **Deadline Period:** Adjusted from $1 \times PP$ to $3 \times PP$
-
-**2. Scenario**
-(e.g., "Monitoring `on_requested_deadline_missed` callbacks under jittery network conditions.")
-
-**3. Results & Observation**
-* **Jitter Analysis:** Even without network failure, jitter causes arrival times to exceed $1 \times PP$.
-* **Safe Margin:** A margin of at least $2 \times PP$ is required to ensure stability.
-
----
-
-### Rule 39: Liveliness Lease Duration vs. Publish Period
-*Analyzes the relationship between Liveliness Lease and heartbeat frequency.*
-
-**1. Scenario & Result**
-(Fill in your specific experimental data for Rule 39 here.)
-
----
-
-*(Note: Follow the same structure for Rules 6, 32, 33, 36, 37, and 40.)*
 
 ## 📝 Notation Summary
 * **mpi**: `max_samples_per_instance`
