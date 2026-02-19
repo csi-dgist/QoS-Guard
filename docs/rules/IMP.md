@@ -233,9 +233,19 @@ return tnext;}
 #endif /* DDS_HAS_DEADLINE_MISSED */
 ```
 ### Rule 11
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS**
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// If the lease duration is infinite, the writer is not registered. Consequently, lease expiry → not alive does not occur → owner change fails.
+if (liveliness_lease_duration_ < c_TimeInfinite)
+{
+auto wlp = this->mp_RTPSParticipant->wlp();
+if ( wlp != nullptr)
+{ 
+wlp->sub_liveliness_manager_->add_writer(
+wdata.guid(),
+liveliness_kind_,
+liveliness_lease_duration_);
+}
 ```
 ### Rule 12
 - **RMW/Implementation:** - **Source File:** - **Code Snippet:**
