@@ -182,32 +182,32 @@ The experimental results highlight two different causes of Deadline violations:
 
 ---
 ### Rule 36
-*Validates why Durability (Transient Local) requires a non-zero Lifespan to provide late-joining data.*
+*Justifies the consistency requirement between Liveliness Lease Duration and Deadline Period to avoid redundant or conflicting fault detections.*
 
 **1. Experimental Setup**
 
-* **Publisher:** Durability = `TRANSIENT_LOCAL`, Lifespan = `50ms`
-* **Subscriber 1 (Existing):** Launched before Publisher.
-* **Subscriber 2 (Late-joiner):** Launched after Publisher finishes sending 1,000 samples.
-* **Total Samples Sent:** 1,000
+* **Publication Period (PP):** 100ms
+* **Deadline Period:** 200ms
+* **Total Samples:** 600 (Total duration: 60s)
+* **Liveliness Lease Duration**: Variable
 
 **2. Test Scenario (Step-by-Step)**
 
-1.  Launch **Subscriber 1** to monitor live data.
-2.  Launch **Publisher** and transmit 1,000 samples (Total time taken > 50ms).
-3.  Confirm **Subscriber 1** received all 1,000 samples.
-4.  Launch **Subscriber 2** (Late-joiner) to retrieve historical data from the Publisher's buffer.
+The network condition is controlled over 60 seconds using the `tc` command:
+1.  **0s ~ 20s (Loss 0%):** Normal communication.
+2.  **20s ~ 40s (Loss 10%):** Induce occasional **Deadline Missed** due to retransmission delays.
+3.  **40s ~ 45s (Loss 100%):** Induce **Liveliness Lost** by blocking all packets.
+4.  **45s ~ 60s (Loss 0%):** Restore communication and observe recovery.
 
-**3. Experimental Observation**
+**3. Experimental Observation & Empirical Conclusion [ISSUE]**
 
-| Entity | Expected Received | Actual Received | Status |
-| :--- | :---: | :---: | :---: |
-| Subscriber 1 (Live) | 1,000 | 1,000 | ✅ Success |
-| Subscriber 2 (Late) | 1,000 | **0** | ❌ Data Expired |
+**[ISSUE]** Liveliness Lost is triggered prematurely (approx. 60~80ms). Even though the Publisher is already marked as 'Offline', **Deadline Missed alarms continue to trigger late at the 200ms mark.**
 
-**4. Empirical Conclusion**
+**[Conclusion]**
+The experiment demonstrates that when `Lease Duration < Deadline`, the system falls into a contradictory state: it continues to fire "Data Missing" alarms (Deadline Missed) for a Publisher that it has already declared "Dead" (Liveliness Lost). 
 
-Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifespan (50ms)** caused all buffered samples to be purged from the Publisher's queue before Subscriber 2 could connect.
+To prevent this **state inconsistency** and ensure a logical fault-detection sequence (where the data stream is monitored within the lifespan of the entity), the Liveliness Lease Duration must always be longer than the Deadline Period:
+$$LIVENS.lease \ge DEADLN.period$$
 
 ---
 ### Rule 37
