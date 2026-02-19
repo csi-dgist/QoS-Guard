@@ -303,9 +303,23 @@ deadline_unregister_instance_locked (&rhc->deadline, &inst->deadline);
 // Since the timer is not reset to the "next expiry time" upon unregistration, the deadline timer ceases to function once the list becomes empty.
 ```
 ### Rule 15
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS**
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// The writer signals liveliness, but if a reader becomes involved in the partition dynamic change process, it no longer receives updates to the writer's liveliness
+// → Subsequently, when the lease expires, the notification is sent only to readers that are "still matched".
+// However, if there are no readers, the liveliness notification is disabled even during the partition dynamic change process.
+static void proxy_writer_notify_liveliness_change_may_unlock (struct ddsi_proxy_writer *pwr)
+{ 
+struct ddsi_alive_state alive_state; 
+proxy_writer_get_alive_state_locked (pwr, &alive_state); 
+struct ddsi_guid rdguid; 
+struct ddsi_pwr_rd_match *m; memset (&rdguid, 0, sizeof (rdguid)); 
+while (pwr->alive_vclock == alive_state.vclock && (m = ddsrt_avl_lookup_succ (&ddsi_pwr_readers_treedef, &pwr->readers, &rdguid)) != NULL) 
+{ rdguid = m->rd_guid; ddsrt_mutex_unlock (&pwr->e.lock); 
+/* unlocking pwr means alive state may have changed already; we break out of the loop once we detect this but there for the reader in the current iteration, anything is possible */ 
+ddsi_reader_update_notify_pwr_alive_state_guid (&rdguid, pwr, &alive_state); 
+ddsrt_mutex_lock (&pwr->e.lock); }}
+// → The recipients of the notification are only the readers listed in pwr→readers.
 ```
 ### Rule 16
 - **RMW/Implementation:** - **Source File:** - **Code Snippet:**
