@@ -186,9 +186,51 @@ cb_data->add = true; return false;
 }
 ```
 ### Rule 10
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS**
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// Changing the owner in deadline_missed()
+void deadline_missed() 
+{ if (fastdds::rtps::c_Guid_Unknown != current_owner.first) 
+{ if (alive_writers.remove_if([&](const WriterOwnership& item) 
+{ return item.first == current_owner.first; })) 
+{ 
+current_owner.second = 0;
+current_owner.first = fastdds::rtps::c_Guid_Unknown; 
+if (alive_writers.empty() && (InstanceStateKind::ALIVE_INSTANCE_STATE == instance_state)) 
+{ instance_state = InstanceStateKind::NOT_ALIVE_NO_WRITERS_INSTANCE_STATE; } 
+if (ALIVE_INSTANCE_STATE == instance_state) 
+{ update_owner(); } } } }
+
+// However, assume that the `deadline_missed()` function is not infinite!
+bool DataReaderImpl::deadline_timer_reschedule()
+{
+assert(qos_.deadline().period != dds::c_TimeInfinite);
+```
+- **RMW/Implementation: CycloneDDS** 
+```cpp
+// When a deadline is missed, inst->wr_iid_islive is reset to 0, thereby changing ownership. 
+// However, if the deadline is set to infinity, inst->wr_iid_islive will never be reset to 0.
+#endif /* DDS_HAS_LIFESPAN */
+#ifdef DDS_HAS_DEADLINE_MISSED
+ddsrt_mtime_t dds_rhc_default_deadline_missed_cb(void *hc, ddsrt_mtime_t tnow)
+{ struct dds_rhc_default *rhc = hc; 
+void *vinst; 
+ddsrt_mtime_t tnext; 
+ddsrt_mutex_lock (&rhc->lock); 
+while ((tnext = deadline_next_missed_locked (&rhc->deadline, tnow, &vinst)).v == 0) 
+{ struct rhc_instance *inst = vinst; deadline_reregister_instance_locked (&rhc->deadline, &inst->deadline, tnow); 
+inst->wr_iid_islive = 0; 
+ddsi_status_cb_data_t cb_data; 
+cb_data.raw_status_id = (int) DDS_REQUESTED_DEADLINE_MISSED_STATUS_ID; 
+cb_data.extra = 0; 
+cb_data.handle = inst->iid; 
+cb_data.add = true; 
+ddsrt_mutex_unlock (&rhc->lock); 
+dds_reader_status_cb (&rhc->reader->m_entity, &cb_data); ddsrt_mutex_lock (&rhc->lock); 
+tnow = ddsrt_time_monotonic (); } 
+ddsrt_mutex_unlock (&rhc->lock); 
+return tnext;}
+#endif /* DDS_HAS_DEADLINE_MISSED */
 ```
 ### Rule 11
 - **RMW/Implementation:** - **Source File:** - **Code Snippet:**
