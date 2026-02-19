@@ -82,8 +82,11 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 3.  Decrease the History Depth incrementally for each test run.
 
 **3. Experimental Observation**
-
-![Rule 31 Experimental Result](../images/rule31.png)
+<p align="center">
+  <img src="../images/rule31.png" width="60%">
+  <br>
+  <em>Message loss rate analysis according to History Depth and RTT</em>
+</p>
 
 **4. Empirical Conclusion**
 
