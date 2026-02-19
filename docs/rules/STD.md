@@ -1,11 +1,11 @@
-# Stage 1 & 2: Standard (STD) Rules
+# STD Rules
 
 This page describes the QoS dependency and consistency rules derived from the **OMG DDS** and **ROS 2 Standard** specifications. Violation of these rules typically results in entity creation failure or immediate communication incompatibility.
 
 ---
 
-## ## 🏗️ Structural Consistency (Stage 1)
-*Focuses on individual entity (Publisher or Subscriber) settings and internal consistency.*
+## Stage 1
+*Focuses on iy.*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -14,8 +14,8 @@ This page describes the QoS dependency and consistency rules derived from the **
 
 ---
 
-## 🤝 RxO Compatibility (Stage 2)
-*Focuses on the compatibility between Offered (Publisher) and Requested (Subscriber) QoS policies.*
+## Stage 2
+*Focuses on th.*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -29,5 +29,3 @@ This page describes the QoS dependency and consistency rules derived from the **
 
 ---
 
-!!! tip "Characteristics of Standard Rules"
-    Standard rules are strictly enforced by the ROS 2 Middleware (RMW) layer. Violating Stage 2 rules (RxO) will trigger an **`Incompatible QoS`** event, preventing the establishment of the connection between a Publisher and a Subscriber.
