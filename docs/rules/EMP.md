@@ -148,32 +148,37 @@ Even with `RELIABLE` settings, data loss occurs if the **Lifespan duration** is 
 
 ---
 ### Rule 35
-*Validates why Durability (Transient Local) requires a non-zero Lifespan to provide late-joining data.*
+*Justifies how Reliability settings impact Deadline compliance under packet loss conditions.*
 
 **1. Experimental Setup**
 
-* **Publisher:** Durability = `TRANSIENT_LOCAL`, Lifespan = `50ms`
-* **Subscriber 1 (Existing):** Launched before Publisher.
-* **Subscriber 2 (Late-joiner):** Launched after Publisher finishes sending 1,000 samples.
-* **Total Samples Sent:** 1,000
+* **QoS Profile:** Deadline Period = `150ms`, Reliability = `RELIABLE` vs `BEST_EFFORT`
+* **Network Condition (Loss):** 5% Packet Loss (Simulated via `tc`)
+* **Publication Period (PP):** 100ms
+* **Total Samples:** 1,000
 
 **2. Test Scenario (Step-by-Step)**
 
-1.  Launch **Subscriber 1** to monitor live data.
-2.  Launch **Publisher** and transmit 1,000 samples (Total time taken > 50ms).
-3.  Confirm **Subscriber 1** received all 1,000 samples.
-4.  Launch **Subscriber 2** (Late-joiner) to retrieve historical data from the Publisher's buffer.
+1.  Set the Publisher and Subscriber with a Deadline period of 150ms.
+2.  Introduce 5% packet loss to the network interface.
+3.  Case A: Configure both entities with `RELIABLE` Reliability.
+4.  Case B: Configure both entities with `BEST_EFFORT` Reliability.
+5.  Publish 1,000 samples and monitor the `on_requested_deadline_missed` callback at the Subscriber.
 
 **3. Experimental Observation**
 
-| Entity | Expected Received | Actual Received | Status |
-| :--- | :---: | :---: | :---: |
-| Subscriber 1 (Live) | 1,000 | 1,000 | ✅ Success |
-| Subscriber 2 (Late) | 1,000 | **0** | ❌ Data Expired |
+![Rule 35 Experimental Result](../images/rule35.png)
+
+| Reliability | Total Samples | Received Samples | Deadline Missed Count | Cause of Violation |
+| :--- | :---: | :---: | :---: | :--- |
+| **RELIABLE** | 1,000 | 1,000 | 25 | Delay caused by Retransmission |
+| **BEST_EFFORT** | 1,000 | ~950 | 48 | Gap caused by Packet Loss |
 
 **4. Empirical Conclusion**
 
-Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifespan (50ms)** caused all buffered samples to be purged from the Publisher's queue before Subscriber 2 could connect.
+The experimental results highlight two different causes of Deadline violations:
+1. In **RELIABLE** mode, all 1,000 samples were received, but 25 samples violated the Deadline because the time taken for NACK-based retransmission exceeded the 150ms window.
+2. In **BEST_EFFORT** mode, violations nearly doubled (48 times) because lost packets created permanent gaps in the data stream, directly triggering the Deadline timer.
 
 ---
 ### Rule 36
