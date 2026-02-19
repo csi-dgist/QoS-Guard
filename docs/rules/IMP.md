@@ -264,9 +264,57 @@ if (s->isread)
 { inst->nvread--; rhc->n_vread--; } }
 ```
 ### Rule 18
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS** 
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// Keep_All waits until an ACK is received confirming that the oldest data has been successfully delivered to the other party before deleting the data.
+else if (history_qos_.kind == KEEP_ALL_HISTORY_QOS) 
+{ if (vit->second.cache_changes.size() < static_cast<size_t>(resource_limited_qos_.max_samples_per_instance)) 
+{ add = true; } 
+else { 
+SequenceNumber_t seq_to_remove = vit->second.cache_changes.front()->sequenceNumber; 
+if (!mp_writer->wait_for_acknowledgement(seq_to_remove, max_blocking_time, lock)) { 
+// Timeout waiting. Will not add change to history. 
+break; } 
+// vit may have been invalidated 
+if (!find_or_add_key(change->instanceHandle, change->serializedPayload, &vit)) 
+{ break; } 
+// If the change we were trying to remove was already removed, try again 
+if (vit->second.cache_changes.empty() || vit->second.cache_changes.front()->sequenceNumber != seq_to_remove) 
+{ continue; } 
+// Remove change if still present 
+add = remove_change_pub(vit->second.cache_changes.front()); } }
+
+// Looking at the lifespan timer code, it states that it "may already have been removed from the history".
+CacheChange_t* earliest_change; 
+while (history_.get_earliest_change(&earliest_change)) 
+{ fastdds::rtps::Time_t expiration_ts = earliest_change->sourceTimestamp + qos_.lifespan().duration; 
+// Check that the earliest change has expired (the change which started the timer could have been removed from the history) 
+if (current_ts < expiration_ts) 
+{ fastdds::rtps::Time_t interval = expiration_ts - current_ts; lifespan_timer_->update_interval_millisec(interval.to_ns() * 1e-6); return true; } 
+// The earliest change has expired 
+history_.remove_change_sub(earliest_change); 
+try_notify_read_conditions(); } 
+return false;
+```
+- **RMW/Implementation: CycloneDDS** 
+```cpp
+// Although set to Keep_all, due to max_samples_per_instance, samples are not saved at all before their lifespan expires, meaning no samples are deleted by lifespan.
+/* Check if resource max_samples QoS exceeded */ 
+if (rhc->reader && rhc->max_samples != DDS_LENGTH_UNLIMITED && rhc->n_vsamples >= (uint32_t) rhc->max_samples) 
+{ 
+cb_data->raw_status_id = (int) DDS_SAMPLE_REJECTED_STATUS_ID; 
+cb_data->extra = DDS_REJECTED_BY_SAMPLES_LIMIT; 
+cb_data->handle = inst->iid; 
+cb_data->add = true; return false; 
+} 
+/* Check if resource max_samples_per_instance QoS exceeded */ 
+if (rhc->reader && rhc->max_samples_per_instance != DDS_LENGTH_UNLIMITED && inst->nvsamples >= (uint32_t) rhc->max_samples_per_instance) 
+{ 
+cb_data->raw_status_id = (int) DDS_SAMPLE_REJECTED_STATUS_ID; 
+cb_data->extra = DDS_REJECTED_BY_SAMPLES_PER_INSTANCE_LIMIT; 
+cb_data->handle = inst->iid; 
+cb_data->add = true; return false; 
+}
 ```
 ### Rule 19
 - **RMW/Implementation:** - **Source File:** - **Code Snippet:**
