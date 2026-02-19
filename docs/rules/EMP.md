@@ -111,11 +111,7 @@ In a lossy network (5% loss), a Reliable connection requires retransmission of l
 
 **3. Experimental Observation**
 
-<p align="center">
-  <img src="../images/rule32.png" width="60%">
-  <br>
-  <em> Impact of max_samples_per_instance on reliability across different RTTs</em>
-</p>
+![Rule 32](../images/rule32.png){ width="100" }
 
 **4. Empirical Conclusion**
 
