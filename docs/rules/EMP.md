@@ -211,32 +211,38 @@ $$LIVENS.lease \ge DEADLN.period$$
 
 ---
 ### Rule 37
-*Validates why Durability (Transient Local) requires a non-zero Lifespan to provide late-joining data.*
+*Justifies the impact of Resource Limits on the recovery latency for late-joining subscribers in durable communication.*
 
 **1. Experimental Setup**
 
-* **Publisher:** Durability = `TRANSIENT_LOCAL`, Lifespan = `50ms`
-* **Subscriber 1 (Existing):** Launched before Publisher.
-* **Subscriber 2 (Late-joiner):** Launched after Publisher finishes sending 1,000 samples.
-* **Total Samples Sent:** 1,000
+* **QoS Profile:** Durability = `TRANSIENT_LOCAL`, History = `KEEP_ALL`
+* **Variable:** `max_samples_per_instance` (mpi) ranging from 1,000 to 5,000
+* **Data Volume:** Sample count up to 1,600
+* **Metric:** Latency (ms) required for the system to reach steady-state convergence
 
 **2. Test Scenario (Step-by-Step)**
 
-1.  Launch **Subscriber 1** to monitor live data.
-2.  Launch **Publisher** and transmit 1,000 samples (Total time taken > 50ms).
-3.  Confirm **Subscriber 1** received all 1,000 samples.
-4.  Launch **Subscriber 2** (Late-joiner) to retrieve historical data from the Publisher's buffer.
+1.  Initialize a Publisher that sends samples continuously with `TRANSIENT_LOCAL` durability.
+2.  After a specific number of samples are published, introduce a Late-Joining Subscriber.
+3.  Vary the **max_samples_per_instance** setting on the Subscriber side.
+4.  Measure the latency between the sample generation time and the time it is actually processed by the late-joiner.
+5.  Observe how long the "catch-up" phase lasts before latency returns to normal levels.
 
 **3. Experimental Observation**
 
-| Entity | Expected Received | Actual Received | Status |
-| :--- | :---: | :---: | :---: |
-| Subscriber 1 (Live) | 1,000 | 1,000 | ✅ Success |
-| Subscriber 2 (Late) | 1,000 | **0** | ❌ Data Expired |
+![Rule 37 Experimental Result](../images/rule37.png)
+
+* **Low mpi Zone:** Recovery is relatively fast
+* **High mpi Zone:** As `max_samples_per_instance` increases towards 5,000, the recovery latency increases exponentially (reaching up to 50,000ms). The system takes significantly longer to converge to a steady state.
 
 **4. Empirical Conclusion**
 
-Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifespan (50ms)** caused all buffered samples to be purged from the Publisher's queue before Subscriber 2 could connect.
+The experiment proves that setting an excessively high `max_samples_per_instance` for the sake of data completeness leads to a **"Recovery Latency Storm."** For a late-joining node, processing thousands of buffered historical samples simultaneously saturates the available bandwidth and CPU, causing current data to be delayed by tens of seconds.
+
+To balance data durability with system responsiveness, the resource limits must be tuned based on the expected maximum network downtime and the acceptable recovery window:
+$$[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \implies mpi \ge default$$
+*(Note: $default$ should be calculated based on the maximum tolerable recovery time.)*
+
 
 ---
 ### Rule 38
