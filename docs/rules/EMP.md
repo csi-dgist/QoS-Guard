@@ -83,7 +83,7 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 
 **3. Experimental Observation**
 
-![Rule 31 Experimental Result](images/rule31.png)
+![Rule 31 Experimental Result](../images/rule31.png)
 
 **4. Empirical Conclusion**
 
