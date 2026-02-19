@@ -34,7 +34,8 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 ##  Experimental Evidence Details
 
-### Rule 31: History Depth vs. Network Latency
+### Rule 31
+## History Depth vs. Network Latency
 *Justifies the dependency between History Depth and RTT in Reliable communication.*
 
 **1. Experimental Setup**
