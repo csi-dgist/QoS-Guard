@@ -246,32 +246,44 @@ $$[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \implies mpi \ge default$$
 
 ---
 ### Rule 38
-*Validates why Durability (Transient Local) requires a non-zero Lifespan to provide late-joining data.*
+*Here is the structured English code for Rule 38. This experiment highlights how the Deadline period directly affects the frequency of ownership handovers in an EXCLUSIVE ownership setting when packet loss is present.
+
+📄 EMP.md Rule 38 Final Code
+Markdown
+
+### Rule 38: DEADLN → OWNST
+*Justifies the minimum Deadline period required to maintain stable Ownership in exclusive communication under network instability.*
 
 **1. Experimental Setup**
 
-* **Publisher:** Durability = `TRANSIENT_LOCAL`, Lifespan = `50ms`
-* **Subscriber 1 (Existing):** Launched before Publisher.
-* **Subscriber 2 (Late-joiner):** Launched after Publisher finishes sending 1,000 samples.
-* **Total Samples Sent:** 1,000
+* **QoS Profile:** Ownership = `EXCLUSIVE`, Reliability = `RELIABLE`
+* **Variable:** Deadline Period (`100ms` vs `500ms`)
+* **Network Condition:** 5% Packet Loss (Simulated via `tc`)
+* **Publication Period (PP):** 100ms
+* **Total Samples:** 400
 
 **2. Test Scenario (Step-by-Step)**
 
-1.  Launch **Subscriber 1** to monitor live data.
-2.  Launch **Publisher** and transmit 1,000 samples (Total time taken > 50ms).
-3.  Confirm **Subscriber 1** received all 1,000 samples.
-4.  Launch **Subscriber 2** (Late-joiner) to retrieve historical data from the Publisher's buffer.
+1.  Configure two Publishers with different strengths for `EXCLUSIVE` ownership.
+2.  Set both Publishers and the Subscriber to `RELIABLE` reliability to ensure eventual delivery.
+3.  Introduce a constant 5% packet loss using the `tc` command.
+4.  **Case A:** Set the Deadline period to `100ms` (equal to the PP).
+5.  **Case B:** Set the Deadline period to `500ms` ($5 \times PP$).
+6.  Monitor the `on_requested_deadline_missed` callback and track how often the active owner is switched due to deadline timeouts.
 
 **3. Experimental Observation**
 
-| Entity | Expected Received | Actual Received | Status |
-| :--- | :---: | :---: | :---: |
-| Subscriber 1 (Live) | 1,000 | 1,000 | ✅ Success |
-| Subscriber 2 (Late) | 1,000 | **0** | ❌ Data Expired |
+![Rule 38 Experimental Result](../images/rule38.jpg)
 
-**4. Empirical Conclusion**
+* **Case A (Deadline = 100ms):** Represented by the orange spikes. Frequent deadline misses occur because any retransmission delay immediately exceeds the narrow 100ms window, causing constant and unstable ownership changes.
+* **Case B (Deadline = 500ms):** Represented by the blue spikes. Although packet loss still occurs, the larger 500ms buffer allows for successful retransmissions without triggering a deadline miss as frequently, leading to a more stable ownership state.
 
-Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifespan (50ms)** caused all buffered samples to be purged from the Publisher's queue before Subscriber 2 could connect.
+**4. Empirical Conclusion [ISSUE]**
+
+The experiment reveals that in an `EXCLUSIVE` ownership environment, a tight **Deadline** period (close to the Publication Period) leads to **Ownership Churning.** When a deadline miss is triggered by minor network jitters or retransmissions, the system prematurely hands over control to a secondary publisher, disrupting data continuity.
+
+To ensure stable operation and prevent unnecessary handovers in unreliable networks, the Deadline period must be set with a safety margin relative to the publication frequency:
+$$[OWNST = EXCLUSIVE] \implies DEADLN.period \ge 2 \times PP$$
 
 ---
 ### Rule 39
