@@ -83,6 +83,9 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 **3. Experimental Observation**
 
 ![Rule 31](../images/rule31.png)
+
+<img src="../images/rule31.png" width="500" alt="Rule 31">
+
 **4. Empirical Conclusion**
 
 In a lossy network (5% loss), a Reliable connection requires retransmission of lost packets. If the **History Depth** is smaller than the number of samples sent during one **RTT**, the buffer is overwritten before a retransmission can be requested. 
