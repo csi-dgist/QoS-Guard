@@ -281,32 +281,37 @@ $$[OWNST = EXCLUSIVE] \implies DEADLN.period \ge 2 \times PP$$
 
 ---
 ### Rule 39
-*Validates why Durability (Transient Local) requires a non-zero Lifespan to provide late-joining data.*
+*Justifies the impact of Liveliness Lease Duration on Ownership stability by preventing premature entity failure detection.*
 
 **1. Experimental Setup**
 
-* **Publisher:** Durability = `TRANSIENT_LOCAL`, Lifespan = `50ms`
-* **Subscriber 1 (Existing):** Launched before Publisher.
-* **Subscriber 2 (Late-joiner):** Launched after Publisher finishes sending 1,000 samples.
-* **Total Samples Sent:** 1,000
+* **QoS Profile:** Ownership = `EXCLUSIVE`, Liveliness = `AUTOMATIC`
+* **Variable (Lease Duration):** 50ms, 100ms, 300ms, 500ms, 800ms
+* **Network Condition:** Constant Packet Loss/Jitter (Simulated via `tc`)
+* **Publication Period (PP):** 100ms
+* **Metric:** Total count of Liveliness Lost events
 
 **2. Test Scenario (Step-by-Step)**
 
-1.  Launch **Subscriber 1** to monitor live data.
-2.  Launch **Publisher** and transmit 1,000 samples (Total time taken > 50ms).
-3.  Confirm **Subscriber 1** received all 1,000 samples.
-4.  Launch **Subscriber 2** (Late-joiner) to retrieve historical data from the Publisher's buffer.
+1.  Configure two Publishers with different strengths for `EXCLUSIVE` ownership.
+2.  Maintain a constant network instability using the `tc` command to induce heartbeat delays.
+3.  Vary the **Liveliness Lease Duration** from 50ms up to 800ms.
+4.  Monitor the `on_liveliness_changed` callback at the Subscriber side.
+5.  Count how many times the active Publisher is mistakenly identified as 'Down' (Liveliness Lost), which forces an ownership handover to the standby Publisher.
 
 **3. Experimental Observation**
 
-| Entity | Expected Received | Actual Received | Status |
-| :--- | :---: | :---: | :---: |
-| Subscriber 1 (Live) | 1,000 | 1,000 | ✅ Success |
-| Subscriber 2 (Late) | 1,000 | **0** | ❌ Data Expired |
+![Rule 39 Experimental Result](../images/rule39.png)
 
-**4. Empirical Conclusion**
+* **Short Lease Duration (50ms - 100ms):** A high frequency of Liveliness Lost events is observed (up to 26 times). Since the lease duration is shorter than or equal to the Publication Period (100ms), even a single delayed heartbeat triggers a failure detection.
+* **Long Lease Duration (300ms - 800ms):** The event count drops significantly as the lease duration increases. At 800ms, only 10 events occur, indicating that the system can tolerate multiple lost or delayed heartbeats without dropping the ownership.
 
-Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifespan (50ms)** caused all buffered samples to be purged from the Publisher's queue before Subscriber 2 could connect.
+**4. Empirical Conclusion [ISSUE]**
+
+The experiment highlights the risk of **"False Positive Failures."** When the Liveliness Lease Duration is too aggressive (close to the $PP$), transient network issues cause the Subscriber to frequently revoke ownership from the primary Publisher. This leads to unstable system control and unnecessary handovers.
+
+To maintain a stable Ownership state, the Liveliness Lease Duration must be set with enough margin to accommodate at least two consecutive heartbeat losses or retransmission delays:
+$$[OWNST = EXCLUSIVE] \implies lease\_duration \ge 2 \times PP$$
 
 ---
 
