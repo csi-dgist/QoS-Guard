@@ -248,9 +248,27 @@ liveliness_lease_duration_);
 }
 ```
 ### Rule 12
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS**
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// livelinss lost switched to NOT_ALIVE
+// However, if set to infinite, the transition does not occur, so the sample cannot be automatically removed.
+bool LivelinessManager::timer_expired()
+{ std::unique_lock<std::mutex> lock(mutex_); 
+if (timer_owner_ == nullptr) 
+{ EPROSIMA_LOG_ERROR(RTPS_WRITER, "Liveliness timer expired but there is no writer"); 
+return false; } 
+else { timer_owner_->status = LivelinessData::WriterStatus::NOT_ALIVE; }
+```
+- **RMW/Implementation: CycloneDDS**
+```cpp
+// Upon expiry of the lease term,
+case DDSI_EK_PROXY_WRITER:
+ddsi_proxy_writer_set_notalive ((struct ddsi_proxy_writer *) l->entity, true);
+break;
+case DDSI_EK_WRITER:
+ddsi_writer_set_notalive ((struct ddsi_writer *) l->entity, true);
+break;
+// However, if set to infinite, it will not expire, so the data deletion function will not operate.
 ```
 ### Rule 13
 - **RMW/Implementation:** - **Source File:** - **Code Snippet:**
