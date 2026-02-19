@@ -102,7 +102,7 @@ In a lossy network (5% loss), a Reliable connection requires retransmission of l
 * **Resource Limits:** `max_samples_per_instance` (Variable: $1 \sim N$)
 * **Network Condition:** packet loss 5%
 * **Network Latency (RTT):** 100ms, 200ms, 300ms, 400ms (Simulated via `tc`)
-* **Publication Period (PP):** 20ms (50Hz)
+* **Publication Period (PP):** 100ms (10Hz)
 
 **2. Test Scenario (Step-by-Step)**
 
