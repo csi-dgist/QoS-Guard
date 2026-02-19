@@ -6,11 +6,12 @@ Choose a category from the sidebar to see detailed constraints.
 
 ## Full List of 40 Dependency-Violation Rules
 
-We have identified and classified 40 rules that govern the relationships between ROS 2 QoS policies. These are implemented in **QoS Guard** for static verification.
+We have identified and classified 40 rules that govern the relationships between ROS 2 QoS policies. 
+These are implemented in **QoS Guard** for static verification.
 
 
-## Stage 1: Structural & Intra-entity Rules
-*Focuses on individual entity settings and internal consistency.*
+## Stage 1
+*Focuses on ...*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -37,8 +38,8 @@ We have identified and classified 40 rules that govern the relationships between
 
 ---
 
-## Stage 2: RxO (Required-versus-Offered) Rules
-*Focuses on compatibility between Publishers and Subscribers.*
+## Stage 2
+*Focuses on ...*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -55,8 +56,8 @@ We have identified and classified 40 rules that govern the relationships between
 
 ---
 
-## Stage 3: Dynamic & Performance Rules
-*Focuses on runtime environment and network-dependent constraints.*
+## Stage 3
+*Focuses on...*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -71,11 +72,6 @@ We have identified and classified 40 rules that govern the relationships between
 | 39 | LIVENS → OWNST | $[OWNST = EXCLUSIVE] \wedge [lease < 2 \times PP]$ | Operational | Sub | EMP |
 | 40 | DURABL → DEADLN | $[DEADLN.period > 0] \wedge [DURABL \ge TRAN\_LOCAL]$ | Operational | Sub | EMP |
 
-*(Note: mpi = max_samples_per_instance, PP = Publish Period, RTT = Round Trip Time)*
 
 ---
-
-!!! info "Acronyms"
-    - **mpi**: max_samples_per_instance
-    - **PP**: Publish Period
-    - **RTT**: Round Trip Time
+*(Note: mpi = max_samples_per_instance, PP = Publish Period, RTT = Round Trip Time)*
