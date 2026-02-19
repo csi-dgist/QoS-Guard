@@ -33,29 +33,33 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 ##  Experimental Evidence Details
 
-### Rule 6: LFSPAN → DURABL
+### Rule 6
 *Validates why Durability (Transient Local) requires a non-zero Lifespan to provide late-joining data.*
 
 **1. Experimental Setup**
+
 * **Publisher:** Durability = `TRANSIENT_LOCAL`, Lifespan = `50ms`
 * **Subscriber 1 (Existing):** Launched before Publisher.
 * **Subscriber 2 (Late-joiner):** Launched after Publisher finishes sending 1,000 samples.
 * **Total Samples Sent:** 1,000
 
 **2. Test Scenario (Step-by-Step)**
+
 1.  Launch **Subscriber 1** to monitor live data.
 2.  Launch **Publisher** and transmit 1,000 samples (Total time taken > 50ms).
 3.  Confirm **Subscriber 1** received all 1,000 samples.
 4.  Launch **Subscriber 2** (Late-joiner) to retrieve historical data from the Publisher's buffer.
 
 **3. Experimental Observation**
+
 | Entity | Expected Received | Actual Received | Status |
 | :--- | :---: | :---: | :---: |
 | Subscriber 1 (Live) | 1,000 | 1,000 | ✅ Success |
 | Subscriber 2 (Late) | 1,000 | **0** | ❌ Data Expired |
 
 **4. Empirical Conclusion**
-Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifespan (50ms)** caused all buffered samples to be purged from the Publisher's queue before Subscriber 2 could connect. 
+
+Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifespan (50ms)** caused all buffered samples to be purged from the Publisher's queue before Subscriber 2 could connect.
 
 ---
 
