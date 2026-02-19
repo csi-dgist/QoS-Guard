@@ -83,11 +83,7 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 
 **3. Experimental Observation**
 
-<p align="center">
-  <img src="docs/images/rule31.png" width="60%">
-  <br>
-  <em>Message loss rate analysis according to History Depth and RTT</em>
-</p>
+![Rule 31](../images/rule31.png)
 
 **4. Empirical Conclusion**
 
@@ -116,7 +112,7 @@ In a lossy network (5% loss), a Reliable connection requires retransmission of l
 **3. Experimental Observation**
 
 <p align="center">
-  <img src="/images/rule32.png" width="60%">
+  <img src="../images/rule32.png" width="60%">
   <br>
   <em> Impact of max_samples_per_instance on reliability across different RTTs</em>
 </p>
