@@ -60,9 +60,49 @@ This page describes the QoS dependency rules derived from the specific implement
 // TODO: Insert relevant code from FastDDS or CycloneDDS
 ```
 ### Rule 7
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS**
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// The Reader's Lifespan and Deadline timers share the same History 
+!History 
+detail::DataReaderHistory history_;
+```
+- **RMW/Implementation: CycloneDDS**
+```cpp
+// Both timers operate independently
+
+// Deadline
+ddsrt_mtime_t deadline_next_missed_locked (struct deadline_adm *deadline_adm, ddsrt_mtime_t tnow, void **instance)
+{
+struct deadline_elem *elem = NULL;
+if (!ddsrt_circlist_isempty (&deadline_adm->list))
+{
+struct ddsrt_circlist_elem *list_elem = ddsrt_circlist_oldest (&deadline_adm->list);
+elem = DDSRT_FROM_CIRCLIST (struct deadline_elem, e, list_elem);
+if (elem->t_deadline.v <= tnow.v)
+{
+ddsrt_circlist_remove (&deadline_adm->list, &elem->e);
+if (instance != NULL)
+*instance = (char *)elem - deadline_adm->elem_offset;
+return (ddsrt_mtime_t) { 0 };
+}
+}
+if (instance != NULL)
+*instance = NULL;
+return (elem != NULL) ? elem->t_deadline : DDSRT_MTIME_NEVER;
+}
+
+// Lifespan
+ddsrt_mtime_t lifespan_next_expired_locked (const struct lifespan_adm *lifespan_adm, ddsrt_mtime_t tnow, void **sample)
+{
+struct lifespan_fhnode *node;
+if ((node = ddsrt_fibheap_min(&lifespan_fhdef, &lifespan_adm->ls_exp_heap)) != NULL && node->t_expire.v <= tnow.v)
+{
+*sample = (char *)node - lifespan_adm->fhn_offset;
+return (ddsrt_mtime_t) { 0 };
+}
+*sample = NULL;
+return (node != NULL) ? node->t_expire : DDSRT_MTIME_NEVER;
+}
 ```
 ### Rule 8
 - **RMW/Implementation:** - **Source File:** - **Code Snippet:**
