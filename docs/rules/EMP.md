@@ -269,15 +269,15 @@ $$[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \implies mpi \ge default$$
 
 ![Rule 38 Experimental Result](../images/rule38.png)
 
-* **Case A (Deadline = 100ms - Orange):** Counter-intuitively, the shorter deadline shows fewer misses initially. This is because samples are either delivered on time or missed entirely without significant queuing delay.
-* **Case B (Deadline = 500ms - Blue):** The longer deadline shows significantly more frequent misses. In a `RELIABLE` setting, the system attempts multiple retransmissions within the 500ms window. This leads to **Head-of-Line (HOL) blocking** and cumulative delays, eventually causing a burst of deadline misses once the buffer exceeds the limit.
+* **Case A (Deadline = 100ms - Orange):** Numerous spikes are observed throughout the experiment. Any minor retransmission delay caused by the 5% loss immediately triggers a deadline miss, leading to unstable ownership.
+* **Case B (Deadline = 500ms - Blue):** Significantly fewer and more sparse spikes appear. The larger window provides sufficient time for the `RELIABLE` protocol to recover lost packets through NACK/retransmission before the 500ms timer expires, maintaining a more consistent owner state.
 
-**4. Empirical Conclusion [ISSUE]**
+**4. Empirical Conclusion**
 
-The experimental data reveals a critical trade-off: while a longer **Deadline** is intended to provide a safety margin, in `RELIABLE` networks with constant loss, it can inadvertently lead to **Ownership Instability.** The extended window allows retransmission queues to grow, which eventually triggers a series of late-delivery timeouts that are more frequent than in shorter deadline configurations.
+The experiment clearly demonstrates that **Ownership Stability** is highly dependent on the **Deadline** period in lossy networks. A tight deadline (Case A) causes "Ownership Churning," where control is frequently and unnecessarily handed over due to transient network jitters. 
 
-To ensure stable Ownership and minimize handover churn, the Deadline must be balanced against the retransmission timeout (RTO) and the publication frequency:
-$$[OWNST = EXCLUSIVE] \implies DEADLN.period \approx 2 \times PP \text{ (Optimal for Stability)}$$
+By extending the Deadline (Case B), the system becomes more resilient to packet loss, ensuring that the primary owner remains active as long as retransmissions are successful within the extended margin. To ensure stable control in exclusive ownership, the Deadline should be at least twice the Publication Period:
+$$[OWNST = EXCLUSIVE] \implies DEADLN.period \ge 2 \times PP$$
 
 ---
 ### Rule 39
