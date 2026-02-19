@@ -3,23 +3,11 @@
 This section covers 40+ dependency-violation rules classified into three stages. 
 Choose a category from the sidebar to see detailed constraints.
 
-!! info
-    Our analysis covers Discovery, Data Exchange, and Disassociation phases.
-## 📋 Full List of 40 Dependency-Violation Rules
+
+## Full List of 40 Dependency-Violation Rules
 
 We have identified and classified 40 rules that govern the relationships between ROS 2 QoS policies. These are implemented in **QoS Guard** for static verification.
 
-# QoS Rules Overview
-
-This page provides a comprehensive list of the 40 dependency-violation rules identified in our research. The rules are categorized into three stages based on their verification context.
-
----
-
-# QoS Rules Overview
-
-This page provides a comprehensive list of the 40 dependency-violation rules.
-
----
 
 ## Stage 1: Structural & Intra-entity Rules
 *Focuses on individual entity settings and internal consistency.*
