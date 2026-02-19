@@ -267,7 +267,7 @@ $$[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \implies mpi \ge default$$
 
 **3. Experimental Observation**
 
-![Rule 38 Experimental Result](../images/rule38.jpg)
+![Rule 38 Experimental Result](../images/rule38.png)
 
 * **Case A (Deadline = 100ms):** Represented by the orange spikes. Frequent deadline misses occur because any retransmission delay immediately exceeds the narrow 100ms window, causing constant and unstable ownership changes.
 * **Case B (Deadline = 500ms):** Represented by the blue spikes. Although packet loss still occurs, the larger 500ms buffer allows for successful retransmissions without triggering a deadline miss as frequently, leading to a more stable ownership state.
