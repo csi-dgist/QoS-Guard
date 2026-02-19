@@ -498,18 +498,32 @@ else
 m->in_sync = PRMSS_SYNC;
 m->u.not_in_sync.end_of_tl_seq = MAX_SEQ_NUMBER;
 ```
-### Rule 28
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+### Rule 28 / Rule 29 / Rule 30
+- **RMW/Implementation: FastDDS** 
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// If autodispose_unregistered_instances=false and the application does not explicitly call dispose(), the DataWriter will not send a disposal notification (DISPOSE), meaning the NOT_ALIVE_DISPOSED state is not passed to the DataReader.
+// Consequently, the autopurge_disposed_samples_delay setting in READER_DATA_LIFECYCLE becomes irrelevant for that instance, rendering it meaningless.
+/**
+* @brief Indicates the duration the DataReader must retain information regarding instances that have the
+* instance_state NOT_ALIVE_DISPOSED. <br>
+* By default, dds::c_TimeInfinite.
+*/
+dds::Duration_t autopurge_disposed_samples_delay;
 ```
-### Rule 29
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: CycloneDDS** 
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
-```
-### Rule 30
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
-```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// As the instance is not in the DISPOSED state, autopurge_disposed_samples_delay does not apply to it in the first place.
+void ddsi_reader_update_notify_pwr_alive_state (struct ddsi_reader *rd, const struct ddsi_proxy_writer *pwr, const struct ddsi_alive_state *alive_state)
+{ struct ddsi_rd_pwr_match *m; bool notify = false; 
+int delta = 0; 
+/* -1: alive -> not_alive; 0: unchanged; 1: not_alive -> alive */ 
+ddsrt_mutex_lock (&rd->e.lock); 
+if ((m = ddsrt_avl_lookup (&ddsi_rd_writers_treedef, &rd->writers, &pwr->e.guid)) != NULL) 
+{ if ((int32_t) (alive_state->vclock - m->pwr_alive_vclock) > 0) 
+{ delta = (int) alive_state->alive - (int) m->pwr_alive; notify = true; 
+m->pwr_alive = alive_state->alive; 
+m->pwr_alive_vclock = alive_state->vclock; } } 
+ddsrt_mutex_unlock (&rd->e.lock); 
+if (delta < 0 && rd->rhc) { struct ddsi_writer_info wrinfo; 
+ddsi_make_writer_info (&wrinfo, &pwr->e, pwr->c.xqos, NN_STATUSINFO_UNREGISTER); ddsi_rhc_unregister_wr (rd->rhc, &wrinfo); }
 ```
