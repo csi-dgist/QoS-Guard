@@ -425,9 +425,23 @@ opts.historyCapacity = (uint64_t)qos->durability_service.history.depth;
 else { opts.historyCapacity = 0; } }
 ```
 ### Rule 20
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS**
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// Upon successful matching, it may be treated as a later-join, potentially resulting in duplicate data being received.
+if (!matched) //Different partitions
+{
+EPROSIMA_LOG_WARNING(RTPS_EDP, "INCOMPATIBLE QOS (topic: " << rdata->topic_name << "): Different Partitions");
+reason.set(MatchingFailureMask::partitions);
+}
+// transient_local always enters PRMSS_SYNC upon (re)matching and does not verify whether it has already received the entire data
+// → Consequently, even if the partition is rematched, it is treated as a new match, leading to redundant data reception.
+if (rd->handle_as_transient_local)
+m->in_sync = PRMSS_OUT_OF_SYNC;
+else if (vendor_is_eclipse (pwr->c.vendor))
+m->in_sync = PRMSS_OUT_OF_SYNC;
+else
+m->in_sync = PRMSS_SYNC;
+m->u.not_in_sync.end_of_tl_seq = MAX_SEQ_NUMBER;
 ```
 ### Rule 28
 - **RMW/Implementation:** - **Source File:** - **Code Snippet:**
