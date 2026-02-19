@@ -82,9 +82,9 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 
 **3. Experimental Observation**
 
-![Rule 31](../images/rule31.png)
-
-<img src="../images/rule31.png" width="500" alt="Rule 31">
+<div align="center">
+  <img src="../images/rule31.png" width="400">
+</div>
 
 **4. Empirical Conclusion**
 
