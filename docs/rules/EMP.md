@@ -32,7 +32,6 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 *(Note: mpi = max_samples_per_instance, PP = Publish Period, RTT = Round Trip Time)*
 
 ##  Experimental Evidence Details
----
 
 ### Rule 6
 *Validates why Durability (Transient Local) requires a non-zero Lifespan to provide late-joining data.*
