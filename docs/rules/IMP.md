@@ -290,9 +290,17 @@ Duration_t autopurge_no_writer_samples_delay;
 */
 ```
 ### Rule 14
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS** 
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// Partition change → Unmatching → Call ddsi_rhc_unregister_wr (rd->rhc, &wrinfo);
+// ⇒ Instance is immediately unregistered from the deadline. → Deadline timer is not updated.
+if (inst->deadline_reg)
+{
+inst->deadline_reg = 0;
+deadline_unregister_instance_locked (&rhc->deadline, &inst->deadline);
+}
+// During the process of dynamically changing partitions, instances are removed from the deadline list due to writer unregistration.
+// Since the timer is not reset to the "next expiry time" upon unregistration, the deadline timer ceases to function once the list becomes empty.
 ```
 ### Rule 15
 - **RMW/Implementation:** - **Source File:** - **Code Snippet:**
