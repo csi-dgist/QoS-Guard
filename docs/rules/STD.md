@@ -5,7 +5,7 @@ This page describes the QoS dependency and consistency rules derived from the **
 ---
 
 ## Stage 1
-*Focuses on iy.*
+*Intra-entity Dependency Validation*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -15,7 +15,7 @@ This page describes the QoS dependency and consistency rules derived from the **
 ---
 
 ## Stage 2
-*Focuses on th.*
+*Inter-entity Dependency Validation*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
