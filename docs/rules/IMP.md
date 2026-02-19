@@ -45,19 +45,66 @@ This page describes the QoS dependency rules derived from the specific implement
 
 
 ### Rule 3
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS** 
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// [TRANSIENT_LOCAL late-joiner logic resides within if (is_reliable)]
+// → When best-effort, it returns false, preventing the later-joiner logic from executing → Transient behaviour does not occur
+bool is_reliable = rp->is_reliable(); 
+if (is_reliable) 
+{ SequenceNumber_t min_seq = get_seq_num_min(); 
+SequenceNumber_t last_seq = get_seq_num_max(); 
+RTPSMessageGroup group(mp_RTPSParticipant, this, rp->message_sender()); 
+// History not empty 
+if (min_seq != SequenceNumber_t::unknown()) 
+{ (void)last_seq; assert(last_seq != SequenceNumber_t::unknown()); assert(min_seq <= last_seq);
+ try { 
+// Late-joiner 
+if (TRANSIENT_LOCAL <= rp->durability_kind() && TRANSIENT_LOCAL <= m_att.durabilityKind)
+```
+- **RMW/Implementation: CycloneDDS** 
+```cpp
+// Providing historical data to late joiners is only performed when it is more efficient than best-effort processing.
+  /* Store available data into the late joining reader when it is reliable (we don't do
+historical data for best-effort data over the wire, so also not locally). */
+if (rd->xqos->reliability.kind > DDS_RELIABILITY_BEST_EFFORT && rd->xqos->durability.kind > DDS_DURABILITY_VOLATILE)
+ddsi_deliver_historical_data (wr, rd);
 ```
 ### Rule 4
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS** 
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// Only the FastDDS code contains code that checks this rule.
+if (m_reliability.kind == BEST_EFFORT_RELIABILITY_QOS && m_ownership.kind == EXCLUSIVE_OWNERSHIP_QOS) 
+{
+logError(RTPS_QOS_CHECK, "BEST_EFFORT incompatible with EXCLUSIVE ownership"); 
+return false; 
+} 
+return true;
 ```
 ### Rule 5
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS** 
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// When using best effort, a StatelessWriter is created.
+// When using Manual_by_topic, a heartbeat is sent only if it is a StatefulWriter ⇒ No heartbeat is sent.
+if (qos_.liveliness().kind == MANUAL_BY_TOPIC_LIVELINESS_QOS) 
+{ 
+// As described in the RTPS specification, if liveliness kind is manual a heartbeat must be sent // This only applies to stateful writers, as stateless writers do not send heartbeats 
+StatefulWriter* stateful_writer = dynamic_cast<StatefulWriter*>(writer_); 
+if (stateful_writer != nullptr) 
+{ stateful_writer->send_periodic_heartbeat(true, true); } } 
+return RETCODE_OK;
+```
+- **RMW/Implementation: CycloneDDS** 
+```cpp
+// Only when reliable → HB transmission
+// When best-effort, loss is possible, so live link status determination may be incorrect
+/* heartbeat event will be deleted when the handler can't find a
+writer for it in the hash table. NEVER => won't ever be
+scheduled, and this can only change by writing data, which won't
+happen until after it becomes visible. */
+if (wr->reliable)
+wr->heartbeat_xevent = qxev_heartbeat (wr->evq, DDSRT_MTIME_NEVER, &wr->e.guid);
+else
+wr->heartbeat_xevent = NULL;
 ```
 ### Rule 7
 - **RMW/Implementation: FastDDS**
