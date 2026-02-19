@@ -105,9 +105,49 @@ return (node != NULL) ? node->t_expire : DDSRT_MTIME_NEVER;
 }
 ```
 ### Rule 8
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS** 
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// Removal is performed by comparing the sourceTimestamp; if depth=1, existing older data is simply deleted.
+// Therefore, as there is only one piece of archived data, there is nothing to compare it with, rendering the process meaningless.
+// Try to substitute the oldest sample.
+CacheChange_t* first_change = instance_changes.at(0);
+if (a_change->sourceTimestamp >= first_change->sourceTimestamp)
+{
+// As the instance is ordered by source timestamp, we can always remove the first one.
+ret_value = remove_change_sub(first_change);
+}
+else
+{
+// Received change is older than oldest, and should be discarded
+return true;
+}
+```
+- **RMW/Implementation: CycloneDDS** 
+```cpp
+// In BY_SOURCE_TIMESTAMP mode, samples that are "reversed relative to the source timestamp (i.e., past-time samples arriving late)" are discarded unconditionally.
+// This behaviour results in retaining only the single most recent sample, rather than performing any sorting function.
+static int inst_accepts_sample (const struct dds_rhc_default *rhc, const struct rhc_instance *inst, const struct ddsi_writer_info *wrinfo, const struct ddsi_serdata sample, const bool has_data)
+{ if (rhc->by_source_ordering) {
+  if (sample->timestamp.v > inst->tstamp.v)
+{/ ok /}
+else if (sample->timestamp.v < inst->tstamp.v)
+{return 0;}
+else if (inst_accepts_sample_by_writer_guid (inst, wrinfo))
+{/ ok /}
+else
+{return 0;}}
+if (rhc->exclusive_ownership && inst->wr_iid_islive && inst->wr_iid != wrinfo->iid)
+{int32_t strength = wrinfo->ownership_strength;
+if (strength > inst->strength) {
+/ ok /
+} else if (strength < inst->strength) {
+return 0;
+} else if (inst_accepts_sample_by_writer_guid (inst, wrinfo)) {
+/ ok /
+} else {return 0;}}
+if (has_data && !content_filter_accepts (rhc->reader, sample, inst, wrinfo->iid, inst->iid))
+{return 0;}
+return 1;}
 ```
 ### Rule 9
 - **RMW/Implementation:** - **Source File:** - **Code Snippet:**
