@@ -49,3 +49,83 @@ This page describes the QoS dependency rules derived from the specific implement
 ```cpp
 // TODO: Insert relevant code from FastDDS or CycloneDDS
 ```
+### Rule 4
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
+### Rule 5
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
+### Rule 7
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
+### Rule 8
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
+### Rule 9
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
+### Rule `0
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
+### Rule 11
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
+### Rule 12
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
+### Rule 13
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
+### Rule 14
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
+### Rule 15
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
+### Rule 16
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
+### Rule 17
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
+### Rule 18
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
+### Rule 19
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
+### Rule 20
+- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+```cpp
+// TODO: Insert relevant code from FastDDS or CycloneDDS
+```
