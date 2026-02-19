@@ -401,9 +401,28 @@ cb_data->add = true; return false;
 }
 ```
 ### Rule 19
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS**
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// autoenable_created_entities = FALSE means entities are not automatically enabled.
+publisher_->rtps_participant()->register_writer(writer_, topic_desc, wqos);
+// ⇒ Only within enable() are register_writer() / register_reader() called to register with discovery.
+// As VOLATILE entities do not become existing until enabled, any previously sent data is discarded.
+// When set to Volatile, upon enabling, all previous data will not be received. 
+```
+- **RMW/Implementation: CycloneDDS**
+```cpp
+// When set to VOLATILE, previous data is not fully retrieved.
+// The implementation where autoenable_created_entities=FALSE is not present.
+if(qos->durability.kind == DDS_DURABILITY_VOLATILE) 
+{ opts.historyCapacity = 0; } 
+else 
+{ 
+// Transient Local and stronger  
+if (qos->durability_service.history.kind == DDS_HISTORY_KEEP_LAST) 
+{ 
+opts.historyCapacity = (uint64_t)qos->durability_service.history.depth;
+ } 
+else { opts.historyCapacity = 0; } }
 ```
 ### Rule 20
 - **RMW/Implementation:** - **Source File:** - **Code Snippet:**
