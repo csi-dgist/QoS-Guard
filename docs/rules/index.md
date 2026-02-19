@@ -10,8 +10,8 @@ We have identified and classified 40 rules that govern the relationships between
 These are implemented in **QoS Guard** for static verification.
 
 
-## Stage 1
-*Focuses on ...*
+## Stage 1 | Intra-entity Dependency Validation
+*This stage performs static consistency checks by analyzing each DDS XML profile independently to identify inherent configuration conflicts within a single entity.*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -38,8 +38,8 @@ These are implemented in **QoS Guard** for static verification.
 
 ---
 
-## Stage 2
-*Focuses on ...*
+## Stage 2 | Inter-entity Dependency Validation
+*This stage evaluates the compatibility between a pair of Publisher and Subscriber profiles, focusing on Requested-versus-Offered (RxO) rules to prevent connection failures.*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -56,8 +56,8 @@ These are implemented in **QoS Guard** for static verification.
 
 ---
 
-## Stage 3
-*Focuses on...*
+## Stage 3 | Timing-based Dependency Validation
+*This stage integrates environmental parameters like publish period and round-trip time to examine operational risks arising from runtime uncertainties such as latency and packet loss.*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
