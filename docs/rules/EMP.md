@@ -33,26 +33,31 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 ##  Experimental Evidence Details
 
-### Rule 6 
-*.*
+### Rule 6: LFSPAN → DURABL
+*Validates why Durability (Transient Local) requires a non-zero Lifespan to provide late-joining data.*
 
 **1. Experimental Setup**
-* **Network Condition:** (e.g., Simulated RTT using `tc`)
-* **Publication Rate (PP):** (e.g., 20ms / 50Hz)
-* **Variable:** History Depth ($1 \sim N$)
+* **Publisher:** Durability = `TRANSIENT_LOCAL`, Lifespan = `50ms`
+* **Subscriber 1 (Existing):** Launched before Publisher.
+* **Subscriber 2 (Late-joiner):** Launched after Publisher finishes sending 1,000 samples.
+* **Total Samples Sent:** 1,000
 
-**2. Scenario**
-(Describe how the test was performed, e.g., "Measuring message loss rate while increasing RTT and decreasing History Depth.")
+**2. Test Scenario (Step-by-Step)**
+1.  Launch **Subscriber 1** to monitor live data.
+2.  Launch **Publisher** and transmit 1,000 samples (Total time taken > 50ms).
+3.  Confirm **Subscriber 1** received all 1,000 samples.
+4.  Launch **Subscriber 2** (Late-joiner) to retrieve historical data from the Publisher's buffer.
 
-**3. Results & Graph**
-![Rule 31 Graph](images/rule31_result.png)
-> **Observation:** Data loss occurs when the buffer size is smaller than the outstanding unacknowledged samples required for retransmission.
+**3. Experimental Observation**
+| Entity | Expected Received | Actual Received | Status |
+| :--- | :---: | :---: | :---: |
+| Subscriber 1 (Live) | 1,000 | 1,000 | ✅ Success |
+| Subscriber 2 (Late) | 1,000 | **0** | ❌ Data Expired |
 
-**4. Empirical Formula Derivation**
-* Based on the results, the minimum depth must satisfy: $depth \ge \lceil RTT/PP \rceil + 2$.
+**4. Empirical Conclusion**
+Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifespan (50ms)** caused all buffered samples to be purged from the Publisher's queue before Subscriber 2 could connect. 
 
 ---
-##  Experimental Evidence Details
 
 ### Rule 31 
 *History Depth vs. Network Latency*
