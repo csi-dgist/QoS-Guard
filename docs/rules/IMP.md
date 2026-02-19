@@ -150,11 +150,42 @@ if (has_data && !content_filter_accepts (rhc->reader, sample, inst, wrinfo->iid,
 return 1;}
 ```
 ### Rule 9
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS** 
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// The KeepAll policy is capped at 1 by resourcelimits, meaning no new samples are added once the buffer is full.
+// Consequently, with only one piece of data being retained, there is nothing to compare it with, rendering it meaningless.
+(DataReaderHistory.cpp)
+InstanceCollection::iterator vit;
+if (find_key(a_change->instanceHandle, vit)) 
+{ DataReaderInstance::ChangeCollection& instance_changes = vit->second->cache_changes; 
+size_t total_size = instance_changes.size() + unknown_missing_changes_up_to; 
+if (total_size < static_cast<size_t>(resource_limited_qos_.max_samples_per_instance)) 
+{ 
+return add_received_change_with_key(a_change, *vit->second); 
+} 
+logInfo(SUBSCRIBER, "Change not added due to maximum number of samples per instance"); }
 ```
-### Rule `0
+- **RMW/Implementation: CycloneDDS** 
+```cpp
+// Set to Keep_all, but limited to 1 due to max_samples_per_instance
+/* Check if resource max_samples QoS exceeded */ 
+if (rhc->reader && rhc->max_samples != DDS_LENGTH_UNLIMITED && rhc->n_vsamples >= (uint32_t) rhc->max_samples) 
+{ 
+cb_data->raw_status_id = (int) DDS_SAMPLE_REJECTED_STATUS_ID; 
+cb_data->extra = DDS_REJECTED_BY_SAMPLES_LIMIT; 
+cb_data->handle = inst->iid; 
+cb_data->add = true; return false;  
+} 
+/* Check if resource max_samples_per_instance QoS exceeded */ 
+if (rhc->reader && rhc->max_samples_per_instance != DDS_LENGTH_UNLIMITED && inst->nvsamples >= (uint32_t) rhc->max_samples_per_instance) 
+{ 
+cb_data->raw_status_id = (int) DDS_SAMPLE_REJECTED_STATUS_ID; 
+cb_data->extra = DDS_REJECTED_BY_SAMPLES_PER_INSTANCE_LIMIT; 
+cb_data->handle = inst->iid; 
+cb_data->add = true; return false; 
+}
+```
+### Rule 10
 - **RMW/Implementation:** - **Source File:** - **Code Snippet:**
 ```cpp
 // TODO: Insert relevant code from FastDDS or CycloneDDS
@@ -190,9 +221,47 @@ return 1;}
 // TODO: Insert relevant code from FastDDS or CycloneDDS
 ```
 ### Rule 17
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation:FastDDS**
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// Keep_last removes the oldest sample when the depth is full.
+ {// Try to substitute the oldest sample.
+CacheChange_t* first_change = instance_changes.at(0);
+if (a_change->sourceTimestamp >= first_change->sourceTimestamp){
+// As the instance is ordered by source timestamp, we can always remove the first one.
+ret_value = remove_change_sub(first_change);}
+else{
+// Received change is older than oldest, and should be discarded
+return true;}}
+
+// Looking at the lifespan timer code, it states that it "may already have been removed from the history".
+CacheChange_t* earliest_change; 
+while (history_.get_earliest_change(&earliest_change)) 
+{ fastdds::rtps::Time_t expiration_ts = earliest_change->sourceTimestamp + qos_.lifespan().duration; 
+// Check that the earliest change has expired (the change which started the timer could have been removed from the history) 
+if (current_ts < expiration_ts) 
+{ fastdds::rtps::Time_t interval = expiration_ts - current_ts; lifespan_timer_->update_interval_millisec(interval.to_ns() * 1e-6); return true; } 
+// The earliest change has expired 
+history_.remove_change_sub(earliest_change); 
+try_notify_read_conditions(); } 
+return false;
+```
+- **RMW/Implementation:CycloneDDS** 
+```cpp
+// A situation where a sample is overwritten and disappears due to history depth before it "expires" based on its lifespan.
+// In the code, it deletes data using keep_last and then deletes it again based on lifespan.
+if (inst->nvsamples == rhc->history_depth) { 
+/* replace oldest sample; latest points to the latest one, the list is circular from old -> new, so latest->next is the oldest */ 
+inst_clear_invsample_if_exists (rhc, inst, trig_qc); 
+assert (inst->latest != NULL); s = inst->latest->next; 
+assert (trig_qc->dec_conds_sample == 0); 
+ddsi_serdata_unref (s->sample);
+#ifdef DDS_HAS_LIFESPAN 
+lifespan_unregister_sample_locked (&rhc->lifespan, &s->lifespan);
+#endif 
+trig_qc->dec_sample_read = s->isread; 
+trig_qc->dec_conds_sample = s->conds; 
+if (s->isread) 
+{ inst->nvread--; rhc->n_vread--; } }
 ```
 ### Rule 18
 - **RMW/Implementation:** - **Source File:** - **Code Snippet:**
