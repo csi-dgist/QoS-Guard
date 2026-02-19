@@ -5,7 +5,7 @@ This page describes the QoS dependency rules derived from the specific implement
 ---
 
 ## Stage 1
-*In..*
+*Intra-entity Dependency Validation*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
