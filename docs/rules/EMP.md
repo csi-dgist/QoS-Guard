@@ -83,8 +83,7 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 
 **3. Experimental Observation**
 
-![Rule 31](../images/rule31.png){ width="100" }
-
+![Rule 31](../images/rule31.png)
 **4. Empirical Conclusion**
 
 In a lossy network (5% loss), a Reliable connection requires retransmission of lost packets. If the **History Depth** is smaller than the number of samples sent during one **RTT**, the buffer is overwritten before a retransmission can be requested. 
@@ -111,7 +110,7 @@ In a lossy network (5% loss), a Reliable connection requires retransmission of l
 
 **3. Experimental Observation**
 
-![Rule 32](../images/rule32.png){ width="100" }
+![Rule 32](../images/rule32.png)
 
 **4. Empirical Conclusion**
 
@@ -120,32 +119,32 @@ When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effectiv
 
 ---
 ### Rule 33
-*Validates why Durability (Transient Local) requires a non-zero Lifespan to provide late-joining data.*
+*Justifies the minimum Lifespan duration required to ensure sample reception before expiration in reliable communication.*
 
 **1. Experimental Setup**
 
-* **Publisher:** Durability = `TRANSIENT_LOCAL`, Lifespan = `50ms`
-* **Subscriber 1 (Existing):** Launched before Publisher.
-* **Subscriber 2 (Late-joiner):** Launched after Publisher finishes sending 1,000 samples.
-* **Total Samples Sent:** 1,000
+* **QoS Profile:** Reliability = `RELIABLE`, Lifespan = `Variable`
+* **Publication Period (PP):** 10ms to 100ms
+* **Lifespan Duration:** 100ms to 1000ms
+* **Total Samples:** 10,000
 
 **2. Test Scenario (Step-by-Step)**
 
-1.  Launch **Subscriber 1** to monitor live data.
-2.  Launch **Publisher** and transmit 1,000 samples (Total time taken > 50ms).
-3.  Confirm **Subscriber 1** received all 1,000 samples.
-4.  Launch **Subscriber 2** (Late-joiner) to retrieve historical data from the Publisher's buffer.
+1.  Fix the total number of samples to be sent at 10,000.
+2.  Perform a grid search by varying the **Publish Period (PP)** from 10ms to 100ms and **Lifespan duration** from 100ms to 1000ms.
+3.  Measure the total number of samples successfully received at the Subscriber.
+4.  Identify the threshold where sample reception starts to drop despite using `RELIABLE` QoS.
 
 **3. Experimental Observation**
 
-| Entity | Expected Received | Actual Received | Status |
-| :--- | :---: | :---: | :---: |
-| Subscriber 1 (Live) | 1,000 | 1,000 | ✅ Success |
-| Subscriber 2 (Late) | 1,000 | **0** | ❌ Data Expired |
+![Rule 33 Experimental Result](../images/rule33.png)
+
+* **High Reception Zone (Blue):** When Lifespan is sufficiently longer than RTT and PP, nearly all 10,000 samples are received.
+* **Low Reception Zone (White/Gray):** When Lifespan duration is close to or shorter than the round-trip retransmission time, samples expire before they can be successfully delivered or processed.
 
 **4. Empirical Conclusion**
 
-Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifespan (50ms)** caused all buffered samples to be purged from the Publisher's queue before Subscriber 2 could connect.
+Even with `RELIABLE` settings, data loss occurs if the **Lifespan duration** is shorter than the time required for successful transmission and acknowledgement. 
 
 ---
 ### Rule 35
