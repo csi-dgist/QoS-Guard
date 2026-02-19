@@ -94,32 +94,36 @@ In a lossy network (5% loss), a Reliable connection requires retransmission of l
 
 ---
 ### Rule 32
-*Validates why Durability (Transient Local) requires a non-zero Lifespan to provide late-joining data.*
+*Justifies the minimum Resource Limits (max_samples_per_instance) required to sustain reliable transmission under network delay.*
 
 **1. Experimental Setup**
 
-* **Publisher:** Durability = `TRANSIENT_LOCAL`, Lifespan = `50ms`
-* **Subscriber 1 (Existing):** Launched before Publisher.
-* **Subscriber 2 (Late-joiner):** Launched after Publisher finishes sending 1,000 samples.
-* **Total Samples Sent:** 1,000
+* **QoS Profile:** Reliability = `RELIABLE`, History Kind = `KEEP_ALL`
+* **Resource Limits:** `max_samples_per_instance` (Variable: $1 \sim N$)
+* **Network Condition:** packet loss 5%
+* **Network Latency (RTT):** 100ms, 200ms, 300ms, 400ms (Simulated via `tc`)
+* **Publication Period (PP):** 20ms (50Hz)
 
 **2. Test Scenario (Step-by-Step)**
 
-1.  Launch **Subscriber 1** to monitor live data.
-2.  Launch **Publisher** and transmit 1,000 samples (Total time taken > 50ms).
-3.  Confirm **Subscriber 1** received all 1,000 samples.
-4.  Launch **Subscriber 2** (Late-joiner) to retrieve historical data from the Publisher's buffer.
+1.  Connect two notebooks and verify the baseline RTT.
+2.  Set the Publisher's History to `KEEP_ALL` to ensure all samples are subject to Resource Limits.
+3.  Vary the RTT from 100ms to 400ms using network emulation tools.
+4.  Decrease `max_samples_per_instance` until sample rejected or lost events occur.
+5.  Record the minimum `mpi` value that ensures 100% successful delivery.
 
 **3. Experimental Observation**
 
-| Entity | Expected Received | Actual Received | Status |
-| :--- | :---: | :---: | :---: |
-| Subscriber 1 (Live) | 1,000 | 1,000 | ✅ Success |
-| Subscriber 2 (Late) | 1,000 | **0** | ❌ Data Expired |
+<p align="center">
+  <img src="../images/rule32.png" width="60%">
+  <br>
+  <em> Impact of max_samples_per_instance on reliability across different RTTs</em>
+</p>
 
 **4. Empirical Conclusion**
 
-Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifespan (50ms)** caused all buffered samples to be purged from the Publisher's queue before Subscriber 2 could connect.
+When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effective buffer size for the reliability protocol. If mpi is insufficient to hold all samples sent during one **RTT** (plus the time for ACK/NACK processing), the Publisher will either block or drop samples.
+
 
 ---
 ### Rule 33
