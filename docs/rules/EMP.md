@@ -293,11 +293,11 @@ $$[OWNST = EXCLUSIVE] \implies DEADLN.period \ge 2 \times PP$$
 
 **2. Test Scenario (Step-by-Step)**
 
-1.  Configure two Publishers with different strengths for `EXCLUSIVE` ownership.
-2.  Maintain a constant network instability using the `tc` command to induce heartbeat delays.
-3.  Vary the **Liveliness Lease Duration** from 50ms up to 800ms.
-4.  Monitor the `on_liveliness_changed` callback at the Subscriber side.
-5.  Count how many times the active Publisher is mistakenly identified as 'Down' (Liveliness Lost), which forces an ownership handover to the standby Publisher.
+1.  Initialize two Publishers with different strengths for `EXCLUSIVE` ownership.
+2.  Apply a harsh network environment with **80% packet loss** using the `tc` command.
+3.  Publish a total of **10,000 samples** to observe long-term stability.
+4.  Vary the **Liveliness Lease Duration** from 50ms to 800ms.
+5.  Record the frequency of ownership handovers triggered by `on_liveliness_changed` at the Subscriber side.
 
 **3. Experimental Observation**
 
