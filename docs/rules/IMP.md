@@ -1,11 +1,11 @@
-# Stage 1 & 2: Implementation-specific (IMP) Rules
+# IMP Rules
 
 This page describes the QoS dependency rules derived from the specific implementation behaviors of ROS 2 Middlewares (RMWs) such as eProsima Fast DDS and Eclipse Cyclone DDS. These dependencies are not explicitly mandated by the DDS standard but are critical for functional consistency in practice.
 
 ---
 
-## ⚙️ Functional & Operational Consistency (Stage 1)
-*Internal dependencies within a single entity based on RMW implementation.*
+## Stage 1
+*In..*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -29,8 +29,8 @@ This page describes the QoS dependency rules derived from the specific implement
 
 ---
 
-## 🤝 RxO Functional Matching (Stage 2)
-*Dependencies between Publishers and Subscribers based on implementation logic.*
+## Stage 2
+*Dec.*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -39,6 +39,3 @@ This page describes the QoS dependency rules derived from the specific implement
 | 30 | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = \infty]$ | Operational | Pub ↔ Sub | IMP |
 
 ---
-
-!!! note "Implementation Dependency"
-    Unlike Standard (STD) rules, Implementation (IMP) rules may vary slightly depending on the RMW vendor. However, the rules listed here are commonly observed in mainstream ROS 2 distributions (e.g., Humble, Iron, Jazzy).
