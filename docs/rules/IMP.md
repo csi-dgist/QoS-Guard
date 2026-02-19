@@ -40,6 +40,16 @@ This page describes the QoS dependency rules derived from the specific implement
 
 ---
 
+## Stage 3: Dynamic & Performance Rules
+*Focuses*
+
+| No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
+|:---:|:---|:---|:---:|:---:|:---:|
+| [34](#rule-34) | RELIAB → WDLIFE | $[autodispose = TRUE] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub | IMP |
+| [40](#rule-40) | DURABL → DEADLN | $[DEADLN.period > 0] \wedge [DURABL \ge TRAN\_LOCAL]$ | Operational | Sub | IMP |
+
+---
+
 ## Implementation Evidence Details
 *Below are the code-level justifications and source references for each IMP rule.*
 
