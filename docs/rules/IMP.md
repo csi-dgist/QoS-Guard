@@ -271,9 +271,23 @@ break;
 // However, if set to infinite, it will not expire, so the data deletion function will not operate.
 ```
 ### Rule 13
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS** 
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// Stored in permanent storage
+void StatefulPersistentReader::set_last_notified(
+const GUID_t& writer_guid,
+const SequenceNumber_t& seq)
+{
+history_state_->history_record[writer_guid] = seq;
+persistence_->update_writer_seq_on_storage(persistence_guid_, writer_guid, seq);
+}
+// But the data vanished in an instant.
+Duration_t autopurge_no_writer_samples_delay;
+/**
+* @brief Indicates the duration the DataReader must retain information regarding instances that have the
+* instance_state NOT_ALIVE_DISPOSED. <br>
+* By default, c_TimeInfinite.
+*/
 ```
 ### Rule 14
 - **RMW/Implementation:** - **Source File:** - **Code Snippet:**
