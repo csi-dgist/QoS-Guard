@@ -5,7 +5,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 ---
 
 ## Stage 1
-*Intn.*
+*Intra-entity Dependency Validation*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -14,7 +14,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 ---
 
 ## Stage 3
-*Ru.*
+*Timing-based Dependency Validation*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
