@@ -83,7 +83,11 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 
 **3. Experimental Observation**
 
-![Rule 31](../images/rule31.png#width=100)
+<p align="center">
+  <img src="../images/rule31.png" style="width: 500px; height: auto;">
+  <br>
+  <em>Figure: Message loss rate analysis according to History Depth and RTT</em>
+</p>
 
 **4. Empirical Conclusion**
 
