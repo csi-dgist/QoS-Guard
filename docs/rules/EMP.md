@@ -269,15 +269,16 @@ $$[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \implies mpi \ge default$$
 
 ![Rule 38 Experimental Result](../images/rule38.png)
 
-* **Case A (Deadline = 100ms):** Represented by the orange spikes. Frequent deadline misses occur because any retransmission delay immediately exceeds the narrow 100ms window, causing constant and unstable ownership changes.
-* **Case B (Deadline = 500ms):** Represented by the blue spikes. Although packet loss still occurs, the larger 500ms buffer allows for successful retransmissions without triggering a deadline miss as frequently, leading to a more stable ownership state.
+* **Case A (Deadline = 100ms - Orange):** Counter-intuitively, the shorter deadline shows fewer misses initially. This is because samples are either delivered on time or missed entirely without significant queuing delay.
+* **Case B (Deadline = 500ms - Blue):** The longer deadline shows significantly more frequent misses. In a `RELIABLE` setting, the system attempts multiple retransmissions within the 500ms window. This leads to **Head-of-Line (HOL) blocking** and cumulative delays, eventually causing a burst of deadline misses once the buffer exceeds the limit.
 
 **4. Empirical Conclusion [ISSUE]**
 
-The experiment reveals that in an `EXCLUSIVE` ownership environment, a tight **Deadline** period (close to the Publication Period) leads to **Ownership Churning.** When a deadline miss is triggered by minor network jitters or retransmissions, the system prematurely hands over control to a secondary publisher, disrupting data continuity.
+The experimental data reveals a critical trade-off: while a longer **Deadline** is intended to provide a safety margin, in `RELIABLE` networks with constant loss, it can inadvertently lead to **Ownership Instability.** The extended window allows retransmission queues to grow, which eventually triggers a series of late-delivery timeouts that are more frequent than in shorter deadline configurations.
 
-To ensure stable operation and prevent unnecessary handovers in unreliable networks, the Deadline period must be set with a safety margin relative to the publication frequency:
-$$[OWNST = EXCLUSIVE] \implies DEADLN.period \ge 2 \times PP$$
+To ensure stable Ownership and minimize handover churn, the Deadline must be balanced against the retransmission timeout (RTO) and the publication frequency:
+$$[OWNST = EXCLUSIVE] \implies DEADLN.period \approx 2 \times PP \text{ (Optimal for Stability)}$$
+
 ---
 ### Rule 39
 *Validates why Durability (Transient Local) requires a non-zero Lifespan to provide late-joining data.*
