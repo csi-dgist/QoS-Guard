@@ -43,7 +43,8 @@ This page describes the QoS dependency rules derived from the specific implement
 ## 🔍 Implementation Evidence Details
 *Below are the code-level justifications and source references for each IMP rule.*
 
-### Rule 3 {#rule-3}
+<a id="rule-3"></a>
+### Rule 3
 - **RMW/Implementation:** - **Source File:** - **Code Snippet:**
 ```cpp
 // TODO: Insert relevant code from FastDDS or CycloneDDS
