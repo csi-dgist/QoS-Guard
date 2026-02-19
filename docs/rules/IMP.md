@@ -322,9 +322,42 @@ ddsrt_mutex_lock (&pwr->e.lock); }}
 // → The recipients of the notification are only the readers listed in pwr→readers.
 ```
 ### Rule 16
-- **RMW/Implementation:** - **Source File:** - **Code Snippet:**
+- **RMW/Implementation: FastDDS** 
 ```cpp
-// TODO: Insert relevant code from FastDDS or CycloneDDS
+// The system is designed so that not just anyone can delete data;
+// only the sender with the most powerful permissions can alter the status.
+bool writer_dispose
+( const fastrtps::rtps::GUID_t& writer_guid, const uint32_t ownership_strength) 
+{ bool ret_val = false; writer_set(writer_guid, ownership_strength); 
+if (ownership_strength >= current_owner.second) 
+{ current_owner.first = writer_guid; current_owner.second = ownership_strength; 
+if (InstanceStateKind::ALIVE_INSTANCE_STATE == instance_state) 
+{ ret_val = true; instance_state = InstanceStateKind::NOT_ALIVE_DISPOSED_INSTANCE_STATE; } } 
+return ret_val; }
+```
+- **RMW/Implementation: CycloneDDS** 
+```cpp
+// Only writers with a stronger strength can now modify the instance's state.
+static int inst_accepts_sample (const struct dds_rhc_default *rhc, const struct rhc_instance *inst, const struct ddsi_writer_info *wrinfo, const struct ddsi_serdata sample, const bool has_data)
+{if (rhc->by_source_ordering){
+if (sample->timestamp.v > inst->tstamp.v)
+{/ ok /}
+else if (sample->timestamp.v < inst->tstamp.v)
+{return 0;}
+else if (inst_accepts_sample_by_writer_guid (inst, wrinfo))
+{/ ok /}
+else
+{return 0;}}
+if (rhc->exclusive_ownership && inst->wr_iid_islive && inst->wr_iid != wrinfo->iid)
+{int32_t strength = wrinfo->ownership_strength;
+if (strength > inst->strength) {
+/ ok /
+} else if (strength < inst->strength) {
+return 0;
+} else if (inst_accepts_sample_by_writer_guid (inst, wrinfo)) {
+/ ok */
+} else {
+return 0;}}
 ```
 ### Rule 17
 - **RMW/Implementation:FastDDS**
