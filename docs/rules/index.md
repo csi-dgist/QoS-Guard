@@ -11,7 +11,7 @@ These are implemented in **QoS Guard** for static verification.
 
 
 ## Stage 1 | Intra-entity Dependency Validation
-* Identifies internal conflicts by analyzing each entity's QoS profile independently.*
+*Identifies internal conflicts by analyzing each entity's QoS profile independently.*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -39,7 +39,7 @@ These are implemented in **QoS Guard** for static verification.
 ---
 
 ## Stage 2 | Inter-entity Dependency Validation
-* Prevents connection failures by checking RxO compatibility between Publisher and Subscriber pairs.*
+*Prevents connection failures by checking RxO compatibility between Publisher and Subscriber pairs.*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -57,7 +57,7 @@ These are implemented in **QoS Guard** for static verification.
 ---
 
 ## Stage 3 | Timing-based Dependency Validation
-* Evaluates operational risks by integrating network parameters like RTT and publish period.*
+*Evaluates operational risks by integrating network parameters like RTT and publish period.*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
