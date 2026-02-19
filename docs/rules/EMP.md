@@ -246,12 +246,6 @@ $$[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \implies mpi \ge default$$
 
 ---
 ### Rule 38
-*Here is the structured English code for Rule 38. This experiment highlights how the Deadline period directly affects the frequency of ownership handovers in an EXCLUSIVE ownership setting when packet loss is present.
-
-📄 EMP.md Rule 38 Final Code
-Markdown
-
-### Rule 38: DEADLN → OWNST
 *Justifies the minimum Deadline period required to maintain stable Ownership in exclusive communication under network instability.*
 
 **1. Experimental Setup**
@@ -284,7 +278,6 @@ The experiment reveals that in an `EXCLUSIVE` ownership environment, a tight **D
 
 To ensure stable operation and prevent unnecessary handovers in unreliable networks, the Deadline period must be set with a safety margin relative to the publication frequency:
 $$[OWNST = EXCLUSIVE] \implies DEADLN.period \ge 2 \times PP$$
-
 ---
 ### Rule 39
 *Validates why Durability (Transient Local) requires a non-zero Lifespan to provide late-joining data.*
