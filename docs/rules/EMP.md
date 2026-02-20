@@ -43,7 +43,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 * **Subscriber 2 (Late-joiner):** Launched after Publisher finishes sending 1,000 samples.
 * **Total Samples Sent:** 1,000
 
-**2. Test Scenario (Step-by-Step)**
+**2. Test Scenario**
 
 1.  Launch **Subscriber 1** to monitor live data.
 2.  Launch **Publisher** and transmit 1,000 samples (Total time taken > 50ms).
@@ -74,7 +74,7 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 * **Publication Period (PP):** 100ms (10Hz)
 * **Variable:** History Depth ($1 \sim N$)
 
-**2. Test Scenario (Step-by-Step)**
+**2. Test Scenario**
 
 1.  Set the network packet loss to 5% and RTT to a range of 100ms to 500ms.
 2.  Transmit 1,000 samples from Publisher to Subscriber.
@@ -103,7 +103,7 @@ In a lossy network (5% loss), a Reliable connection requires retransmission of l
 * **Network Latency (RTT):** 100ms, 200ms, 300ms, 400ms (Simulated via `tc`)
 * **Publication Period (PP):** 100ms (10Hz)
 
-**2. Test Scenario (Step-by-Step)**
+**2. Test Scenario**
 
 1.  Connect two notebooks and verify the baseline RTT.
 2.  Set the Publisher's History to `KEEP_ALL` to ensure all samples are subject to Resource Limits.
@@ -133,7 +133,7 @@ When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effectiv
 * **Lifespan Duration:** 100ms to 1000ms
 * **Total Samples:** 10,000
 
-**2. Test Scenario (Step-by-Step)**
+**2. Test Scenario**
 
 1.  Fix the total number of samples to be sent at 10,000.
 2.  Perform a grid search by varying the **Publish Period (PP)** from 10ms to 100ms and **Lifespan duration** from 100ms to 1000ms.
@@ -164,7 +164,7 @@ Even with `RELIABLE` settings, data loss occurs if the **Lifespan duration** is 
 * **Publication Period (PP):** 100ms
 * **Total Samples:** 1,000
 
-**2. Test Scenario (Step-by-Step)**
+**2. Test Scenario**
 
 1.  Set the Publisher and Subscriber with a Deadline period of 150ms.
 2.  Introduce 5% packet loss to the network interface.
@@ -200,9 +200,10 @@ The experimental results highlight two different causes of Deadline violations:
 * **Total Samples:** 600 (Total duration: 60s)
 * **Liveliness Lease Duration**: Variable
 
-**2. Test Scenario (Step-by-Step)**
+**2. Test Scenario**
 
 The network condition is controlled over 60 seconds using the `tc` command:
+
 1.  **0s ~ 20s (Loss 0%):** Normal communication.
 2.  **20s ~ 40s (Loss 10%):** Induce occasional **Deadline Missed** due to retransmission delays.
 3.  **40s ~ 45s (Loss 100%):** Induce **Liveliness Lost** by blocking all packets.
@@ -229,7 +230,7 @@ $$LIVENS.lease \ge DEADLN.period$$
 * **Data Volume:** Sample count up to 1,600
 * **Metric:** Latency (ms) required for the system to reach steady-state convergence
 
-**2. Test Scenario (Step-by-Step)**
+**2. Test Scenario**
 
 1.  Initialize a Publisher that sends samples continuously with `TRANSIENT_LOCAL` durability.
 2.  After a specific number of samples are published, introduce a Late-Joining Subscriber.
@@ -267,7 +268,7 @@ $$[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \implies mpi \ge default$$
 * **Publication Period (PP):** 100ms
 * **Total Samples:** 400
 
-**2. Test Scenario (Step-by-Step)**
+**2. Test Scenario**
 
 1.  Configure two Publishers with different strengths for `EXCLUSIVE` ownership.
 2.  Set both Publishers and the Subscriber to `RELIABLE` reliability to ensure eventual delivery.
@@ -304,7 +305,7 @@ $$[OWNST = EXCLUSIVE] \implies DEADLN.period \ge 2 \times PP$$
 * **Publication Period (PP):** 100ms
 * **Metric:** Total count of Liveliness Lost events
 
-**2. Test Scenario (Step-by-Step)**
+**2. Test Scenario**
 
 1.  Initialize two Publishers with different strengths for `EXCLUSIVE` ownership.
 2.  Apply a harsh network environment with **80% packet loss** using the `tc` command.
