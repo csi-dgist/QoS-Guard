@@ -1,29 +1,104 @@
 # STD Rules
 
+
 <style>
-.md-typeset table td:first-child {
-  text-align: center;
-  padding: 8px !important; 
+/* 전체 리스트 컨테이너 */
+.std-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
 }
 
-.md-typeset table td:first-child a {
-  display: inline-block; 
-  width: 24px;         
-  height: 24px;        
-  line-height: 24px;    
-  border-radius: 50%;   
-  background-color: #f0f0f0; 
-  color: #000 !important;
+/* 개별 규칙 카드 */
+.std-item {
+  border: 1px solid #e1e4e8;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 16px 20px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
   text-decoration: none !important;
-  font-weight: bold;
-  font-size: 13px;      
-  transition: 0.2s;
+  color: inherit !important;
 }
 
-.md-typeset table tr:hover td:first-child a {
-  background-color: #4e37e6 !important; 
-  color: #fff !important; 
-  transform: scale(1.1);
+/* 호버 효과: 그림자와 보라색 포인트 (사용자 선호 색상 반영) */
+.std-item:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border-color: #4e37e6;
+  transform: translateY(-2px);
+}
+
+/* 상단 라인: 번호와 타이틀 */
+.std-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.std-no {
+  background: #f0f0f0;
+  color: #444;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.std-item:hover .std-no {
+  background: #4e37e6;
+  color: #fff;
+}
+
+.std-id {
+  font-weight: 700;
+  font-size: 1.05em;
+  color: #2c3e50;
+  flex-grow: 1;
+  margin-left: 12px;
+}
+
+/* 위반 조건 박스 (수식 강조) */
+.std-condition {
+  background: #f8f9fa;
+  padding: 14px;
+  border-radius: 6px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  border-left: 4px solid #4e37e6;
+  margin: 8px 0;
+  font-size: 0.95em;
+  color: #d63384; /* 수식 강조 색상 */
+  line-height: 1.5;
+}
+
+/* 하단 메타 데이터 */
+.std-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 0.82em;
+}
+
+.std-tag {
+  display: flex;
+  align-items: center;
+  background: #f1f3f5;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: #666;
+}
+
+.std-tag b {
+  color: #4e37e6;
+  margin-right: 5px;
+  font-weight: 600;
 }
 </style>
 
@@ -34,11 +109,42 @@ This page describes the QoS dependency and consistency rules derived from the **
 ## Stage 1
 *Intra-entity Dependency Validation*
 
-| No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
-|:---:|:---|:---|:---:|:---:|:---:|
-| [1](#rule-1) | HIST ↔ RESLIM | $[HIST.kind = KEEP\_LAST] \wedge [HIST.depth > mpi]$ | Structural | Pub, Sub | STD |
-| [2](#rule-2) | RESLIM ↔ RESLIM | $[max\_samples < max\_samples\_per\_instance]$ | Structural | Pub, Sub | STD |
 
+
+
+<div class="std-list">
+
+  <div class="std-item" id="rule-1">
+    <div class="std-header">
+      <span class="std-no">1</span>
+      <span class="std-id">HIST ↔ RESLIM</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      $[HIST.kind = KEEP\_LAST] \wedge [HIST.depth > mpi]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-2">
+    <div class="std-header">
+      <span class="std-no">2</span>
+      <span class="std-id">RESLIM ↔ RESLIM</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      $[max\_samples < max\_samples\_per\_instance]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+  </div>
+
+</div>
 ---
 
 ## Stage 2
