@@ -4,12 +4,12 @@
 .md-typeset table td:nth-child(1),
 .md-typeset table td:first-child,
 .md-typeset table tr td:first-child {
-    font-size: 22px !important;    /* 눈에 띄게 22px로 키웠습니다 */
-    font-weight: 900 !important;    /* 가장 두꺼운 굵기 */
-    text-align: center !important;  /* 중앙 정렬 */
-    color: #000000 !important;      /* 검은색으로 선명하게 */
+    font-size: 22px !important;    
+    font-weight: 900 !important;  
+    text-align: center !important;  
+    color: #000000 !important;     
     vertical-align: middle !important;
-    min-width: 50px !important;     /* 칸이 너무 좁아지지 않게 너비 확보 */
+    min-width: 50px !important;     
 }
 </style>
 
@@ -22,6 +22,7 @@ Choose a category from the sidebar to see detailed constraints.
 We have identified and classified 40 rules that govern the relationships between ROS 2 QoS policies. 
 These are implemented in **QoS Guard** for static verification.
 
+<hr style="border: 0; height: 2px; background: #4e37e6; opacity: 0.5; margin: 40px 0;">
 
 ## Stage 1 | Intra-entity Dependency Validation
 *Identifies internal conflicts by analyzing each entity's QoS profile independently.*
