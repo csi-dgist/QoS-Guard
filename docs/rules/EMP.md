@@ -1,5 +1,10 @@
 # EMP Rules
 
+<style>
+.md-typeset table td:first-child a { color: #000 !important; font-size: 1.15em; font-weight: 600; }
+</style>
+
+
 This page describes the QoS dependency rules derived from **Empirical analysis and experimental results**. These rules focus on runtime performance, network conditions (e.g., RTT), and timing-critical dependencies that were validated through systematic testing.
 
 ---
@@ -17,7 +22,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
-| <kbd>[31]</kbd>(#rule-31) | <kbd>HIST</kbd> → <kbd>RELIAB</kbd> | $[RELIABLE] \wedge [KEEP\_LAST] \wedge [depth < \lceil RTT/PP \rceil + 2]$ | Functional | Pub | EMP |
+| <kbd>[31](#rule-31)</kbd> | <kbd>HIST</kbd> → <kbd>RELIAB</kbd> | $[RELIABLE] \wedge [KEEP\_LAST] \wedge [depth < \lceil RTT/PP \rceil + 2]$ | Functional | Pub | EMP |
 | [32](#rule-32) | <kbd>RESLIM</kbd> → <kbd>RELIAB</kbd> | $[RELIABLE] \wedge [KEEP\_ALL] \wedge [mpi < \lceil RTT/PP \rceil + 1]$ | Functional | Pub | EMP |
 | [33](#rule-33) | <kbd>LFSPAN</kbd> → <kbd>RELIAB</kbd> | $[RELIABLE] \wedge [LFSPAN.duration < RTT \times 2]$ | Functional | Pub | EMP |
 | [35](#rule-35) | <kbd>RELIAB</kbd> → <kbd>DEADLN</kbd> | $[DEADLN.period > 0] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Sub | EMP |
