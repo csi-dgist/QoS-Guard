@@ -1,30 +1,27 @@
 # EMP Rules
 
 <style>
-/* 1. No. 열을 원형 배지로 만들기 */
 .md-typeset table td:first-child {
   width: 10px;
   height: 10px;
   text-align: center;
   border-radius: 50%;
-  background-color: #f0f0f0; /* 평소 배경 */
-  transition: 0.2s;          /* 부드러운 변화 */
+  background-color: #f0f0f0; 
+  transition: 0.2s;          
   padding: 0 !important;
 }
 
-/* 2. 마우스를 올렸을 때 (Hover) */
 .md-typeset table tr:hover td:first-child {
-  background-color: #fcba03 !important; /* 주황색 강조 */
-  transform: scale(1.1);                /* 살짝 커짐 */
+  background-color: #4e37e6 !important; 
+  transform: scale(1.1);                
 }
 
-/* 3. 숫자(링크) 스타일 */
 .md-typeset table td:first-child a {
   color: #000 !important;
   text-decoration: none !important;
   font-weight: bold;
   display: block;
-  line-height: 30px; /* 원 중앙 정렬 */
+  line-height: 30px; 
 }
 </style>
 
