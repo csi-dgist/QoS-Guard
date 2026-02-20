@@ -119,7 +119,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      $[DURABL \ge TRAN\_LOCAL] \wedge [RELIAB = BEST\_EFFORT]$
+      [DURABL \ge TRAN\_LOCAL] \wedge [RELIAB = BEST\_EFFORT]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
@@ -134,7 +134,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      $[OWNST = EXCLUSIVE] \wedge [RELIAB = BEST\_EFFORT]$
+      [OWNST = EXCLUSIVE] \wedge [RELIAB = BEST\_EFFORT]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
@@ -149,7 +149,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      $[LIVENS = MANUAL] \wedge [RELIAB = BEST\_EFFORT]$
+      [LIVENS = MANUAL] \wedge [RELIAB = BEST\_EFFORT]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
@@ -164,7 +164,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      $LFSPAN.duration < DEADLN.period$
+      LFSPAN.duration < DEADLN.period
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -179,7 +179,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      $[DESTORD = BY\_SOURCE] \wedge [HIST.kind = KEEP\_LAST] \wedge [depth = 1]$
+      [DESTORD = BY\_SOURCE] \wedge [HIST.kind = KEEP\_LAST] \wedge [depth = 1]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -194,7 +194,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      $[DESTORD = BY\_SOURCE] \wedge [KEEP\_ALL] \wedge [mpi = 1]$
+      [DESTORD = BY\_SOURCE] \wedge [KEEP\_ALL] \wedge [mpi = 1]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -209,7 +209,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      $[OWNST = EXCLUSIVE] \wedge [DEADLN.period = \infty]$
+      [OWNST = EXCLUSIVE] \wedge [DEADLN.period = \infty]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -224,7 +224,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      $[OWNST = EXCLUSIVE] \wedge [LIVENS.lease = \infty]$
+      [OWNST = EXCLUSIVE] \wedge [LIVENS.lease = \infty]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -239,7 +239,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      $[autopurge\_nowriter > 0] \wedge [LIVENS.lease = \infty]$
+      [autopurge\_nowriter > 0] \wedge [LIVENS.lease = \infty]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -254,7 +254,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      $[DURABL \ge TRANSIENT] \wedge [autopurge\_disposed \neq \infty]$
+      [DURABL \ge TRANSIENT] \wedge [autopurge\_disposed \neq \infty]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -269,7 +269,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      $[DEADLN.period > 0] \wedge [PART.names \neq \emptyset]$
+      [DEADLN.period > 0] \wedge [PART.names \neq \emptyset]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -284,7 +284,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      $[LIVENS = MANUAL] \wedge [PART.names \neq \emptyset]$
+      [LIVENS = MANUAL] \wedge [PART.names \neq \emptyset]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -299,7 +299,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      $[autodispose = TRUE] \wedge [OWNST = EXCLUSIVE]$
+      [autodispose = TRUE] \wedge [OWNST = EXCLUSIVE]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -314,7 +314,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      $[HIST.KEEP\_LAST] \wedge [LFSPAN.duration > HIST.depth \times PP]$
+      [HIST.KEEP\_LAST] \wedge [LFSPAN.duration > HIST.depth \times PP]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
@@ -329,7 +329,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      $[KEEP\_ALL] \wedge [LFSPAN.duration > mpi \times PP]$
+      [KEEP\_ALL] \wedge [LFSPAN.duration > mpi \times PP]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
@@ -344,7 +344,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      $[DURABL \neq VOLATILE] \wedge [autoenable = FALSE]$
+      [DURABL \neq VOLATILE] \wedge [autoenable = FALSE]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
@@ -359,7 +359,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      $[DURABL \ge TRAN\_LOCAL] \wedge [PART.names \neq \emptyset]$
+      [DURABL \ge TRAN\_LOCAL] \wedge [PART.names \neq \emptyset]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
@@ -383,7 +383,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      $[W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = 0]$
+      [W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = 0]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
@@ -398,7 +398,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      $[W.autodispose = FALSE] \wedge [R.autopurge\_disposed > 0]$
+      [W.autodispose = FALSE] \wedge [R.autopurge\_disposed > 0]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
@@ -413,7 +413,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      $[W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = \infty]$
+      [W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = \infty]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
@@ -437,7 +437,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      $[autodispose = TRUE] \wedge [RELIAB = BEST\_EFFORT]$
+      [autodispose = TRUE] \wedge [RELIAB = BEST\_EFFORT]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub</div>
@@ -452,7 +452,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      $[DEADLN.period > 0] \wedge [DURABL \ge TRAN\_LOCAL]$
+      [DEADLN.period > 0] \wedge [DURABL \ge TRAN\_LOCAL]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
