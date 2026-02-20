@@ -87,7 +87,7 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 </div>
 
 <div align="center">
-  <img src="../images/rule31.png" width="500">
+  <img src="/images/rule31.png" width="500">
 </div>
 
 ![Rule 31](../images/rule31.png)
