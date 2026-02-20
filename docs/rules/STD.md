@@ -121,7 +121,7 @@ This page describes the QoS dependency and consistency rules derived from the **
       <span style="font-size: 0.8em; color: #999;">Structural</span>
     </div>
     <div class="std-condition">
-      [HIST.kind = KEEP\_LAST] \wedge [HIST.depth > mpi]
+      [HIST.kind = KEEP_LAST] ∧ [HIST.depth > mpi]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
@@ -136,7 +136,7 @@ This page describes the QoS dependency and consistency rules derived from the **
       <span style="font-size: 0.8em; color: #999;">Structural</span>
     </div>
     <div class="std-condition">
-      [max\_samples < max\_samples\_per\_instance]
+      [max_samples < max_samples_per_instance]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
@@ -159,7 +159,7 @@ This page describes the QoS dependency and consistency rules derived from the **
       <span style="font-size: 0.8em; color: #999;">Structural</span>
     </div>
     <div class="std-condition">
-      [Writer.PART \cap Reader.PART] = \emptyset
+      [Writer.PART ∩ Reader.PART] = ∅
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
@@ -219,7 +219,7 @@ This page describes the QoS dependency and consistency rules derived from the **
       <span style="font-size: 0.8em; color: #999;">Structural</span>
     </div>
     <div class="std-condition">
-      [W.LIVENS < R.LIVENS] \vee [W.lease > R.lease]
+      [W.LIVENS < R.LIVENS] ∨ [W.lease > R.lease]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
@@ -234,7 +234,7 @@ This page describes the QoS dependency and consistency rules derived from the **
       <span style="font-size: 0.8em; color: #999;">Structural</span>
     </div>
     <div class="std-condition">
-      [Writer.OWNST \neq Reader.OWNST]
+      [Writer.OWNST ≠ Reader.OWNST]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
