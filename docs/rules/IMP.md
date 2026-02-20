@@ -7,8 +7,6 @@ This page describes the QoS dependency rules derived from the specific implement
 ## Stage 1
 *Intra-entity Dependency Validation*
 
-<div class="rule-table">
-
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
 | [3](#rule-3) | RELIAB → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub, Sub | IMP |
@@ -29,14 +27,10 @@ This page describes the QoS dependency rules derived from the specific implement
 | [19](#rule-19) | ENTFAC → DURABL | $[DURABL \neq VOLATILE] \wedge [autoenable = FALSE]$ | Operational | Pub, Sub | IMP |
 | [20](#rule-20) | PART → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [PART.names \neq \emptyset]$ | Operational | Pub, Sub | IMP |
 
-</div>
-
 ---
 
 ## Stage 2
 *Dec.*
-
-<div class="rule-table">
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -44,20 +38,15 @@ This page describes the QoS dependency rules derived from the specific implement
 | [29](#rule-29) | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_disposed > 0]$ | Operational | Pub ↔ Sub | IMP |
 | [30](#rule-30) | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = \infty]$ | Operational | Pub ↔ Sub | IMP |
 
-</div>
-
 ---
 
 ## Stage 3: Dynamic & Performance Rules
-
-<div class="rule-table">
+*Focuses*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
 | [34](#rule-34) | RELIAB → WDLIFE | $[autodispose = TRUE] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub | IMP |
 | [40](#rule-40) | DURABL → DEADLN | $[DEADLN.period > 0] \wedge [DURABL \ge TRAN\_LOCAL]$ | Operational | Sub | IMP |
-
-</div>
 
 ---
 
