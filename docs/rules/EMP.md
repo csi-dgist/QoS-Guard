@@ -26,6 +26,19 @@
   color: #fff !important; 
   transform: scale(1.1);
 }
+
+/* std-list card style (same as IMP) */
+.std-list { display: flex; flex-direction: column; gap: 16px; margin: 24px 0; }
+.std-item { border: 1px solid #e1e4e8; border-radius: 10px; background: #ffffff; padding: 16px 20px; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); position: relative; text-decoration: none !important; color: inherit !important; }
+.std-item:hover { box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-color: #4e37e6; transform: translateY(-2px); }
+.std-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.std-no { background: #f0f0f0; color: #444; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 800; font-size: 13px; transition: 0.3s; }
+.std-item:hover .std-no { background: #4e37e6; color: #fff; }
+.std-id { font-weight: 700; font-size: 1.05em; color: #2c3e50; flex-grow: 1; margin-left: 12px; }
+.std-condition { background: #f8f9fa; padding: 14px; border-radius: 6px; font-family: 'Consolas', 'Monaco', monospace; border-left: 4px solid #4e37e6; margin: 8px 0; font-size: 0.95em; color: #000000; line-height: 1.5; }
+.std-footer { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; font-size: 0.82em; }
+.std-tag { display: flex; align-items: center; background: #f1f3f5; padding: 2px 8px; border-radius: 4px; color: #666; }
+.std-tag b { color: #4e37e6; margin-right: 5px; font-weight: 600; }
 </style>
 
 
@@ -35,25 +48,153 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 ## Stage 1
 *Intra-entity Dependency Validation*
 
-| No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
-|:---:|:---|:---|:---:|:---:|:---:|
-| [6](#rule-6) | LFSPAN → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [LFSPAN.duration > 0]$ | Functional | Pub | EMP |
+<div class="std-list">
+
+  <a href="#rule-6" class="std-item">
+    <div class="std-header">
+      <span class="std-no">6</span>
+      <span class="std-id">LFSPAN → DURABL</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [DURABL \ge TRAN\_LOCAL] \wedge [LFSPAN.duration > 0]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+</div>
 
 ---
 
 ## Stage 3
 *Timing-based Dependency Validation*
 
-| No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
-|:---:|:---|:---|:---:|:---:|:---:|
-| [31](#rule-31) | HIST → RELIAB | $[RELIABLE] \wedge [KEEP\_LAST] \wedge [depth < \lceil RTT/PP \rceil + 2]$ | Functional | Pub | EMP |
-| [32](#rule-32) | RESLIM → RELIAB | $[RELIABLE] \wedge [KEEP\_ALL] \wedge [mpi < \lceil RTT/PP \rceil + 1]$ | Functional | Pub | EMP |
-| [33](#rule-33) | LFSPAN → RELIAB | $[RELIABLE] \wedge [LFSPAN.duration < RTT \times 2]$ | Functional | Pub | EMP |
-| [35](#rule-35) | RELIAB → DEADLN | $[DEADLN.period > 0] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Sub | EMP |
-| [36](#rule-36) | LIVENS → DEADLN | $[DEADLN.period > 0] \wedge [LIVENS.lease < DEADLN.period]$ | Functional | Sub | EMP |
-| [37](#rule-37) | HIST → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \wedge [mpi \ge default]$ | Operational | Pub | EMP |
-| [38](#rule-38) | DEADLN → OWNST | $[OWNST = EXCLUSIVE] \wedge [DEADLN.period < 2 \times PP]$ | Operational | Sub | EMP |
-| [39](#rule-39) | LIVENS → OWNST | $[OWNST = EXCLUSIVE] \wedge [lease < 2 \times PP]$ | Operational | Sub | EMP |
+<div class="std-list">
+
+  <a href="#rule-31" class="std-item">
+    <div class="std-header">
+      <span class="std-no">31</span>
+      <span class="std-id">HIST → RELIAB</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [RELIABLE] \wedge [KEEP\_LAST] \wedge [depth < \lceil RTT/PP \rceil + 2]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-32" class="std-item">
+    <div class="std-header">
+      <span class="std-no">32</span>
+      <span class="std-id">RESLIM → RELIAB</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [RELIABLE] \wedge [KEEP\_ALL] \wedge [mpi < \lceil RTT/PP \rceil + 1]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-33" class="std-item">
+    <div class="std-header">
+      <span class="std-no">33</span>
+      <span class="std-id">LFSPAN → RELIAB</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [RELIABLE] \wedge [LFSPAN.duration < RTT \times 2]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-35" class="std-item">
+    <div class="std-header">
+      <span class="std-no">35</span>
+      <span class="std-id">RELIAB → DEADLN</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [DEADLN.period > 0] \wedge [RELIAB = BEST\_EFFORT]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-36" class="std-item">
+    <div class="std-header">
+      <span class="std-no">36</span>
+      <span class="std-id">LIVENS → DEADLN</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [DEADLN.period > 0] \wedge [LIVENS.lease < DEADLN.period]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-37" class="std-item">
+    <div class="std-header">
+      <span class="std-no">37</span>
+      <span class="std-id">HIST → DURABL</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      [DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \wedge [mpi \ge default]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-38" class="std-item">
+    <div class="std-header">
+      <span class="std-no">38</span>
+      <span class="std-id">DEADLN → OWNST</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      [OWNST = EXCLUSIVE] \wedge [DEADLN.period < 2 \times PP]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-39" class="std-item">
+    <div class="std-header">
+      <span class="std-no">39</span>
+      <span class="std-id">LIVENS → OWNST</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      [OWNST = EXCLUSIVE] \wedge [lease < 2 \times PP]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+</div>
 
 ---
 
@@ -65,6 +206,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 ---
 ##  Experimental Evidence Details
 
+<span id="rule-6"></span>
 ### Rule 6
 *Validates why Durability (Transient Local) requires a non-zero Lifespan to provide late-joining data.*
 
@@ -95,6 +237,7 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 
 ---
 
+<span id="rule-31"></span>
 ### Rule 31 
 *Justifies the minimum History Depth required to prevent data loss in Reliable communication under network delay and loss.*
 
@@ -124,6 +267,7 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 In a lossy network (5% loss), a Reliable connection requires retransmission of lost packets. If the **History Depth** is smaller than the number of samples sent during one **RTT**, the buffer is overwritten before a retransmission can be requested. 
 
 ---
+<span id="rule-32"></span>
 ### Rule 32
 *Justifies the minimum Resource Limits (max_samples_per_instance) required to sustain reliable transmission under network delay.*
 
@@ -155,6 +299,7 @@ When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effectiv
 
 
 ---
+<span id="rule-33"></span>
 ### Rule 33
 *Justifies the minimum Lifespan duration required to ensure sample reception before expiration in reliable communication.*
 
@@ -186,6 +331,7 @@ When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effectiv
 Even with `RELIABLE` settings, data loss occurs if the **Lifespan duration** is shorter than the time required for successful transmission and acknowledgement. 
 
 ---
+<span id="rule-35"></span>
 ### Rule 35
 *Justifies how Reliability settings impact Deadline compliance under packet loss conditions.*
 
@@ -222,6 +368,7 @@ The experimental results highlight two different causes of Deadline violations:
 2. In **BEST_EFFORT** mode, violations nearly doubled (48 times) because lost packets created permanent gaps in the data stream, directly triggering the Deadline timer.
 
 ---
+<span id="rule-36"></span>
 ### Rule 36
 *Justifies the consistency requirement between Liveliness Lease Duration and Deadline Period to avoid redundant or conflicting fault detections.*
 
@@ -252,6 +399,7 @@ To prevent this **state inconsistency** and ensure a logical fault-detection seq
 $LIVENS.lease \ge DEADLN.period$
 
 ---
+<span id="rule-37"></span>
 ### Rule 37
 *Justifies the impact of Resource Limits on the recovery latency for late-joining subscribers in durable communication.*
 
@@ -289,6 +437,7 @@ $[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \implies mpi \ge default$
 
 
 ---
+<span id="rule-38"></span>
 ### Rule 38
 *Justifies the minimum Deadline period required to maintain stable Ownership in exclusive communication under network instability.*
 
@@ -326,6 +475,7 @@ By extending the Deadline (Case B), the system becomes more resilient to packet 
 $[OWNST = EXCLUSIVE] \implies DEADLN.period \ge 2 \times PP$
 
 ---
+<span id="rule-39"></span>
 ### Rule 39
 *Justifies the impact of Liveliness Lease Duration on Ownership stability by preventing premature entity failure detection.*
 
