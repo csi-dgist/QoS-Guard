@@ -73,7 +73,7 @@
   border-left: 4px solid #4e37e6;
   margin: 8px 0;
   font-size: 0.95em;
-  color: #d63384; /* 수식 강조 색상 */
+  color: #000000; /* 수식 강조 색상 */
   line-height: 1.5;
 }
 
