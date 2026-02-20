@@ -54,3 +54,11 @@ hr.hr-short-bar {
     letter-spacing: 15px;
     margin: 35px 0;
 }
+
+.hr-edge-fade {
+    height: 3px;
+    background: linear-gradient(to right, #4E5EB4 10%, rgba(78, 94, 180, 0.1) 90%);
+    border-radius: 2px;
+    margin: 20px 0;
+    border: none; 
+}
