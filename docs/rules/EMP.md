@@ -114,7 +114,7 @@ In a lossy network (5% loss), a Reliable connection requires retransmission of l
 **3. Experimental Observation**
 
 <div align="center">
-  <img src="../../images/rule32.png" width="400">
+  <img src="../../images/rule32.png" width="500">
 </div>
 
 **4. Empirical Conclusion**
@@ -143,7 +143,7 @@ When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effectiv
 **3. Experimental Observation**
 
 <div align="center">
-  <img src="../../images/rule33.png" width="200">
+  <img src="../../images/rule33.png" width="500">
 </div>
 
 * **High Reception Zone (Blue):** When Lifespan is sufficiently longer than RTT and PP, nearly all 10,000 samples are received.
@@ -175,7 +175,7 @@ Even with `RELIABLE` settings, data loss occurs if the **Lifespan duration** is 
 **3. Experimental Observation**
 
 <div align="center">
-  <img src="../../images/rule35.png" width="400">
+  <img src="../../images/rule35.png" width="500">
 </div>
 
 | Reliability | Total Samples | Received Samples | Deadline Missed Count | Cause of Violation |
@@ -240,7 +240,7 @@ $$LIVENS.lease \ge DEADLN.period$$
 **3. Experimental Observation**
 
 <div align="center">
-  <img src="../../images/rule37.png" width="400">
+  <img src="../../images/rule37.png" width="500">
 </div>
 
 * **Low mpi Zone:** Recovery is relatively fast
@@ -279,7 +279,7 @@ $$[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \implies mpi \ge default$$
 **3. Experimental Observation**
 
 <div align="center">
-  <img src="../../images/rule38.png" width="400">
+  <img src="../../images/rule38.png" width="500">
 </div>
 
 * **Case A (Deadline = 100ms - Orange):** Numerous spikes are observed throughout the experiment. Any minor retransmission delay caused by the 5% loss immediately triggers a deadline miss, leading to unstable ownership.
@@ -315,7 +315,7 @@ $$[OWNST = EXCLUSIVE] \implies DEADLN.period \ge 2 \times PP$$
 **3. Experimental Observation**
 
 <div align="center">
-  <img src="../../images/rule39.png" width="400">
+  <img src="../../images/rule39.png" width="500">
 </div>
 
 * **Short Lease Duration (50ms - 100ms):** A high frequency of Liveliness Lost events is observed (up to 26 times). Since the lease duration is shorter than or equal to the Publication Period (100ms), even a single delayed heartbeat triggers a failure detection.
