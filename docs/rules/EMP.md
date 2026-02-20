@@ -4,6 +4,33 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 ---
 
+## :material-layers-search: Stage 1: Intra-entity Validation
+!!! info "Static Configuration Rules"
+    각 엔티티 내부의 QoS 설정 일관성을 검증하는 규칙입니다. [cite: 582, 611]
+
+    | No. | Identifier | QoS Conflict Condition (Violation) | Entity | Basis |
+    |:---:|:---|:---|:---:|:---:|
+    | **6** | [LFSPAN → DURABL](#rule-6) | $[DURABL \ge TRAN\_LOCAL] \wedge [LFSPAN.duration > 0]$ | :material-publish: Pub | `EMP` |
+
+---
+
+## :material-timer-alert: Stage 3: Timing-based Validation
+!!! warning "Network & Timing-dependent Rules"
+    네트워크 지연(RTT) 및 패킷 손실 등 환경적 변수를 고려한 동적 검증 규칙입니다. [cite: 586, 611]
+
+    | No. | Identifier | QoS Conflict Condition (Violation) | Entity | Basis |
+    |:---:|:---|:---|:---:|:---:|
+    | **31** | [HIST → RELIAB](#rule-31) | $[RELIABLE] \wedge [KEEP\_LAST] \wedge [depth < \lceil RTT/PP \rceil + 2]$ | :material-publish: Pub | `EMP` |
+    | **32** | [RESLIM → RELIAB](#rule-32) | $[RELIABLE] \wedge [KEEP\_ALL] \wedge [mpi < \lceil RTT/PP \rceil + 1]$ | :material-publish: Pub | `EMP` |
+    | **33** | [LFSPAN → RELIAB](#rule-33) | $[RELIABLE] \wedge [LFSPAN.duration < RTT \times 2]$ | :material-publish: Pub | `EMP` |
+    | **35** | [RELIAB → DEADLN](#rule-35) | $[DEADLN.period > 0] \wedge [RELIAB = BEST\_EFFORT]$ | :material-download: Sub | `EMP` |
+    | **36** | [LIVENS → DEADLN](#rule-36) | $[DEADLN.period > 0] \wedge [LIVENS.lease < DEADLN.period]$ | :material-download: Sub | `EMP` |
+    | **37** | [HIST → DURABL](#rule-37) | $[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \wedge [mpi \ge default]$ | :material-publish: Pub | `EMP` |
+    | **38** | [DEADLN → OWNST](#rule-38) | $[OWNST = EXCLUSIVE] \wedge [DEADLN.period < 2 \times PP]$ | :material-download: Sub | `EMP` |
+    | **39** | [LIVENS → OWNST](#rule-39) | $[OWNST = EXCLUSIVE] \wedge [lease < 2 \times PP]$ | :material-download: Sub | `EMP` |
+
+    ---
+
 ## Stage 1
 *Intra-entity Dependency Validation*
 
