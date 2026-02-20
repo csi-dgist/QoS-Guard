@@ -1,12 +1,10 @@
 # QoS Rules Overview
 
 <style>
-/* 1. 전체 폰트 및 기본 설정 */
 .md-typeset {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* 2. 표 디자인 */
 .md-typeset table {
     border-collapse: separate;
     border-spacing: 0;
@@ -18,14 +16,13 @@
     background: #ffffff;
 }
 
-/* 3. 헤더 고정 및 호버 효과 완전 제거 */
-.md-typeset table thead {
+.md-typeset table thead,
+.md-typeset table thead tr {
     background-color: #4E5EB4 !important;
 }
 
 .md-typeset table thead tr {
-    background-color: #4E5EB4 !important;
-    pointer-events: none; /* 헤더 행 전체에 마우스 이벤트 차단 (연해짐 방지) */
+    pointer-events: none;
 }
 
 .md-typeset table th {
@@ -36,47 +33,42 @@
     letter-spacing: 0.03em;
     padding: 14px 16px !important;
     border: none !important;
-    background-color: #4E5EB4 !important; 
+    background-color: #4E5EB4 !important;
 }
 
-/* 4. 데이터 셀 설정 (호버 색상이 뚫고 나오도록 배경색 투명화) */
 .md-typeset table td {
     padding: 14px 16px !important;
     border-bottom: 1px solid #f1f5f9 !important;
     font-size: 13.5px;
     color: #334155;
     vertical-align: middle;
-    /* 중요: 개별 셀 배경색을 투명하게 해야 tr의 호버 색상이 보입니다 */
-    background-color: transparent !important; 
+    background-color: transparent !important;
 }
 
-/* 5. 첫 번째 열(No.) 특정 디자인 */
+/* No. 열: 검정, 크게, 가운데 정렬 */
 .md-typeset table td:first-child {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 15px !important;
+    font-size: 18px !important;
     font-weight: 600 !important;
-    color: #4E5EB4 !important;
+    color: #000000 !important;
     text-align: center !important;
+    vertical-align: middle !important;
     width: 65px;
 }
 
-/* 6. 행 전체 호버 이벤트 (통일된 반응) */
 .md-typeset table tbody tr {
     transition: background-color 0.15s ease;
-    background-color: #ffffff; /* 기본 배경색 명시 */
+    background-color: #ffffff;
 }
 
-/* 본문 행 전체에 마우스를 올렸을 때 */
 .md-typeset table tbody tr:hover {
-    background-color: #f1f5f9 !important; 
+    background-color: #f1f5f9 !important;
 }
 
-/* 호버 시 모든 셀의 배경을 투명으로 강제 (일부 안 변하는 현상 방지) */
 .md-typeset table tbody tr:hover td {
     background-color: transparent !important;
 }
 
-/* 7. 기타 스타일 */
 .md-typeset table td:nth-child(3) {
     font-family: 'Fira Code', 'Consolas', monospace;
     font-size: 12.5px;
@@ -135,7 +127,7 @@ These are implemented in **QoS Guard** for static verification.
 | 16 | OWNST → WDLIFE | $[autodispose = TRUE] \wedge [OWNST = EXCLUSIVE]$ | Functional | Sub | IMP |
 | 17 | HIST → LFSPAN | $[HIST.KEEP\_LAST] \wedge [LFSPAN.duration > HIST.depth \times PP]$ | Operational | Pub, Sub | IMP |
 | 18 | RESLIM → LFSPAN | $[KEEP\_ALL] \wedge [LFSPAN.duration > mpi \times PP]$ | Operational | Pub, Sub | IMP |
-| 19 | ENTFAC → DURABL | $[DURABL \neq VOLATILE] \wedge [autoenable = FALSE]$ | Operational | Pub, Sub | <span class="basis-tag basis-imp">IMP</span> |
+| 19 | ENTFAC → DURABL | $[DURABL \neq VOLATILE] \wedge [autoenable = FALSE]$ | Operational | Pub, Sub | <span class="basis-tag">IMP</span> |
 | 20 | PART → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [PART.names \neq \emptyset]$ | Operational | Pub, Sub | IMP |
 
 <hr class="hr-grad-left">
