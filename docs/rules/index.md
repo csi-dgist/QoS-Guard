@@ -48,9 +48,9 @@
 /* No. 열: Identifier 열과 동일 색상, 가운데 정렬, 좁은 너비 */
 .md-typeset table th:first-child,
 .md-typeset table td:first-child {
-    width: 42px !important;
-    min-width: 42px !important;
-    max-width: 42px !important;
+    width: 50px !important;
+    min-width: 50px !important;
+    max-width: 50px !important;
     box-sizing: border-box;
 }
 .md-typeset table td:first-child {
@@ -113,7 +113,7 @@ These are implemented in **QoS Guard** for static verification.
 <h2 class="stage-header">Stage 1 | Intra-entity Dependency Validation</h2>
 *Identifies internal conflicts by analyzing each entity's QoS profile independently.*
 
-| No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
+| No | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
 | 1 | HIST ↔ RESLIM | $[HIST.kind = KEEP\_LAST] \wedge [HIST.depth > mpi]$ | Structural | Pub, Sub | STD |
 | 2 | RESLIM ↔ RESLIM | $[max\_samples < max\_samples\_per\_instance]$ | Structural | Pub, Sub | STD |
@@ -141,7 +141,7 @@ These are implemented in **QoS Guard** for static verification.
 <h2 class="stage-header">Stage 2 | Inter-entity Dependency Validation</h2>
 *Prevents connection failures by checking RxO compatibility between Publisher and Subscriber pairs.*
 
-| No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
+| No | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
 | 21 | PART ↔ PART | $[Writer.PART \cap Reader.PART] = \emptyset$ | Structural | Pub ↔ Sub | STD |
 | 22 | RELIAB ↔ RELIAB | $[Writer.RELIAB < Reader.RELIAB]$ | Structural | Pub ↔ Sub | STD |
@@ -159,7 +159,7 @@ These are implemented in **QoS Guard** for static verification.
 <h2 class="stage-header">Stage 3 | Timing-based Dependency Validation</h2>
 *Evaluates operational risks by integrating network parameters like RTT and publish period.*
 
-| No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
+| No | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
 | 31 | HIST → RELIAB | $[RELIABLE] \wedge [KEEP\_LAST] \wedge [depth < \lceil RTT/PP \rceil + 2]$ | Functional | Pub | EMP |
 | 32 | RESLIM → RELIAB | $[RELIABLE] \wedge [KEEP\_ALL] \wedge [mpi < \lceil RTT/PP \rceil + 1]$ | Functional | Pub | EMP |
