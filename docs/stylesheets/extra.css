@@ -1,27 +1,19 @@
-.md-typeset table td:nth-child(1) {
-    font-size: 20px !important;
-    font-weight: 800 !important;
-    text-align: center !important;
-    color: #4E5EB4 !important; /* 이미지에서 추출한 블루 색상 적용 */
-    vertical-align: middle !important;
-}
-
-hr.double-blue {
-    border: none;
-    border-top: 4px double #4E5EB4;
-    opacity: 0.6;
-    height: 4px;
+hr.hr-solid {
+    border: 0;
+    height: 2px;
+    background: #4E5EB4;
+    opacity: 0.5;
     margin: 40px 0;
 }
 
-hr.grad-center {
+hr.hr-grad-center {
     border: 0;
     height: 1px;
     background-image: linear-gradient(to right, rgba(0,0,0,0), #4E5EB4, rgba(0,0,0,0));
     margin: 30px 0;
 }
 
-hr.grad-left {
+hr.hr-grad-left {
     border: 0;
     height: 2px;
     background-image: linear-gradient(to right, #4E5EB4, rgba(0,0,0,0));
@@ -29,7 +21,22 @@ hr.grad-left {
     margin: 25px 0;
 }
 
-hr.short-bar {
+hr.hr-dashed {
+    border: 0;
+    border-top: 1px dashed #4E5EB4;
+    opacity: 0.4;
+    margin: 20px 0;
+}
+
+hr.hr-double {
+    border: none;
+    border-top: 4px double #4E5EB4;
+    opacity: 0.6;
+    height: 4px;
+    margin: 40px 0;
+}
+
+hr.hr-short-bar {
     border: 0;
     height: 4px;
     background: #4E5EB4;
