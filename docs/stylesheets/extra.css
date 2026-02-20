@@ -62,23 +62,3 @@ hr.hr-short-bar {
     margin: 20px 0;
     border: none; 
 }
-
-/* Admonition 'info' 블루 빛남 효과 적용 */
-.md-typeset .admonition.info {
-  --md-admonition-fg-color: #4E5EB4 !important;
-  --md-admonition-bg-color: #ffffff !important; 
-  
-  border-left: 0.4rem solid #4E5EB4 !important;
-  border-right: 1px solid rgba(78, 94, 180, 0.2) !important;
-  border-top: 1px solid rgba(78, 94, 180, 0.2) !important;
-  border-bottom: 1px solid rgba(78, 94, 180, 0.2) !important;
-
-  /* 핵심: 초록색 대신 #4E5EB4 색상으로 은은한 광채 효과 */
-  box-shadow: 0 4px 10px rgba(78, 94, 180, 0.15), 0 0 5px rgba(78, 94, 180, 0.1) !important;
-}
-
-.md-typeset .info > .admonition-title {
-  background-color: rgba(78, 94, 180, 0.05) !important;
-  color: #4E5EB4 !important;
-  border-bottom: 1px solid rgba(78, 94, 180, 0.1) !important;
-}
