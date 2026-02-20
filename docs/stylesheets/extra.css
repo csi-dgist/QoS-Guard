@@ -61,6 +61,7 @@ hr.hr-short-bar {
     border-radius: 2px;
     margin: 20px 0;
     border: none; 
+}
 
 .md-typeset .admonition.info {
   --md-admonition-fg-color: #4E5EB4 !important;
@@ -68,7 +69,4 @@ hr.hr-short-bar {
   --md-admonition-bg-color: rgba(78, 94, 180, 0.1) !important;
   
   border-left-width: 0.4rem !important;
-}
-
-    
 }
