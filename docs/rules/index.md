@@ -50,14 +50,29 @@
     background-color: transparent !important; 
 }
 
-/* 5. 첫 번째 열(No.) 특정 디자인 */
-.md-typeset table td:first-child {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 15px !important;
+/* 5. 첫 번째 열(No.) — 배지 스타일 (MkDocs Material + 일반 미리보기 공통) */
+.md-typeset table td:first-child,
+table td:first-child {
+    font-family: 'SF Mono', 'JetBrains Mono', 'Consolas', monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 12px !important;
     font-weight: 600 !important;
-    color: #4E5EB4 !important;
+    color: #4338ca !important;
     text-align: center !important;
-    width: 65px;
+    width: 56px;
+    padding: 10px 12px !important;
+    background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%) !important;
+    border: 1px solid rgba(78, 94, 180, 0.12);
+    border-radius: 8px;
+    letter-spacing: 0.02em;
+    box-shadow: 0 1px 2px rgba(78, 94, 180, 0.06);
+}
+/* No. 열 호버 시에도 배지 톤 유지 */
+.md-typeset table tbody tr:hover td:first-child,
+table tbody tr:hover td:first-child {
+    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%) !important;
+    border-color: rgba(78, 94, 180, 0.18);
+    box-shadow: 0 2px 4px rgba(78, 94, 180, 0.08);
 }
 
 /* 6. 행 전체 호버 이벤트 (통일된 반응) */
