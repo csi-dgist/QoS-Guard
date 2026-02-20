@@ -3,26 +3,81 @@
 > Source: *Dependency Chain Analysis of ROS 2 DDS QoS Policies: From Lifecycle Tutorial to Static Verification*  
 > DDS Publish–Subscribe communication is divided into three phases: **Discovery → Data Exchange → Disassociation**.
 
+
+<style>
+/* qos.md 전용 커스텀 스타일 */
+.qos-toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.qos-card {
+    background: #ffffff;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    padding: 12px 16px;
+    text-decoration: none !important;
+    color: #24292e !important;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.qos-card:hover {
+    border-color: #0366d6;
+    background-color: #f6f8fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.qos-num {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: #0366d6;
+    margin-right: 12px;
+    font-size: 1.1em;
+}
+
+.qos-title {
+    font-weight: 500;
+    font-size: 0.95em;
+    line-height: 1.2;
+}
+
+.qos-abbr {
+    display: block;
+    font-size: 0.75em;
+    color: #6a737d;
+    margin-top: 2px;
+}  
+</style>
+
 ---
 
 ## Table of Contents
 
-1. [ENTITY FACTORY](#1-entity-factory-entfac)
-2. [PARTITION](#2-partition-part)
-3. [USER DATA](#3-user-data-usrdata)
-4. [GROUP DATA](#4-group-data-grpdata)
-5. [TOPIC DATA](#5-topic-data-topdata)
-6. [RELIABILITY](#6-reliability-reliab)
-7. [DURABILITY](#7-durability-durabl)
-8. [DEADLINE](#8-deadline-deadln)
-9. [LIVELINESS](#9-liveliness-livens)
-10. [HISTORY](#10-history-hist)
-11. [RESOURCE LIMITS](#11-resource-limits-reslim)
-12. [LIFESPAN](#12-lifespan-lfspan)
-13. [OWNERSHIP (+STRENGTH)](#13-ownership-strength-ownst)
-14. [DESTINATION ORDER](#14-destination-order-destord)
-15. [WRITER DATA LIFECYCLE](#15-writer-data-lifecycle-wdlife)
-16. [READER DATA LIFECYCLE](#16-reader-data-lifecycle-rdlife)
+<div class="qos-toc-grid">
+  <a href="#1-entity-factory-entfac" class="qos-card"><span class="qos-num">01</span><div class="qos-title">ENTITY FACTORY<span class="qos-abbr">ENTFAC</span></div></a>
+  <a href="#2-partition-part" class="qos-card"><span class="qos-num">02</span><div class="qos-title">PARTITION<span class="qos-abbr">PART</span></div></a>
+  <a href="#3-user-data-usrdata" class="qos-card"><span class="qos-num">03</span><div class="qos-title">USER DATA<span class="qos-abbr">USRDATA</span></div></a>
+  <a href="#4-group-data-grpdata" class="qos-card"><span class="qos-num">04</span><div class="qos-title">GROUP DATA<span class="qos-abbr">GRPDATA</span></div></a>
+  <a href="#5-topic-data-topdata" class="qos-card"><span class="qos-num">05</span><div class="qos-title">TOPIC DATA<span class="qos-abbr">TOPDATA</span></div></a>
+  <a href="#6-reliability-reliab" class="qos-card"><span class="qos-num">06</span><div class="qos-title">RELIABILITY<span class="qos-abbr">RELIAB</span></div></a>
+  <a href="#7-durability-durabl" class="qos-card"><span class="qos-num">07</span><div class="qos-title">DURABILITY<span class="qos-abbr">DURABL</span></div></a>
+  <a href="#8-deadline-deadln" class="qos-card"><span class="qos-num">08</span><div class="qos-title">DEADLINE<span class="qos-abbr">DEADLN</span></div></a>
+  <a href="#9-liveliness-livens" class="qos-card"><span class="qos-num">09</span><div class="qos-title">LIVELINESS<span class="qos-abbr">LIVENS</span></div></a>
+  <a href="#10-history-hist" class="qos-card"><span class="qos-num">10</span><div class="qos-title">HISTORY<span class="qos-abbr">HIST</span></div></a>
+  <a href="#11-resource-limits-reslim" class="qos-card"><span class="qos-num">11</span><div class="qos-title">RESOURCE LIMITS<span class="qos-abbr">RESLIM</span></div></a>
+  <a href="#12-lifespan-lfspan" class="qos-card"><span class="qos-num">12</span><div class="qos-title">LIFESPAN<span class="qos-abbr">LFSPAN</span></div></a>
+  <a href="#13-ownership-strength-ownst" class="qos-card"><span class="qos-num">13</span><div class="qos-title">OWNERSHIP<span class="qos-abbr">OWNST</span></div></a>
+  <a href="#14-destination-order-destord" class="qos-card"><span class="qos-num">14</span><div class="qos-title">DESTINATION ORDER<span class="qos-abbr">DESTORD</span></div></a>
+  <a href="#15-writer-data-lifecycle-wdlife" class="qos-card"><span class="qos-num">15</span><div class="qos-title">WRITER DATA LIFECYCLE<span class="qos-abbr">WDLIFE</span></div></a>
+  <a href="#16-reader-data-lifecycle-rdlife" class="qos-card"><span class="qos-num">16</span><div class="qos-title">READER DATA LIFECYCLE<span class="qos-abbr">RDLIFE</span></div></a>
+</div>
 
 ---
 
