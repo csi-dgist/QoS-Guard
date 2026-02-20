@@ -17,11 +17,12 @@
 }
 
 .md-typeset table td:first-child a {
+  font-size:14px;
   color: #000 !important;
   text-decoration: none !important;
   font-weight: bold;
   display: block;
-  line-height: 30px; 
+  line-height: 10px; 
 }
 </style>
 
