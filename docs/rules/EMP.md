@@ -67,35 +67,6 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 
 ---
 
-### :material-numeric-31-box: Rule 31: HIST &rarr; RELIAB
-!!! info "Empirical Validation: Stage 3"
-    **Justification:** Justifies the minimum History Depth required to prevent data loss in Reliable communication under network delay and loss. [cite: 45, 366, 625]
-
-    **1. Experimental Setup**
-    * **QoS Profile:** Reliability = `RELIABLE`, History Kind = `KEEP_LAST` [cite: 373]
-    * **Network Condition:** 5% Packet Loss, 100ms to 500ms RTT [cite: 319, 320, 375]
-    * **Variable:** History Depth ($1 \sim N$) [cite: 314, 632]
-
-    **2. Test Scenario**
-    1. 네트워크 패킷 손실 5%, RTT 100ms~500ms 범위를 설정합니다. [cite: 374, 375]
-    2. 퍼블리셔에서 서브스크라이버로 1,000개의 샘플을 전송합니다. [cite: 321, 376]
-    3. 각 테스트마다 History Depth를 점진적으로 감소시키며 관찰합니다. [cite: 632]
-
-    **3. Experimental Observation**
-    <div align="center">
-      <img src="../../images/rule31.png" width="500">
-      <p><i>Fig 1. Impact of History Depth on Sample Reception</i></p>
-    </div>
-
-    **4. Empirical Conclusion**
-    !!! success "Safe Configuration Guide"
-        손실이 있는 네트워크(5% loss)에서 Reliable 연결은 패킷 재전송이 필요합니다. 만약 **History Depth**가 하나의 **RTT** 동안 전송되는 샘플 수보다 작으면, 재전송 요청이 처리되기 전에 버퍼가 새로운 데이터로 덮어씌워져 데이터 유실이 발생합니다. [cite: 45, 367, 378]
-        
-        **Mathematical Constraint:**
-        $$depth \ge \lceil RTT/PP \rceil + 2$$ [cite: 366, 633]
-
-        ---
-
 ### Rule 31 
 *Justifies the minimum History Depth required to prevent data loss in Reliable communication under network delay and loss.*
 
