@@ -2,52 +2,38 @@
 
 
 <style>
-/* 1. 번호 칸(td)을 중앙 정렬 기계로 개조 */
+/* 1. 번호가 들어가는 칸(td) 설정 */
 .md-typeset table td:first-child {
-    /* 기존 레이아웃 무시하고 Flex 적용 */
-    display: flex !important;
-    justify-content: center !important; /* 수평 중앙 */
-    align-items: center !important;     /* 수직 중앙 */
-    
-    /* 칸의 크기 고정 및 여백 제거 */
-    min-width: 60px !important; 
-    width: 60px !important;
-    padding: 12px 0 !important; 
-    border-right: 1px solid #eee; /* 구분선이 필요하면 유지 */
+    padding: 0 !important;       /* 칸 안의 불필요한 여백 완전 제거 */
+    width: 45px !important;      /* 칸 너비를 원보다 조금 넓게 고정 */
+    min-width: 45px !important;
+    vertical-align: middle !important; /* 수직 중앙 정렬 기본값 */
 }
 
-/* 2. 숫자 배지 (링크 유무 통합) */
+/* 2. 숫자 배지 (링크가 있든 없든 동일 적용) */
 .md-typeset table td:first-child,
 .md-typeset table td:first-child a {
-    /* 원 자체도 내부 숫자를 중앙에 맞춤 */
-    display: inline-flex !important;
-    justify-content: center !important;
+    display: flex !important;    /* flex를 써야 정중앙 배치가 됨 */
     align-items: center !important;
-
-    /* 타원 방지를 위해 가로/세로 완전 고정 */
-    width: 26px !important;
+    justify-content: center !important;
+    
+    margin: auto !important;     /* 칸 내에서 정중앙으로 밀어넣음 */
+    width: 26px !important;      /* 원 크기 (줄이려면 이 값을 수정) */
     height: 26px !important;
-    min-width: 26px !important;
-    min-height: 26px !important;
-    
-    margin: 0 !important; /* 쏠림 방지를 위해 마진 제거 */
     border-radius: 50% !important;
-    background-color: #f2f2f2 !important;
     
-    /* 글자 스타일 */
+    background-color: #f2f2f2 !important;
     color: #000 !important;
     font-size: 13px !important;
     font-weight: bold !important;
     text-decoration: none !important;
-    line-height: 1 !important; /* 행간 간섭 제거 */
-    
     transition: 0.2s ease;
 }
 
-/* 3. 호버 시 효과 */
+/* 3. 호버 시 강조 효과 */
 .md-typeset table tr:hover td:first-child,
 .md-typeset table tr:hover td:first-child a {
-    background-color: #4e37e6 !important;
+    background-color: #4e37e6 !important; /* 파란색 강조 */
     color: #fff !important;
     transform: scale(1.1);
 }
