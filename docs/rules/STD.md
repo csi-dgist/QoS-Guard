@@ -1,47 +1,50 @@
 # STD Rules
 
 <style>
-/* 1. 번호가 들어가는 칸(td) 설정 */
+/* 1. 번호 칸(td) 내부의 모든 요소를 중앙으로 강제 배치 */
 .md-typeset table td:first-child {
-    padding: 0 !important;
-    width: 50px !important;      /* 칸 너비를 충분히 확보 */
-    min-width: 50px !important;
-    text-align: center !important; /* 내부의 inline-block 요소를 중앙으로 */
-    vertical-align: middle !important;
+  padding: 0 !important;
+  width: 50px !important;
+  min-width: 50px !important;
+  /* 핵심: 셀 내부에서 배지가 중앙에 오도록 함 */
+  text-align: center !important;
+  vertical-align: middle !important;
 }
 
-/* 2. 숫자 배지 디자인 */
+/* 2. 숫자 배지 (링크 유무 통합) */
 .md-typeset table td:first-child,
 .md-typeset table td:first-child a {
-    /* 핵심: inline-flex를 쓰고 margin을 주어 중앙 고정 */
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    
-    /* 가로 세로를 완전히 똑같이 고정 (타원 방지) */
-    width: 28px !important;
-    height: 28px !important;
-    min-width: 28px !important;
-    min-height: 28px !important;
-    
-    /* 중앙 정렬을 위한 마진 */
-    margin: 8px auto !important;
-    
-    border-radius: 50% !important;
-    background-color: #f2f2f2 !important;
-    color: #000 !important;
-    font-size: 13px !important;
-    font-weight: bold !important;
-    text-decoration: none !important;
-    transition: 0.2s ease;
+  /* inline-flex를 써야 정렬이 가장 안정적입니다 */
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  /* 수평 중앙 정렬을 보장하는 핵심 속성 */
+  margin: 8px auto !important; 
+  float: none !important;
+
+  /* 원형 유지 설정 */
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  min-height: 26px !important;
+  border-radius: 50% !important;
+
+  /* 스타일 */
+  background-color: #f0f0f0 !important;
+  color: #000 !important;
+  font-size: 13px !important;
+  font-weight: bold !important;
+  text-decoration: none !important;
+  transition: 0.2s;
 }
 
 /* 3. 호버 시 효과 */
 .md-typeset table tr:hover td:first-child,
 .md-typeset table tr:hover td:first-child a {
-    background-color: #4e37e6 !important;
-    color: #fff !important;
-    transform: scale(1.1);
+  background-color: #4e37e6 !important;
+  color: #fff !important;
+  transform: scale(1.1);
 }
 </style>
 
