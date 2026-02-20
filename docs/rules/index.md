@@ -15,6 +15,7 @@
 </style>
 
 This section covers 40+ dependency-violation rules classified into three stages. 
+
 Choose a category from the sidebar to see detailed constraints.
 
 ## Full List of 40 Dependency-Violation Rules
