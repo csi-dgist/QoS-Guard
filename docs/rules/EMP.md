@@ -143,7 +143,7 @@ When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effectiv
 **3. Experimental Observation**
 
 <div align="center">
-  <img src="../../images/rule33.png" width="400">
+  <img src="../../images/rule33.png" width="200">
 </div>
 
 * **High Reception Zone (Blue):** When Lifespan is sufficiently longer than RTT and PP, nearly all 10,000 samples are received.
