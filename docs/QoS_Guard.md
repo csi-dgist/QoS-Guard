@@ -83,14 +83,14 @@ QoS-Guard scans your **XML profiles** and **source code** (e.g. `rclcpp::QoS`, `
     <div class="feature-icon">📂</div>
     <div class="feature-content">
       <strong>Package mode</strong>
-      <span>Point to a package path → auto-scan XML + code, verify all topic pairs</span>
+      <span>Point to a package path <br>→ auto-scan XML + code, verify all topic pairs</span>
     </div>
   </div>
   <div class="feature-card">
     <div class="feature-icon">📄</div>
     <div class="feature-content">
       <strong>XML pair mode</strong>
-      <span>Point to one pub XML + one sub XML → verify that pair only (Fast/Connext)</span>
+      <span>Point to one pub XML + one sub XML <br>→ verify that pair only (Fast/Connext)</span>
     </div>
   </div>
 </div>
