@@ -27,6 +27,8 @@ This page describes the QoS dependency rules derived from the specific implement
 | [19](#rule-19) | ENTFAC → DURABL | $[DURABL \neq VOLATILE] \wedge [autoenable = FALSE]$ | Operational | Pub, Sub | IMP |
 | [20](#rule-20) | PART → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [PART.names \neq \emptyset]$ | Operational | Pub, Sub | IMP |
 
+{: .rule-table }
+
 ---
 
 ## Stage 2
@@ -38,6 +40,8 @@ This page describes the QoS dependency rules derived from the specific implement
 | [29](#rule-29) | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_disposed > 0]$ | Operational | Pub ↔ Sub | IMP |
 | [30](#rule-30) | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = \infty]$ | Operational | Pub ↔ Sub | IMP |
 
+{: .rule-table }
+
 ---
 
 ## Stage 3: Dynamic & Performance Rules
@@ -47,6 +51,8 @@ This page describes the QoS dependency rules derived from the specific implement
 |:---:|:---|:---|:---:|:---:|:---:|
 | [34](#rule-34) | RELIAB → WDLIFE | $[autodispose = TRUE] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub | IMP |
 | [40](#rule-40) | DURABL → DEADLN | $[DEADLN.period > 0] \wedge [DURABL \ge TRAN\_LOCAL]$ | Operational | Sub | IMP |
+
+{: .rule-table }
 
 ---
 
