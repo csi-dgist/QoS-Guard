@@ -1,104 +1,95 @@
 # QoS Rules Overview
 
 <style>
-/* 1. 기본 폰트 및 배경 정리 */
+/* 1. 전체 폰트 스택 정돈 */
 .md-typeset {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* 2. 표 레이아웃: 선을 없애고 여백 강조 */
+/* 2. 표 디자인: 테두리는 최소화, 라운딩과 그림자로 부드럽게 */
 .md-typeset table {
     border-collapse: separate;
     border-spacing: 0;
-    border: 1px solid #f0f0f2;
+    border: 1px solid #e2e8f0;
     border-radius: 12px;
     overflow: hidden;
-    margin: 2em 0;
+    margin: 24px 0;
     width: 100%;
     background: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
 }
 
-/* 3. 헤더: 아주 연한 그레이 배경에 짙은 텍스트 (고급스러움) */
+/* 3. 헤더: #4E5EB4 배경에 화이트 텍스트 */
 .md-typeset table thead {
-    background-color: #f8f9fb;
+    background-color: #4E5EB4;
 }
 
 .md-typeset table th {
-    color: #475569 !important; /* 짙은 블루그레이 */
+    color: #ffffff !important;
     font-weight: 600 !important;
-    font-size: 12px !important;
+    font-size: 13px !important;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.03em;
     padding: 14px 16px !important;
-    border-bottom: 1px solid #f0f0f2 !important;
+    border: none !important;
 }
 
-/* 4. 첫 번째 열(No.): 강조하되 촌스럽지 않게 */
+/* 4. 첫 번째 열(No.): 포인트 컬러 강조 */
 .md-typeset table td:first-child {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    color: #6366f1 !important; /* 세련된 인디고 블루 */
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #4E5EB4 !important;
     text-align: center !important;
-    background: #fcfcff;
-    width: 60px;
+    background: #f8fafc; /* 매우 연한 그레이 블루 */
+    width: 65px;
 }
 
-/* 5. 수식 칸: 코드 스니펫 느낌 */
+/* 5. 데이터 셀: 깔끔한 가독성 */
+.md-typeset table td {
+    padding: 14px 16px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    font-size: 13.5px;
+    color: #334155;
+    vertical-align: middle;
+}
+
+/* 6. 수식(Violation Condition) 칸 스타일 */
 .md-typeset table td:nth-child(3) {
     font-family: 'Fira Code', 'Consolas', monospace;
-    font-size: 13px;
+    font-size: 12.5px;
     color: #1e293b;
-    line-height: 1.6;
     background: #ffffff;
 }
 
-/* 6. 행 호버: 아주 은은하게 */
-.md-typeset table tr {
-    transition: background-color 0.1s ease;
-}
-
+/* 7. 행 호버: 부드러운 전환 */
 .md-typeset table tr:hover {
-    background-color: #fbfbfe !important;
+    background-color: #f1f5f9 !important;
 }
 
-.md-typeset table td {
-    padding: 12px 16px !important;
-    border-bottom: 1px solid #f0f0f2 !important;
-    font-size: 13.5px;
-}
-
-/* 7. Basis 배지: 색감을 파스텔톤으로 톤다운 */
+/* 8. Basis 배지: #4E5EB4와 어울리는 파스텔 톤 */
 .basis-tag {
     display: inline-flex;
     align-items: center;
     padding: 2px 8px;
-    border-radius: 6px;
+    border-radius: 4px;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.02em;
 }
+/* STD: Emerald / IMP: Sky / EMP: Amber */
 .basis-std { background-color: #ecfdf5; color: #059669; border: 1px solid #d1fae5; }
-.basis-imp { background-color: #eff6ff; color: #2563eb; border: 1px solid #dbeafe; }
-.basis-emp { background-color: #fff7ed; color: #ea580c; border: 1px solid #ffedd5; }
+.basis-imp { background-color: #f0f9ff; color: #0369a1; border: 1px solid #e0f2fe; }
+.basis-emp { background-color: #fffbeb; color: #b45309; border: 1px solid #fef3c7; }
 
-/* Stage 헤더 스타일 */
+/* Stage 헤더: 왼쪽 바 포인트 */
 .stage-header {
-    font-size: 1.5em;
+    font-size: 1.4em;
     font-weight: 700;
     color: #1e293b;
-    margin-top: 2.5em;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.stage-header::before {
-    content: "";
-    width: 4px;
-    height: 24px;
-    background: #6366f1;
-    border-radius: 10px;
+    margin-top: 2em;
+    padding-left: 14px;
+    border-left: 4px solid #4E5EB4;
 }
 </style>
 
