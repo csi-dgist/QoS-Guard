@@ -21,4 +21,7 @@ By offering both conceptual insights and a practical tool, this work helps ROS 2
 
 <p align="center">
   <img src="images/QoS_guard.png" width="1000px">
+  <figcaption style="font-style: italic; color: #666; margin-top: 10px;">
+    QoS Guard Framework
+  </figcaption>
 </p>
