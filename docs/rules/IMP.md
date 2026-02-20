@@ -112,7 +112,7 @@ This page describes the QoS dependency rules derived from the specific implement
 
 <div class="std-list">
 
-  <div class="std-item" id="rule-3">
+  <a href="#rule-3" class="std-item" id="rule-3">
     <div class="std-header">
       <span class="std-no">3</span>
       <span class="std-id">RELIAB → DURABL</span>
@@ -125,9 +125,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-4">
+  <a href="#rule-4" class="std-item" id="rule-4">
     <div class="std-header">
       <span class="std-no">4</span>
       <span class="std-id">RELIAB → OWNST</span>
@@ -140,9 +140,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-5">
+  <a href="#rule-5" class="std-item" id="rule-5">
     <div class="std-header">
       <span class="std-no">5</span>
       <span class="std-id">RELIAB → LIVENS</span>
@@ -155,9 +155,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-7">
+  <a href="#rule-7" class="std-item" id="rule-7">
     <div class="std-header">
       <span class="std-no">7</span>
       <span class="std-id">LFSPAN → DEADLN</span>
@@ -170,9 +170,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-8">
+  <a href="#rule-8" class="std-item" id="rule-8">
     <div class="std-header">
       <span class="std-no">8</span>
       <span class="std-id">HIST → DESTORD</span>
@@ -185,9 +185,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-9">
+  <a href="#rule-9" class="std-item" id="rule-9">
     <div class="std-header">
       <span class="std-no">9</span>
       <span class="std-id">RESLIM → DESTORD</span>
@@ -200,9 +200,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-10">
+  <a href="#rule-10" class="std-item" id="rule-10">
     <div class="std-header">
       <span class="std-no">10</span>
       <span class="std-id">DEADLN → OWNST</span>
@@ -215,9 +215,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-11">
+  <a href="#rule-11" class="std-item" id="rule-11">
     <div class="std-header">
       <span class="std-no">11</span>
       <span class="std-id">LIVENS → OWNST</span>
@@ -230,9 +230,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-12">
+  <a href="#rule-12" class="std-item" id="rule-12">
     <div class="std-header">
       <span class="std-no">12</span>
       <span class="std-id">LIVENS → RDLIFE</span>
@@ -245,9 +245,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-13">
+  <a href="#rule-13" class="std-item" id="rule-13">
     <div class="std-header">
       <span class="std-no">13</span>
       <span class="std-id">RDLIFE → DURABL</span>
@@ -260,9 +260,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-14">
+  <a href="#rule-14" class="std-item" id="rule-14">
     <div class="std-header">
       <span class="std-no">14</span>
       <span class="std-id">PART → DEADLN</span>
@@ -275,9 +275,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-15">
+  <a href="#rule-15" class="std-item" id="rule-15">
     <div class="std-header">
       <span class="std-no">15</span>
       <span class="std-id">PART → LIVENS</span>
@@ -290,9 +290,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-16">
+  <a href="#rule-16" class="std-item" id="rule-16">
     <div class="std-header">
       <span class="std-no">16</span>
       <span class="std-id">OWNST → WDLIFE</span>
@@ -305,9 +305,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-17">
+  <a href="#rule-17" class="std-item" id="rule-17">
     <div class="std-header">
       <span class="std-no">17</span>
       <span class="std-id">HIST → LFSPAN</span>
@@ -320,9 +320,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-18">
+  <a href="#rule-18" class="std-item" id="rule-18">
     <div class="std-header">
       <span class="std-no">18</span>
       <span class="std-id">RESLIM → LFSPAN</span>
@@ -335,9 +335,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-19">
+  <a href="#rule-19" class="std-item" id="rule-19">
     <div class="std-header">
       <span class="std-no">19</span>
       <span class="std-id">ENTFAC → DURABL</span>
@@ -350,9 +350,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-20">
+  <a href="#rule-20" class="std-item" id="rule-20">
     <div class="std-header">
       <span class="std-no">20</span>
       <span class="std-id">PART → DURABL</span>
@@ -365,7 +365,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
 </div>
 
@@ -376,7 +376,7 @@ This page describes the QoS dependency rules derived from the specific implement
 
 <div class="std-list">
 
-  <div class="std-item" id="rule-28">
+  <a href="#rule-28" class="std-item" id="rule-28">
     <div class="std-header">
       <span class="std-no">28</span>
       <span class="std-id">WDLIFE → RDLIFE</span>
@@ -389,9 +389,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-29">
+  <a href="#rule-29" class="std-item" id="rule-29">
     <div class="std-header">
       <span class="std-no">29</span>
       <span class="std-id">WDLIFE → RDLIFE</span>
@@ -404,9 +404,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-30">
+  <a href="#rule-30" class="std-item" id="rule-30">
     <div class="std-header">
       <span class="std-no">30</span>
       <span class="std-id">WDLIFE → RDLIFE</span>
@@ -419,7 +419,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
 </div>
 
@@ -430,7 +430,7 @@ This page describes the QoS dependency rules derived from the specific implement
 
 <div class="std-list">
 
-  <div class="std-item" id="rule-34">
+  <a href="#rule-34" class="std-item" id="rule-34">
     <div class="std-header">
       <span class="std-no">34</span>
       <span class="std-id">RELIAB → WDLIFE</span>
@@ -443,9 +443,9 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Pub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-40">
+  <a href="#rule-40" class="std-item" id="rule-40">
     <div class="std-header">
       <span class="std-no">40</span>
       <span class="std-id">DURABL → DEADLN</span>
@@ -458,7 +458,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <div class="std-tag"><b>Entity</b> Sub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
-  </div>
+  </a>
 
 </div>
 
