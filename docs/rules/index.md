@@ -1,12 +1,12 @@
 # QoS Rules Overview
 
 <style>
-/* 1. 전체 폰트 스택 정돈 */
+/* 1. 전체 폰트 및 기본 설정 */
 .md-typeset {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* 2. 표 디자인: 테두리는 최소화, 라운딩과 그림자로 부드럽게 */
+/* 2. 표 디자인: 라운딩과 연한 테두리 */
 .md-typeset table {
     border-collapse: separate;
     border-spacing: 0;
@@ -16,12 +16,11 @@
     margin: 24px 0;
     width: 100%;
     background: #ffffff;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
 }
 
-/* 3. 헤더: #4E5EB4 배경에 화이트 텍스트 */
+/* 3. 헤더: #4E5EB4 고정 (호버 이벤트 없음) */
 .md-typeset table thead {
-    background-color: #4E5EB4;
+    background-color: #4E5EB4 !important;
 }
 
 .md-typeset table th {
@@ -32,55 +31,54 @@
     letter-spacing: 0.03em;
     padding: 14px 16px !important;
     border: none !important;
+    background-color: #4E5EB4 !important; /* 배경색 고정 */
+    pointer-events: none; /* 헤더는 인터랙션 제외 */
 }
 
-/* 4. 첫 번째 열(No.): 포인트 컬러 강조 */
+/* 4. 첫 번째 열(No.) 디자인 */
 .md-typeset table td:first-child {
     font-family: 'JetBrains Mono', monospace;
     font-size: 15px !important;
     font-weight: 600 !important;
     color: #4E5EB4 !important;
     text-align: center !important;
-    background: #f8fafc; /* 매우 연한 그레이 블루 */
     width: 65px;
 }
 
-/* 5. 데이터 셀: 깔끔한 가독성 */
+/* 5. 데이터 셀 및 수식 칸 (배경색 투명화하여 호버 통일) */
 .md-typeset table td {
     padding: 14px 16px !important;
     border-bottom: 1px solid #f1f5f9 !important;
     font-size: 13.5px;
     color: #334155;
     vertical-align: middle;
+    background-color: transparent !important; /* 개별 배경색 제거 */
 }
 
-/* 6. 수식(Violation Condition) 칸 스타일 */
+/* 수식 칸 폰트만 지정 */
 .md-typeset table td:nth-child(3) {
     font-family: 'Fira Code', 'Consolas', monospace;
     font-size: 12.5px;
     color: #1e293b;
-    background: #ffffff;
 }
 
-/* 7. 행 호버: 부드러운 전환 */
-.md-typeset table tr:hover {
-    background-color: #f1f5f9 !important;
+/* 6. 행 전체 호버 이벤트 (통일된 반응) */
+.md-typeset table tr {
+    transition: background-color 0.15s ease;
 }
 
-/* 8. Basis 배지: #4E5EB4와 어울리는 파스텔 톤 */
+/* 헤더를 제외한 본문 행에만 호버 적용 */
+.md-typeset table tbody tr:hover {
+    background-color: #f1f5f9 !important; /* 줄 전체가 동일하게 반응 */
+}
+
+/* 7. Basis: 스타일 없이 깔끔한 볼드체 */
 .basis-tag {
-    display: inline-flex;
-    align-items: center;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.02em;
+    font-size: 12px;
+    color: #475569;
+    text-transform: uppercase;
 }
-/* STD: Emerald / IMP: Sky / EMP: Amber */
-.basis-std { background-color: #ecfdf5; color: #059669; border: 1px solid #d1fae5; }
-.basis-imp { background-color: #f0f9ff; color: #0369a1; border: 1px solid #e0f2fe; }
-.basis-emp { background-color: #fffbeb; color: #b45309; border: 1px solid #fef3c7; }
 
 /* Stage 헤더: 왼쪽 바 포인트 */
 .stage-header {
@@ -110,12 +108,12 @@ These are implemented in **QoS Guard** for static verification.
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
-| 1 | HIST ↔ RESLIM | $[HIST.kind = KEEP\_LAST] \wedge [HIST.depth > mpi]$ | Structural | Pub, Sub | <span class="basis-tag basis-std">STD</span> |
+| 1 | HIST ↔ RESLIM | $[HIST.kind = KEEP\_LAST] \wedge [HIST.depth > mpi]$ | Structural | Pub, Sub | STD |
 | 2 | RESLIM ↔ RESLIM | $[max\_samples < max\_samples\_per\_instance]$ | Structural | Pub, Sub | STD |
 | 3 | RELIAB → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub, Sub | IMP |
-| 4 | RELIAB → OWNST | $[OWNST = EXCLUSIVE] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub, Sub | <span class="basis-tag basis-imp">IMP</span> |
+| 4 | RELIAB → OWNST | $[OWNST = EXCLUSIVE] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub, Sub | IMP |
 | 5 | RELIAB → LIVENS | $[LIVENS = MANUAL] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub, Sub | IMP |
-| 6 | LFSPAN → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [LFSPAN.duration > 0]$ | Functional | Pub | <span class="basis-tag basis-emp">EMP</span> |
+| 6 | LFSPAN → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [LFSPAN.duration > 0]$ | Functional | Pub | EMP |
 | 7 | LFSPAN → DEADLN | $LFSPAN.duration < DEADLN.period$ | Functional | Sub | IMP |
 | 8 | HIST → DESTORD | $[DESTORD = BY\_SOURCE] \wedge [HIST.kind = KEEP\_LAST] \wedge [depth = 1]$ | Functional | Sub | IMP |
 | 9 | RESLIM → DESTORD | $[DESTORD = BY\_SOURCE] \wedge [KEEP\_ALL] \wedge [mpi = 1]$ | Functional | Sub | IMP |
