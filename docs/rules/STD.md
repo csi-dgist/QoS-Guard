@@ -1,38 +1,40 @@
 # STD Rules
 
 <style>
+/* 1. 첫 번째 열의 레이아웃 고정 */
 .md-typeset table td:first-child {
-  text-align: center;
-  padding: 8px !important;
+    text-align: center !important;
+    width: 32px !important;       /* 칸의 너비를 고정 */
+    min-width: 32px !important;
+    padding: 8px 0 !important;    /* 좌우 패딩을 없애서 원이 찌그러지지 않게 함 */
 }
 
-.md-typeset table td:first-child {
-  color: #000;
-  font-weight: bold;
-  font-size: 13px;
-}
-
-.md-typeset table td:first-child, 
+/* 2. 숫자 배지 디자인 (링크 유무와 상관없이 적용) */
+.md-typeset table td:first-child,
 .md-typeset table td:first-child a {
-  display: inline-block;
-  width: 24px;         
-  height: 24px;
-  line-height: 24px;  
-  border-radius: 50%;
-  background-color: #f0f0f0;
-  transition: 0.2s;
+    display: inline-flex !important; /* 내부 숫자를 중앙에 맞추기 위해 flex 사용 */
+    align-items: center;
+    justify-content: center;
+    
+    width: 26px !important;        /* 원의 크기 */
+    height: 26px !important;
+    border-radius: 50% !important; /* 무조건 정원 유지 */
+    
+    background-color: #f0f0f0;
+    color: #000 !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+    transition: 0.2s ease;
+    box-sizing: border-box;
 }
 
-.md-typeset table td:first-child a {
-  color: #000 !important;
-  text-decoration: none !important;
-}
-
+/* 3. 호버 효과: 행 전체에 마우스 올렸을 때 배지만 강조 */
 .md-typeset table tr:hover td:first-child,
 .md-typeset table tr:hover td:first-child a {
-  background-color: #4e37e6 !important;
-  color: #fff !important;
-  transform: scale(1.1);
+    background-color: #4e37e6 !important;
+    color: #fff !important;
+    transform: scale(1.1);
 }
 </style>
 
