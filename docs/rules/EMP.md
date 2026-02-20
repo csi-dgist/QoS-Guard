@@ -2,32 +2,28 @@
 
 <style>
 .md-typeset table td:first-child {
-  /* 칸 자체의 정렬 설정 */
   text-align: center;
-  padding: 8px !important; /* 칸 내부 여백을 적당히 줌 */
+  padding: 8px !important; 
 }
 
-/* 숫자 배지 스타일 */
 .md-typeset table td:first-child a {
-  /* 핵심: inline-block으로 설정해야 크기가 정확히 먹힙니다 */
   display: inline-block; 
-  width: 24px;          /* 원의 가로 크기 (적당히 줄임) */
-  height: 24px;         /* 원의 세로 크기 (가로와 동일하게) */
-  line-height: 24px;    /* 수직 중앙 정렬 (height와 동일하게) */
+  width: 24px;         
+  height: 24px;        
+  line-height: 24px;    
   
-  border-radius: 50%;   /* 깨끗한 정원 */
+  border-radius: 50%;   
   background-color: #f0f0f0; 
   color: #000 !important;
   text-decoration: none !important;
   font-weight: bold;
-  font-size: 13px;      /* 글자 크기 */
+  font-size: 13px;      
   transition: 0.2s;
 }
 
-/* 호버 효과: 숫자에 마우스를 올렸을 때 */
 .md-typeset table tr:hover td:first-child a {
   background-color: #4e37e6 !important; 
-  color: #fff !important; /* 배경이 짙어지므로 글자는 흰색으로 */
+  color: #fff !important; 
   transform: scale(1.1);
 }
 </style>
@@ -50,7 +46,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
-| <kbd>[31](#rule-31)</kbd> | HIST → RELIAB | $[RELIABLE] \wedge [KEEP\_LAST] \wedge [depth < \lceil RTT/PP \rceil + 2]$ | Functional | Pub | EMP |
+| [31](#rule-31) | HIST → RELIAB | $[RELIABLE] \wedge [KEEP\_LAST] \wedge [depth < \lceil RTT/PP \rceil + 2]$ | Functional | Pub | EMP |
 | [32](#rule-32) | RESLIM → RELIAB | $[RELIABLE] \wedge [KEEP\_ALL] \wedge [mpi < \lceil RTT/PP \rceil + 1]$ | Functional | Pub | EMP |
 | [33](#rule-33) | LFSPAN → RELIAB | $[RELIABLE] \wedge [LFSPAN.duration < RTT \times 2]$ | Functional | Pub | EMP |
 | [35](#rule-35) | RELIAB → DEADLN | $[DEADLN.period > 0] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Sub | EMP |
