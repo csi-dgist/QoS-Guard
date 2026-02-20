@@ -1,32 +1,34 @@
 # STD Rules
 
 <style>
-/* 1. 번호가 들어가는 칸(td)을 정중앙 정렬 기계로 만들기 */
+/* 1. 번호가 들어가는 칸(td) 설정 */
 .md-typeset table td:first-child {
-    display: flex !important;
-    justify-content: center !important; /* 수평 중앙 */
-    align-items: center !important;     /* 수직 중앙 */
-    padding: 12px 0 !important;         /* 상하 여백만 유지 */
-    width: 60px !important;             /* 칸 너비를 충분히 확보 */
-    min-width: 60px !important;
-    border: none !important;            /* 테두리 간섭 방지 */
+    /* 쏠림 방지 핵심: 셀 자체가 중앙 정렬의 기준이 됨 */
+    text-align: center !important;
+    vertical-align: middle !important;
+    padding: 12px 0 !important;
+    width: 50px !important;
+    min-width: 50px !important;
 }
 
-/* 2. 숫자 배지 - 크기 고정 및 타원 방지 */
+/* 2. 숫자 배지 - 타원 방지 및 정중앙 배치 */
 .md-typeset table td:first-child,
 .md-typeset table td:first-child a {
-    display: flex !important;
-    justify-content: center !important;
+    /* 타원 방지를 위해 inline-flex 사용 */
+    display: inline-flex !important;
     align-items: center !important;
+    justify-content: center !important;
 
-    /* 원의 크기를 완전히 똑같이 고정하여 타원 방지 */
+    /* 정원 유지: 가로/세로를 완전히 똑같이 고정 */
     width: 26px !important;
     height: 26px !important;
     min-width: 26px !important;
-    max-width: 26px !important;
+    max-width: 26px !important; /* 가로로 늘어나는 타원 현상 차단 */
     
-    margin: 0 !important;               /* 쏠림 방지를 위해 외부 마진 제거 */
-    border-radius: 50% !important;      /* 무조건 정원 */
+    /* 중앙 정렬 핵심: 상하 여백을 주고 좌우를 자동으로 설정 */
+    margin: 4px auto !important; 
+    
+    border-radius: 50% !important;
     background-color: #f2f2f2 !important;
     
     /* 글자 스타일 */
@@ -34,7 +36,7 @@
     font-size: 13px !important;
     font-weight: bold !important;
     text-decoration: none !important;
-    line-height: 1 !important;          /* 텍스트 높이 간섭 제거 */
+    line-height: 1 !important;
     
     transition: 0.2s ease;
 }
