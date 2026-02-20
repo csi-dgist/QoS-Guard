@@ -17,30 +17,12 @@
 This section covers 40+ dependency-violation rules classified into three stages. 
 Choose a category from the sidebar to see detailed constraints.
 
-<hr class="hr-grad-left">
-
-
 ## Full List of 40 Dependency-Violation Rules
 
 We have identified and classified 40 rules that govern the relationships between ROS 2 QoS policies. 
 These are implemented in **QoS Guard** for static verification.
 
-<hr style="border: 0; height: 2px; background: #4E5EB4; opacity: 0.5; margin: 40px 0;">
-
-<hr style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0,0,0,0), #4E5EB4, rgba(0,0,0,0)); margin: 30px 0;">
-
-<hr style="border: 0; height: 2px; background-image: linear-gradient(to right, #4E5EB4, rgba(0,0,0,0)); opacity: 0.6; margin: 25px 0;">
-
-<hr style="border: 0; border-top: 1px dashed #4E5EB4; opacity: 0.4; margin: 20px 0;">
-
-<hr style="border: none; border-top: 4px double #4E5EB4; opacity: 0.6; height: 4px; margin: 40px 0;">
-
-<hr style="border: 0; height: 2px; background: #4E5EB4; width: 80px; margin: 50px auto; opacity: 0.8; border-radius: 10px;">
-
-<div style="text-align: center; color: #4E5EB4; opacity: 0.5; font-size: 20px; letter-spacing: 15px; margin: 35px 0;">•••</div>
-
-<div style="height: 3px; background: linear-gradient(to right, #4E5EB4 10%, rgba(78, 94, 180, 0.1) 90%); border-radius: 2px; margin: 20px 0;"></div>
-
+<hr class="hr-grad-left">
 
 ## Stage 1 | Intra-entity Dependency Validation
 *Identifies internal conflicts by analyzing each entity's QoS profile independently.*
@@ -68,7 +50,7 @@ These are implemented in **QoS Guard** for static verification.
 | 19 | ENTFAC → DURABL | $[DURABL \neq VOLATILE] \wedge [autoenable = FALSE]$ | Operational | Pub, Sub | IMP |
 | 20 | PART → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [PART.names \neq \emptyset]$ | Operational | Pub, Sub | IMP |
 
----
+<hr class="hr-edge-fade">
 
 ## Stage 2 | Inter-entity Dependency Validation
 *Prevents connection failures by checking RxO compatibility between Publisher and Subscriber pairs.*
@@ -86,7 +68,7 @@ These are implemented in **QoS Guard** for static verification.
 | 29 | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_disposed > 0]$ | Operational | Pub ↔ Sub | IMP |
 | 30 | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = \infty]$ | Operational | Pub ↔ Sub | IMP |
 
----
+<hr class="hr-edge-fade">
 
 ## Stage 3 | Timing-based Dependency Validation
 *Evaluates operational risks by integrating network parameters like RTT and publish period.*
@@ -104,5 +86,6 @@ These are implemented in **QoS Guard** for static verification.
 | 39 | LIVENS → OWNST | $[OWNST = EXCLUSIVE] \wedge [lease < 2 \times PP]$ | Operational | Sub | EMP |
 | 40 | DURABL → DEADLN | $[DEADLN.period > 0] \wedge [DURABL \ge TRAN\_LOCAL]$ | Operational | Sub | EMP |
 
----
+<hr class="hr-edge-fade">
+
 *(Note: mpi = max_samples_per_instance, PP = Publish Period, RTT = Round Trip Time)*
