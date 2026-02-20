@@ -1,12 +1,15 @@
 # QoS Rules Overview
 
 <style>
-.md-typeset table td:first-child {
-    font-size: 18px !important;    /* ← 글자 크기 (1.5em, 18px 등으로 자유롭게 조절) */
-    font-weight: 800 !important;    /* ← 더 굵게 (700~900 사이 선택) */
-    text-align: center !important;  /* ← 가운데 정렬 */
-    color: #333 !important;         /* ← 글자 색상 (필요시 변경) */
+.md-typeset table td:nth-child(1),
+.md-typeset table td:first-child,
+.md-typeset table tr td:first-child {
+    font-size: 22px !important;    /* 눈에 띄게 22px로 키웠습니다 */
+    font-weight: 900 !important;    /* 가장 두꺼운 굵기 */
+    text-align: center !important;  /* 중앙 정렬 */
+    color: #000000 !important;      /* 검은색으로 선명하게 */
     vertical-align: middle !important;
+    min-width: 50px !important;     /* 칸이 너무 좁아지지 않게 너비 확보 */
 }
 </style>
 
