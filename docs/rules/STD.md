@@ -114,7 +114,7 @@ This page describes the QoS dependency and consistency rules derived from the **
 
 <div class="std-list">
 
-  <div class="std-item" id="rule-1">
+  <a href="#rule-1" class="std-item">
     <div class="std-header">
       <span class="std-no">1</span>
       <span class="std-id">HIST ↔ RESLIM</span>
@@ -127,9 +127,9 @@ This page describes the QoS dependency and consistency rules derived from the **
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-2">
+  <a href="#rule-2" class="std-item">
     <div class="std-header">
       <span class="std-no">2</span>
       <span class="std-id">RESLIM ↔ RESLIM</span>
@@ -142,7 +142,7 @@ This page describes the QoS dependency and consistency rules derived from the **
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
-  </div>
+  </a>
 
 </div>
 ---
@@ -152,111 +152,110 @@ This page describes the QoS dependency and consistency rules derived from the **
 
 <div class="std-list">
 
-  <div class="std-item" id="rule-21">
+  <a href="#rule-21" class="std-item">
     <div class="std-header">
       <span class="std-no">21</span>
       <span class="std-id">PART ↔ PART</span>
       <span style="font-size: 0.8em; color: #999;">Structural</span>
     </div>
     <div class="std-condition">
-      $[Writer.PART \cap Reader.PART] = \emptyset$
+      [Writer.PART \cap Reader.PART] = \emptyset
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-22">
+  <a href="#rule-22" class="std-item">
     <div class="std-header">
       <span class="std-no">22</span>
       <span class="std-id">RELIAB ↔ RELIAB</span>
       <span style="font-size: 0.8em; color: #999;">Structural</span>
     </div>
     <div class="std-condition">
-      $[Writer.RELIAB < Reader.RELIAB]$
+      [Writer.RELIAB < Reader.RELIAB]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-23">
+  <a href="#rule-23" class="std-item">
     <div class="std-header">
       <span class="std-no">23</span>
       <span class="std-id">DURABL ↔ DURABL</span>
       <span style="font-size: 0.8em; color: #999;">Structural</span>
     </div>
     <div class="std-condition">
-      $[Writer.DURABL < Reader.DURABL]$
+      [Writer.DURABL < Reader.DURABL]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-24">
+  <a href="#rule-24" class="std-item">
     <div class="std-header">
       <span class="std-no">24</span>
       <span class="std-id">DEADLN ↔ DEADLN</span>
       <span style="font-size: 0.8em; color: #999;">Structural</span>
     </div>
     <div class="std-condition">
-      $[Writer.DEADLN.period > Reader.DEADLN.period]$
+      [Writer.DEADLN.period > Reader.DEADLN.period]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-25">
+  <a href="#rule-25" class="std-item">
     <div class="std-header">
       <span class="std-no">25</span>
       <span class="std-id">LIVENS ↔ LIVENS</span>
       <span style="font-size: 0.8em; color: #999;">Structural</span>
     </div>
     <div class="std-condition">
-      $[W.LIVENS < R.LIVENS] \vee [W.lease > R.lease]$
+      [W.LIVENS < R.LIVENS] \vee [W.lease > R.lease]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-26">
+  <a href="#rule-26" class="std-item">
     <div class="std-header">
       <span class="std-no">26</span>
       <span class="std-id">OWNST ↔ OWNST</span>
       <span style="font-size: 0.8em; color: #999;">Structural</span>
     </div>
     <div class="std-condition">
-      $[Writer.OWNST \neq Reader.OWNST]$
+      [Writer.OWNST \neq Reader.OWNST]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
-  </div>
+  </a>
 
-  <div class="std-item" id="rule-27">
+  <a href="#rule-27" class="std-item">
     <div class="std-header">
       <span class="std-no">27</span>
       <span class="std-id">DESTORD ↔ DESTORD</span>
       <span style="font-size: 0.8em; color: #999;">Structural</span>
     </div>
     <div class="std-condition">
-      $[Writer.DESTORD < Reader.DESTORD]$
+      [Writer.DESTORD < Reader.DESTORD]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
-  </div>
+  </a>
 
 </div>
 ---
-
