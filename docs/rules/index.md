@@ -50,7 +50,7 @@ These are implemented in **QoS Guard** for static verification.
 | 19 | ENTFAC → DURABL | $[DURABL \neq VOLATILE] \wedge [autoenable = FALSE]$ | Operational | Pub, Sub | IMP |
 | 20 | PART → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [PART.names \neq \emptyset]$ | Operational | Pub, Sub | IMP |
 
-<hr class="hr-edge-fade">
+<hr class="hr-grad-left">
 
 ## Stage 2 | Inter-entity Dependency Validation
 *Prevents connection failures by checking RxO compatibility between Publisher and Subscriber pairs.*
@@ -68,7 +68,7 @@ These are implemented in **QoS Guard** for static verification.
 | 29 | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_disposed > 0]$ | Operational | Pub ↔ Sub | IMP |
 | 30 | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = \infty]$ | Operational | Pub ↔ Sub | IMP |
 
-<hr class="hr-edge-fade">
+<hr class="hr-grad-left">
 
 ## Stage 3 | Timing-based Dependency Validation
 *Evaluates operational risks by integrating network parameters like RTT and publish period.*
@@ -86,7 +86,7 @@ These are implemented in **QoS Guard** for static verification.
 | 39 | LIVENS → OWNST | $[OWNST = EXCLUSIVE] \wedge [lease < 2 \times PP]$ | Operational | Sub | EMP |
 | 40 | DURABL → DEADLN | $[DEADLN.period > 0] \wedge [DURABL \ge TRAN\_LOCAL]$ | Operational | Sub | EMP |
 
-<hr class="hr-edge-fade">
+<hr class="hr-grad-left">
 
 !!! info "Notation Summary"
     * **mpi**: `max_samples_per_instance` 
