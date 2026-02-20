@@ -63,3 +63,13 @@ hr.hr-short-bar {
     border: none; 
 }
 
+/* Info 어드모니션의 아이콘 색상 변경 */
+.md-typeset .admonition.info,
+.md-typeset details.info {
+  border-left-color: #4E5EB4; /* 왼쪽 테두리 선 색상도 맞추고 싶다면 추가 */
+}
+
+.md-typeset .info > .admonition-title::before,
+.md-typeset .info > summary::before {
+  background-color: #4E5EB4; /* i 아이콘 색상 변경 */
+}
