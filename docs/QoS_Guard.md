@@ -191,7 +191,7 @@ cd ~/ros2_ws/src
 git clone <repository_URL> qos-guard
 ```
 
-#### 2. Build and source
+2. Build and source
 ```bash
 cd ~/ros2_ws
 colcon build --packages-select qos_guard
