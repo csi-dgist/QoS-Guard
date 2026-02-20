@@ -51,37 +51,45 @@
     }
 }
 
-.simple-req-list {
+<style>
+.req-container {
     margin: 20px 0;
-    border-top: 1.5px solid #e2e8f0;    /* 상단 라인으로 영역 구분 */
-    border-bottom: 1.5px solid #e2e8f0; /* 하단 라인으로 영역 구분 */
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: #ffffff; /* 배경을 흰색으로 고정 */
+    overflow: hidden;
 }
 
-.simple-req-row {
+.req-item {
     display: flex;
-    padding: 10px 4px;
-    /* 행 사이를 구분하는 아주 연한 점선 (선택 사항) */
-    border-bottom: 1px id #f1f5f9; 
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    /* transition이나 hover 관련 설정은 모두 삭제했습니다 */
 }
 
-.simple-req-row:last-child {
+.req-item:last-child {
     border-bottom: none;
 }
 
-/* 레이블과 값의 색상을 동일하게 통일 (#334155) */
-.label {
-    min-width: 110px;
+.req-label {
+    min-width: 100px;
     font-weight: 700;
-    color: #334155;
-    font-size: 14px;
+    color: #4E5EB4; /* 포인트 컬러 유지 */
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
-.value {
+.req-value {
     color: #334155;
     font-size: 14px;
-    padding-left: 20px;
-    /* 세로선 대신 여백으로만 구분하여 더 깔끔하게 */
+    border-left: 2px solid #e2e8f0;
+    padding-left: 16px;
+    margin-left: 8px;
 }
+  
+</style>
   
 </style>
 
@@ -150,18 +158,18 @@ python3 -m qos_guard.qos_checker /path/to/package
 
 ## Requirements
 
-<div class="simple-req-list">
-  <div class="simple-req-row">
-    <span class="label">Python</span>
-    <span class="value">3.10 or higher</span>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Python</span>
+    <span class="req-value">3.10 or higher</span>
   </div>
-  <div class="simple-req-row">
-    <span class="label">ROS 2</span>
-    <span class="value">Optional (Humble, Jazzy, or Kilted)</span>
+  <div class="req-item">
+    <span class="req-label">ROS 2</span>
+    <span class="req-value">Optional (Humble, Jazzy, or Kilted)</span>
   </div>
-  <div class="simple-req-row">
-    <span class="label">OS</span>
-    <span class="value">Linux recommended / Windows (Python only)</span>
+  <div class="req-item">
+    <span class="req-label">OS</span>
+    <span class="req-value">Linux recommended / Windows (Python only)</span>
   </div>
 </div>
 
