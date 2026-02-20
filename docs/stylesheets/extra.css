@@ -1,4 +1,7 @@
-/* Stage 1/2/3 rule tables only: No. column = small circle, black number */
+/* Stage 1/2/3 rule tables ONLY (class .rule-table).
+   No other tables (e.g. Entity, Experimental Observation) are styled. */
+.rule-table table tbody td:first-child,
+.rule-table table tr:not(:first-child) td:first-child,
 table.rule-table tbody td:first-child,
 table.rule-table tr:not(:first-child) td:first-child {
   width: 1.35em !important;
@@ -16,12 +19,16 @@ table.rule-table tr:not(:first-child) td:first-child {
   box-sizing: border-box !important;
 }
 
+[data-md-color-scheme="slate"] .rule-table table tbody td:first-child,
+[data-md-color-scheme="slate"] .rule-table table tr:not(:first-child) td:first-child,
 [data-md-color-scheme="slate"] table.rule-table tbody td:first-child,
 [data-md-color-scheme="slate"] table.rule-table tr:not(:first-child) td:first-child {
   color: #000 !important;
   background-color: #9e9e9e !important;
 }
 
+.rule-table table tbody td:first-child a,
+.rule-table table tr:not(:first-child) td:first-child a,
 table.rule-table tbody td:first-child a,
 table.rule-table tr:not(:first-child) td:first-child a {
   color: #000 !important;
@@ -29,6 +36,8 @@ table.rule-table tr:not(:first-child) td:first-child a {
   text-decoration: none !important;
 }
 
+.rule-table table tbody td:first-child a:hover,
+.rule-table table tr:not(:first-child) td:first-child a:hover,
 table.rule-table tbody td:first-child a:hover,
 table.rule-table tr:not(:first-child) td:first-child a:hover {
   color: #000 !important;
