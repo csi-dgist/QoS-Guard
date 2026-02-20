@@ -32,7 +32,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 | [38](#rule-38) | DEADLN → OWNST | $[OWNST = EXCLUSIVE] \wedge [DEADLN.period < 2 \times PP]$ | Operational | Sub | EMP |
 | [39](#rule-39) | LIVENS → OWNST | $[OWNST = EXCLUSIVE] \wedge [lease < 2 \times PP]$ | Operational | Sub | EMP |
 
-</div>
+</div> 
 
 ---
 
