@@ -1,24 +1,22 @@
 # STD Rules
 
 <style>
-/* 1. 첫 번째 열의 레이아웃 고정 */
 .md-typeset table td:first-child {
     text-align: center !important;
-    width: 32px !important;       /* 칸의 너비를 고정 */
+    width: 32px !important;      
     min-width: 32px !important;
-    padding: 8px 0 !important;    /* 좌우 패딩을 없애서 원이 찌그러지지 않게 함 */
+    padding: 8px 0 !important;    
 }
 
-/* 2. 숫자 배지 디자인 (링크 유무와 상관없이 적용) */
 .md-typeset table td:first-child,
 .md-typeset table td:first-child a {
-    display: inline-flex !important; /* 내부 숫자를 중앙에 맞추기 위해 flex 사용 */
+    display: inline-flex !important; 
     align-items: center;
     justify-content: center;
     
-    width: 26px !important;        /* 원의 크기 */
+    width: 26px !important;      
     height: 26px !important;
-    border-radius: 50% !important; /* 무조건 정원 유지 */
+    border-radius: 50% !important; 
     
     background-color: #f0f0f0;
     color: #000 !important;
