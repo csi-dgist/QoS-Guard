@@ -73,20 +73,33 @@ hr.hr-short-bar {
   --md-typeset-admonition-info: #4E5EB4;
 }
 
-/* 박스 전체의 스타일 세부 조정 */
+/* Info Admonition 커스텀 스타일 */
 .md-typeset .admonition.info,
 .md-typeset details.info {
-  border-color: #4E5EB4;
+  /* 1. 왼쪽 선을 바닥까지 연결 & 전체 테두리 색상 */
+  border-left: 0.2rem solid #4E5EB4;
+  border-right: 1px solid #4E5EB4;
+  border-top: 1px solid #4E5EB4;
+  border-bottom: 1px solid #4E5EB4;
+
+  /* 2. "빛나는" 효과 (Glow / Box Shadow) */
+  box-shadow: 0 4px 10px rgba(78, 94, 180, 0.2), 0 0 2px rgba(78, 94, 180, 0.1);
+  
+  /* 둥근 모서리 유지 */
+  border-radius: 0.1rem;
+  overflow: hidden;
 }
 
-/* 상단 타이틀 바 배경색 변경 */
+/* 상단 타이틀 바 수정 */
 .md-typeset .info > .admonition-title,
 .md-typeset .info > summary {
-  background-color: rgba(78, 94, 180, 0.1); /* 연한 배경색 (선택사항) */
-  border-left: 0.2rem solid #4E5EB4;
+  background-color: rgba(78, 94, 180, 0.07); /* 아주 연한 배경색 */
+  border-left: 0; /* 중복 선 제거 (박스 전체 선을 사용하므로) */
+  font-weight: 700;
+  margin: 0;
 }
 
-/* 타이틀 글자 색상 및 아이콘 색상 */
+/* 아이콘 색상 강제 지정 */
 .md-typeset .info > .admonition-title::before,
 .md-typeset .info > summary::before {
   background-color: #4E5EB4;
