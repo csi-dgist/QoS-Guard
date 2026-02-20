@@ -184,7 +184,7 @@ python3 -m qos_guard.qos_checker /path/to/package
 After this, you run the tool with `ros2 run qos_guard qos_guard ...`.
 
 
-#### 1. Clone into your workspace src
+**1. Clone into your workspace src**
 ```bash
 mkdir -p ~/ros2_ws/src
 cd ~/ros2_ws/src
