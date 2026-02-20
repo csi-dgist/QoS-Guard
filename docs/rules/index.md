@@ -50,28 +50,14 @@
     background-color: transparent !important; 
 }
 
-/* 5. 첫 번째 열(No.) — 깔끔한 인덱스 배지 (MkDocs Material + 일반 미리보기 공통) */
-.md-typeset table td:first-child,
-table td:first-child {
-    font-family: 'SF Mono', 'JetBrains Mono', 'Consolas', monospace;
-    font-variant-numeric: tabular-nums;
+/* 5. 첫 번째 열(No.) 특정 디자인 */
+.md-typeset table td:first-child {
+    font-family: 'JetBrains Mono', monospace;
     font-size: 15px !important;
-    font-weight: 700 !important;
-    color: #1e293b !important;
+    font-weight: 600 !important;
+    color: #4E5EB4 !important;
     text-align: center !important;
-    width: 72px;
-    padding: 12px 14px !important;
-    background: #f8fafc !important;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    letter-spacing: 0.02em;
-    box-shadow: none;
-}
-/* No. 열 호버 시 */
-.md-typeset table tbody tr:hover td:first-child,
-table tbody tr:hover td:first-child {
-    background: #f1f5f9 !important;
-    border-color: #cbd5e1;
+    width: 65px;
 }
 
 /* 6. 행 전체 호버 이벤트 (통일된 반응) */
