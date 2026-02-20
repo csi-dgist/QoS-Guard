@@ -3,45 +3,37 @@
 <style>
 /* 1. 번호가 들어가는 칸(td) 설정 */
 .md-typeset table td:first-child {
-    /* 쏠림 방지 핵심: 셀 자체가 중앙 정렬의 기준이 됨 */
-    text-align: center !important;
-    vertical-align: middle !important;
-    padding: 12px 0 !important;
-    width: 50px !important;
-    min-width: 50px !important;
+    text-align: center !important;    /* 수평 중앙 정렬 */
+    vertical-align: middle !important;  /* 수직 중앙 정렬 */
+    padding: 8px !important;
+    width: 40px !important;           /* 칸 너비 고정 */
+    min-width: 40px !important;
 }
 
-/* 2. 숫자 배지 - 타원 방지 및 정중앙 배치 */
+/* 2. 숫자 배지 - 링크(a)가 있든 없든 동일하게 적용 */
 .md-typeset table td:first-child,
 .md-typeset table td:first-child a {
-    /* 타원 방지를 위해 inline-flex 사용 */
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    /* 정원 유지: 가로/세로를 완전히 똑같이 고정 */
-    width: 26px !important;
-    height: 26px !important;
-    min-width: 26px !important;
-    max-width: 26px !important; /* 가로로 늘어나는 타원 현상 차단 */
+    /* EMP.md 방식처럼 글자처럼 취급하되 크기 고정 */
+    display: inline-block !important; 
+    width: 24px !important;
+    height: 24px !important;
+    line-height: 24px !important;     /* 글자를 원의 수직 중앙으로 */
     
-    /* 중앙 정렬 핵심: 상하 여백을 주고 좌우를 자동으로 설정 */
-    margin: 4px auto !important; 
+    /* 타원 방지를 위해 최대 너비 제한 */
+    max-width: 24px !important;
     
     border-radius: 50% !important;
-    background-color: #f2f2f2 !important;
+    background-color: #f0f0f0 !important;
     
     /* 글자 스타일 */
     color: #000 !important;
-    font-size: 13px !important;
-    font-weight: bold !important;
     text-decoration: none !important;
-    line-height: 1 !important;
-    
-    transition: 0.2s ease;
+    font-weight: bold !important;
+    font-size: 13px !important;
+    transition: 0.2s;
 }
 
-/* 3. 호버 시 강조 효과 */
+/* 3. 호버 시 효과 (마우스를 올렸을 때) */
 .md-typeset table tr:hover td:first-child,
 .md-typeset table tr:hover td:first-child a {
     background-color: #4e37e6 !important;
