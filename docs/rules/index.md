@@ -45,12 +45,12 @@
     background-color: transparent !important;
 }
 
-/* No. 열: 검정, 크게, 가운데 정렬 */
+/* No. 열: Identifier 열과 동일 색상, 크게, 가운데 정렬 */
 .md-typeset table td:first-child {
     font-family: 'JetBrains Mono', monospace;
     font-size: 18px !important;
     font-weight: 600 !important;
-    color: #000000 !important;
+    color: #334155 !important;
     text-align: center !important;
     vertical-align: middle !important;
     width: 65px;
