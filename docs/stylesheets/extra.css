@@ -1,6 +1,10 @@
-/* Rule table: No. column – small circle, black number */
+/* Rule table No. column: small circle, black number */
+.md-typeset .md-typeset__table table tbody td:first-child,
+.md-typeset .md-typeset__table table tr:not(:first-child) td:first-child,
 .md-typeset table tbody td:first-child,
-.md-typeset table tr:not(:first-child) td:first-child {
+.md-typeset table tr:not(:first-child) td:first-child,
+article table tbody td:first-child,
+article table tr:not(:first-child) td:first-child {
   width: 1.35em !important;
   min-width: 1.35em !important;
   max-width: 1.35em !important;
@@ -16,21 +20,33 @@
   box-sizing: border-box !important;
 }
 
+[data-md-color-scheme="slate"] .md-typeset .md-typeset__table table tbody td:first-child,
+[data-md-color-scheme="slate"] .md-typeset .md-typeset__table table tr:not(:first-child) td:first-child,
 [data-md-color-scheme="slate"] .md-typeset table tbody td:first-child,
-[data-md-color-scheme="slate"] .md-typeset table tr:not(:first-child) td:first-child {
+[data-md-color-scheme="slate"] .md-typeset table tr:not(:first-child) td:first-child,
+[data-md-color-scheme="slate"] article table tbody td:first-child,
+[data-md-color-scheme="slate"] article table tr:not(:first-child) td:first-child {
   color: #000 !important;
   background-color: #9e9e9e !important;
 }
 
+.md-typeset .md-typeset__table table tbody td:first-child a,
+.md-typeset .md-typeset__table table tr:not(:first-child) td:first-child a,
 .md-typeset table tbody td:first-child a,
-.md-typeset table tr:not(:first-child) td:first-child a {
+.md-typeset table tr:not(:first-child) td:first-child a,
+article table tbody td:first-child a,
+article table tr:not(:first-child) td:first-child a {
   color: #000 !important;
   font-weight: 600 !important;
   text-decoration: none !important;
 }
 
+.md-typeset .md-typeset__table table tbody td:first-child a:hover,
+.md-typeset .md-typeset__table table tr:not(:first-child) td:first-child a:hover,
 .md-typeset table tbody td:first-child a:hover,
-.md-typeset table tr:not(:first-child) td:first-child a:hover {
+.md-typeset table tr:not(:first-child) td:first-child a:hover,
+article table tbody td:first-child a:hover,
+article table tr:not(:first-child) td:first-child a:hover {
   color: #000 !important;
   text-decoration: none !important;
 }
