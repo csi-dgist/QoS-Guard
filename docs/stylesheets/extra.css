@@ -63,24 +63,20 @@ hr.hr-short-bar {
     border: none; 
 }
 
-/* 1. 테마의 내부 속성 선택자까지 포함해서 강제로 색상 지정 */
-.md-typeset .admonition.info,
-.md-typeset :target .admonition.info,
-.md-typeset .admonition[class*="info"] {
-  border-left-color: #4E5EB4 !important;
+/* Admonition 'info' 색상 및 배경 최적화 */
+.md-typeset .admonition.info {
+  /* 1. 테두리 및 아이콘 색상 (진한 블루) */
   --md-admonition-fg-color: #4E5EB4 !important;
-  --md-admonition-bg-color: rgba(78, 94, 180, 0.1) !important;
+  
+  /* 2. 본문 배경색 (0.03으로 낮춰서 아주 밝게 설정) */
+  --md-admonition-bg-color: rgba(78, 94, 180, 0.03) !important;
+  
+  /* 3. 테두리 두께 강조 */
+  border-left-width: 0.4rem !important;
 }
 
-/* 2. 제목 줄의 배경색과 글자색 강제 지정 */
-.md-typeset .info > .admonition-title,
-.md-typeset .info > summary {
-  background-color: rgba(78, 94, 180, 0.1) !important;
+/* 제목 바 배경색만 본문보다 살짝 더 진하게 (선택 사항) */
+.md-typeset .info > .admonition-title {
+  background-color: rgba(78, 94, 180, 0.08) !important;
   color: #4E5EB4 !important;
-}
-
-/* 3. 아이콘 색상 강제 지정 */
-.md-typeset .info > .admonition-title::before,
-.md-typeset .info > summary::before {
-  background-color: #4E5EB4 !important;
 }
