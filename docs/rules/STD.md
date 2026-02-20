@@ -1,42 +1,42 @@
 # STD Rules
 
 <style>
-/* 1. 번호 칸(td) 내부의 모든 요소를 중앙으로 강제 배치 */
+/* 1. 번호가 들어가는 칸(td) 설정 */
 .md-typeset table td:first-child {
-  padding: 0 !important;
+  text-align: center !important; /* 내부 요소를 수평 중앙으로 */
+  vertical-align: middle !important; /* 수직 중앙 */
+  padding: 10px 0 !important;
   width: 50px !important;
   min-width: 50px !important;
-  /* 핵심: 셀 내부에서 배지가 중앙에 오도록 함 */
-  text-align: center !important;
-  vertical-align: middle !important;
 }
 
-/* 2. 숫자 배지 (링크 유무 통합) */
+/* 2. 숫자 배지 (링크 유무 상관없이 적용) */
 .md-typeset table td:first-child,
 .md-typeset table td:first-child a {
-  /* inline-flex를 써야 정렬이 가장 안정적입니다 */
+  /* 핵심: inline-flex와 margin auto의 조합 */
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-
-  /* 수평 중앙 정렬을 보장하는 핵심 속성 */
-  margin: 8px auto !important; 
-  float: none !important;
-
-  /* 원형 유지 설정 */
+  
+  /* 원형을 유지하기 위한 절대 고정 수치 */
   width: 26px !important;
   height: 26px !important;
   min-width: 26px !important;
   min-height: 26px !important;
-  border-radius: 50% !important;
+  
+  /* 왼쪽 쏠림 해결: 좌우 마진을 auto로 주면 정중앙에 고정됩니다 */
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 4px !important;
+  margin-bottom: 4px !important;
 
-  /* 스타일 */
-  background-color: #f0f0f0 !important;
+  border-radius: 50% !important;
+  background-color: #f2f2f2 !important;
   color: #000 !important;
   font-size: 13px !important;
   font-weight: bold !important;
   text-decoration: none !important;
-  transition: 0.2s;
+  transition: 0.2s ease;
 }
 
 /* 3. 호버 시 효과 */
