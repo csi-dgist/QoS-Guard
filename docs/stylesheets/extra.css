@@ -64,8 +64,7 @@ hr.hr-short-bar {
 }
 
 
-
-/* 1. 모든 info 박스 스타일 강제 지정 */
+/* info icon custom */
 .md-typeset .admonition.info, 
 .md-typeset details.info {
   /* 왼쪽 선을 바닥까지 굵게 (0.4rem) 연결 */
@@ -101,7 +100,7 @@ hr.hr-short-bar {
   -webkit-mask-image: var(--md-admonition-icon--info);
 }
 
-/* 1. 스크롤바 전체 너비 설정 */
+/* scroll custom */
 ::-webkit-scrollbar {
   width: 6px;  /* 세로 스크롤바 두께 */
   height: 6px; /* 가로 스크롤바 두께 */
