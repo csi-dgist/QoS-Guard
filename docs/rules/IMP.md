@@ -1,7 +1,5 @@
 # IMP Rules
 
-<hr class="hr-grad-left">
-
 <style>
 /* 전체 리스트 컨테이너 */
 .std-list {
