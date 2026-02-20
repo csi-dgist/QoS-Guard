@@ -207,16 +207,21 @@ ros2 run qos_guard qos_guard /path/to/any/ros2/package
 
 You only need the repository and Python 3.10+.
 
-```bash
-# 1. Clone and go to repo root (parent of the qos_guard folder)
-cd /path/to/QoS-Guard
 
-# 2. Optional: use a virtual environment
+#### 1. Clone and go to repo root (parent of the qos_guard folder)
+```bash
+cd /path/to/QoS-Guard
+```
+
+#### 2. Optional: use a virtual environment
+```bash
 python3 -m venv .venv
 source .venv/bin/activate   # Linux/macOS
 # .venv\Scripts\activate    # Windows
+```
 
-# 3. Run (parent of qos_guard must be on Python path)
+#### 3. Run (parent of qos_guard must be on Python path)
+```bash
 python3 -m qos_guard.qos_checker /path/to/your_ros2_package
 ```
 
