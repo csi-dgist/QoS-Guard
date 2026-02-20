@@ -50,29 +50,28 @@
     background-color: transparent !important; 
 }
 
-/* 5. 첫 번째 열(No.) — 배지 스타일 (MkDocs Material + 일반 미리보기 공통) */
+/* 5. 첫 번째 열(No.) — 깔끔한 인덱스 배지 (MkDocs Material + 일반 미리보기 공통) */
 .md-typeset table td:first-child,
 table td:first-child {
     font-family: 'SF Mono', 'JetBrains Mono', 'Consolas', monospace;
     font-variant-numeric: tabular-nums;
-    font-size: 12px !important;
-    font-weight: 600 !important;
-    color: #4338ca !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
     text-align: center !important;
-    width: 56px;
-    padding: 10px 12px !important;
-    background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%) !important;
-    border: 1px solid rgba(78, 94, 180, 0.12);
-    border-radius: 8px;
+    width: 72px;
+    padding: 12px 14px !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
     letter-spacing: 0.02em;
-    box-shadow: 0 1px 2px rgba(78, 94, 180, 0.06);
+    box-shadow: none;
 }
-/* No. 열 호버 시에도 배지 톤 유지 */
+/* No. 열 호버 시 */
 .md-typeset table tbody tr:hover td:first-child,
 table tbody tr:hover td:first-child {
-    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%) !important;
-    border-color: rgba(78, 94, 180, 0.18);
-    box-shadow: 0 2px 4px rgba(78, 94, 180, 0.08);
+    background: #f1f5f9 !important;
+    border-color: #cbd5e1;
 }
 
 /* 6. 행 전체 호버 이벤트 (통일된 반응) */
