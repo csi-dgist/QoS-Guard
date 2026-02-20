@@ -57,7 +57,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      [DURABL \ge TRAN\_LOCAL] \wedge [LFSPAN.duration > 0]
+      [DURABL ≥ TRAN_LOCAL] ∧ [LFSPAN.duration > 0]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub</div>
@@ -81,7 +81,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      [RELIABLE] \wedge [KEEP\_LAST] \wedge [depth < \lceil RTT/PP \rceil + 2]
+      [RELIABLE] ∧ [KEEP_LAST] ∧ [depth < ⌈ RTT/PP ⌉ + 2]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub</div>
@@ -96,7 +96,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      [RELIABLE] \wedge [KEEP\_ALL] \wedge [mpi < \lceil RTT/PP \rceil + 1]
+      [RELIABLE] ∧ [KEEP_ALL] ∧ [mpi < ⌈ RTT/PP ⌉ + 1]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub</div>
@@ -111,7 +111,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      [RELIABLE] \wedge [LFSPAN.duration < RTT \times 2]
+      [RELIABLE] ∧ [LFSPAN.duration < RTT × 2]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub</div>
@@ -126,7 +126,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      [DEADLN.period > 0] \wedge [RELIAB = BEST\_EFFORT]
+      [DEADLN.period > 0] ∧ [RELIAB = BEST_EFFORT]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -141,7 +141,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      [DEADLN.period > 0] \wedge [LIVENS.lease < DEADLN.period]
+      [DEADLN.period > 0] ∧ [LIVENS.lease < DEADLN.period]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -156,7 +156,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      [DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \wedge [mpi \ge default]
+      [DURABL ≥ TRAN_LOCAL] ∧ [KEEP_ALL] ∧ [mpi ≥ default]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub</div>
@@ -171,7 +171,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      [OWNST = EXCLUSIVE] \wedge [DEADLN.period < 2 \times PP]
+      [OWNST = EXCLUSIVE] ∧ [DEADLN.period < 2 × PP]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -186,7 +186,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      [OWNST = EXCLUSIVE] \wedge [lease < 2 \times PP]
+      [OWNST = EXCLUSIVE] ∧ [lease < 2 × PP]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -396,7 +396,7 @@ The network condition is controlled over 60 seconds using the `tc` command:
 The experiment demonstrates that when `Lease Duration < Deadline`, the system falls into a contradictory state: it continues to fire "Data Missing" alarms (Deadline Missed) for a Publisher that it has already declared "Dead" (Liveliness Lost). 
 
 To prevent this **state inconsistency** and ensure a logical fault-detection sequence (where the data stream is monitored within the lifespan of the entity), the Liveliness Lease Duration must always be longer than the Deadline Period:
-$LIVENS.lease \ge DEADLN.period$
+$LIVENS.lease ≥ DEADLN.period$
 
 ---
 <span id="rule-37"></span>
@@ -432,7 +432,7 @@ $LIVENS.lease \ge DEADLN.period$
 The experiment proves that setting an excessively high `max_samples_per_instance` for the sake of data completeness leads to a **"Recovery Latency Storm."** For a late-joining node, processing thousands of buffered historical samples simultaneously saturates the available bandwidth and CPU, causing current data to be delayed by tens of seconds.
 
 To balance data durability with system responsiveness, the resource limits must be tuned based on the expected maximum network downtime and the acceptable recovery window:
-$[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \implies mpi \ge default$
+$[DURABL ≥ TRAN_LOCAL] ∧ [KEEP_ALL] ⇒ mpi ≥ default$
 *(Note: $default$ should be calculated based on the maximum tolerable recovery time.)*
 
 
@@ -455,7 +455,7 @@ $[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \implies mpi \ge default$
 2.  Set both Publishers and the Subscriber to `RELIABLE` reliability to ensure eventual delivery.
 3.  Introduce a constant 5% packet loss using the `tc` command.
 4.  **Case A:** Set the Deadline period to `100ms` (equal to the PP).
-5.  **Case B:** Set the Deadline period to `500ms` ($5 \times PP$).
+5.  **Case B:** Set the Deadline period to `500ms` ($5 × PP$).
 6.  Monitor the `on_requested_deadline_missed` callback and track how often the active owner is switched due to deadline timeouts.
 
 **3. Experimental Observation**
@@ -472,7 +472,7 @@ $[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \implies mpi \ge default$
 The experiment clearly demonstrates that **Ownership Stability** is highly dependent on the **Deadline** period in lossy networks. A tight deadline (Case A) causes "Ownership Churning," where control is frequently and unnecessarily handed over due to transient network jitters. 
 
 By extending the Deadline (Case B), the system becomes more resilient to packet loss, ensuring that the primary owner remains active as long as retransmissions are successful within the extended margin. To ensure stable control in exclusive ownership, the Deadline should be at least twice the Publication Period:
-$[OWNST = EXCLUSIVE] \implies DEADLN.period \ge 2 \times PP$
+$[OWNST = EXCLUSIVE] ⇒ DEADLN.period ≥ 2 × PP$
 
 ---
 <span id="rule-39"></span>
@@ -509,6 +509,6 @@ $[OWNST = EXCLUSIVE] \implies DEADLN.period \ge 2 \times PP$
 The experiment highlights the risk of **"False Positive Failures."** When the Liveliness Lease Duration is too aggressive (close to the $PP$), transient network issues cause the Subscriber to frequently revoke ownership from the primary Publisher. This leads to unstable system control and unnecessary handovers.
 
 To maintain a stable Ownership state, the Liveliness Lease Duration must be set with enough margin to accommodate at least two consecutive heartbeat losses or retransmission delays:
-$[OWNST = EXCLUSIVE] \implies lease\_duration \ge 2 \times PP$
+$[OWNST = EXCLUSIVE] ⇒ lease_duration ≥ 2 × PP$
 
 ---
