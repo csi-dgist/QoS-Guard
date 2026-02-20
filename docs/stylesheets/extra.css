@@ -65,42 +65,38 @@ hr.hr-short-bar {
 
 
 
-:root {
-  /* 인포 박스의 메인 테두리와 배경 아이콘 색상 */
-  --md-admonition-icon--info: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 9h-2V7h2m0 10h-2v-6h2m-1-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2Z"/></svg>');
-  
-  /* 타이틀 바 배경 및 왼쪽 테두리 색상 지정 */
-  --md-typeset-admonition-info: #4E5EB4;
-}
-
-/* Info Admonition 커스텀 스타일 */
-.md-typeset .admonition.info,
+/* 1. 모든 info 박스 스타일 강제 지정 */
+.md-typeset .admonition.info, 
 .md-typeset details.info {
-  /* 1. 왼쪽 선을 바닥까지 연결 & 전체 테두리 색상 */
-  border-left: 0.2rem solid #4E5EB4;
-  border-right: 1px solid #4E5EB4;
-  border-top: 1px solid #4E5EB4;
-  border-bottom: 1px solid #4E5EB4;
-
-  /* 2. "빛나는" 효과 (Glow / Box Shadow) */
-  box-shadow: 0 4px 10px rgba(78, 94, 180, 0.2), 0 0 2px rgba(78, 94, 180, 0.1);
+  /* 왼쪽 선을 바닥까지 굵게 (0.4rem) 연결 */
+  border-left: 0.4rem solid #4E5EB4 !important; 
   
-  /* 둥근 모서리 유지 */
-  border-radius: 0.1rem;
+  /* 나머지 3면 테두리 */
+  border-right: 1px solid rgba(78, 94, 180, 0.3) !important;
+  border-top: 1px solid rgba(78, 94, 180, 0.3) !important;
+  border-bottom: 1px solid rgba(78, 94, 180, 0.3) !important;
+  
+  /* 박스 주변 보랏빛 광채 효과 (Glow) */
+  box-shadow: 0 0 15px rgba(78, 94, 180, 0.25) !important;
+  
+  background-color: #ffffff !important;
   overflow: hidden;
+  margin-bottom: 1em;
 }
 
-/* 상단 타이틀 바 수정 */
+/* 2. 상단 타이틀 바 영역 배경색 */
 .md-typeset .info > .admonition-title,
 .md-typeset .info > summary {
-  background-color: rgba(78, 94, 180, 0.07); /* 아주 연한 배경색 */
-  border-left: 0; /* 중복 선 제거 (박스 전체 선을 사용하므로) */
-  font-weight: 700;
-  margin: 0;
+  background-color: rgba(78, 94, 180, 0.1) !important; 
+  border-left: none !important; /* 박스 자체 선을 쓰므로 타이틀 선은 제거 */
+  border-bottom: 1px solid rgba(78, 94, 180, 0.1) !important;
 }
 
-/* 아이콘 색상 강제 지정 */
+/* 3. 아이콘 색상 변경 */
 .md-typeset .info > .admonition-title::before,
 .md-typeset .info > summary::before {
-  background-color: #4E5EB4;
+  background-color: #4E5EB4 !important;
+  /* 아이콘 모양(SVG)은 테마 기본값을 유지하면서 색상만 적용 */
+  mask-image: var(--md-admonition-icon--info);
+  -webkit-mask-image: var(--md-admonition-icon--info);
 }
