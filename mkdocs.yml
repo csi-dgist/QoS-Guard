@@ -40,6 +40,8 @@ extra_css:
 
 nav:
   - Home: index.md
+  - How to use : QoS_Guard.md
+  - QoS Encyclopedia : QoS.md
   - QoS Rules:
     - Overview: rules/index.md
     - STD Rules: rules/STD.md
