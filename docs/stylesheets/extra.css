@@ -63,13 +63,26 @@ hr.hr-short-bar {
     border: none; 
 }
 
-/* Info 어드모니션의 아이콘 색상 변경 */
-.md-typeset .admonition.info,
-.md-typeset details.info {
-  border-left-color: #4E5EB4; /* 왼쪽 테두리 선 색상도 맞추고 싶다면 추가 */
+.md-typeset .admonition.info {
+  /* 테마 변수 강제 교체 */
+  --md-admonition-fg-color: #4E5EB4 !important;
+  --md-admonition-bg-color: #ffffff !important; 
+  
+  /* 테두리 및 그림자 광채 효과 */
+  border: 1px solid rgba(78, 94, 180, 0.2) !important;
+  border-left: 0.4rem solid #4E5EB4 !important;
+  box-shadow: 0 4px 10px rgba(78, 94, 180, 0.15), 0 0 5px rgba(78, 94, 180, 0.1) !important;
 }
 
-.md-typeset .info > .admonition-title::before,
-.md-typeset .info > summary::before {
-  background-color: #4E5EB4; /* i 아이콘 색상 변경 */
+/* 제목 줄 배경 및 글자색 */
+.md-typeset .info > .admonition-title {
+  background-color: rgba(78, 94, 180, 0.05) !important;
+  color: #4E5EB4 !important;
+  border-bottom: 1px solid rgba(78, 94, 180, 0.1) !important;
+}
+
+/* 3. 핵심: i 아이콘(이모티콘) 색상을 남색(#4E5EB4)으로 강제 지정 */
+.md-typeset .admonition.info > .admonition-title::before,
+.md-typeset .admonition.info > summary::before {
+  background-color: #4E5EB4 !important;
 }
