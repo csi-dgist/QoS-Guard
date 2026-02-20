@@ -142,7 +142,9 @@ When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effectiv
 
 **3. Experimental Observation**
 
-![Rule 33 Experimental Result](../images/rule33.png)
+<div align="center">
+  <img src="../../images/rule33.png" width="400">
+</div>
 
 * **High Reception Zone (Blue):** When Lifespan is sufficiently longer than RTT and PP, nearly all 10,000 samples are received.
 * **Low Reception Zone (White/Gray):** When Lifespan duration is close to or shorter than the round-trip retransmission time, samples expire before they can be successfully delivered or processed.
@@ -172,7 +174,9 @@ Even with `RELIABLE` settings, data loss occurs if the **Lifespan duration** is 
 
 **3. Experimental Observation**
 
-![Rule 35 Experimental Result](../images/rule35.png)
+<div align="center">
+  <img src="../../images/rule35.png" width="400">
+</div>
 
 | Reliability | Total Samples | Received Samples | Deadline Missed Count | Cause of Violation |
 | :--- | :---: | :---: | :---: | :--- |
@@ -235,7 +239,9 @@ $$LIVENS.lease \ge DEADLN.period$$
 
 **3. Experimental Observation**
 
-![Rule 37 Experimental Result](../images/rule37.png)
+<div align="center">
+  <img src="../../images/rule37.png" width="400">
+</div>
 
 * **Low mpi Zone:** Recovery is relatively fast
 * **High mpi Zone:** As `max_samples_per_instance` increases towards 5,000, the recovery latency increases exponentially (reaching up to 50,000ms). The system takes significantly longer to converge to a steady state.
@@ -272,7 +278,9 @@ $$[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \implies mpi \ge default$$
 
 **3. Experimental Observation**
 
-![Rule 38 Experimental Result](../images/rule38.png)
+<div align="center">
+  <img src="../../images/rule38.png" width="400">
+</div>
 
 * **Case A (Deadline = 100ms - Orange):** Numerous spikes are observed throughout the experiment. Any minor retransmission delay caused by the 5% loss immediately triggers a deadline miss, leading to unstable ownership.
 * **Case B (Deadline = 500ms - Blue):** Significantly fewer and more sparse spikes appear. The larger window provides sufficient time for the `RELIABLE` protocol to recover lost packets through NACK/retransmission before the 500ms timer expires, maintaining a more consistent owner state.
@@ -306,7 +314,9 @@ $$[OWNST = EXCLUSIVE] \implies DEADLN.period \ge 2 \times PP$$
 
 **3. Experimental Observation**
 
-![Rule 39 Experimental Result](../images/rule39.png)
+<div align="center">
+  <img src="../../images/rule39.png" width="400">
+</div>
 
 * **Short Lease Duration (50ms - 100ms):** A high frequency of Liveliness Lost events is observed (up to 26 times). Since the lease duration is shorter than or equal to the Publication Period (100ms), even a single delayed heartbeat triggers a failure detection.
 * **Long Lease Duration (300ms - 800ms):** The event count drops significantly as the lease duration increases. At 800ms, only 10 events occur, indicating that the system can tolerate multiple lost or delayed heartbeats without dropping the ownership.
