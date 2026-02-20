@@ -63,10 +63,24 @@ hr.hr-short-bar {
     border: none; 
 }
 
-.md-typeset .admonition.info {
+/* 1. 테마의 내부 속성 선택자까지 포함해서 강제로 색상 지정 */
+.md-typeset .admonition.info,
+.md-typeset :target .admonition.info,
+.md-typeset .admonition[class*="info"] {
+  border-left-color: #4E5EB4 !important;
   --md-admonition-fg-color: #4E5EB4 !important;
-  
   --md-admonition-bg-color: rgba(78, 94, 180, 0.1) !important;
-  
-  border-left-width: 0.4rem !important;
+}
+
+/* 2. 제목 줄의 배경색과 글자색 강제 지정 */
+.md-typeset .info > .admonition-title,
+.md-typeset .info > summary {
+  background-color: rgba(78, 94, 180, 0.1) !important;
+  color: #4E5EB4 !important;
+}
+
+/* 3. 아이콘 색상 강제 지정 */
+.md-typeset .info > .admonition-title::before,
+.md-typeset .info > summary::before {
+  background-color: #4E5EB4 !important;
 }
