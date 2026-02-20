@@ -79,7 +79,7 @@ hr.hr-short-bar {
 
 .md-typeset .info > .admonition-title,
 .md-typeset .info > summary {
-  background-color: rgba(78, 94, 180, 0.1); /* 연한 배경색 (선택사항) */
+  background-color: rgba(78, 94, 180, 0.1); 
 }
 
 .md-typeset .info > .admonition-title::before,
@@ -88,33 +88,28 @@ hr.hr-short-bar {
 }
 
 /* scroll custom */
-/* 1. 스크롤바가 나타날 컨테이너 설정 */
 .scroll-container {
-  width: 50%;           /* 전체 너비의 80% 정도로 줄임 (원하시는 만큼 조절 가능) */
-  margin: 0 auto;       /* 가운데 정렬 */
-  overflow-x: auto;     /* 가로 스크롤 허용 */
-  white-space: nowrap;  /* 내부 콘텐츠가 줄바꿈되지 않도록 설정 */
-  padding-bottom: 10px; /* 스크롤바와 콘텐츠 사이 간격 */
+  width: 50%;           
+  margin: 0 auto;       
+  overflow-x: auto;    
+  white-space: nowrap;  
+  padding-bottom: 10px; 
 }
 
-/* 2. 스크롤바 전체 높이 */
 .scroll-container::-webkit-scrollbar {
-  height: 10px;          /* 가로 스크롤바의 두께를 살짝 슬림하게 변경 */
+  height: 10px;       
 }
 
-/* 3. 스크롤바 뒷배경 (트랙) - 파란색보다 연한 색상 */
 .scroll-container::-webkit-scrollbar-track {
-  background: #D9DFF2;  /* #4E5EB4 계열의 아주 연한 파란색 */
+  background: #D9DFF2;  
   border-radius: 10px;
 }
 
-/* 4. 스크롤 막대 (핸들) - 메인 파란색 */
 .scroll-container::-webkit-scrollbar-thumb {
-  background: #4E5EB4;  /* 요청하신 메인 색상 */
+  background: #4E5EB4;  
   border-radius: 10px;
 }
 
-/* 5. 마우스 올렸을 때 효과 */
 .scroll-container::-webkit-scrollbar-thumb:hover {
   background: #3B4A91;
 }
