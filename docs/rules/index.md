@@ -37,6 +37,8 @@ These are implemented in **QoS Guard** for static verification.
 
 <div style="text-align: center; color: #4E5EB4; opacity: 0.5; font-size: 20px; letter-spacing: 15px; margin: 35px 0;">•••</div>
 
+<div style="height: 3px; background: linear-gradient(to right, #4E5EB4 10%, rgba(78, 94, 180, 0.1) 90%); border-radius: 2px; margin: 20px 0;"></div>
+
 
 ## Stage 1 | Intra-entity Dependency Validation
 *Identifies internal conflicts by analyzing each entity's QoS profile independently.*
