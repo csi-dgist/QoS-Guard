@@ -48,9 +48,9 @@
 /* No. 열: Identifier 열과 동일 색상, 가운데 정렬, 좁은 너비 */
 .md-typeset table th:first-child,
 .md-typeset table td:first-child {
-    width: 50px !important;
-    min-width: 50px !important;
-    max-width: 50px !important;
+    width: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
     box-sizing: border-box;
 }
 .md-typeset table td:first-child {
