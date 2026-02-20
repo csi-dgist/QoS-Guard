@@ -8,24 +8,6 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
-| [6](#rule-6) | <kbd>LFSPAN</kbd> → <kbd>DURABL</kbd> | $[DURABL \ge TRAN\_LOCAL]$ <br> $\wedge [LFSPAN.duration > 0]$ | **Functional** | Pub | EMP |
-
-
-
-| No. | ![Identifier](https://img.shields.io/badge/-Identifier-orange) | ![Condition](https://img.shields.io/badge/-QoS_Conflict_Condition-blue) | ![Type](https://img.shields.io/badge/-Type-lightgrey) |
-|:---:|:---:|:---|:---:|
-| 6 | `LFSPAN` → `DURABL` | $DURABL \ge TRAN\_L \wedge LFSPAN.dur > 0$ | **Func** |
-
-| ![No](https://img.shields.io/badge/No.-007ec6) | ![Id](https://img.shields.io/badge/-Identifier-ef8b33) | ![Condition](https://img.shields.io/badge/-QoS_Conflict_Condition-007ec6) | ![Type](https://img.shields.io/badge/-Type-888) |
-|:---:|:---:|:---|:---:|
-| [![6](https://img.shields.io/badge/-6-888)](#rule-6) | <kbd>LFSPAN</kbd> → <kbd>DURABL</kbd> | $DURABL \ge TRAN\_L \wedge LFSPAN.dur > 0$ | **Func** |
-
----
-## Stage 1
-*Intra-entity Dependency Validation*
-
-| No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
-|:---:|:---|:---|:---:|:---:|:---:|
 | [6](#rule-6) | <kbd>LFSPAN</kbd> → <kbd>DURABL</kbd> | $[DURABL \ge TRAN\_LOCAL] \wedge [LFSPAN.duration > 0]$ | Functional | Pub | EMP |
 
 ---
