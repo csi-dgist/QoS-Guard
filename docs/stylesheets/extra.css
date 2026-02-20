@@ -66,28 +66,29 @@ hr.hr-short-bar {
 
 /* info icon custom */
 
-/* 1. 기본 테마의 선 스타일을 완전히 제거하고 새로 정의 */
-.md-typeset .admonition.info, 
-.md-typeset details.info {
-  border: 1px solid rgba(78, 94, 180, 0.3) !important; /* 전체 테두리 */
-  border-left: 0.4rem solid #4E5EB4 !important;      /* 왼쪽 강조선 (바닥까지) */
-  box-shadow: 0 0 15px rgba(78, 94, 180, 0.2) !important; /* 은은한 광택 */
-  background-color: #ffffff !important;
-  border-radius: 0.1rem;
-  overflow: hidden;
+:root {
+  /* 인포 박스의 메인 테두리와 배경 아이콘 색상 */
+  --md-admonition-icon--info: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 9h-2V7h2m0 10h-2v-6h2m-1-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2Z"/></svg>');
+  
+  /* 타이틀 바 배경 및 왼쪽 테두리 색상 지정 */
+  --md-typeset-admonition-info: #4E5EB4;
 }
 
-/* 2. 타이틀 영역의 기존 테두리 중복 제거 */
+/* 박스 전체의 스타일 세부 조정 */
+.md-typeset .admonition.info,
+.md-typeset details.info {
+  border-color: #4E5EB4;
+}
+
+/* 상단 타이틀 바 배경색 변경 */
 .md-typeset .info > .admonition-title,
 .md-typeset .info > summary {
-  background-color: rgba(78, 94, 180, 0.07) !important;
-  border-left: none !important;  /* 여기서 선이 끊겨 보이게 만들던 범인 제거 */
-  border-bottom: 1px solid rgba(78, 94, 180, 0.1) !important;
-  margin: 0 !important;
+  background-color: rgba(78, 94, 180, 0.1); /* 연한 배경색 (선택사항) */
+  border-left: 0.2rem solid #4E5EB4;
 }
 
-/* 3. 아이콘 색상 고정 */
+/* 타이틀 글자 색상 및 아이콘 색상 */
 .md-typeset .info > .admonition-title::before,
 .md-typeset .info > summary::before {
-  background-color: #4E5EB4 !important;
+  background-color: #4E5EB4;
 }
