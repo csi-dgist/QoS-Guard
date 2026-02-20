@@ -1,31 +1,55 @@
 # STD Rules
 
 <style>
-.md-typeset table td:first-child {
-  text-align: center;
-  padding: 8px !important; 
-}
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.95em;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+  }
 
-.md-typeset table td:first-child a {
-  display: inline-block; 
-  width: 24px;         
-  height: 24px;        
-  line-height: 24px;    
-  
-  border-radius: 50%;   
-  background-color: #f0f0f0; 
-  color: #000 !important;
-  text-decoration: none !important;
-  font-weight: bold;
-  font-size: 13px;      
-  transition: 0.2s;
-}
+  table thead tr {
+    background-color: #009879; /* DDS 표준 느낌의 진한 초록색 */
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+  }
 
-.md-typeset table tr:hover td:first-child a {
-  background-color: #4e37e6 !important; 
-  color: #fff !important; 
-  transform: scale(1.1);
-}
+  table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+  }
+
+  table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+
+  table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3; /* 줄바꿈 색상 구분 */
+  }
+
+  table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+  }
+
+  /* 수식이 들어가는 세 번째 열(QoS Conflict Condition) 강조 */
+  table td:nth-child(3) {
+    font-family: 'Consolas', monospace;
+    color: #c0392b;
+    background-color: #fff9f9;
+    font-weight: 500;
+  }
+
+  /* No. 열 너비 조절 및 중앙 정렬 */
+  table td:nth-child(1) {
+    text-align: center;
+    font-weight: bold;
+    width: 50px;
+  }
 </style>
 
 This page describes the QoS dependency and consistency rules derived from the **OMG DDS** and **ROS 2 Standard** specifications. Violation of these rules typically results in entity creation failure or immediate communication incompatibility.
