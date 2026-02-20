@@ -1,5 +1,57 @@
 # QoS-Guard
 
+<style>
+  /* 특징 그리드 레이아웃 */
+.feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2열 배치 */
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.feature-card {
+    display: flex;
+    align-items: flex-start;
+    padding: 18px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.feature-card:hover {
+    border-color: #4E5EB4;
+    box-shadow: 0 4px 12px rgba(78, 94, 180, 0.08);
+    transform: translateY(-2px);
+}
+
+.feature-icon {
+    font-size: 20px;
+    margin-right: 14px;
+    margin-top: 2px;
+}
+
+.feature-content strong {
+    display: block;
+    font-size: 15px;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.feature-content span {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+/* 모바일대응: 화면이 작아지면 1열로 변환 */
+@media (max-width: 768px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
 **Offline static verification of DDS QoS for ROS 2.** 
 
 Find QoS mismatches and dependency violations before you run your nodes—no ROS 2 runtime required.
@@ -12,10 +64,36 @@ ROS 2 uses **DDS** and **QoS policies** (reliability, durability, history, etc.)
 
 QoS-Guard scans your **XML profiles** and **source code** (e.g. `rclcpp::QoS`, `create_publisher`), builds Pub–Sub pairs per topic, and runs **40 dependency rules** to report potential issues.
 
-| **No runtime** | No need to run `ros2 run` or any node |
-| **Python 3.10+** | Works with or without ROS 2 installed |
-| **Package mode** | Point to a package path → auto-scan XML + code, verify all topic pairs |
-| **XML pair mode** | Point to one pub XML + one sub XML → verify that pair only (Fast/Connext) |
+<div class="feature-grid">
+  <div class="feature-card">
+    <div class="feature-icon">⚡</div>
+    <div class="feature-content">
+      <strong>No runtime</strong>
+      <span>No need to run <code>ros2 run</code> or any node</span>
+    </div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">🐍</div>
+    <div class="feature-content">
+      <strong>Python 3.10+</strong>
+      <span>Works with or without ROS 2 installed</span>
+    </div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">📦</div>
+    <div class="feature-content">
+      <strong>Package mode</strong>
+      <span>Point to a package path → auto-scan XML + code, verify all topic pairs</span>
+    </div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">🛠️</div>
+    <div class="feature-content">
+      <strong>XML pair mode</strong>
+      <span>Point to one pub XML + one sub XML → verify that pair only (Fast/Connext)</span>
+    </div>
+  </div>
+</div>
 
 <hr class="hr-grad-left">
 
