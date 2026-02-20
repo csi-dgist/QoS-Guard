@@ -45,10 +45,10 @@
     background-color: transparent !important;
 }
 
-/* No. 열: Identifier 열과 동일 색상, 크게, 가운데 정렬 */
+/* No. 열: Identifier 열과 동일 색상, 가운데 정렬 */
 .md-typeset table td:first-child {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 18px !important;
+    font-size: 15px !important;
     font-weight: 600 !important;
     color: #334155 !important;
     text-align: center !important;
@@ -84,7 +84,7 @@
 
 .stage-header {
     font-size: 1.4em;
-    font-weight: 700;
+    font-weight: 800;
     color: #1e293b;
     margin-top: 2em;
     padding-left: 14px;
