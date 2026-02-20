@@ -3,8 +3,8 @@
 <style>
 /* 1. No. 열을 원형 배지로 만들기 */
 .md-typeset table td:first-child {
-  width: 30px;
-  height: 30px;
+  width: 10px;
+  height: 10px;
   text-align: center;
   border-radius: 50%;
   background-color: #f0f0f0; /* 평소 배경 */
