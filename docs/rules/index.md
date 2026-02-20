@@ -1,17 +1,63 @@
 # QoS Rules Overview
 
 <style>
-.md-typeset table td:nth-child(1),
-.md-typeset table td:first-child,
-.md-typeset table tr td:first-child {
-    font-size: 20px !important;    
-    font-weight: 600 !important;  
-    text-align: center !important;  
-    color: #000000 !important;     
-    vertical-align: middle !important;
-    min-width: 50px !important;     
+/* 1. 표 전체 테두리 및 그림자 */
+.md-typeset table {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin: 20px 0;
 }
 
+/* 2. 헤더 스타일 (보라색 포인트) */
+.md-typeset table thead {
+    background-color: #4e37e6;
+}
+
+.md-typeset table th {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    padding: 12px 15px !important;
+    font-size: 13px !important;
+    border: none !important;
+}
+
+/* 3. 첫 번째 열(No.) 디자인 */
+.md-typeset table td:first-child {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    color: #4e37e6 !important;
+    background-color: #f8faff;
+    vertical-align: middle !important;
+}
+
+/* 4. 수식 칸 스타일 */
+.md-typeset table td:nth-child(3) {
+    font-family: 'Consolas', monospace;
+    font-size: 14px;
+    background-color: #fafafa;
+    line-height: 1.5;
+}
+
+/* 5. Basis 컬러 배지 */
+.basis-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+}
+.basis-std { background-color: #2ecc71; } /* 초록 */
+.basis-imp { background-color: #3498db; } /* 파랑 */
+.basis-emp { background-color: #e67e22; } /* 주황 */
+
+/* 6. 행 호버 애니메이션 */
+.md-typeset table tr:hover {
+    background-color: #f2f0ff !important;
+}
 </style>
 
 This section covers 40 dependency-violation rules classified into three stages. 
@@ -26,7 +72,7 @@ These are implemented in **QoS Guard** for static verification.
 
 <hr class="hr-grad-left">
 
-## Stage 1 | Intra-entity Dependency Validation
+<h2 class="stage-header">Stage 1 | Intra-entity Dependency Validation</h2>
 *Identifies internal conflicts by analyzing each entity's QoS profile independently.*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
@@ -54,7 +100,7 @@ These are implemented in **QoS Guard** for static verification.
 
 <hr class="hr-grad-left">
 
-## Stage 2 | Inter-entity Dependency Validation
+<h2 class="stage-header">Stage 2 | Inter-entity Dependency Validation</h2>
 *Prevents connection failures by checking RxO compatibility between Publisher and Subscriber pairs.*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
@@ -72,7 +118,7 @@ These are implemented in **QoS Guard** for static verification.
 
 <hr class="hr-grad-left">
 
-## Stage 3 | Timing-based Dependency Validation
+<h2 class="stage-header">Stage 3 | Timing-based Dependency Validation</h2>
 *Evaluates operational risks by integrating network parameters like RTT and publish period.*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
