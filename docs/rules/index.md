@@ -23,19 +23,19 @@ Choose a category from the sidebar to see detailed constraints.
 We have identified and classified 40 rules that govern the relationships between ROS 2 QoS policies. 
 These are implemented in **QoS Guard** for static verification.
 
-<hr style="border: 0; height: 2px; background: #4e37e6; opacity: 0.5; margin: 40px 0;">
+<hr style="border: 0; height: 2px; background: #4E5EB4; opacity: 0.5; margin: 40px 0;">
 
-<hr style="border: 0; height: 1px; background-image: linear-gradient(to right, #ccc, #4e37e6, #ccc); margin: 30px 0;">
+<hr style="border: 0; height: 1px; background-image: linear-gradient(to right, #ccc, #4E5EB4, #ccc); margin: 30px 0;">
 
-<hr style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0,0,0,0), #4e37e6, rgba(0,0,0,0)); margin: 30px 0;">
+<hr style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0,0,0,0), #4E5EB4, rgba(0,0,0,0)); margin: 30px 0;">
 
-<hr style="border: 0; height: 2px; background-image: linear-gradient(to right, #4e37e6, rgba(0,0,0,0)); opacity: 0.6; margin: 25px 0;">
+<hr style="border: 0; height: 2px; background-image: linear-gradient(to right, #4E5EB4, rgba(0,0,0,0)); opacity: 0.6; margin: 25px 0;">
 
-<hr style="border: 0; height: 1px; background: #eee; border-bottom: 1px solid #ddd; margin: 30px 0;">
+<hr style="border: 0; height: 1px; background: #4E5EB4; border-bottom: 1px solid #ddd; margin: 30px 0;">
 
-<hr style="border: 0; height: 4px; background: #4e37e6; width: 50px; margin: 40px auto; opacity: 0.3; border-radius: 2px;">
+<hr style="border: 0; height: 4px; background: #4E5EB4; width: 50px; margin: 40px auto; opacity: 0.3; border-radius: 2px;">
 
-<hr style="border: 0; border-top: 1px dashed #4e37e6; opacity: 0.4; margin: 20px 0;">
+<hr style="border: 0; border-top: 1px dashed #4E5EB4; opacity: 0.4; margin: 20px 0;">
 
 
 
