@@ -78,6 +78,7 @@ hr.hr-short-bar {
 .md-typeset .admonition.info,
 .md-typeset details.info {
   border-color: #4E5EB4;
+  border-left: 0.2rem solid #4E5EB4 !important;
 }
 
 /* 상단 타이틀 바 배경색 변경 */
