@@ -13,8 +13,6 @@ These are implemented in **QoS Guard** for static verification.
 ## Stage 1 | Intra-entity Dependency Validation
 *Identifies internal conflicts by analyzing each entity's QoS profile independently.*
 
-<div class="rule-table">
-
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
 | 1 | HIST ↔ RESLIM | $[HIST.kind = KEEP\_LAST] \wedge [HIST.depth > mpi]$ | Structural | Pub, Sub | STD |
@@ -38,14 +36,10 @@ These are implemented in **QoS Guard** for static verification.
 | 19 | ENTFAC → DURABL | $[DURABL \neq VOLATILE] \wedge [autoenable = FALSE]$ | Operational | Pub, Sub | IMP |
 | 20 | PART → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [PART.names \neq \emptyset]$ | Operational | Pub, Sub | IMP |
 
-</div>
-
 ---
 
 ## Stage 2 | Inter-entity Dependency Validation
 *Prevents connection failures by checking RxO compatibility between Publisher and Subscriber pairs.*
-
-<div class="rule-table">
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -60,14 +54,10 @@ These are implemented in **QoS Guard** for static verification.
 | 29 | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_disposed > 0]$ | Operational | Pub ↔ Sub | IMP |
 | 30 | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = \infty]$ | Operational | Pub ↔ Sub | IMP |
 
-</div>
-
 ---
 
 ## Stage 3 | Timing-based Dependency Validation
 *Evaluates operational risks by integrating network parameters like RTT and publish period.*
-
-<div class="rule-table">
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -81,8 +71,6 @@ These are implemented in **QoS Guard** for static verification.
 | 38 | DEADLN → OWNST | $[OWNST = EXCLUSIVE] \wedge [DEADLN.period < 2 \times PP]$ | Operational | Sub | EMP |
 | 39 | LIVENS → OWNST | $[OWNST = EXCLUSIVE] \wedge [lease < 2 \times PP]$ | Operational | Sub | EMP |
 | 40 | DURABL → DEADLN | $[DEADLN.period > 0] \wedge [DURABL \ge TRAN\_LOCAL]$ | Operational | Sub | EMP |
-
-</div>
 
 ---
 *(Note: mpi = max_samples_per_instance, PP = Publish Period, RTT = Round Trip Time)*
