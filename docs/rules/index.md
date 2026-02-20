@@ -1,17 +1,76 @@
 # QoS Rules Overview
 
 <style>
-.md-typeset table td:nth-child(1),
-.md-typeset table td:first-child,
-.md-typeset table tr td:first-child {
-    font-size: 20px !important;    
-    font-weight: 600 !important;  
-    text-align: center !important;  
-    color: #000000 !important;     
-    vertical-align: middle !important;
-    min-width: 50px !important;     
+/* 1. 표 전체 컨테이너 스타일 */
+.md-typeset table {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin: 20px 0;
 }
 
+/* 2. 헤더 스타일: 보라색 포인트 컬러 적용 */
+.md-typeset table thead {
+    background-color: #4e37e6;
+    color: #ffffff;
+}
+
+.md-typeset table th {
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    font-size: 13px !important;
+    letter-spacing: 0.5px;
+    padding: 15px !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* 3. 첫 번째 열(No.) 숫자 강조 */
+.md-typeset table td:first-child {
+    font-family: 'Consolas', monospace;
+    font-weight: 700 !important;
+    color: #4e37e6 !important;
+    background-color: #fcfcff;
+    width: 45px;
+}
+
+/* 4. 수식 열(Violation Condition) 가독성 향상 */
+.md-typeset table td:nth-child(3) {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+    color: #1a1a1a;
+    background-color: #f9f9fb;
+    line-height: 1.6;
+}
+
+/* 5. Basis 태그 스타일링 */
+.basis-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+}
+.basis-std { background-color: #2ecc71; } /* 초록색: 표준 */
+.basis-imp { background-color: #3498db; } /* 파란색: 구현 */
+.basis-emp { background-color: #e67e22; } /* 주황색: 실험 */
+
+/* 6. 행 호버 효과 */
+.md-typeset table tr:hover {
+    background-color: #f0edff !important;
+    transition: background-color 0.2s ease;
+}
+
+/* 스테이지 구분선 커스텀 */
+.stage-header {
+    margin-top: 50px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #4e37e6;
+    color: #4e37e6;
+}
 </style>
 
 This section covers 40 dependency-violation rules classified into three stages. 
@@ -26,7 +85,7 @@ These are implemented in **QoS Guard** for static verification.
 
 <hr class="hr-grad-left">
 
-## Stage 1 | Intra-entity Dependency Validation
+<h2 class="stage-header">Stage 1 | Intra-entity Dependency Validation</h2>
 *Identifies internal conflicts by analyzing each entity's QoS profile independently.*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
@@ -54,7 +113,7 @@ These are implemented in **QoS Guard** for static verification.
 
 <hr class="hr-grad-left">
 
-## Stage 2 | Inter-entity Dependency Validation
+<h2 class="stage-header">Stage 2 | Inter-entity Dependency Validation</h2>
 *Prevents connection failures by checking RxO compatibility between Publisher and Subscriber pairs.*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
@@ -72,7 +131,7 @@ These are implemented in **QoS Guard** for static verification.
 
 <hr class="hr-grad-left">
 
-## Stage 3 | Timing-based Dependency Validation
+<h2 class="stage-header">Stage 3 | Timing-based Dependency Validation</h2>
 *Evaluates operational risks by integrating network parameters like RTT and publish period.*
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
