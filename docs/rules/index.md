@@ -37,6 +37,15 @@ These are implemented in **QoS Guard** for static verification.
 
 <hr style="border: 0; border-top: 1px dashed #4E5EB4; opacity: 0.4; margin: 20px 0;">
 
+<hr style="border: none; border-top: 4px double #4E5EB4; opacity: 0.6; height: 4px; margin: 40px 0;">
+
+<hr style="border: 0; height: 2px; background: #4E5EB4; width: 80px; margin: 50px auto; opacity: 0.8; border-radius: 10px;">
+
+<hr style="border: none; border-top: 2px dotted; background-image: linear-gradient(to right, #4E5EB4, rgba(255,255,255,0)); height: 1px; width: 100%; opacity: 0.5; margin: 25px 0;">
+
+<div style="height: 3px; background: linear-gradient(to right, #4E5EB4 10%, rgba(78, 94, 180, 0.1) 90%); border-radius: 2px; margin: 20px 0;"></div>
+
+<div style="text-align: center; color: #4E5EB4; opacity: 0.5; font-size: 20px; letter-spacing: 15px; margin: 35px 0;">•••</div>
 
 
 ## Stage 1 | Intra-entity Dependency Validation
