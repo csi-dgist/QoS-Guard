@@ -1,30 +1,105 @@
 # IMP Rules
 
+---
+
 <style>
-.md-typeset table td:first-child {
-  text-align: center;
-  padding: 8px !important; 
+/* 전체 리스트 컨테이너 */
+.std-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
 }
 
-.md-typeset table td:first-child a {
-  display: inline-block; 
-  width: 24px;         
-  height: 24px;        
-  line-height: 24px;    
-  
-  border-radius: 50%;   
-  background-color: #f0f0f0; 
-  color: #000 !important;
+/* 개별 규칙 카드 */
+.std-item {
+  border: 1px solid #e1e4e8;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 16px 20px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
   text-decoration: none !important;
-  font-weight: bold;
-  font-size: 13px;      
-  transition: 0.2s;
+  color: inherit !important;
 }
 
-.md-typeset table tr:hover td:first-child a {
-  background-color: #4e37e6 !important; 
-  color: #fff !important; 
-  transform: scale(1.1);
+/* 호버 효과: 그림자와 보라색 포인트 */
+.std-item:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border-color: #4e37e6;
+  transform: translateY(-2px);
+}
+
+/* 상단 라인: 번호와 타이틀 */
+.std-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.std-no {
+  background: #f0f0f0;
+  color: #444;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.std-item:hover .std-no {
+  background: #4e37e6;
+  color: #fff;
+}
+
+.std-id {
+  font-weight: 700;
+  font-size: 1.05em;
+  color: #2c3e50;
+  flex-grow: 1;
+  margin-left: 12px;
+}
+
+/* 위반 조건 박스 (수식 강조) */
+.std-condition {
+  background: #f8f9fa;
+  padding: 14px;
+  border-radius: 6px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  border-left: 4px solid #4e37e6;
+  margin: 8px 0;
+  font-size: 0.95em;
+  color: #000000;
+  line-height: 1.5;
+}
+
+/* 하단 메타 데이터 */
+.std-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 0.82em;
+}
+
+.std-tag {
+  display: flex;
+  align-items: center;
+  background: #f1f3f5;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: #666;
+}
+
+.std-tag b {
+  color: #4e37e6;
+  margin-right: 5px;
+  font-weight: 600;
 }
 </style>
 
@@ -35,46 +110,357 @@ This page describes the QoS dependency rules derived from the specific implement
 ## Stage 1
 *Intra-entity Dependency Validation*
 
-| No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
-|:---:|:---|:---|:---:|:---:|:---:|
-| [3](#rule-3) | RELIAB → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub, Sub | IMP |
-| [4](#rule-4) | RELIAB → OWNST | $[OWNST = EXCLUSIVE] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub, Sub | IMP |
-| [5](#rule-5) | RELIAB → LIVENS | $[LIVENS = MANUAL] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub, Sub | IMP |
-| [7](#rule-7) | LFSPAN → DEADLN | $LFSPAN.duration < DEADLN.period$ | Functional | Sub | IMP |
-| [8](#rule-8) | HIST → DESTORD | $[DESTORD = BY\_SOURCE] \wedge [HIST.kind = KEEP\_LAST] \wedge [depth = 1]$ | Functional | Sub | IMP |
-| [9](#rule-9) | RESLIM → DESTORD | $[DESTORD = BY\_SOURCE] \wedge [KEEP\_ALL] \wedge [mpi = 1]$ | Functional | Sub | IMP |
-| [10](#rule-10) | DEADLN → OWNST | $[OWNST = EXCLUSIVE] \wedge [DEADLN.period = \infty]$ | Functional | Sub | IMP |
-| [11](#rule-11) | LIVENS → OWNST | $[OWNST = EXCLUSIVE] \wedge [LIVENS.lease = \infty]$ | Functional | Sub | IMP |
-| [12](#rule-12) | LIVENS → RDLIFE | $[autopurge\_nowriter > 0] \wedge [LIVENS.lease = \infty]$ | Functional | Sub | IMP |
-| [13](#rule-13) | RDLIFE → DURABL | $[DURABL \ge TRANSIENT] \wedge [autopurge\_disposed \neq \infty]$ | Functional | Sub | IMP |
-| [14](#rule-14) | PART → DEADLN | $[DEADLN.period > 0] \wedge [PART.names \neq \emptyset]$ | Functional | Sub | IMP |
-| [15](#rule-15) | PART → LIVENS | $[LIVENS = MANUAL] \wedge [PART.names \neq \emptyset]$ | Functional | Sub | IMP |
-| [16](#rule-16) | OWNST → WDLIFE | $[autodispose = TRUE] \wedge [OWNST = EXCLUSIVE]$ | Functional | Sub | IMP |
-| [17](#rule-17) | HIST → LFSPAN | $[HIST.KEEP\_LAST] \wedge [LFSPAN.duration > HIST.depth \times PP]$ | Operational | Pub, Sub | IMP |
-| [18](#rule-18) | RESLIM → LFSPAN | $[KEEP\_ALL] \wedge [LFSPAN.duration > mpi \times PP]$ | Operational | Pub, Sub | IMP |
-| [19](#rule-19) | ENTFAC → DURABL | $[DURABL \neq VOLATILE] \wedge [autoenable = FALSE]$ | Operational | Pub, Sub | IMP |
-| [20](#rule-20) | PART → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [PART.names \neq \emptyset]$ | Operational | Pub, Sub | IMP |
+<div class="std-list">
+
+  <div class="std-item" id="rule-3">
+    <div class="std-header">
+      <span class="std-no">3</span>
+      <span class="std-id">RELIAB → DURABL</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      $[DURABL \ge TRAN\_LOCAL] \wedge [RELIAB = BEST\_EFFORT]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-4">
+    <div class="std-header">
+      <span class="std-no">4</span>
+      <span class="std-id">RELIAB → OWNST</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      $[OWNST = EXCLUSIVE] \wedge [RELIAB = BEST\_EFFORT]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-5">
+    <div class="std-header">
+      <span class="std-no">5</span>
+      <span class="std-id">RELIAB → LIVENS</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      $[LIVENS = MANUAL] \wedge [RELIAB = BEST\_EFFORT]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-7">
+    <div class="std-header">
+      <span class="std-no">7</span>
+      <span class="std-id">LFSPAN → DEADLN</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      $LFSPAN.duration < DEADLN.period$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-8">
+    <div class="std-header">
+      <span class="std-no">8</span>
+      <span class="std-id">HIST → DESTORD</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      $[DESTORD = BY\_SOURCE] \wedge [HIST.kind = KEEP\_LAST] \wedge [depth = 1]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-9">
+    <div class="std-header">
+      <span class="std-no">9</span>
+      <span class="std-id">RESLIM → DESTORD</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      $[DESTORD = BY\_SOURCE] \wedge [KEEP\_ALL] \wedge [mpi = 1]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-10">
+    <div class="std-header">
+      <span class="std-no">10</span>
+      <span class="std-id">DEADLN → OWNST</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      $[OWNST = EXCLUSIVE] \wedge [DEADLN.period = \infty]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-11">
+    <div class="std-header">
+      <span class="std-no">11</span>
+      <span class="std-id">LIVENS → OWNST</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      $[OWNST = EXCLUSIVE] \wedge [LIVENS.lease = \infty]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-12">
+    <div class="std-header">
+      <span class="std-no">12</span>
+      <span class="std-id">LIVENS → RDLIFE</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      $[autopurge\_nowriter > 0] \wedge [LIVENS.lease = \infty]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-13">
+    <div class="std-header">
+      <span class="std-no">13</span>
+      <span class="std-id">RDLIFE → DURABL</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      $[DURABL \ge TRANSIENT] \wedge [autopurge\_disposed \neq \infty]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-14">
+    <div class="std-header">
+      <span class="std-no">14</span>
+      <span class="std-id">PART → DEADLN</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      $[DEADLN.period > 0] \wedge [PART.names \neq \emptyset]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-15">
+    <div class="std-header">
+      <span class="std-no">15</span>
+      <span class="std-id">PART → LIVENS</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      $[LIVENS = MANUAL] \wedge [PART.names \neq \emptyset]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-16">
+    <div class="std-header">
+      <span class="std-no">16</span>
+      <span class="std-id">OWNST → WDLIFE</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      $[autodispose = TRUE] \wedge [OWNST = EXCLUSIVE]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-17">
+    <div class="std-header">
+      <span class="std-no">17</span>
+      <span class="std-id">HIST → LFSPAN</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      $[HIST.KEEP\_LAST] \wedge [LFSPAN.duration > HIST.depth \times PP]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-18">
+    <div class="std-header">
+      <span class="std-no">18</span>
+      <span class="std-id">RESLIM → LFSPAN</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      $[KEEP\_ALL] \wedge [LFSPAN.duration > mpi \times PP]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-19">
+    <div class="std-header">
+      <span class="std-no">19</span>
+      <span class="std-id">ENTFAC → DURABL</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      $[DURABL \neq VOLATILE] \wedge [autoenable = FALSE]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-20">
+    <div class="std-header">
+      <span class="std-no">20</span>
+      <span class="std-id">PART → DURABL</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      $[DURABL \ge TRAN\_LOCAL] \wedge [PART.names \neq \emptyset]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+</div>
 
 ---
 
 ## Stage 2
 *Inter-entity Dependency Validation*
 
-| No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
-|:---:|:---|:---|:---:|:---:|:---:|
-| [28](#rule-28) | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = 0]$ | Functional | Pub ↔ Sub | IMP |
-| [29](#rule-29) | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_disposed > 0]$ | Operational | Pub ↔ Sub | IMP |
-| [30](#rule-30) | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = \infty]$ | Operational | Pub ↔ Sub | IMP |
+<div class="std-list">
+
+  <div class="std-item" id="rule-28">
+    <div class="std-header">
+      <span class="std-no">28</span>
+      <span class="std-id">WDLIFE → RDLIFE</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      $[W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = 0]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-29">
+    <div class="std-header">
+      <span class="std-no">29</span>
+      <span class="std-id">WDLIFE → RDLIFE</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      $[W.autodispose = FALSE] \wedge [R.autopurge\_disposed > 0]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-30">
+    <div class="std-header">
+      <span class="std-no">30</span>
+      <span class="std-id">WDLIFE → RDLIFE</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      $[W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = \infty]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+</div>
 
 ---
 
-## Stage 3: Dynamic & Performance Rules
-*Timing-based Dependency Validation*
+## Stage 3
+*Dynamic & Performance Rules*
 
-| No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
-|:---:|:---|:---|:---:|:---:|:---:|
-| [34](#rule-34) | RELIAB → WDLIFE | $[autodispose = TRUE] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub | IMP |
-| [40](#rule-40) | DURABL → DEADLN | $[DEADLN.period > 0] \wedge [DURABL \ge TRAN\_LOCAL]$ | Operational | Sub | IMP |
+<div class="std-list">
+
+  <div class="std-item" id="rule-34">
+    <div class="std-header">
+      <span class="std-no">34</span>
+      <span class="std-id">RELIAB → WDLIFE</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      $[autodispose = TRUE] \wedge [RELIAB = BEST\_EFFORT]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-40">
+    <div class="std-header">
+      <span class="std-no">40</span>
+      <span class="std-id">DURABL → DEADLN</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      $[DEADLN.period > 0] \wedge [DURABL \ge TRAN\_LOCAL]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </div>
+
+</div>
 
 ---
 
