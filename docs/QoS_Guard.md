@@ -51,12 +51,11 @@
     }
 }
 
-<style>
 .req-container {
     margin: 20px 0;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
-    background-color: #ffffff; /* 배경을 흰색으로 고정 */
+    background-color: #ffffff; /* 흰색 배경 고정 */
     overflow: hidden;
 }
 
@@ -65,7 +64,7 @@
     align-items: center;
     padding: 12px 16px;
     border-bottom: 1px solid #e2e8f0;
-    /* transition이나 hover 관련 설정은 모두 삭제했습니다 */
+    /* 호버 효과 없음 */
 }
 
 .req-item:last-child {
@@ -75,22 +74,19 @@
 .req-label {
     min-width: 100px;
     font-weight: 700;
-    color: #4E5EB4; /* 포인트 컬러 유지 */
+    color: #334155; /* 오른쪽 텍스트와 동일한 색상으로 수정 */
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
 .req-value {
-    color: #334155;
+    color: #334155; /* 기준 색상 */
     font-size: 14px;
     border-left: 2px solid #e2e8f0;
     padding-left: 16px;
     margin-left: 8px;
 }
-  
-</style>
-  
 </style>
 
 **Offline static verification of DDS QoS for ROS 2.** 
