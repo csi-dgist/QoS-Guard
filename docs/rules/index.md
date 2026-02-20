@@ -35,8 +35,6 @@ These are implemented in **QoS Guard** for static verification.
 
 <hr style="border: 0; height: 2px; background: #4E5EB4; width: 80px; margin: 50px auto; opacity: 0.8; border-radius: 10px;">
 
-<hr style="border: none; border-top: 2px dotted; background-image: linear-gradient(to right, #4E5EB4, rgba(255,255,255,0)); height: 1px; width: 100%; opacity: 0.5; margin: 25px 0;">
-
 <div style="text-align: center; color: #4E5EB4; opacity: 0.5; font-size: 20px; letter-spacing: 15px; margin: 35px 0;">•••</div>
 
 
