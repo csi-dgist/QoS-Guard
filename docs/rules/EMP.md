@@ -209,7 +209,7 @@ The network condition is controlled over 60 seconds using the `tc` command:
 3.  **40s ~ 45s (Loss 100%):** Induce **Liveliness Lost** by blocking all packets.
 4.  **45s ~ 60s (Loss 0%):** Restore communication and observe recovery.
 
-**3. Experimental Observation & Empirical Conclusion [ISSUE]**
+**3. Experimental Observation & Empirical Conclusion**
 
 **[ISSUE]** Liveliness Lost is triggered prematurely (approx. 60~80ms). Even though the Publisher is already marked as 'Offline', **Deadline Missed alarms continue to trigger late at the 200ms mark.**
 
