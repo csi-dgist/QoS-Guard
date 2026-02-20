@@ -1,39 +1,38 @@
 # STD Rules
 
 <style>
-/* 1. 첫 번째 열(No.) 칸 자체를 중앙 정렬 기계로 만들기 */
+/* 1. 번호가 들어가는 칸(td) 설정 */
 .md-typeset table td:first-child {
-    display: flex !important;
-    justify-content: center !important; /* 수평 중앙 */
-    align-items: center !important;     /* 수직 중앙 */
-    padding: 10px 0 !important;         /* 상하 여백만 유지 */
-    min-width: 50px !important;         /* 칸이 너무 좁아지지 않게 방어 */
-    border: none !important;            /* 테두리 간섭 방지 */
+    padding: 0 !important;       /* 칸 안의 불필요한 여백 완전 제거 */
+    width: 45px !important;      /* 칸 너비를 원보다 조금 넓게 고정 */
+    min-width: 45px !important;
+    vertical-align: middle !important; /* 수직 중앙 정렬 기본값 */
 }
 
-/* 2. 원형 숫자 배지 */
+/* 2. 숫자 배지 (링크가 있든 없든 동일 적용) */
 .md-typeset table td:first-child,
 .md-typeset table td:first-child a {
-    display: flex !important;
-    justify-content: center !important;
+    display: flex !important;    /* flex를 써야 정중앙 배치가 됨 */
     align-items: center !important;
+    justify-content: center !important;
     
-    width: 28px !important;             /* 원 크기 살짝 키움 */
-    height: 28px !important;
-    border-radius: 50% !important;      /* 무조건 정원 */
+    margin: auto !important;     /* 칸 내에서 정중앙으로 밀어넣음 */
+    width: 26px !important;      /* 원 크기 (줄이려면 이 값을 수정) */
+    height: 26px !important;
+    border-radius: 50% !important;
     
     background-color: #f2f2f2 !important;
     color: #000 !important;
     font-size: 13px !important;
     font-weight: bold !important;
     text-decoration: none !important;
-    transition: background 0.2s, transform 0.2s;
+    transition: 0.2s ease;
 }
 
-/* 3. 호버 효과 */
+/* 3. 호버 시 강조 효과 */
 .md-typeset table tr:hover td:first-child,
 .md-typeset table tr:hover td:first-child a {
-    background-color: #4e37e6 !important;
+    background-color: #4e37e6 !important; /* 파란색 강조 */
     color: #fff !important;
     transform: scale(1.1);
 }
