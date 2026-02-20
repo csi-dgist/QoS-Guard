@@ -26,6 +26,8 @@ theme:
 use_directory_urls: true
 
 markdown_extensions:
+  - tables
+  - attr_list
   - admonition
   - pymdownx.details
   - pymdownx.superfences
