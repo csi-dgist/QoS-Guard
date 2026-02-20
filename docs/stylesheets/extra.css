@@ -1,58 +1,36 @@
-/* ============================================
-   Rule tables: No. column – badge style
-   (tr:not(:first-child) = 데이터 행만, tbody 없어도 동작)
-   ============================================ */
-
-/* No. 열: 작은 원 뱃지 (헤더 제외, 첫 번째 열만) */
+/* Rule table: No. column – small circle, black number */
 .md-typeset table tbody td:first-child,
 .md-typeset table tr:not(:first-child) td:first-child {
-  text-align: center !important;
-  vertical-align: middle !important;
-  color: #4338ca !important;
-  font-weight: 700 !important;
-  font-size: 0.8em !important;
-  width: 1.6em !important;
-  min-width: 1.6em !important;
-  max-width: 1.6em !important;
-  height: 1.6em !important;
+  width: 1.35em !important;
+  min-width: 1.35em !important;
+  max-width: 1.35em !important;
+  height: 1.35em !important;
   padding: 0 !important;
-  line-height: 1.6em !important;
+  line-height: 1.35em !important;
+  text-align: center !important;
+  color: #000 !important;
+  font-weight: 600 !important;
+  font-size: 0.75em !important;
   border-radius: 50% !important;
-  background: linear-gradient(145deg, #eef2ff 0%, #e0e7ff 100%) !important;
-  border: 1px solid rgba(99, 102, 241, 0.35) !important;
-  box-shadow: 0 1px 2px rgba(99, 102, 241, 0.08) !important;
+  background-color: #e8e8e8 !important;
   box-sizing: border-box !important;
 }
 
-/* Dark theme */
 [data-md-color-scheme="slate"] .md-typeset table tbody td:first-child,
 [data-md-color-scheme="slate"] .md-typeset table tr:not(:first-child) td:first-child {
-  color: #a5b4fc !important;
-  background: linear-gradient(145deg, rgba(99, 102, 241, 0.25) 0%, rgba(99, 102, 241, 0.15) 100%) !important;
-  border: 1px solid rgba(165, 180, 252, 0.4) !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+  color: #000 !important;
+  background-color: #9e9e9e !important;
 }
 
-/* No.가 링크일 때 */
 .md-typeset table tbody td:first-child a,
 .md-typeset table tr:not(:first-child) td:first-child a {
-  color: #4338ca !important;
-  font-weight: 700 !important;
+  color: #000 !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
 }
 
 .md-typeset table tbody td:first-child a:hover,
 .md-typeset table tr:not(:first-child) td:first-child a:hover {
-  color: #3730a3 !important;
-  text-decoration: underline !important;
-}
-
-[data-md-color-scheme="slate"] .md-typeset table tbody td:first-child a,
-[data-md-color-scheme="slate"] .md-typeset table tr:not(:first-child) td:first-child a {
-  color: #a5b4fc !important;
-}
-
-[data-md-color-scheme="slate"] .md-typeset table tbody td:first-child a:hover,
-[data-md-color-scheme="slate"] .md-typeset table tr:not(:first-child) td:first-child a:hover {
-  color: #c7d2fe !important;
-  text-decoration: underline !important;
+  color: #000 !important;
+  text-decoration: none !important;
 }
