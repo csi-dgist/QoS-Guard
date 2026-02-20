@@ -44,7 +44,8 @@
 
 This page describes the QoS dependency rules derived from **Empirical analysis and experimental results**. These rules focus on runtime performance, network conditions (e.g., RTT), and timing-critical dependencies that were validated through systematic testing.
 
----
+<hr class="hr-grad-left">
+
 ## Stage 1
 *Intra-entity Dependency Validation*
 
@@ -67,7 +68,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 </div>
 
----
+<hr class="hr-grad-left">
 
 ## Stage 3
 *Timing-based Dependency Validation*
@@ -196,14 +197,15 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 </div>
 
----
+<hr class="hr-grad-left">
 
 !!! info "Notation Summary"
     * **mpi**: `max_samples_per_instance` 
     * **PP**: `Publish Period` 
     * **RTT**: `Round Trip Time`
 
----
+<hr class="hr-double">
+
 ##  Experimental Evidence Details
 
 <span id="rule-6"></span>
@@ -235,7 +237,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifespan (50ms)** caused all buffered samples to be purged from the Publisher's queue before Subscriber 2 could connect.
 
----
+<hr class="hr-dashed">
 
 <span id="rule-31"></span>
 ### Rule 31 
@@ -266,7 +268,8 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 
 In a lossy network (5% loss), a Reliable connection requires retransmission of lost packets. If the **History Depth** is smaller than the number of samples sent during one **RTT**, the buffer is overwritten before a retransmission can be requested. 
 
----
+<hr class="hr-dashed">
+
 <span id="rule-32"></span>
 ### Rule 32
 *Justifies the minimum Resource Limits (max_samples_per_instance) required to sustain reliable transmission under network delay.*
