@@ -6,7 +6,7 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* 2. 표 디자인: 라운딩과 연한 테두리 */
+/* 2. 표 디자인 */
 .md-typeset table {
     border-collapse: separate;
     border-spacing: 0;
@@ -18,9 +18,14 @@
     background: #ffffff;
 }
 
-/* 3. 헤더: #4E5EB4 고정 (호버 이벤트 없음) */
+/* 3. 헤더 고정 및 호버 효과 완전 제거 */
 .md-typeset table thead {
     background-color: #4E5EB4 !important;
+}
+
+.md-typeset table thead tr {
+    background-color: #4E5EB4 !important;
+    pointer-events: none; /* 헤더 행 전체에 마우스 이벤트 차단 (연해짐 방지) */
 }
 
 .md-typeset table th {
@@ -31,11 +36,21 @@
     letter-spacing: 0.03em;
     padding: 14px 16px !important;
     border: none !important;
-    background-color: #4E5EB4 !important; /* 배경색 고정 */
-    pointer-events: none; /* 헤더는 인터랙션 제외 */
+    background-color: #4E5EB4 !important; 
 }
 
-/* 4. 첫 번째 열(No.) 디자인 */
+/* 4. 데이터 셀 설정 (호버 색상이 뚫고 나오도록 배경색 투명화) */
+.md-typeset table td {
+    padding: 14px 16px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    font-size: 13.5px;
+    color: #334155;
+    vertical-align: middle;
+    /* 중요: 개별 셀 배경색을 투명하게 해야 tr의 호버 색상이 보입니다 */
+    background-color: transparent !important; 
+}
+
+/* 5. 첫 번째 열(No.) 특정 디자인 */
 .md-typeset table td:first-child {
     font-family: 'JetBrains Mono', monospace;
     font-size: 15px !important;
@@ -45,34 +60,29 @@
     width: 65px;
 }
 
-/* 5. 데이터 셀 및 수식 칸 (배경색 투명화하여 호버 통일) */
-.md-typeset table td {
-    padding: 14px 16px !important;
-    border-bottom: 1px solid #f1f5f9 !important;
-    font-size: 13.5px;
-    color: #334155;
-    vertical-align: middle;
-    background-color: transparent !important; /* 개별 배경색 제거 */
+/* 6. 행 전체 호버 이벤트 (통일된 반응) */
+.md-typeset table tbody tr {
+    transition: background-color 0.15s ease;
+    background-color: #ffffff; /* 기본 배경색 명시 */
 }
 
-/* 수식 칸 폰트만 지정 */
+/* 본문 행 전체에 마우스를 올렸을 때 */
+.md-typeset table tbody tr:hover {
+    background-color: #f1f5f9 !important; 
+}
+
+/* 호버 시 모든 셀의 배경을 투명으로 강제 (일부 안 변하는 현상 방지) */
+.md-typeset table tbody tr:hover td {
+    background-color: transparent !important;
+}
+
+/* 7. 기타 스타일 */
 .md-typeset table td:nth-child(3) {
     font-family: 'Fira Code', 'Consolas', monospace;
     font-size: 12.5px;
     color: #1e293b;
 }
 
-/* 6. 행 전체 호버 이벤트 (통일된 반응) */
-.md-typeset table tr {
-    transition: background-color 0.15s ease;
-}
-
-/* 헤더를 제외한 본문 행에만 호버 적용 */
-.md-typeset table tbody tr:hover {
-    background-color: #f1f5f9 !important; /* 줄 전체가 동일하게 반응 */
-}
-
-/* 7. Basis: 스타일 없이 깔끔한 볼드체 */
 .basis-tag {
     font-weight: 700;
     font-size: 12px;
@@ -80,7 +90,6 @@
     text-transform: uppercase;
 }
 
-/* Stage 헤더: 왼쪽 바 포인트 */
 .stage-header {
     font-size: 1.4em;
     font-weight: 700;
