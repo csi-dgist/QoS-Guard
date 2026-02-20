@@ -18,7 +18,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 | ![No](https://img.shields.io/badge/No.-007ec6) | ![Id](https://img.shields.io/badge/-Identifier-ef8b33) | ![Condition](https://img.shields.io/badge/-QoS_Conflict_Condition-007ec6) | ![Type](https://img.shields.io/badge/-Type-888) |
 |:---:|:---:|:---|:---:|
-| [![6](https://img.shields.io/badge/-6-888)](#rule-6) | `LFSPAN` → `DURABL` | $DURABL \ge TRAN\_L \wedge LFSPAN.dur > 0$ | **Func** |
+| [![6](https://img.shields.io/badge/-6-888)](#rule-6) | <kbd>LFSPAN</kbd> → <kbd>DURABL</kbd> | $DURABL \ge TRAN\_L \wedge LFSPAN.dur > 0$ | **Func** |
 
 ---
 ## Stage 1
@@ -26,7 +26,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
-| [6](#rule-6) | LFSPAN → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [LFSPAN.duration > 0]$ | Functional | Pub | EMP |
+| [6](#rule-6) | <kbd>LFSPAN</kbd> → <kbd>DURABL</kbd> | $[DURABL \ge TRAN\_LOCAL] \wedge [LFSPAN.duration > 0]$ | Functional | Pub | EMP |
 
 ---
 
@@ -35,14 +35,14 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
-| [31](#rule-31) | HIST → RELIAB | $[RELIABLE] \wedge [KEEP\_LAST] \wedge [depth < \lceil RTT/PP \rceil + 2]$ | Functional | Pub | EMP |
-| [32](#rule-32) | RESLIM → RELIAB | $[RELIABLE] \wedge [KEEP\_ALL] \wedge [mpi < \lceil RTT/PP \rceil + 1]$ | Functional | Pub | EMP |
-| [33](#rule-33) | LFSPAN → RELIAB | $[RELIABLE] \wedge [LFSPAN.duration < RTT \times 2]$ | Functional | Pub | EMP |
-| [35](#rule-35) | RELIAB → DEADLN | $[DEADLN.period > 0] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Sub | EMP |
-| [36](#rule-36) | LIVENS → DEADLN | $[DEADLN.period > 0] \wedge [LIVENS.lease < DEADLN.period]$ | Functional | Sub | EMP |
-| [37](#rule-37) | HIST → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \wedge [mpi \ge default]$ | Operational | Pub | EMP |
-| [38](#rule-38) | DEADLN → OWNST | $[OWNST = EXCLUSIVE] \wedge [DEADLN.period < 2 \times PP]$ | Operational | Sub | EMP |
-| [39](#rule-39) | LIVENS → OWNST | $[OWNST = EXCLUSIVE] \wedge [lease < 2 \times PP]$ | Operational | Sub | EMP |
+| [31](#rule-31) | <kbd>HIST</kbd> → <kbd>RELIAB</kbd> | $[RELIABLE] \wedge [KEEP\_LAST] \wedge [depth < \lceil RTT/PP \rceil + 2]$ | Functional | Pub | EMP |
+| [32](#rule-32) | <kbd>RESLIM</kbd> → <kbd>RELIAB</kbd> | $[RELIABLE] \wedge [KEEP\_ALL] \wedge [mpi < \lceil RTT/PP \rceil + 1]$ | Functional | Pub | EMP |
+| [33](#rule-33) | <kbd>LFSPAN</kbd> → <kbd>RELIAB</kbd> | $[RELIABLE] \wedge [LFSPAN.duration < RTT \times 2]$ | Functional | Pub | EMP |
+| [35](#rule-35) | <kbd>RELIAB</kbd> → <kbd>DEADLN</kbd> | $[DEADLN.period > 0] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Sub | EMP |
+| [36](#rule-36) | <kbd>LIVENS</kbd> → <kbd>DEADLN</kbd> | $[DEADLN.period > 0] \wedge [LIVENS.lease < DEADLN.period]$ | Functional | Sub | EMP |
+| [37](#rule-37) | <kbd>HIST</kbd> → <kbd>DURABL</kbd> | $[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \wedge [mpi \ge default]$ | Operational | Pub | EMP |
+| [38](#rule-38) | <kbd>DEADLN</kbd> → <kbd>OWNST</kbd> | $[OWNST = EXCLUSIVE] \wedge [DEADLN.period < 2 \times PP]$ | Operational | Sub | EMP |
+| [39](#rule-39) | <kbd>LIVENS</kbd> → <kbd>OWNST</kbd> | $[OWNST = EXCLUSIVE] \wedge [lease < 2 \times PP]$ | Operational | Sub | EMP |
 
 ---
 
