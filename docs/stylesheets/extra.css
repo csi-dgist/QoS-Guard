@@ -1,0 +1,45 @@
+/* ============================================
+   Rule tables: No. column styling
+   - First column (No.) shown as a circle
+   - Number color: black, bold
+   ============================================ */
+
+/* No. column cell: circle shape, black number */
+.md-typeset table tbody td:first-child {
+  text-align: center;
+  color: #000;
+  font-weight: 600;
+  width: 2.5em;
+  min-width: 2.5em;
+  height: 2.5em;
+  padding: 0;
+  line-height: 2.5em;
+  border-radius: 50%;           /* makes the cell look like a circle */
+  background-color: #e8e8e8;   /* light gray fill (light theme) */
+  box-sizing: border-box;
+}
+
+/* Dark theme: slightly lighter circle so black number stays readable */
+[data-md-color-scheme="slate"] .md-typeset table tbody td:first-child {
+  background-color: #9e9e9e;
+}
+
+/* When No. is a link (e.g. IMP/EMP [3](#rule-3)): keep black, bold */
+.md-typeset table tbody td:first-child a {
+  color: #000;
+  font-weight: 600;
+}
+
+.md-typeset table tbody td:first-child a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table tbody td:first-child a {
+  color: #000;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table tbody td:first-child a:hover {
+  color: #000;
+  text-decoration: underline;
+}
