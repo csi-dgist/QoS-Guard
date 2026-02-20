@@ -45,7 +45,14 @@
     background-color: transparent !important;
 }
 
-/* No. 열: Identifier 열과 동일 색상, 가운데 정렬 */
+/* No. 열: Identifier 열과 동일 색상, 가운데 정렬, 좁은 너비 */
+.md-typeset table th:first-child,
+.md-typeset table td:first-child {
+    width: 42px !important;
+    min-width: 42px !important;
+    max-width: 42px !important;
+    box-sizing: border-box;
+}
 .md-typeset table td:first-child {
     font-family: 'JetBrains Mono', monospace;
     font-size: 15px !important;
@@ -53,7 +60,6 @@
     color: #334155 !important;
     text-align: center !important;
     vertical-align: middle !important;
-    width: 65px;
 }
 
 .md-typeset table tbody tr {
