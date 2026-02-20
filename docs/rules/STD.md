@@ -21,7 +21,7 @@
   transition: 0.2s;
 }
 
-.md-typeset table tr:hover td:first-child a {
+.md-typeset table tr:hover td:first-child  {
   background-color: #4e37e6 !important; 
   color: #fff !important; 
   transform: scale(1.1);
