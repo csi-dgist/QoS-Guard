@@ -150,15 +150,113 @@ This page describes the QoS dependency and consistency rules derived from the **
 ## Stage 2
 *Inter-entity Dependency Validation*
 
-| No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
-|:---:|:---|:---|:---:|:---:|:---:|
-| [21](#rule-21) | PART ↔ PART | $[Writer.PART \cap Reader.PART] = \emptyset$ | Structural | Pub ↔ Sub | STD |
-| [22](#rule-22) | RELIAB ↔ RELIAB | $[Writer.RELIAB < Reader.RELIAB]$ | Structural | Pub ↔ Sub | STD |
-| [23](#rule-23) | DURABL ↔ DURABL | $[Writer.DURABL < Reader.DURABL]$ | Structural | Pub ↔ Sub | STD |
-| [24](#rule-24) | DEADLN ↔ DEADLN | $[Writer.DEADLN.period > Reader.DEADLN.period]$ | Structural | Pub ↔ Sub | STD |
-| [25](#rule-25) | LIVENS ↔ LIVENS | $[W.LIVENS < R.LIVENS] \vee [W.lease > R.lease]$ | Structural | Pub ↔ Sub | STD |
-| [26](#rule-26) | OWNST ↔ OWNST | $[Writer.OWNST \neq Reader.OWNST]$ | Structural | Pub ↔ Sub | STD |
-| [27](#rule-27) | DESTORD ↔ DESTORD | $[Writer.DESTORD < Reader.DESTORD]$ | Structural | Pub ↔ Sub | STD |
+<div class="std-list">
 
+  <div class="std-item" id="rule-21">
+    <div class="std-header">
+      <span class="std-no">21</span>
+      <span class="std-id">PART ↔ PART</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      $[Writer.PART \cap Reader.PART] = \emptyset$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-22">
+    <div class="std-header">
+      <span class="std-no">22</span>
+      <span class="std-id">RELIAB ↔ RELIAB</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      $[Writer.RELIAB < Reader.RELIAB]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-23">
+    <div class="std-header">
+      <span class="std-no">23</span>
+      <span class="std-id">DURABL ↔ DURABL</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      $[Writer.DURABL < Reader.DURABL]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-24">
+    <div class="std-header">
+      <span class="std-no">24</span>
+      <span class="std-id">DEADLN ↔ DEADLN</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      $[Writer.DEADLN.period > Reader.DEADLN.period]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-25">
+    <div class="std-header">
+      <span class="std-no">25</span>
+      <span class="std-id">LIVENS ↔ LIVENS</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      $[W.LIVENS < R.LIVENS] \vee [W.lease > R.lease]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-26">
+    <div class="std-header">
+      <span class="std-no">26</span>
+      <span class="std-id">OWNST ↔ OWNST</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      $[Writer.OWNST \neq Reader.OWNST]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+  </div>
+
+  <div class="std-item" id="rule-27">
+    <div class="std-header">
+      <span class="std-no">27</span>
+      <span class="std-id">DESTORD ↔ DESTORD</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      $[Writer.DESTORD < Reader.DESTORD]$
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+  </div>
+
+</div>
 ---
 
