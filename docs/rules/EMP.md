@@ -54,7 +54,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 | Entity | Expected Received | Actual Received | Status |
 | :--- | :---: | :---: | :---: |
-| Subscriber 1 (Live) | 1,000 | 1,000 | ✅ Success |
+| <font size="4">Subscriber 1 (Live)</font> | 1,000 | 1,000 | ✅ Success |
 | Subscriber 2 (Late) | 1,000 | **0** | ❌ Data Expired |
 
 **4. Empirical Conclusion**
