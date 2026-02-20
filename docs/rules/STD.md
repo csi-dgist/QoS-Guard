@@ -7,17 +7,21 @@ This page describes the QoS dependency and consistency rules derived from the **
 ## Stage 1
 *Intra-entity Dependency Validation*
 
+<div class="rule-table">
+
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
 | 1 | HIST ↔ RESLIM | $[HIST.kind = KEEP\_LAST] \wedge [HIST.depth > mpi]$ | Structural | Pub, Sub | STD |
 | 2 | RESLIM ↔ RESLIM | $[max\_samples < max\_samples\_per\_instance]$ | Structural | Pub, Sub | STD |
 
-{: .rule-table }
+</div>
 
 ---
 
 ## Stage 2
 *Inter-entity Dependency Validation*
+
+<div class="rule-table">
 
 | No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
@@ -29,7 +33,6 @@ This page describes the QoS dependency and consistency rules derived from the **
 | 26 | OWNST ↔ OWNST | $[Writer.OWNST \neq Reader.OWNST]$ | Structural | Pub ↔ Sub | STD |
 | 27 | DESTORD ↔ DESTORD | $[Writer.DESTORD < Reader.DESTORD]$ | Structural | Pub ↔ Sub | STD |
 
-{: .rule-table }
-
+</div>
 ---
 
