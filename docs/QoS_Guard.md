@@ -50,6 +50,49 @@
         grid-template-columns: 1fr;
     }
 }
+
+.req-container {
+    margin: 20px 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: #f8fafc;
+    overflow: hidden;
+}
+
+.req-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.req-item:last-child {
+    border-bottom: none;
+}
+
+.req-label {
+    min-width: 100px;
+    font-weight: 700;
+    color: #4E5EB4; /* 프로젝트 포인트 컬러 */
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.req-value {
+    color: #334155;
+    font-size: 14px;
+    border-left: 2px solid #e2e8f0;
+    padding-left: 16px;
+    margin-left: 8px;
+}
+
+/* 호버 시 아주 살짝 반응 */
+.req-item:hover {
+    background-color: #ffffff;
+    transition: background 0.2s ease;
+}
+  
 </style>
 
 **Offline static verification of DDS QoS for ROS 2.** 
@@ -60,7 +103,9 @@ Find QoS mismatches and dependency violations before you run your nodes—no ROS
 
 ## Overview
 
-ROS 2 uses **DDS** and **QoS policies** (reliability, durability, history, etc.) for topic communication. If Publisher and Subscriber QoS do not match or conflict, you can get **failed connections**, **data loss**, or **crashes**.
+ROS 2 uses **DDS** and **QoS policies** (reliability, durability, history, etc.) for topic communication. 
+
+If Publisher and Subscriber QoS do not match or conflict, you can get **failed connections**, **data loss**, or **crashes**.
 
 QoS-Guard scans your **XML profiles** and **source code** (e.g. `rclcpp::QoS`, `create_publisher`), builds Pub–Sub pairs per topic, and runs **40 dependency rules** to report potential issues.
 
@@ -111,17 +156,26 @@ cd /path/to/QoS-Guard
 python3 -m qos_guard.qos_checker /path/to/package
 ```
 
----
+<hr class="hr-grad-left">
 
 ## Requirements
 
-| Item | Requirement |
-|------|-------------|
-| **Python** | 3.10 or higher |
-| **ROS 2** | Optional. Only needed if you install as a ROS 2 package (Humble, Jazzy, or Kilted). |
-| **OS** | Linux recommended; also runs on Windows with Python only. |
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Python</span>
+    <span class="req-value">3.10 or higher</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">ROS 2</span>
+    <span class="req-value">Optional (Humble, Jazzy, or Kilted)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">OS</span>
+    <span class="req-value">Linux recommended / Windows (Python only)</span>
+  </div>
+</div>
 
----
+<hr class="hr-grad-left">
 
 ## Installation
 
