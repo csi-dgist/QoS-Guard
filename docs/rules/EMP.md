@@ -3,7 +3,14 @@
 This page describes the QoS dependency rules derived from **Empirical analysis and experimental results**. These rules focus on runtime performance, network conditions (e.g., RTT), and timing-critical dependencies that were validated through systematic testing.
 
 ---
+## Stage 1
+*Intra-entity Dependency Validation*
 
+| No. | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
+|:---:|:---|:---|:---:|:---:|:---:|
+| [6](#rule-6) | <kbd>LFSPAN</kbd> → <kbd>DURABL</kbd> | $[DURABL \ge TRAN\_LOCAL]$ <br> $\wedge [LFSPAN.duration > 0]$ | **Functional** | Pub | EMP |
+
+---
 ## Stage 1
 *Intra-entity Dependency Validation*
 
