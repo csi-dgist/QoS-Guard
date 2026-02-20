@@ -30,7 +30,12 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 ---
 
 *(Note: mpi = max_samples_per_instance, PP = Publish Period, RTT = Round Trip Time)*
+!!! info "Notation Summary"
+    * [cite_start]**mpi**: `max_samples_per_instance` [cite: 11, 236]
+    * [cite_start]**PP**: `Publish Period` [cite: 314, 576]
+    * [cite_start]**RTT**: `Round Trip Time` [cite: 315, 576]
 
+---
 ##  Experimental Evidence Details
 
 ### Rule 6
