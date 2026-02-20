@@ -205,6 +205,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
     * **RTT**: `Round Trip Time`
 
 <hr class="hr-double">
+<hr class="hr-dashed">
 
 ##  Experimental Evidence Details
 
@@ -238,6 +239,8 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifespan (50ms)** caused all buffered samples to be purged from the Publisher's queue before Subscriber 2 could connect.
 
 <hr class="hr-dashed">
+<hr class="hr-double">
+<hr class="hr-dashed">
 
 <span id="rule-31"></span>
 ### Rule 31 
@@ -268,6 +271,8 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 
 In a lossy network (5% loss), a Reliable connection requires retransmission of lost packets. If the **History Depth** is smaller than the number of samples sent during one **RTT**, the buffer is overwritten before a retransmission can be requested. 
 
+<hr class="hr-dashed">
+<hr class="hr-double">
 <hr class="hr-dashed">
 
 <span id="rule-32"></span>
