@@ -306,6 +306,8 @@ In a lossy network (5% loss), a Reliable connection requires retransmission of l
 When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effective buffer size for the reliability protocol. If mpi is insufficient to hold all samples sent during one **RTT** (plus the time for ACK/NACK processing), the Publisher will either block or drop samples.
 
 <hr class="hr-dashed">
+<hr class="hr-double">
+<hr class="hr-dashed">
 
 <span id="rule-33"></span>
 ### Rule 33
@@ -338,6 +340,8 @@ When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effectiv
 
 Even with `RELIABLE` settings, data loss occurs if the **Lifespan duration** is shorter than the time required for successful transmission and acknowledgement. 
 
+<hr class="hr-dashed">
+<hr class="hr-double">
 <hr class="hr-dashed">
 
 <span id="rule-35"></span>
@@ -377,6 +381,8 @@ The experimental results highlight two different causes of Deadline violations:
 2. In **BEST_EFFORT** mode, violations nearly doubled (48 times) because lost packets created permanent gaps in the data stream, directly triggering the Deadline timer.
 
 <hr class="hr-dashed">
+<hr class="hr-double">
+<hr class="hr-dashed">
 
 <span id="rule-36"></span>
 ### Rule 36
@@ -408,6 +414,8 @@ The experiment demonstrates that when `Lease Duration < Deadline`, the system fa
 To prevent this **state inconsistency** and ensure a logical fault-detection sequence (where the data stream is monitored within the lifespan of the entity), the Liveliness Lease Duration must always be longer than the Deadline Period:
 $LIVENS.lease ≥ DEADLN.period$
 
+<hr class="hr-dashed">
+<hr class="hr-double">
 <hr class="hr-dashed">
 
 <span id="rule-37"></span>
@@ -446,6 +454,8 @@ To balance data durability with system responsiveness, the resource limits must 
 $[DURABL ≥ TRAN_LOCAL] ∧ [KEEP_ALL] ⇒ mpi ≥ default$
 *(Note: $default$ should be calculated based on the maximum tolerable recovery time.)*
 
+<hr class="hr-dashed">
+<hr class="hr-double">
 <hr class="hr-dashed">
 
 <span id="rule-38"></span>
@@ -486,6 +496,8 @@ By extending the Deadline (Case B), the system becomes more resilient to packet 
 $[OWNST = EXCLUSIVE] ⇒ DEADLN.period ≥ 2 × PP$
 
 <hr class="hr-dashed">
+<hr class="hr-double">
+<hr class="hr-dashed">
 
 <span id="rule-39"></span>
 ### Rule 39
@@ -523,4 +535,5 @@ The experiment highlights the risk of **"False Positive Failures."** When the Li
 To maintain a stable Ownership state, the Liveliness Lease Duration must be set with enough margin to accommodate at least two consecutive heartbeat losses or retransmission delays:
 $[OWNST = EXCLUSIVE] ⇒ lease_duration ≥ 2 × PP$
 
+<hr class="hr-dashed">
 <hr class="hr-double">
