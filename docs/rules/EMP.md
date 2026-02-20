@@ -10,6 +10,8 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 |:---:|:---|:---|:---:|:---:|:---:|
 | [6](#rule-6) | LFSPAN → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [LFSPAN.duration > 0]$ | Functional | Pub | EMP |
 
+{: .rule-table }
+
 ---
 
 ## Stage 3
@@ -25,6 +27,8 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 | [37](#rule-37) | HIST → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \wedge [mpi \ge default]$ | Operational | Pub | EMP |
 | [38](#rule-38) | DEADLN → OWNST | $[OWNST = EXCLUSIVE] \wedge [DEADLN.period < 2 \times PP]$ | Operational | Sub | EMP |
 | [39](#rule-39) | LIVENS → OWNST | $[OWNST = EXCLUSIVE] \wedge [lease < 2 \times PP]$ | Operational | Sub | EMP |
+
+{: .rule-table }
 
 ---
 
