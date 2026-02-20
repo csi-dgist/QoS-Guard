@@ -100,3 +100,26 @@ hr.hr-short-bar {
   mask-image: var(--md-admonition-icon--info);
   -webkit-mask-image: var(--md-admonition-icon--info);
 }
+
+/* 1. 스크롤바 전체 너비 설정 */
+::-webkit-scrollbar {
+  width: 6px;  /* 세로 스크롤바 두께 */
+  height: 6px; /* 가로 스크롤바 두께 */
+}
+
+/* 2. 스크롤바 막대(Thumb) 디자인 */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(78, 94, 180, 0.4); /* 기본 상태: 반투명한 메인 컬러 */
+  border-radius: 10px; /* 둥글둥글하게 */
+}
+
+/* 3. 마우스를 올렸을 때(Hover) 더 진하게 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #4E5EB4; /* 호버 시 진한 메인 컬러 */
+}
+
+/* 4. 스크롤바 배경(Track) - 깔끔하게 투명 처리 */
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
