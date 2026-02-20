@@ -3,23 +3,30 @@
 <style>
 /* 1. 번호가 들어가는 칸(td) 설정 */
 .md-typeset table td:first-child {
-    padding: 0 !important;       /* 칸 안의 불필요한 여백 완전 제거 */
-    width: 45px !important;      /* 칸 너비를 원보다 조금 넓게 고정 */
+    padding: 0 !important;
+    width: 45px !important;
     min-width: 45px !important;
-    vertical-align: middle !important; /* 수직 중앙 정렬 기본값 */
+    /* 핵심: 셀 자체가 정렬을 주도하게 함 */
+    text-align: center !important;
+    vertical-align: middle !important;
 }
 
-/* 2. 숫자 배지 (링크가 있든 없든 동일 적용) */
+/* 2. 숫자 배지 (가장 중요한 수정 부분) */
 .md-typeset table td:first-child,
 .md-typeset table td:first-child a {
-    display: flex !important;    /* flex를 써야 정중앙 배치가 됨 */
+    /* inline-flex로 변경하여 자기 크기를 고수하게 함 */
+    display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     
-    margin: auto !important;     /* 칸 내에서 정중앙으로 밀어넣음 */
-    width: 26px !important;      /* 원 크기 (줄이려면 이 값을 수정) */
+    /* 가로/세로를 완전히 고정 */
+    width: 26px !important;
     height: 26px !important;
+    min-width: 26px !important; /* 최소 너비 강제 */
+    min-height: 26px !important; /* 최소 높이 강제 */
+    
     border-radius: 50% !important;
+    margin: 5px auto !important; /* 상하 여백을 주어 중앙 배치 */
     
     background-color: #f2f2f2 !important;
     color: #000 !important;
@@ -32,7 +39,7 @@
 /* 3. 호버 시 강조 효과 */
 .md-typeset table tr:hover td:first-child,
 .md-typeset table tr:hover td:first-child a {
-    background-color: #4e37e6 !important; /* 파란색 강조 */
+    background-color: #4e37e6 !important;
     color: #fff !important;
     transform: scale(1.1);
 }
