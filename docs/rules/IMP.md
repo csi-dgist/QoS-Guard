@@ -112,7 +112,7 @@ This page describes the QoS dependency rules derived from the specific implement
 
 <div class="std-list">
 
-  <a href="#rule-3" class="std-item" id="rule-3">
+  <a href="#rule-3" class="std-item">
     <div class="std-header">
       <span class="std-no">3</span>
       <span class="std-id">RELIAB → DURABL</span>
@@ -127,7 +127,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-4" class="std-item" id="rule-4">
+  <a href="#rule-4" class="std-item">
     <div class="std-header">
       <span class="std-no">4</span>
       <span class="std-id">RELIAB → OWNST</span>
@@ -142,7 +142,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-5" class="std-item" id="rule-5">
+  <a href="#rule-5" class="std-item">
     <div class="std-header">
       <span class="std-no">5</span>
       <span class="std-id">RELIAB → LIVENS</span>
@@ -157,7 +157,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-7" class="std-item" id="rule-7">
+  <a href="#rule-7" class="std-item">
     <div class="std-header">
       <span class="std-no">7</span>
       <span class="std-id">LFSPAN → DEADLN</span>
@@ -172,7 +172,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-8" class="std-item" id="rule-8">
+  <a href="#rule-8" class="std-item">
     <div class="std-header">
       <span class="std-no">8</span>
       <span class="std-id">HIST → DESTORD</span>
@@ -187,7 +187,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-9" class="std-item" id="rule-9">
+  <a href="#rule-9" class="std-item">
     <div class="std-header">
       <span class="std-no">9</span>
       <span class="std-id">RESLIM → DESTORD</span>
@@ -202,7 +202,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-10" class="std-item" id="rule-10">
+  <a href="#rule-10" class="std-item">
     <div class="std-header">
       <span class="std-no">10</span>
       <span class="std-id">DEADLN → OWNST</span>
@@ -217,7 +217,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-11" class="std-item" id="rule-11">
+  <a href="#rule-11" class="std-item">
     <div class="std-header">
       <span class="std-no">11</span>
       <span class="std-id">LIVENS → OWNST</span>
@@ -232,7 +232,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-12" class="std-item" id="rule-12">
+  <a href="#rule-12" class="std-item">
     <div class="std-header">
       <span class="std-no">12</span>
       <span class="std-id">LIVENS → RDLIFE</span>
@@ -247,7 +247,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-13" class="std-item" id="rule-13">
+  <a href="#rule-13" class="std-item">
     <div class="std-header">
       <span class="std-no">13</span>
       <span class="std-id">RDLIFE → DURABL</span>
@@ -262,7 +262,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-14" class="std-item" id="rule-14">
+  <a href="#rule-14" class="std-item">
     <div class="std-header">
       <span class="std-no">14</span>
       <span class="std-id">PART → DEADLN</span>
@@ -277,7 +277,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-15" class="std-item" id="rule-15">
+  <a href="#rule-15" class="std-item">
     <div class="std-header">
       <span class="std-no">15</span>
       <span class="std-id">PART → LIVENS</span>
@@ -292,7 +292,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-16" class="std-item" id="rule-16">
+  <a href="#rule-16" class="std-item">
     <div class="std-header">
       <span class="std-no">16</span>
       <span class="std-id">OWNST → WDLIFE</span>
@@ -307,7 +307,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-17" class="std-item" id="rule-17">
+  <a href="#rule-17" class="std-item">
     <div class="std-header">
       <span class="std-no">17</span>
       <span class="std-id">HIST → LFSPAN</span>
@@ -322,7 +322,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-18" class="std-item" id="rule-18">
+  <a href="#rule-18" class="std-item">
     <div class="std-header">
       <span class="std-no">18</span>
       <span class="std-id">RESLIM → LFSPAN</span>
@@ -337,7 +337,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-19" class="std-item" id="rule-19">
+  <a href="#rule-19" class="std-item">
     <div class="std-header">
       <span class="std-no">19</span>
       <span class="std-id">ENTFAC → DURABL</span>
@@ -352,7 +352,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-20" class="std-item" id="rule-20">
+  <a href="#rule-20" class="std-item">
     <div class="std-header">
       <span class="std-no">20</span>
       <span class="std-id">PART → DURABL</span>
@@ -376,7 +376,7 @@ This page describes the QoS dependency rules derived from the specific implement
 
 <div class="std-list">
 
-  <a href="#rule-28" class="std-item" id="rule-28">
+  <a href="#rule-28" class="std-item">
     <div class="std-header">
       <span class="std-no">28</span>
       <span class="std-id">WDLIFE → RDLIFE</span>
@@ -391,7 +391,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-29" class="std-item" id="rule-29">
+  <a href="#rule-29" class="std-item">
     <div class="std-header">
       <span class="std-no">29</span>
       <span class="std-id">WDLIFE → RDLIFE</span>
@@ -406,7 +406,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-30" class="std-item" id="rule-30">
+  <a href="#rule-30" class="std-item">
     <div class="std-header">
       <span class="std-no">30</span>
       <span class="std-id">WDLIFE → RDLIFE</span>
@@ -430,7 +430,7 @@ This page describes the QoS dependency rules derived from the specific implement
 
 <div class="std-list">
 
-  <a href="#rule-34" class="std-item" id="rule-34">
+  <a href="#rule-34" class="std-item">
     <div class="std-header">
       <span class="std-no">34</span>
       <span class="std-id">RELIAB → WDLIFE</span>
@@ -445,7 +445,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </div>
   </a>
 
-  <a href="#rule-40" class="std-item" id="rule-40">
+  <a href="#rule-40" class="std-item">
     <div class="std-header">
       <span class="std-no">40</span>
       <span class="std-id">DURABL → DEADLN</span>
@@ -468,6 +468,7 @@ This page describes the QoS dependency rules derived from the specific implement
 *Below are the code-level justifications and source references for each IMP rule.*
 
 
+<span id="rule-3"></span>
 ### Rule 3
 - **RMW/Implementation: FastDDS** 
 ```cpp
@@ -493,6 +494,7 @@ historical data for best-effort data over the wire, so also not locally). */
 if (rd->xqos->reliability.kind > DDS_RELIABILITY_BEST_EFFORT && rd->xqos->durability.kind > DDS_DURABILITY_VOLATILE)
 ddsi_deliver_historical_data (wr, rd);
 ```
+<span id="rule-4"></span>
 ### Rule 4
 - **RMW/Implementation: FastDDS** 
 ```cpp
@@ -504,6 +506,7 @@ return false;
 } 
 return true;
 ```
+<span id="rule-5"></span>
 ### Rule 5
 - **RMW/Implementation: FastDDS** 
 ```cpp
@@ -530,6 +533,7 @@ wr->heartbeat_xevent = qxev_heartbeat (wr->evq, DDSRT_MTIME_NEVER, &wr->e.guid);
 else
 wr->heartbeat_xevent = NULL;
 ```
+<span id="rule-7"></span>
 ### Rule 7
 - **RMW/Implementation: FastDDS**
 ```cpp
@@ -575,6 +579,7 @@ return (ddsrt_mtime_t) { 0 };
 return (node != NULL) ? node->t_expire : DDSRT_MTIME_NEVER;
 }
 ```
+<span id="rule-8"></span>
 ### Rule 8
 - **RMW/Implementation: FastDDS** 
 ```cpp
@@ -620,6 +625,7 @@ if (has_data && !content_filter_accepts (rhc->reader, sample, inst, wrinfo->iid,
 {return 0;}
 return 1;}
 ```
+<span id="rule-9"></span>
 ### Rule 9
 - **RMW/Implementation: FastDDS** 
 ```cpp
@@ -656,6 +662,7 @@ cb_data->handle = inst->iid;
 cb_data->add = true; return false; 
 }
 ```
+<span id="rule-10"></span>
 ### Rule 10
 - **RMW/Implementation: FastDDS**
 ```cpp
@@ -703,6 +710,7 @@ ddsrt_mutex_unlock (&rhc->lock);
 return tnext;}
 #endif /* DDS_HAS_DEADLINE_MISSED */
 ```
+<span id="rule-11"></span>
 ### Rule 11
 - **RMW/Implementation: FastDDS**
 ```cpp
@@ -718,6 +726,7 @@ liveliness_kind_,
 liveliness_lease_duration_);
 }
 ```
+<span id="rule-12"></span>
 ### Rule 12
 - **RMW/Implementation: FastDDS**
 ```cpp
@@ -741,6 +750,7 @@ ddsi_writer_set_notalive ((struct ddsi_writer *) l->entity, true);
 break;
 // However, if set to infinite, it will not expire, so the data deletion function will not operate.
 ```
+<span id="rule-13"></span>
 ### Rule 13
 - **RMW/Implementation: FastDDS** 
 ```cpp
@@ -760,6 +770,7 @@ Duration_t autopurge_no_writer_samples_delay;
 * By default, c_TimeInfinite.
 */
 ```
+<span id="rule-14"></span>
 ### Rule 14
 - **RMW/Implementation: FastDDS** 
 ```cpp
@@ -773,6 +784,7 @@ deadline_unregister_instance_locked (&rhc->deadline, &inst->deadline);
 // During the process of dynamically changing partitions, instances are removed from the deadline list due to writer unregistration.
 // Since the timer is not reset to the "next expiry time" upon unregistration, the deadline timer ceases to function once the list becomes empty.
 ```
+<span id="rule-15"></span>
 ### Rule 15
 - **RMW/Implementation: FastDDS**
 ```cpp
@@ -792,6 +804,7 @@ ddsi_reader_update_notify_pwr_alive_state_guid (&rdguid, pwr, &alive_state);
 ddsrt_mutex_lock (&pwr->e.lock); }}
 // → The recipients of the notification are only the readers listed in pwr→readers.
 ```
+<span id="rule-16"></span>
 ### Rule 16
 - **RMW/Implementation: FastDDS** 
 ```cpp
@@ -830,6 +843,7 @@ return 0;
 } else {
 return 0;}}
 ```
+<span id="rule-17"></span>
 ### Rule 17
 - **RMW/Implementation:FastDDS**
 ```cpp
@@ -873,6 +887,7 @@ trig_qc->dec_conds_sample = s->conds;
 if (s->isread) 
 { inst->nvread--; rhc->n_vread--; } }
 ```
+<span id="rule-18"></span>
 ### Rule 18
 - **RMW/Implementation: FastDDS** 
 ```cpp
@@ -926,6 +941,7 @@ cb_data->handle = inst->iid;
 cb_data->add = true; return false; 
 }
 ```
+<span id="rule-19"></span>
 ### Rule 19
 - **RMW/Implementation: FastDDS**
 ```cpp
@@ -950,6 +966,7 @@ opts.historyCapacity = (uint64_t)qos->durability_service.history.depth;
  } 
 else { opts.historyCapacity = 0; } }
 ```
+<span id="rule-20"></span>
 ### Rule 20
 - **RMW/Implementation: FastDDS**
 ```cpp
@@ -969,6 +986,7 @@ else
 m->in_sync = PRMSS_SYNC;
 m->u.not_in_sync.end_of_tl_seq = MAX_SEQ_NUMBER;
 ```
+<span id="rule-28"></span><span id="rule-29"></span><span id="rule-30"></span>
 ### Rule 28 / Rule 29 / Rule 30
 - **RMW/Implementation: FastDDS** 
 ```cpp
@@ -998,6 +1016,7 @@ ddsrt_mutex_unlock (&rd->e.lock);
 if (delta < 0 && rd->rhc) { struct ddsi_writer_info wrinfo; 
 ddsi_make_writer_info (&wrinfo, &pwr->e, pwr->c.xqos, NN_STATUSINFO_UNREGISTER); ddsi_rhc_unregister_wr (rd->rhc, &wrinfo); }
 ```
+<span id="rule-34"></span>
 ### Rule 34
 - **RMW/Implementation: FastDDS** 
 ```cpp
@@ -1025,6 +1044,7 @@ rhc->n_not_alive_no_writers++;
 // When the Writer sends an unregister request, the Reader's RHC receives it and, if auto_dispose == 1, transitions the instance to the DISPOSED state.
 ```
 
+<span id="rule-40"></span>
 ### Rule 40
 - **RMW/Implementation: FastDDS** 
 ```cpp
