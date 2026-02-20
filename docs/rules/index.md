@@ -2,7 +2,7 @@
 
 <style>
 .md-typeset table td:first-child {
-    font-size: 1.2em !important;    /* ← 글자 크기 (1.5em, 18px 등으로 자유롭게 조절) */
+    font-size: 18px !important;    /* ← 글자 크기 (1.5em, 18px 등으로 자유롭게 조절) */
     font-weight: 800 !important;    /* ← 더 굵게 (700~900 사이 선택) */
     text-align: center !important;  /* ← 가운데 정렬 */
     color: #333 !important;         /* ← 글자 색상 (필요시 변경) */
