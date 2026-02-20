@@ -86,11 +86,6 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
   <img src="../../images/rule31.png" width="400">
 </div>
 
-<div align="center">
-  <img src="/images/rule31.png" width="500">
-</div>
-
-![Rule 31](../images/rule31.png)
 
 **4. Empirical Conclusion**
 
@@ -118,7 +113,9 @@ In a lossy network (5% loss), a Reliable connection requires retransmission of l
 
 **3. Experimental Observation**
 
-![Rule 32](../images/rule32.png)
+<div align="center">
+  <img src="../../images/rule32.png" width="400">
+</div>
 
 **4. Empirical Conclusion**
 
