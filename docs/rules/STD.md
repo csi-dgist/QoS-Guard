@@ -27,7 +27,6 @@
     box-sizing: border-box;
 }
 
-/* 3. 호버 효과: 행 전체에 마우스 올렸을 때 배지만 강조 */
 .md-typeset table tr:hover td:first-child,
 .md-typeset table tr:hover td:first-child a {
     background-color: #4e37e6 !important;
