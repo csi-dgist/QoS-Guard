@@ -21,6 +21,7 @@ Choose a category from the sidebar to see detailed constraints.
 ## Full List of 40 Dependency-Violation Rules
 
 We have identified and classified 40 rules that govern the relationships between ROS 2 QoS policies. 
+
 These are implemented in **QoS Guard** for static verification.
 
 <hr class="hr-grad-left">
