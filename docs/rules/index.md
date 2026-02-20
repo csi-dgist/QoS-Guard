@@ -11,6 +11,7 @@
     vertical-align: middle !important;
     min-width: 50px !important;     
 }
+
 </style>
 
 This section covers 40+ dependency-violation rules classified into three stages. 
@@ -23,6 +24,10 @@ We have identified and classified 40 rules that govern the relationships between
 These are implemented in **QoS Guard** for static verification.
 
 <hr style="border: 0; height: 2px; background: #4e37e6; opacity: 0.5; margin: 40px 0;">
+
+<hr style="border: 0; height: 1px; background-image: linear-gradient(to right, #ccc, #4e37e6, #ccc); margin: 30px 0;">
+
+
 
 ## Stage 1 | Intra-entity Dependency Validation
 *Identifies internal conflicts by analyzing each entity's QoS profile independently.*
