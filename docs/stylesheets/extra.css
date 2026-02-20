@@ -90,7 +90,7 @@ hr.hr-short-bar {
 /* scroll custom */
 /* 1. 스크롤바가 나타날 컨테이너 설정 */
 .scroll-container {
-  width: 80%;           /* 전체 너비의 80% 정도로 줄임 (원하시는 만큼 조절 가능) */
+  width: 50%;           /* 전체 너비의 80% 정도로 줄임 (원하시는 만큼 조절 가능) */
   margin: 0 auto;       /* 가운데 정렬 */
   overflow-x: auto;     /* 가로 스크롤 허용 */
   white-space: nowrap;  /* 내부 콘텐츠가 줄바꿈되지 않도록 설정 */
@@ -99,7 +99,7 @@ hr.hr-short-bar {
 
 /* 2. 스크롤바 전체 높이 */
 .scroll-container::-webkit-scrollbar {
-  height: 8px;          /* 가로 스크롤바의 두께를 살짝 슬림하게 변경 */
+  height: 10px;          /* 가로 스크롤바의 두께를 살짝 슬림하게 변경 */
 }
 
 /* 3. 스크롤바 뒷배경 (트랙) - 파란색보다 연한 색상 */
