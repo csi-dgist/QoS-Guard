@@ -25,15 +25,9 @@ These are implemented in **QoS Guard** for static verification.
 
 <hr style="border: 0; height: 2px; background: #4E5EB4; opacity: 0.5; margin: 40px 0;">
 
-<hr style="border: 0; height: 1px; background-image: linear-gradient(to right, #ccc, #4E5EB4, #ccc); margin: 30px 0;">
-
 <hr style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0,0,0,0), #4E5EB4, rgba(0,0,0,0)); margin: 30px 0;">
 
 <hr style="border: 0; height: 2px; background-image: linear-gradient(to right, #4E5EB4, rgba(0,0,0,0)); opacity: 0.6; margin: 25px 0;">
-
-<hr style="border: 0; height: 1px; background: #4E5EB4; border-bottom: 1px solid #ddd; margin: 30px 0;">
-
-<hr style="border: 0; height: 4px; background: #4E5EB4; width: 50px; margin: 40px auto; opacity: 0.3; border-radius: 2px;">
 
 <hr style="border: 0; border-top: 1px dashed #4E5EB4; opacity: 0.4; margin: 20px 0;">
 
@@ -42,8 +36,6 @@ These are implemented in **QoS Guard** for static verification.
 <hr style="border: 0; height: 2px; background: #4E5EB4; width: 80px; margin: 50px auto; opacity: 0.8; border-radius: 10px;">
 
 <hr style="border: none; border-top: 2px dotted; background-image: linear-gradient(to right, #4E5EB4, rgba(255,255,255,0)); height: 1px; width: 100%; opacity: 0.5; margin: 25px 0;">
-
-<div style="height: 3px; background: linear-gradient(to right, #4E5EB4 10%, rgba(78, 94, 180, 0.1) 90%); border-radius: 2px; margin: 20px 0;"></div>
 
 <div style="text-align: center; color: #4E5EB4; opacity: 0.5; font-size: 20px; letter-spacing: 15px; margin: 35px 0;">•••</div>
 
