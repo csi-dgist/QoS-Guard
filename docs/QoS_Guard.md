@@ -1,13 +1,8 @@
 # QoS-Guard
 
-<p align="center">
-  <img src="https://img.shields.io/badge/ROS--2-Humble%20%7C%20Jazzy%20%7C%20Kilted-22314E?style=for-the-badge&logo=ros" />
-  <img src="https://img.shields.io/badge/Fast--DDS-2.6%20%7C%202.14-5E9BD1?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Connext-6%20%7C%207-DC382D?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python" />
-</p>
+**Offline static verification of DDS QoS for ROS 2.** 
 
-**Offline static verification of DDS QoS for ROS 2.** Find QoS mismatches and dependency violations before you run your nodes—no ROS 2 runtime required.
+Find QoS mismatches and dependency violations before you run your nodes—no ROS 2 runtime required.
 
 ---
 
