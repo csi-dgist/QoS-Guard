@@ -67,29 +67,48 @@ hr.hr-short-bar {
 /* info icon custom */
 
 :root {
-  /* 인포 박스의 메인 테두리와 배경 아이콘 색상 */
   --md-admonition-icon--info: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 9h-2V7h2m0 10h-2v-6h2m-1-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2Z"/></svg>');
-  
-  /* 타이틀 바 배경 및 왼쪽 테두리 색상 지정 */
   --md-typeset-admonition-info: #4E5EB4;
 }
 
-/* 박스 전체의 스타일 세부 조정 */
 .md-typeset .admonition.info,
 .md-typeset details.info {
   border-color: #4E5EB4;
   border-left: 0.2rem solid #4E5EB4 !important;
 }
 
-/* 상단 타이틀 바 배경색 변경 */
 .md-typeset .info > .admonition-title,
 .md-typeset .info > summary {
   background-color: rgba(78, 94, 180, 0.1); /* 연한 배경색 (선택사항) */
   border-left: 0.2rem solid #4E5EB4;
 }
 
-/* 타이틀 글자 색상 및 아이콘 색상 */
 .md-typeset .info > .admonition-title::before,
 .md-typeset .info > summary::before {
   background-color: #4E5EB4;
+}
+
+/* scroll custom */
+/* 1. 스크롤바 전체 너비 설정 */
+::-webkit-scrollbar {
+  width: 10px;  /* 세로 스크롤바 너비 */
+  height: 10px; /* 가로 스크롤바 높이 */
+}
+
+/* 2. 스크롤바 뒷배경 (트랙) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* 배경색 */
+  border-radius: 10px;  /* 둥근 모서리 */
+}
+
+/* 3. 스크롤 막대 (핸들) */
+::-webkit-scrollbar-thumb {
+  background: #4E5EB4; /* 요청하신 메인 색상 */
+  border-radius: 10px;  /* 둥근 모서리 */
+  border: 2px solid #f1f1f1; /* 배경과 약간 띄워져 보이는 효과 */
+}
+
+/* 4. 스크롤 막대에 마우스를 올렸을 때 (Hover) */
+::-webkit-scrollbar-thumb:hover {
+  background: #3b4a91; /* 좀 더 어두운 색상으로 변경 */
 }
