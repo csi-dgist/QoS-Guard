@@ -104,13 +104,10 @@
 
 This page describes the QoS dependency and consistency rules derived from the **OMG DDS** and **ROS 2 Standard** specifications. Violation of these rules typically results in entity creation failure or immediate communication incompatibility.
 
----
+<hr class="hr-grad-left">
 
 ## Stage 1
 *Intra-entity Dependency Validation*
-
-
-
 
 <div class="std-list">
 
@@ -145,7 +142,8 @@ This page describes the QoS dependency and consistency rules derived from the **
   </a>
 
 </div>
----
+
+<hr class="hr-grad-left">
 
 ## Stage 2
 *Inter-entity Dependency Validation*
@@ -258,4 +256,4 @@ This page describes the QoS dependency and consistency rules derived from the **
   </a>
 
 </div>
----
+<hr class="hr-grad-left">
