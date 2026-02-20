@@ -139,15 +139,15 @@ QoS-Guard scans your **XML profiles** and **source code** (e.g. `rclcpp::QoS`, `
 ## Quick Start
 
 
-# After installing as ROS 2 package (see Installation)
+### After installing as ROS 2 package (see Installation)
 ```bash
 qos_guard /path/to/your_ros2_package
 ```
-# Specify DDS and ROS version
+### Specify DDS and ROS version
 ```bash
 qos_guard /path/to/package fast jazzy
 ```
-# Without ROS 2: run from repo root
+### Without ROS 2: run from repo root
 ```bash
 cd /path/to/QoS-Guard
 python3 -m qos_guard.qos_checker /path/to/package
