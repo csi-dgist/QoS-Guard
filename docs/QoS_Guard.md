@@ -87,72 +87,6 @@
     padding-left: 16px;
     margin-left: 8px;
 }
-
-/* Installation option cards */
-.install-option {
-    margin: 24px 0;
-    padding: 0;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    background: linear-gradient(180deg, #fafbff 0%, #ffffff 100%);
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-}
-
-.install-option:hover {
-    border-color: #4E5EB4;
-    box-shadow: 0 4px 12px rgba(78, 94, 180, 0.08);
-}
-
-.install-option-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 16px 20px;
-    border-bottom: 1px solid #e2e8f0;
-    background: #ffffff;
-}
-
-.install-option-title {
-    font-size: 1.1em;
-    font-weight: 700;
-    color: #1e293b;
-    margin: 0;
-}
-
-.install-option-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: #4E5EB4;
-    background: rgba(78, 94, 180, 0.12);
-    border-radius: 6px;
-}
-
-.install-option-desc {
-    padding: 14px 20px;
-    font-size: 14px;
-    color: #475569;
-    line-height: 1.5;
-    margin: 0;
-    background: #ffffff;
-}
-
-.install-option-desc code {
-    background: #f1f5f9;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 13px;
-}
-
-.install-option pre {
-    margin: 0;
-    border-radius: 0 0 12px 12px;
-    border-top: 1px solid #e2e8f0;
-}
 </style>
 
 **Offline static verification of DDS QoS for ROS 2.** 
@@ -239,13 +173,9 @@ python3 -m qos_guard.qos_checker /path/to/package
 
 ## Installation
 
-<div class="install-option">
+### Option A: As a ROS 2 package (recommended if you use ROS 2)
 
-<div class="install-option-header">
-  <span class="install-option-title">Option A: As a ROS 2 package</span>
-  <span class="install-option-badge">Recommended</span>
-</div>
-<p class="install-option-desc">After this, you run the tool with <code>ros2 run qos_guard qos_guard ...</code>.</p>
+After this, you run the tool with `ros2 run qos_guard qos_guard ...`.
 
 ```bash
 # 1. Clone into your workspace src
@@ -262,14 +192,9 @@ source install/setup.bash
 ros2 run qos_guard qos_guard /path/to/any/ros2/package
 ```
 
-</div>
+### Option B: Standalone (no ROS 2)
 
-<div class="install-option">
-
-<div class="install-option-header">
-  <span class="install-option-title">Option B: Standalone (no ROS 2)</span>
-</div>
-<p class="install-option-desc">You only need the repository and Python 3.10+.</p>
+You only need the repository and Python 3.10+.
 
 ```bash
 # 1. Clone and go to repo root (parent of the qos_guard folder)
@@ -284,14 +209,12 @@ source .venv/bin/activate   # Linux/macOS
 python3 -m qos_guard.qos_checker /path/to/your_ros2_package
 ```
 
-<p class="install-option-desc">If you run from inside the <code>qos_guard</code> package directory, run from the <strong>parent</strong> of that directory so the module is found, e.g.:</p>
+If you run from inside the `qos_guard` package directory, run from the **parent** of that directory so the module is found, e.g.:
 
 ```bash
 cd /path/to/QoS-Guard
 python3 -m qos_guard.qos_checker ~/ros2_ws/src/my_pkg
 ```
-
-</div>
 
 <hr class="hr-grad-left">
 
