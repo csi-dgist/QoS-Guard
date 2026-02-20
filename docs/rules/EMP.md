@@ -217,7 +217,7 @@ The network condition is controlled over 60 seconds using the `tc` command:
 The experiment demonstrates that when `Lease Duration < Deadline`, the system falls into a contradictory state: it continues to fire "Data Missing" alarms (Deadline Missed) for a Publisher that it has already declared "Dead" (Liveliness Lost). 
 
 To prevent this **state inconsistency** and ensure a logical fault-detection sequence (where the data stream is monitored within the lifespan of the entity), the Liveliness Lease Duration must always be longer than the Deadline Period:
-$$LIVENS.lease \ge DEADLN.period$$
+$LIVENS.lease \ge DEADLN.period$
 
 ---
 ### Rule 37
