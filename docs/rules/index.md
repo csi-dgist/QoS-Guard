@@ -36,6 +36,8 @@ These are implemented in **QoS Guard** for static verification.
 | 19 | ENTFAC → DURABL | $[DURABL \neq VOLATILE] \wedge [autoenable = FALSE]$ | Operational | Pub, Sub | IMP |
 | 20 | PART → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [PART.names \neq \emptyset]$ | Operational | Pub, Sub | IMP |
 
+{: .rule-table }
+
 ---
 
 ## Stage 2 | Inter-entity Dependency Validation
@@ -53,6 +55,8 @@ These are implemented in **QoS Guard** for static verification.
 | 28 | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = 0]$ | Functional | Pub ↔ Sub | IMP |
 | 29 | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_disposed > 0]$ | Operational | Pub ↔ Sub | IMP |
 | 30 | WDLIFE → RDLIFE | $[W.autodispose = FALSE] \wedge [R.autopurge\_nowriter = \infty]$ | Operational | Pub ↔ Sub | IMP |
+
+{: .rule-table }
 
 ---
 
@@ -72,6 +76,7 @@ These are implemented in **QoS Guard** for static verification.
 | 39 | LIVENS → OWNST | $[OWNST = EXCLUSIVE] \wedge [lease < 2 \times PP]$ | Operational | Sub | EMP |
 | 40 | DURABL → DEADLN | $[DEADLN.period > 0] \wedge [DURABL \ge TRAN\_LOCAL]$ | Operational | Sub | EMP |
 
+{: .rule-table }
 
 ---
 *(Note: mpi = max_samples_per_instance, PP = Publish Period, RTT = Round Trip Time)*
