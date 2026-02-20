@@ -4,22 +4,20 @@
 
 Find QoS mismatches and dependency violations before you run your nodes—no ROS 2 runtime required.
 
----
+<hr class="hr-grad-left">
 
 ## Overview
 
 ROS 2 uses **DDS** and **QoS policies** (reliability, durability, history, etc.) for topic communication. If Publisher and Subscriber QoS do not match or conflict, you can get **failed connections**, **data loss**, or **crashes**.
 
-QoS-Guard scans your **XML profiles** and **source code** (e.g. `rclcpp::QoS`, `create_publisher`), builds Pub–Sub pairs per topic, and runs **40+ dependency rules** to report potential issues.
+QoS-Guard scans your **XML profiles** and **source code** (e.g. `rclcpp::QoS`, `create_publisher`), builds Pub–Sub pairs per topic, and runs **40 dependency rules** to report potential issues.
 
-| | |
-|---|---|
 | **No runtime** | No need to run `ros2 run` or any node |
 | **Python 3.10+** | Works with or without ROS 2 installed |
 | **Package mode** | Point to a package path → auto-scan XML + code, verify all topic pairs |
 | **XML pair mode** | Point to one pub XML + one sub XML → verify that pair only (Fast/Connext) |
 
----
+<hr class="hr-grad-left">
 
 ## Quick Start
 
