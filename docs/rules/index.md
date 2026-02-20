@@ -3,35 +3,27 @@
 <style>
 .md-typeset table td:first-child {
   text-align: center;
-  padding: 8px !important;
+  padding: 8px !important; 
 }
 
-.md-typeset table td:first-child {
-  color: #000;
-  font-weight: bold;
-  font-size: 13px;
-}
-
-.md-typeset table td:first-child, 
 .md-typeset table td:first-child a {
-  display: inline-block;
+  display: inline-block; 
   width: 24px;         
-  height: 24px;
-  line-height: 24px;  
-  border-radius: 50%;
-  background-color: #f0f0f0;
+  height: 24px;        
+  line-height: 24px;    
+  
+  border-radius: 50%;   
+  background-color: #f0f0f0; 
+  color: #000 !important;
+  text-decoration: none !important;
+  font-weight: bold;
+  font-size: 13px;      
   transition: 0.2s;
 }
 
-.md-typeset table td:first-child a {
-  color: #000 !important;
-  text-decoration: none !important;
-}
-
-.md-typeset table tr:hover td:first-child,
 .md-typeset table tr:hover td:first-child a {
-  background-color: #4e37e6 !important;
-  color: #fff !important;
+  background-color: #4e37e6 !important; 
+  color: #fff !important; 
   transform: scale(1.1);
 }
 </style>
