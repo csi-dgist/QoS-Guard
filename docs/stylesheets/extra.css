@@ -62,22 +62,13 @@ hr.hr-short-bar {
     margin: 20px 0;
     border: none; 
 
-.md-typeset .admonition.info,
-.md-typeset details.info {
-  border-color: #4E5EB4 !important;
+.md-typeset .admonition.info {
+  --md-admonition-fg-color: #4E5EB4 !important;
+  
+  --md-admonition-bg-color: rgba(78, 94, 180, 0.1) !important;
+  
+  border-left-width: 0.4rem !important;
 }
 
-.md-typeset .info > .admonition-title,
-.md-typeset .info > summary {
-  background-color: rgba(78, 94, 180, 0.1) !important; 
-  border-left: 0.2rem solid #4E5EB4 !important;     
-  color: #4E5EB4 !important;                         
-}
-
-.md-typeset .info > .admonition-title::before,
-.md-typeset .info > summary::before {
-  background-color: #4E5EB4 !important;
-  -webkit-mask-image: var(--md-admonition-icon--info);
-  mask-image: var(--md-admonition-icon--info);
-}
+    
 }
