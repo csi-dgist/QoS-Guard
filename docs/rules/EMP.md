@@ -300,8 +300,8 @@ In a lossy network (5% loss), a Reliable connection requires retransmission of l
 
 When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effective buffer size for the reliability protocol. If mpi is insufficient to hold all samples sent during one **RTT** (plus the time for ACK/NACK processing), the Publisher will either block or drop samples.
 
+<hr class="hr-dashed">
 
----
 <span id="rule-33"></span>
 ### Rule 33
 *Justifies the minimum Lifespan duration required to ensure sample reception before expiration in reliable communication.*
@@ -333,7 +333,8 @@ When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effectiv
 
 Even with `RELIABLE` settings, data loss occurs if the **Lifespan duration** is shorter than the time required for successful transmission and acknowledgement. 
 
----
+<hr class="hr-dashed">
+
 <span id="rule-35"></span>
 ### Rule 35
 *Justifies how Reliability settings impact Deadline compliance under packet loss conditions.*
@@ -370,7 +371,8 @@ The experimental results highlight two different causes of Deadline violations:
 1. In **RELIABLE** mode, all 1,000 samples were received, but 25 samples violated the Deadline because the time taken for NACK-based retransmission exceeded the 150ms window.
 2. In **BEST_EFFORT** mode, violations nearly doubled (48 times) because lost packets created permanent gaps in the data stream, directly triggering the Deadline timer.
 
----
+<hr class="hr-dashed">
+
 <span id="rule-36"></span>
 ### Rule 36
 *Justifies the consistency requirement between Liveliness Lease Duration and Deadline Period to avoid redundant or conflicting fault detections.*
@@ -401,7 +403,8 @@ The experiment demonstrates that when `Lease Duration < Deadline`, the system fa
 To prevent this **state inconsistency** and ensure a logical fault-detection sequence (where the data stream is monitored within the lifespan of the entity), the Liveliness Lease Duration must always be longer than the Deadline Period:
 $LIVENS.lease ≥ DEADLN.period$
 
----
+<hr class="hr-dashed">
+
 <span id="rule-37"></span>
 ### Rule 37
 *Justifies the impact of Resource Limits on the recovery latency for late-joining subscribers in durable communication.*
@@ -438,8 +441,8 @@ To balance data durability with system responsiveness, the resource limits must 
 $[DURABL ≥ TRAN_LOCAL] ∧ [KEEP_ALL] ⇒ mpi ≥ default$
 *(Note: $default$ should be calculated based on the maximum tolerable recovery time.)*
 
+<hr class="hr-dashed">
 
----
 <span id="rule-38"></span>
 ### Rule 38
 *Justifies the minimum Deadline period required to maintain stable Ownership in exclusive communication under network instability.*
@@ -477,7 +480,8 @@ The experiment clearly demonstrates that **Ownership Stability** is highly depen
 By extending the Deadline (Case B), the system becomes more resilient to packet loss, ensuring that the primary owner remains active as long as retransmissions are successful within the extended margin. To ensure stable control in exclusive ownership, the Deadline should be at least twice the Publication Period:
 $[OWNST = EXCLUSIVE] ⇒ DEADLN.period ≥ 2 × PP$
 
----
+<hr class="hr-dashed">
+
 <span id="rule-39"></span>
 ### Rule 39
 *Justifies the impact of Liveliness Lease Duration on Ownership stability by preventing premature entity failure detection.*
@@ -514,4 +518,4 @@ The experiment highlights the risk of **"False Positive Failures."** When the Li
 To maintain a stable Ownership state, the Liveliness Lease Duration must be set with enough margin to accommodate at least two consecutive heartbeat losses or retransmission delays:
 $[OWNST = EXCLUSIVE] ⇒ lease_duration ≥ 2 × PP$
 
----
+<hr class="hr-double">
