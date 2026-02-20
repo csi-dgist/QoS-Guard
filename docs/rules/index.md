@@ -4,8 +4,8 @@
 .md-typeset table td:nth-child(1),
 .md-typeset table td:first-child,
 .md-typeset table tr td:first-child {
-    font-size: 22px !important;    
-    font-weight: 900 !important;  
+    font-size: 20px !important;    
+    font-weight: 600 !important;  
     text-align: center !important;  
     color: #000000 !important;     
     vertical-align: middle !important;
