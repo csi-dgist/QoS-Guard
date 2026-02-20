@@ -1,6 +1,6 @@
 # IMP Rules
 
----
+<hr class="hr-grad-left">
 
 <style>
 /* 전체 리스트 컨테이너 */
@@ -105,7 +105,7 @@
 
 This page describes the QoS dependency rules derived from the specific implementation behaviors of ROS 2 Middlewares (RMWs) such as eProsima Fast DDS and Eclipse Cyclone DDS. These dependencies are not explicitly mandated by the DDS standard but are critical for functional consistency in practice.
 
----
+<hr class="hr-grad-left">
 
 ## Stage 1
 *Intra-entity Dependency Validation*
@@ -369,7 +369,7 @@ This page describes the QoS dependency rules derived from the specific implement
 
 </div>
 
----
+<hr class="hr-grad-left">
 
 ## Stage 2
 *Inter-entity Dependency Validation*
@@ -423,7 +423,7 @@ This page describes the QoS dependency rules derived from the specific implement
 
 </div>
 
----
+<hr class="hr-grad-left">
 
 ## Stage 3
 *Dynamic & Performance Rules*
@@ -462,11 +462,12 @@ This page describes the QoS dependency rules derived from the specific implement
 
 </div>
 
----
+<hr class="hr-grad-left">
 
 ## Implementation Evidence Details
 *Below are the code-level justifications and source references for each IMP rule.*
 
+<hr class="hr-double">
 
 <span id="rule-3"></span>
 ### Rule 3
@@ -494,6 +495,9 @@ historical data for best-effort data over the wire, so also not locally). */
 if (rd->xqos->reliability.kind > DDS_RELIABILITY_BEST_EFFORT && rd->xqos->durability.kind > DDS_DURABILITY_VOLATILE)
 ddsi_deliver_historical_data (wr, rd);
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-4"></span>
 ### Rule 4
 - **RMW/Implementation: FastDDS** 
@@ -506,6 +510,9 @@ return false;
 } 
 return true;
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-5"></span>
 ### Rule 5
 - **RMW/Implementation: FastDDS** 
@@ -533,6 +540,9 @@ wr->heartbeat_xevent = qxev_heartbeat (wr->evq, DDSRT_MTIME_NEVER, &wr->e.guid);
 else
 wr->heartbeat_xevent = NULL;
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-7"></span>
 ### Rule 7
 - **RMW/Implementation: FastDDS**
@@ -579,6 +589,9 @@ return (ddsrt_mtime_t) { 0 };
 return (node != NULL) ? node->t_expire : DDSRT_MTIME_NEVER;
 }
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-8"></span>
 ### Rule 8
 - **RMW/Implementation: FastDDS** 
@@ -625,6 +638,9 @@ if (has_data && !content_filter_accepts (rhc->reader, sample, inst, wrinfo->iid,
 {return 0;}
 return 1;}
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-9"></span>
 ### Rule 9
 - **RMW/Implementation: FastDDS** 
@@ -662,6 +678,9 @@ cb_data->handle = inst->iid;
 cb_data->add = true; return false; 
 }
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-10"></span>
 ### Rule 10
 - **RMW/Implementation: FastDDS**
@@ -710,6 +729,9 @@ ddsrt_mutex_unlock (&rhc->lock);
 return tnext;}
 #endif /* DDS_HAS_DEADLINE_MISSED */
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-11"></span>
 ### Rule 11
 - **RMW/Implementation: FastDDS**
@@ -726,6 +748,9 @@ liveliness_kind_,
 liveliness_lease_duration_);
 }
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-12"></span>
 ### Rule 12
 - **RMW/Implementation: FastDDS**
@@ -750,6 +775,9 @@ ddsi_writer_set_notalive ((struct ddsi_writer *) l->entity, true);
 break;
 // However, if set to infinite, it will not expire, so the data deletion function will not operate.
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-13"></span>
 ### Rule 13
 - **RMW/Implementation: FastDDS** 
@@ -770,6 +798,9 @@ Duration_t autopurge_no_writer_samples_delay;
 * By default, c_TimeInfinite.
 */
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-14"></span>
 ### Rule 14
 - **RMW/Implementation: FastDDS** 
@@ -784,6 +815,9 @@ deadline_unregister_instance_locked (&rhc->deadline, &inst->deadline);
 // During the process of dynamically changing partitions, instances are removed from the deadline list due to writer unregistration.
 // Since the timer is not reset to the "next expiry time" upon unregistration, the deadline timer ceases to function once the list becomes empty.
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-15"></span>
 ### Rule 15
 - **RMW/Implementation: FastDDS**
@@ -804,6 +838,9 @@ ddsi_reader_update_notify_pwr_alive_state_guid (&rdguid, pwr, &alive_state);
 ddsrt_mutex_lock (&pwr->e.lock); }}
 // → The recipients of the notification are only the readers listed in pwr→readers.
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-16"></span>
 ### Rule 16
 - **RMW/Implementation: FastDDS** 
@@ -843,6 +880,9 @@ return 0;
 } else {
 return 0;}}
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-17"></span>
 ### Rule 17
 - **RMW/Implementation:FastDDS**
@@ -887,6 +927,9 @@ trig_qc->dec_conds_sample = s->conds;
 if (s->isread) 
 { inst->nvread--; rhc->n_vread--; } }
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-18"></span>
 ### Rule 18
 - **RMW/Implementation: FastDDS** 
@@ -941,6 +984,9 @@ cb_data->handle = inst->iid;
 cb_data->add = true; return false; 
 }
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-19"></span>
 ### Rule 19
 - **RMW/Implementation: FastDDS**
@@ -966,6 +1012,9 @@ opts.historyCapacity = (uint64_t)qos->durability_service.history.depth;
  } 
 else { opts.historyCapacity = 0; } }
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-20"></span>
 ### Rule 20
 - **RMW/Implementation: FastDDS**
@@ -986,6 +1035,9 @@ else
 m->in_sync = PRMSS_SYNC;
 m->u.not_in_sync.end_of_tl_seq = MAX_SEQ_NUMBER;
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-28"></span><span id="rule-29"></span><span id="rule-30"></span>
 ### Rule 28 / Rule 29 / Rule 30
 - **RMW/Implementation: FastDDS** 
@@ -1016,6 +1068,9 @@ ddsrt_mutex_unlock (&rd->e.lock);
 if (delta < 0 && rd->rhc) { struct ddsi_writer_info wrinfo; 
 ddsi_make_writer_info (&wrinfo, &pwr->e, pwr->c.xqos, NN_STATUSINFO_UNREGISTER); ddsi_rhc_unregister_wr (rd->rhc, &wrinfo); }
 ```
+
+<hr class="hr-dashed">
+
 <span id="rule-34"></span>
 ### Rule 34
 - **RMW/Implementation: FastDDS** 
@@ -1043,6 +1098,8 @@ if (!inst->autodispose)
 rhc->n_not_alive_no_writers++;
 // When the Writer sends an unregister request, the Reader's RHC receives it and, if auto_dispose == 1, transitions the instance to the DISPOSED state.
 ```
+
+<hr class="hr-dashed">
 
 <span id="rule-40"></span>
 ### Rule 40
@@ -1080,3 +1137,5 @@ else { deadline_register_instance_locked (&rhc->deadline, &inst->deadline, ddsrt
 inst->deadline_reg = 1; } }
 #endif
 ```
+
+<hr class="hr-double">
