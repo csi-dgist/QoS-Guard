@@ -216,7 +216,7 @@ cd /path/to/QoS-Guard
 python3 -m qos_guard.qos_checker ~/ros2_ws/src/my_pkg
 ```
 
----
+<hr class="hr-grad-left">
 
 ## Usage
 
@@ -287,7 +287,7 @@ Found 4 XML file(s) in /path/to/my_pkg
 | `publish_period=<N>ms` | Writer publish period (ms); used by rules that depend on period | `40ms` |
 | `rtt=<N>ms` | Expected round-trip time (ms); used by reliability/depth rules | `50ms` |
 
----
+<hr class="hr-grad-left">
 
 ## DDS support
 
@@ -297,7 +297,7 @@ Found 4 XML file(s) in /path/to/my_pkg
 | **RTI Connext** | ✓ | ✓ | Full XML parsing and profile matching. |
 | **Cyclone DDS** | — | ✓ | No XML QoS; use package mode and code scan only. |
 
----
+<hr class="hr-grad-left">
 
 ## How QoS is applied (package mode)
 
@@ -313,7 +313,7 @@ When both XML and code define QoS, the **highest priority** source wins (and ove
 
 Pub–Sub **pairing** in package mode: same **topic name** → same pair. If there is no topic name, the tool derives a base name from `profile_name` (e.g. `cmd_vel_pub` and `cmd_vel_subscriber` → base `cmd_vel`) and pairs by that.
 
----
+<hr class="hr-grad-left">
 
 ## Verification results
 
@@ -327,7 +327,7 @@ The tool reports violations by **severity**. Output is **color-coded** in the te
 
 If there are **no violations**, you see: **`All Entities are safe !`**
 
----
+<hr class="hr-grad-left">
 
 ## Test package
 
@@ -343,7 +343,7 @@ qos_guard ~/ros2_ws/src/qos_test_pkg fast humble
 
 For topic layout and profile descriptions, see **`qos_test_pkg/README.md`**.
 
----
+<hr class="hr-grad-left">
 
 ## Fast DDS: external XML (package mode)
 
@@ -367,7 +367,7 @@ Or one-off:
 FASTRTPS_DEFAULT_PROFILES_FILE=/path/to/default_profiles.xml qos_guard /path/to/package fast humble
 ```
 
----
+<hr class="hr-grad-left">
 
 ## FAQ
 
@@ -378,10 +378,3 @@ FASTRTPS_DEFAULT_PROFILES_FILE=/path/to/default_profiles.xml qos_guard /path/to/
 | **How do I check only one topic?** | Use XML pair mode with that topic’s pub/sub XML files, or a minimal package containing only that topic’s config/code. |
 | **How do I see actual QoS at runtime?** | Use `ros2 topic echo /topic_name --qos-profile all`. QoS-Guard is for **static** checks before deployment. |
 | **Exit code is 0 but violations were printed.** | The tool may still exit 0 when violations exist; use the printed report and summary table to see if anything failed. |
-
----
-
-## More information
-
-- **License:** See the **LICENSE** file in the project.
-- **Full rule list, DDS/ROS matrices, detailed design:** See **Project.md**.
