@@ -62,3 +62,24 @@ hr.hr-short-bar {
     margin: 20px 0;
     border: none; 
 }
+
+/* Admonition 'info' 잔상 제거 및 색상 고정 */
+.md-typeset .admonition.info {
+  /* 1. 테마 고유의 초록색 변수들을 강제로 무력화 */
+  --md-admonition-fg-color: #4E5EB4 !important;
+  --md-admonition-bg-color: #ffffff !important; /* 본문 배경을 순백색으로 고정 */
+  
+  /* 2. 테두리 스타일: 그림자 효과를 없애고 깔끔한 선만 남김 */
+  border-left: 0.4rem solid #4E5EB4 !important;
+  border-right: 1px solid #e0e0e0 !important;
+  border-top: 1px solid #e0e0e0 !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+  box-shadow: none !important; /* 초록색 계열의 그림자나 빛남 방지 */
+}
+
+/* 3. 제목 줄(Notation Summary)의 배경과 글자색 */
+.md-typeset .info > .admonition-title {
+  background-color: rgba(78, 94, 180, 0.05) !important; /* 아주 연한 블루만 살짝 추가 */
+  color: #4E5EB4 !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+}
