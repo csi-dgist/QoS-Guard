@@ -95,7 +95,3 @@ These are implemented in **QoS Guard** for static verification.
     * **PP**: `Publish Period` 
     * **RTT**: `Round Trip Time`
 
-!!! info "Notation Summary"
-    * **mpi**: `max_samples_per_instance` 
-    * **PP**: `Publish Period` 
-    * **RTT**: `Round Trip Time`
