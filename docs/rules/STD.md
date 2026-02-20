@@ -121,7 +121,7 @@ This page describes the QoS dependency and consistency rules derived from the **
       <span style="font-size: 0.8em; color: #999;">Structural</span>
     </div>
     <div class="std-condition">
-      $[HIST.kind = KEEP\_LAST] \wedge [HIST.depth > mpi]$
+      [HIST.kind = KEEP\_LAST] \wedge [HIST.depth > mpi]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
@@ -136,7 +136,7 @@ This page describes the QoS dependency and consistency rules derived from the **
       <span style="font-size: 0.8em; color: #999;">Structural</span>
     </div>
     <div class="std-condition">
-      $[max\_samples < max\_samples\_per\_instance]$
+      [max\_samples < max\_samples\_per\_instance]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
