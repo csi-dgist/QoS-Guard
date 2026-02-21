@@ -222,17 +222,18 @@ python3 -m qos_guard.qos_checker /path/to/your_ros2_package
 
 ## Usage
 
-The tool has three modes. Examples below use the `qos_guard` command; if you use standalone Python, replace it with `python3 -m qos_guard.qos_checker` and keep the same arguments.
+The tool has three modes. Examples below use the `qos_guard` command.
 
 ### 1. Package mode (default)
 
-**When to use:** Check a whole ROS 2 package. The tool finds all `*.xml` (except `package.xml`) and scans `.cpp`, `.hpp`, `.h`, `.py` for publishers/subscribers, builds Pub–Sub pairs by topic, and runs the rule checks.
+**When to use** 
+Check a whole ROS 2 package. The tool finds all `*.xml` (except `package.xml`) and scans `.cpp`, `.hpp`, `.h`, `.py` for publishers/subscribers, builds Pub–Sub pairs by topic, and runs the rule checks.
 
 ```bash
 qos_guard <package_path> [dds] [ros_version] [publish_period=<N>ms] [rtt=<N>ms]
 ```
 
-**Examples:**
+**Examples**
 
 ```bash
 # Defaults: DDS=fast, ROS=humble, publish_period=40ms, rtt=50ms
@@ -241,7 +242,7 @@ qos_guard ~/ros2_ws/src/my_robot_pkg
 # Fast DDS + Jazzy
 qos_guard ~/ros2_ws/src/my_robot_pkg fast jazzy
 
-# Custom period and RTT (used by some rules, e.g. reliable + history depth)
+# Custom period and RTT 
 qos_guard ~/ros2_ws/src/my_robot_pkg fast humble publish_period=20ms rtt=30ms
 ```
 
