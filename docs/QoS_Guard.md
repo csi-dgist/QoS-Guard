@@ -96,6 +96,43 @@
     padding-left: 16px;
     margin-left: 8px;
 }
+
+/* DDS support: 헤더 + 3열 표 */
+.dds-table .dds-header {
+    display: grid;
+    grid-template-columns: 1fr 100px 120px;
+    gap: 16px;
+    padding: 12px 16px;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 2px solid #e2e8f0;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #475569;
+}
+.dds-table .dds-row {
+    display: grid;
+    grid-template-columns: 1fr 100px 120px;
+    gap: 16px;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 14px;
+    color: #334155;
+}
+.dds-table .dds-row:last-child {
+    border-bottom: none;
+}
+.dds-table .dds-row .dds-name {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #334155;
+}
+.dds-table .dds-cell {
+    text-align: center;
+}
 </style>
 
 **Offline static verification of DDS QoS for ROS 2.** 
@@ -324,18 +361,26 @@ Found 4 XML file(s) in /path/to/my_pkg
 
 ## DDS support
 
-<div class="req-container">
-  <div class="req-item">
-    <span class="req-label">Fast DDS</span>
-    <span class="req-value">XML profiles ✓<br>Source code scan ✓<br>XML and code are merged; 5-level priority applied.</span>
+<div class="req-container dds-table">
+  <div class="dds-header">
+    <span>DDS</span>
+    <span>XML profiles</span>
+    <span>Source code scan</span>
   </div>
-  <div class="req-item">
-    <span class="req-label">RTI Connext</span>
-    <span class="req-value">XML profiles ✓<br>Source code scan ✓<br>Full XML parsing and profile matching.</span>
+  <div class="dds-row">
+    <span class="dds-name">Fast DDS</span>
+    <span class="dds-cell">✓</span>
+    <span class="dds-cell">✓</span>
   </div>
-  <div class="req-item">
-    <span class="req-label">Cyclone DDS</span>
-    <span class="req-value">XML profiles —<br>Source code scan ✓<br>No XML QoS; use package mode and code scan only.</span>
+  <div class="dds-row">
+    <span class="dds-name">RTI Connext</span>
+    <span class="dds-cell">✓</span>
+    <span class="dds-cell">✓</span>
+  </div>
+  <div class="dds-row">
+    <span class="dds-name">Cyclone DDS</span>
+    <span class="dds-cell">—</span>
+    <span class="dds-cell">✓</span>
   </div>
 </div>
 
