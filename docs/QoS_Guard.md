@@ -97,10 +97,10 @@
     margin-left: 8px;
 }
 
-/* DDS support: 헤더 + 3열 표 */
+/* DDS support: 헤더 + 3열 표 (열 비율 1.5:1:1, 가운데 정렬) */
 .dds-table .dds-header {
     display: grid;
-    grid-template-columns: 150px 100px 1fr;
+    grid-template-columns: 1.5fr 1fr 1fr;
     gap: 16px;
     padding: 12px 16px;
     background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
@@ -110,10 +110,14 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: #475569;
+    text-align: center;
+}
+.dds-table .dds-header span {
+    text-align: center;
 }
 .dds-table .dds-row {
     display: grid;
-    grid-template-columns: 150px 100px 1fr;
+    grid-template-columns: 1.5fr 1fr 1fr;
     gap: 16px;
     align-items: center;
     padding: 12px 16px;
@@ -129,6 +133,7 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: #334155;
+    text-align: center;
 }
 .dds-table .dds-cell {
     text-align: center;
@@ -275,7 +280,7 @@ The tool has three modes. Examples below use the `qos_guard` command.
 ### 1. Package mode (default)
 
 **When to use** 
-<br>Check a whole ROS 2 package. <br>The tool finds all `*.xml` (except `package.xml`) and scans `.cpp`, `.hpp`, `.h`, `.py` for publishers/subscribers, builds Pub–Sub pairs by topic, and runs the rule checks.
+Check a whole ROS 2 package. The tool finds all `*.xml` (except `package.xml`) and scans `.cpp`, `.hpp`, `.h`, `.py` for publishers/subscribers, builds Pub–Sub pairs by topic, and runs the rule checks.
 
 ```bash
 qos_guard <package_path> [dds] [ros_version] [publish_period=<N>ms] [rtt=<N>ms]
@@ -298,7 +303,7 @@ qos_guard ~/ros2_ws/src/my_robot_pkg fast humble publish_period=20ms rtt=30ms
 ### 2. XML pair mode
 
 **When to use** 
-<br>You have one Writer QoS XML and one Reader QoS XML and want to verify only that pair. <br>Supported for **Fast DDS** and **Connext** only.
+You have one Writer QoS XML and one Reader QoS XML and want to verify only that pair. <br>Supported for **Fast DDS** and **Connext** only.
 
 ```bash
 qos_guard --xml <pub.xml> <sub.xml> <dds> <ros_version> [publish_period=<N>ms] [rtt=<N>ms]
@@ -317,7 +322,7 @@ qos_guard -x pub_qos.xml sub_qos.xml connext jazzy publish_period=10ms
 
 ### 3. List mode
 
-**When to use** <br>See which XML files the tool would scan under a package (useful to confirm config layout).
+**When to use** See which XML files the tool would scan under a package (useful to confirm config layout).
 
 ```bash
 qos_guard --list <package_path>
