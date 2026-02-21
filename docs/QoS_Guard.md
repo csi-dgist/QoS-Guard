@@ -80,6 +80,15 @@
     letter-spacing: 0.05em;
 }
 
+/* 표 형태 섹션: 첫 번째 열 너비 통일 */
+.req-container.req-table .req-label {
+    width: 220px;
+    min-width: 220px;
+    max-width: 220px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
 .req-value {
     color: #334155; /* 기준 색상 */
     font-size: 14px;
@@ -288,7 +297,7 @@ Found 4 XML file(s) in /path/to/my_pkg
 
 ### Arguments summary
 
-<div class="req-container">
+<div class="req-container req-table">
   <div class="req-item">
     <span class="req-label">package_path</span>
     <span class="req-value">Path to the ROS 2 package directory · Default: Required in package/list mode</span>
@@ -315,7 +324,7 @@ Found 4 XML file(s) in /path/to/my_pkg
 
 ## DDS support
 
-<div class="req-container">
+<div class="req-container req-table">
   <div class="req-item">
     <span class="req-label">Fast DDS</span>
     <span class="req-value">XML profiles ✓ · Source code scan ✓ · XML and code are merged; 5-level priority applied.</span>
@@ -336,7 +345,7 @@ Found 4 XML file(s) in /path/to/my_pkg
 
 When both XML and code define QoS, the **highest priority** source wins (and overrides lower ones):
 
-<div class="req-container">
+<div class="req-container req-table">
   <div class="req-item">
     <span class="req-label">L1</span>
     <span class="req-value">Code (<code>rclcpp::QoS</code>, etc.) · Non-default values in code override XML.</span>
