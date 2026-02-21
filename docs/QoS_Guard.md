@@ -195,6 +195,45 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* FAQ: Q&A 카드 리스트 */
+.faq-list {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.faq-item {
+    padding: 16px 18px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    border-left: 4px solid #4E5EB4;
+    transition: all 0.2s ease;
+}
+.faq-item:hover {
+    border-color: #c7d2fe;
+    box-shadow: 0 2px 8px rgba(78, 94, 180, 0.06);
+}
+.faq-item .faq-q {
+    font-weight: 700;
+    font-size: 14px;
+    color: #1e293b;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+.faq-item .faq-a {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.55;
+    padding-left: 0;
+}
+.faq-item .faq-a code {
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+}
 </style>
 
 **Offline static verification of DDS QoS for ROS 2.** 
@@ -547,17 +586,29 @@ FASTRTPS_DEFAULT_PROFILES_FILE=/path/to/default_profiles.xml qos_guard /path/to/
 
 ## FAQ
 
-**Can I use it without ROS 2?**  
-Yes. Use `python3 -m qos_guard.qos_checker <package_path> [dds] [ros_version]` from the repo root.
+<div class="faq-list">
+  <div class="faq-item">
+    <div class="faq-q">Can I use it without ROS 2?</div>
+    <div class="faq-a">Yes. Use <code>python3 -m qos_guard.qos_checker &lt;package_path&gt; [dds] [ros_version]</code> from the repo root.</div>
+  </div>
 
-**Why does `--xml` not work with Cyclone?**  
-Cyclone DDS has no XML QoS profile support; only package mode (code scan) is available.
+  <div class="faq-item">
+    <div class="faq-q">Why does <code>--xml</code> not work with Cyclone?</div>
+    <div class="faq-a">Cyclone DDS has no XML QoS profile support; only package mode (code scan) is available.</div>
+  </div>
 
-**How do I check only one topic?**  
-Use XML pair mode with that topic’s pub/sub XML files, or a minimal package containing only that topic’s config/code.
+  <div class="faq-item">
+    <div class="faq-q">How do I check only one topic?</div>
+    <div class="faq-a">Use XML pair mode with that topic’s pub/sub XML files, or a minimal package containing only that topic’s config/code.</div>
+  </div>
 
-**How do I see actual QoS at runtime?**  
-Use `ros2 topic echo /topic_name --qos-profile all`. QoS-Guard is for **static** checks before deployment.
+  <div class="faq-item">
+    <div class="faq-q">How do I see actual QoS at runtime?</div>
+    <div class="faq-a">Use <code>ros2 topic echo /topic_name --qos-profile all</code>. QoS-Guard is for <strong>static</strong> checks before deployment.</div>
+  </div>
 
-**Exit code is 0 but violations were printed.**  
-The tool may still exit 0 when violations exist; use the printed report and summary table to see if anything failed.
+  <div class="faq-item">
+    <div class="faq-q">Exit code is 0 but violations were printed.</div>
+    <div class="faq-a">The tool may still exit 0 when violations exist; use the printed report and summary table to see if anything failed.</div>
+  </div>
+</div>
