@@ -288,23 +288,47 @@ Found 4 XML file(s) in /path/to/my_pkg
 
 ### Arguments summary
 
-| Argument | Meaning | Default |
-|----------|---------|---------|
-| `package_path` | Path to the ROS 2 package directory | Required in package/list mode |
-| `dds` | `fast`, `cyclone`, or `connext` | `fast` |
-| `ros_version` | `humble`, `jazzy`, or `kilted` | `humble` |
-| `publish_period=<N>ms` | Writer publish period (ms); used by rules that depend on period | `40ms` |
-| `rtt=<N>ms` | Expected round-trip time (ms); used by reliability/depth rules | `50ms` |
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">package_path</span>
+    <span class="req-value">Path to the ROS 2 package directory · Default: Required in package/list mode</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">dds</span>
+    <span class="req-value"><code>fast</code>, <code>cyclone</code>, or <code>connext</code> · Default: <code>fast</code></span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">ros_version</span>
+    <span class="req-value"><code>humble</code>, <code>jazzy</code>, or <code>kilted</code> · Default: <code>humble</code></span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">publish_period=&lt;N&gt;ms</span>
+    <span class="req-value">Writer publish period (ms); used by rules that depend on period · Default: <code>40ms</code></span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">rtt=&lt;N&gt;ms</span>
+    <span class="req-value">Expected round-trip time (ms); used by reliability/depth rules · Default: <code>50ms</code></span>
+  </div>
+</div>
 
 <hr class="hr-grad-left">
 
 ## DDS support
 
-| DDS | XML profiles | Source code scan | Notes |
-|-----|--------------|------------------|--------|
-| **Fast DDS** | ✓ | ✓ | XML and code are merged; 5-level priority applied. |
-| **RTI Connext** | ✓ | ✓ | Full XML parsing and profile matching. |
-| **Cyclone DDS** | — | ✓ | No XML QoS; use package mode and code scan only. |
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Fast DDS</span>
+    <span class="req-value">XML profiles ✓ · Source code scan ✓ · XML and code are merged; 5-level priority applied.</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">RTI Connext</span>
+    <span class="req-value">XML profiles ✓ · Source code scan ✓ · Full XML parsing and profile matching.</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Cyclone DDS</span>
+    <span class="req-value">XML profiles — · Source code scan ✓ · No XML QoS; use package mode and code scan only.</span>
+  </div>
+</div>
 
 <hr class="hr-grad-left">
 
@@ -312,13 +336,28 @@ Found 4 XML file(s) in /path/to/my_pkg
 
 When both XML and code define QoS, the **highest priority** source wins (and overrides lower ones):
 
-| Priority | Source | Description |
-|----------|--------|-------------|
-| **L1** | Code (`rclcpp::QoS`, etc.) | Non-default values in code override XML. |
-| **L2** | `<topic profile_name="/topic_name">` | Matched by topic name; works across ROS 2 versions. |
-| **L3** | `<data_writer>` / `<data_reader>` | Jazzy/Kilted style; topic name matching. |
-| **L4** | `<publisher>` / `<subscriber>` | Humble style; profile name from code. |
-| **L5** | `is_default_profile="true"` | Fallback when nothing else matches. |
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">L1</span>
+    <span class="req-value">Code (<code>rclcpp::QoS</code>, etc.) · Non-default values in code override XML.</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">L2</span>
+    <span class="req-value"><code>&lt;topic profile_name="/topic_name"&gt;</code> · Matched by topic name; works across ROS 2 versions.</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">L3</span>
+    <span class="req-value"><code>&lt;data_writer&gt;</code> / <code>&lt;data_reader&gt;</code> · Jazzy/Kilted style; topic name matching.</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">L4</span>
+    <span class="req-value"><code>&lt;publisher&gt;</code> / <code>&lt;subscriber&gt;</code> · Humble style; profile name from code.</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">L5</span>
+    <span class="req-value"><code>is_default_profile="true"</code> · Fallback when nothing else matches.</span>
+  </div>
+</div>
 
 Pub–Sub **pairing** in package mode: same **topic name** → same pair. If there is no topic name, the tool derives a base name from `profile_name` (e.g. `cmd_vel_pub` and `cmd_vel_subscriber` → base `cmd_vel`) and pairs by that.
 
