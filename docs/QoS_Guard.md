@@ -481,7 +481,7 @@ Pub–Sub **pairing** in package mode: same **topic name** → same pair. If the
 
 ## Verification results
 
-The tool reports violations by **severity**. Output is **color-coded** in the terminal.
+The tool reports violations by **severity**. Output is **color-coded** in the terminal; a **summary table** at the end shows counts per category.
 
 <div class="severity-grid">
   <div class="severity-card structural">
@@ -507,7 +507,7 @@ If there are **no violations**, you see: **`All Entities are safe !`**
 
 ## Test package
 
-The repo includes **qos_test_pkg** to try the tool<br>: multiple topics, mixed QoS styles (code-only, XML topic profile, entity profile, default trap).
+The repo includes **qos_test_pkg** to try the tool: multiple topics, mixed QoS styles (code-only, XML topic profile, entity profile, default trap).
 
 ```bash
 cd ~/ros2_ws
@@ -517,14 +517,47 @@ source install/setup.bash
 qos_guard ~/ros2_ws/src/qos_test_pkg fast humble
 ```
 
+For topic layout and profile descriptions, see **`qos_test_pkg/README.md`**.
+
+<hr class="hr-grad-left">
+
+## Fast DDS: external XML (package mode)
+
+When `dds=fast`, package mode can also load XML from these **environment variables** (so system-wide or workspace QoS is included):
+
+| Variable | Purpose |
+|----------|---------|
+| `FASTRTPS_DEFAULT_PROFILES_FILE` | Fast DDS default profiles XML path. |
+| `RMW_FASTRTPS_CONFIG_FILE` | ROS 2 rmw_fastrtps config XML path. |
+
+**Example:**
+
+```bash
+export FASTRTPS_DEFAULT_PROFILES_FILE=/path/to/default_profiles.xml
+qos_guard /path/to/package fast humble
+```
+
+Or one-off:
+
+```bash
+FASTRTPS_DEFAULT_PROFILES_FILE=/path/to/default_profiles.xml qos_guard /path/to/package fast humble
+```
+
 <hr class="hr-grad-left">
 
 ## FAQ
 
-| Question | Answer |
-|----------|--------|
-| **Can I use it without ROS 2?** | Yes. Use `python3 -m qos_guard.qos_checker <package_path> [dds] [ros_version]` from the repo root. |
-| **Why does `--xml` not work with Cyclone?** | Cyclone DDS has no XML QoS profile support; only package mode (code scan) is available. |
-| **How do I check only one topic?** | Use XML pair mode with that topic’s pub/sub XML files, or a minimal package containing only that topic’s config/code. |
-| **How do I see actual QoS at runtime?** | Use `ros2 topic echo /topic_name --qos-profile all`. QoS-Guard is for **static** checks before deployment. |
-| **Exit code is 0 but violations were printed.** | The tool may still exit 0 when violations exist; use the printed report and summary table to see if anything failed. |
+**Can I use it without ROS 2?**  
+Yes. Use `python3 -m qos_guard.qos_checker <package_path> [dds] [ros_version]` from the repo root.
+
+**Why does `--xml` not work with Cyclone?**  
+Cyclone DDS has no XML QoS profile support; only package mode (code scan) is available.
+
+**How do I check only one topic?**  
+Use XML pair mode with that topic’s pub/sub XML files, or a minimal package containing only that topic’s config/code.
+
+**How do I see actual QoS at runtime?**  
+Use `ros2 topic echo /topic_name --qos-profile all`. QoS-Guard is for **static** checks before deployment.
+
+**Exit code is 0 but violations were printed.**  
+The tool may still exit 0 when violations exist; use the printed report and summary table to see if anything failed.
