@@ -138,6 +138,63 @@
 .dds-table .dds-cell {
     text-align: center;
 }
+
+/* Verification results: severity cards */
+.severity-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 20px 0;
+}
+.severity-card {
+    padding: 18px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    border-left: 4px solid #94a3b8;
+    transition: all 0.2s ease;
+}
+.severity-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+.severity-card.structural {
+    border-left-color: #dc2626;
+    background: linear-gradient(135deg, #fef2f2 0%, #fff 100%);
+}
+.severity-card.functional {
+    border-left-color: #ea580c;
+    background: linear-gradient(135deg, #fff7ed 0%, #fff 100%);
+}
+.severity-card.operational {
+    border-left-color: #4E5EB4;
+    background: linear-gradient(135deg, #f8fafc 0%, #fff 100%);
+}
+.severity-card .severity-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: #1e293b;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.severity-card .severity-desc {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+.severity-card .severity-action {
+    font-size: 12px;
+    color: #475569;
+    padding-top: 10px;
+    border-top: 1px solid #f1f5f9;
+    font-style: italic;
+}
+@media (max-width: 768px) {
+    .severity-grid {
+        grid-template-columns: 1fr;
+    }
+}
 </style>
 
 **Offline static verification of DDS QoS for ROS 2.** 
@@ -426,11 +483,23 @@ Pub–Sub **pairing** in package mode: same **topic name** → same pair. If the
 
 The tool reports violations by **severity**. Output is **color-coded** in the terminal; a **summary table** at the end shows counts per category.
 
-| Severity | Meaning | What to do |
-|----------|---------|------------|
-| **Structural** | RMW-level incompatibility; connection can fail or process may crash. | Fix first; these block communication. |
-| **Functional** | Connection may work but guarantees (reliability, durability, etc.) are broken. | Risk of data loss or late-joiner issues; fix when possible. |
-| **Operational** | No functional bug but inefficient (e.g. extra memory or bandwidth). | Optional to fix; improves resource use. |
+<div class="severity-grid">
+  <div class="severity-card structural">
+    <div class="severity-title">Structural</div>
+    <div class="severity-desc">RMW-level incompatibility; connection can fail or process may crash.</div>
+    <div class="severity-action">Fix first; these block communication.</div>
+  </div>
+  <div class="severity-card functional">
+    <div class="severity-title">Functional</div>
+    <div class="severity-desc">Connection may work but guarantees (reliability, durability, etc.) are broken.</div>
+    <div class="severity-action">Risk of data loss or late-joiner issues; fix when possible.</div>
+  </div>
+  <div class="severity-card operational">
+    <div class="severity-title">Operational</div>
+    <div class="severity-desc">No functional bug but inefficient (e.g. extra memory or bandwidth).</div>
+    <div class="severity-action">Optional to fix; improves resource use.</div>
+  </div>
+</div>
 
 If there are **no violations**, you see: **`All Entities are safe !`**
 
