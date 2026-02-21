@@ -56,7 +56,7 @@
 }  
 </style>
 
----
+<hr class="hr-grad-left">
 
 ## Table of Contents
 
@@ -79,7 +79,7 @@
   <a href="#16-reader-data-lifecycle-rdlife" class="qos-card"><span class="qos-num">16</span><div class="qos-title">READER DATA LIFECYCLE<span class="qos-abbr">RDLIFE</span></div></a>
 </div>
 
----
+<hr class="hr-grad-left">
 
 ## QoS Mapping by Lifecycle Phase
 
@@ -89,7 +89,7 @@
 | **Data Exchange** | RELIAB, DURABL, DEADLN, LIVENS, HIST, RESLIM, LFSPAN, OWNST, DESTORD |
 | **Disassociation** | RELIAB, DURABL, LIVENS, OWNST, WDLIFE, RDLIFE |
 
----
+<hr class="hr-grad-left">
 
 ## 1. ENTITY FACTORY (ENTFAC)
 
@@ -105,7 +105,7 @@
 
 **Example:** To activate a navigation module’s Publishers/Subscribers only after local sensor calibration or localization is complete, set `autoenable_created_entities=false` and call `enable()` at the appropriate time.
 
----
+<hr class="hr-dashed">
 
 ## 2. PARTITION (PART)
 
@@ -121,7 +121,7 @@
 
 **Example:** Delivery and inventory robots may use the same domain and topics such as `status` and `command`. A central management system can subscribe with `names=delivery` or `names=inventory` to receive data only from the desired group.
 
----
+<hr class="hr-dashed">
 
 ## 3. USER DATA (USRDATA)
 
@@ -136,7 +136,7 @@
 
 **Example:** Each robot can embed `robot_id=R12`, `token=ABCD123` in its participant so the server can validate the token during SPDP and admit only authorized robots. A LiDAR Publisher can include `sensor=LiDAR`, `fov=270` so subscribers can choose an appropriate filtering strategy before receiving samples.
 
----
+<hr class="hr-dashed">
 
 ## 4. GROUP DATA (GRPDATA)
 
@@ -150,7 +150,7 @@
 
 **Example:** Similar to PART for separating delivery vs. inventory robots; PART is used by DDS for matching, while GRPDATA is **interpreted by the application** in discovery callbacks.
 
----
+<hr class="hr-dashed">
 
 ## 5. TOPIC DATA (TOPDATA)
 
@@ -164,7 +164,7 @@
 
 **Example:** Embed `schema=2.1`, `frame=lidar` in the scan cloud topic’s TOPDATA so an inventory app can check schema compatibility during topic discovery and avoid parsing errors.
 
----
+<hr class="hr-dashed">
 
 ## 6. RELIABILITY (RELIAB)
 
@@ -186,7 +186,7 @@
 
 **Example:** Use `reliable` on both sides for emergency stop or task assignment. Use `best_effort` for high-frequency streams (e.g., LiDAR, camera) to avoid retransmission overhead.
 
----
+<hr class="hr-dashed">
 
 ## 7. DURABILITY (DURABL)
 
@@ -210,7 +210,7 @@
 
 **Example:** For global maps or mission plans that must remain available to robots that join later (or after restarts), use `transient` (survives process restart) or `persistent` (survives system reboot).
 
----
+<hr class="hr-dashed">
 
 ## 8. DEADLINE (DEADLN)
 
@@ -229,7 +229,7 @@
 
 **Example:** A robot publishes position and battery every second; the monitoring Subscriber uses period=1 s. If a sample is not received within that interval, a deadline-miss alarm indicates communication or robot failure.
 
----
+<hr class="hr-dashed">
 
 ## 9. LIVELINESS (LIVENS)
 
@@ -250,7 +250,7 @@
 
 **Example:** A central monitor configures each robot’s Publisher with `kind=automatic` and `lease_duration=5` seconds. If no signal is received within 5 seconds, the monitor can gray out the robot’s icon or issue a warning.
 
----
+<hr class="hr-dashed">
 
 ## 10. HISTORY (HIST)
 
@@ -268,7 +268,7 @@
 
 **Example:** For a control station that must keep all robot positions since startup, use `keep_all`. For real-time tracking where only the latest position matters, use `keep_last` with `depth=1`.
 
----
+<hr class="hr-dashed">
 
 ## 11. RESOURCE LIMITS (RESLIM)
 
@@ -288,7 +288,7 @@
 
 **Example:** For real-time position only, set the Publisher’s `max_instances` low to save memory. On the Subscriber, set `max_samples_per_instance` high enough when many robot instances may be present.
 
----
+<hr class="hr-dashed">
 
 ## 12. LIFESPAN (LFSPAN)
 
@@ -307,7 +307,7 @@
 
 **Example:** For position or battery data where only the last few seconds matter, set `duration` accordingly so older samples are removed. For command logs that must be delivered over a long time, set `duration=infinity`.
 
----
+<hr class="hr-dashed">
 
 ## 13. OWNERSHIP (+STRENGTH) (OWNST)
 
@@ -327,7 +327,7 @@
 
 **Example:** Use `shared` when multiple robots update a shared map. For a task that must be performed by a single robot, use `exclusive` with strength so the active robot is the owner; on failure, ownership can transfer to the next-highest strength robot.
 
----
+<hr class="hr-dashed">
 
 ## 14. DESTINATION ORDER (DESTORD)
 
@@ -345,7 +345,7 @@
 
 **Example:** Use `by_source_timestamp` when multiple robots update the same map instance so all share a consistent view. For real-time position where “latest received” matters, use `by_reception_timestamp`.
 
----
+<hr class="hr-dashed">
 
 ## 15. WRITER DATA LIFECYCLE (WDLIFE)
 
@@ -365,7 +365,7 @@
 
 **Example:** When a robot publishes detected objects, `autodispose_unregistered_instances=true` removes the instance from the map as “processed” when the task is done. Set to `false` if another robot may rediscover and update the same object.
 
----
+<hr class="hr-dashed">
 
 ## 16. READER DATA LIFECYCLE (RDLIFE)
 
@@ -385,7 +385,7 @@
 
 **Example:** In a temporary storage area with fast-moving pallets, set `autopurge_disposed_samples_delay=0` to purge as soon as dispose() is received. For critical static objects, set `autopurge_no_writer_samples_delay=300` seconds so newly joined robots can still inspect after brief communication loss.
 
----
+<hr class="hr-grad-left">
 
 ## Summary: Metadata, Matching, Cache, and Lifecycle
 
