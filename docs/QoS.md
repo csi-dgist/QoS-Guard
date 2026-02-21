@@ -56,7 +56,7 @@
 }  
 </style>
 
-<hr class="hr-grad-left">
+<hr class="hr-grad-left"> 
 
 ## Table of Contents
 
