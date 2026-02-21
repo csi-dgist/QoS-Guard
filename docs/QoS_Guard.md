@@ -275,7 +275,7 @@ The tool has three modes. Examples below use the `qos_guard` command.
 ### 1. Package mode (default)
 
 **When to use** 
-Check a whole ROS 2 package. The tool finds all `*.xml` (except `package.xml`) and scans `.cpp`, `.hpp`, `.h`, `.py` for publishers/subscribers, builds Pub–Sub pairs by topic, and runs the rule checks.
+<br>Check a whole ROS 2 package. <br>The tool finds all `*.xml` (except `package.xml`) and scans `.cpp`, `.hpp`, `.h`, `.py` for publishers/subscribers, builds Pub–Sub pairs by topic, and runs the rule checks.
 
 ```bash
 qos_guard <package_path> [dds] [ros_version] [publish_period=<N>ms] [rtt=<N>ms]
@@ -298,7 +298,7 @@ qos_guard ~/ros2_ws/src/my_robot_pkg fast humble publish_period=20ms rtt=30ms
 ### 2. XML pair mode
 
 **When to use** 
-You have one Writer QoS XML and one Reader QoS XML and want to verify only that pair. <br>Supported for **Fast DDS** and **Connext** only.
+<br>You have one Writer QoS XML and one Reader QoS XML and want to verify only that pair. <br>Supported for **Fast DDS** and **Connext** only.
 
 ```bash
 qos_guard --xml <pub.xml> <sub.xml> <dds> <ros_version> [publish_period=<N>ms] [rtt=<N>ms]
@@ -317,7 +317,7 @@ qos_guard -x pub_qos.xml sub_qos.xml connext jazzy publish_period=10ms
 
 ### 3. List mode
 
-**When to use** See which XML files the tool would scan under a package (useful to confirm config layout).
+**When to use** <br>See which XML files the tool would scan under a package (useful to confirm config layout).
 
 ```bash
 qos_guard --list <package_path>
