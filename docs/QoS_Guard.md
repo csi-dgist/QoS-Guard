@@ -100,7 +100,7 @@
 /* DDS support: 헤더 + 3열 표 */
 .dds-table .dds-header {
     display: grid;
-    grid-template-columns: 1fr 100px 120px;
+    grid-template-columns: 150px 100px 1fr;
     gap: 16px;
     padding: 12px 16px;
     background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
@@ -113,7 +113,7 @@
 }
 .dds-table .dds-row {
     display: grid;
-    grid-template-columns: 1fr 100px 120px;
+    grid-template-columns: 150px 100px 1fr;
     gap: 16px;
     align-items: center;
     padding: 12px 16px;
