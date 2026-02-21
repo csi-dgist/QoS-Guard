@@ -87,6 +87,75 @@
     padding-left: 16px;
     margin-left: 8px;
 }
+
+/* Arguments summary */
+.args-container {
+    margin: 20px 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.args-header {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr 1fr;
+    gap: 16px;
+    padding: 14px 20px;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 2px solid #e2e8f0;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #475569;
+}
+
+.args-row {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr 1fr;
+    gap: 16px;
+    padding: 14px 20px;
+    border-bottom: 1px solid #f1f5f9;
+    align-items: center;
+    font-size: 14px;
+    color: #334155;
+}
+
+.args-row:last-child {
+    border-bottom: none;
+}
+
+.args-row:hover {
+    background: #f8fafc;
+}
+
+.args-name {
+    font-family: ui-monospace, monospace;
+    font-size: 13px;
+    color: #4E5EB4;
+    font-weight: 600;
+}
+
+.args-default {
+    font-family: ui-monospace, monospace;
+    font-size: 13px;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .args-header, .args-row {
+        grid-template-columns: 1fr 1fr;
+    }
+    .args-header .args-col-default,
+    .args-row .args-default { grid-column: 2; }
+    .args-row .args-meaning { grid-column: 1 / -1; }
+}
 </style>
 
 **Offline static verification of DDS QoS for ROS 2.** 
@@ -288,13 +357,38 @@ Found 4 XML file(s) in /path/to/my_pkg
 
 ### Arguments summary
 
-| Argument | Meaning | Default |
-|----------|---------|---------|
-| `package_path` | Path to the ROS 2 package directory | Required in package/list mode |
-| `dds` | `fast`, `cyclone`, or `connext` | `fast` |
-| `ros_version` | `humble`, `jazzy`, or `kilted` | `humble` |
-| `publish_period=<N>ms` | Writer publish period (ms); used by rules that depend on period | `40ms` |
-| `rtt=<N>ms` | Expected round-trip time (ms); used by reliability/depth rules | `50ms` |
+<div class="args-container">
+  <div class="args-header">
+    <span>Argument</span>
+    <span>Meaning</span>
+    <span>Default</span>
+  </div>
+  <div class="args-row">
+    <span class="args-name">package_path</span>
+    <span class="args-meaning">Path to the ROS 2 package directory</span>
+    <span class="args-default">Required in package/list mode</span>
+  </div>
+  <div class="args-row">
+    <span class="args-name">dds</span>
+    <span class="args-meaning"><code>fast</code>, <code>cyclone</code>, or <code>connext</code></span>
+    <span class="args-default">fast</span>
+  </div>
+  <div class="args-row">
+    <span class="args-name">ros_version</span>
+    <span class="args-meaning"><code>humble</code>, <code>jazzy</code>, or <code>kilted</code></span>
+    <span class="args-default">humble</span>
+  </div>
+  <div class="args-row">
+    <span class="args-name">publish_period=&lt;N&gt;ms</span>
+    <span class="args-meaning">Writer publish period (ms); used by rules that depend on period</span>
+    <span class="args-default">40ms</span>
+  </div>
+  <div class="args-row">
+    <span class="args-name">rtt=&lt;N&gt;ms</span>
+    <span class="args-meaning">Expected round-trip time (ms); used by reliability/depth rules</span>
+    <span class="args-default">50ms</span>
+  </div>
+</div>
 
 <hr class="hr-grad-left">
 
