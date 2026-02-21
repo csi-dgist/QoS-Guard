@@ -203,6 +203,8 @@ source install/setup.bash
 ros2 run qos_guard qos_guard /path/to/any/ros2/package
 ```
 
+<hr class="hr-dashed">
+
 ### Option B: Standalone (no ROS 2)
 
 You only need the repository and Python 3.10+.
@@ -245,16 +247,18 @@ qos_guard ~/ros2_ws/src/my_robot_pkg fast jazzy
 # Custom period and RTT 
 qos_guard ~/ros2_ws/src/my_robot_pkg fast humble publish_period=20ms rtt=30ms
 ```
+<hr class="hr-dashed">
 
 ### 2. XML pair mode
 
-**When to use:** You have one Writer QoS XML and one Reader QoS XML and want to verify only that pair. Supported for **Fast DDS** and **Connext** only.
+**When to use** 
+You have one Writer QoS XML and one Reader QoS XML and want to verify only that pair. <br>Supported for **Fast DDS** and **Connext** only.
 
 ```bash
 qos_guard --xml <pub.xml> <sub.xml> <dds> <ros_version> [publish_period=<N>ms] [rtt=<N>ms]
 ```
 
-**Examples:**
+**Examples**
 
 ```bash
 qos_guard --xml ./profiles/writer.xml ./profiles/reader.xml fast humble
@@ -262,6 +266,8 @@ qos_guard -x pub_qos.xml sub_qos.xml connext jazzy publish_period=10ms
 ```
 
 > **Cyclone DDS** does not support XML QoS profiles. For Cyclone, use **package mode** only (code scan). The `--xml` option is not available when `dds=cyclone`.
+
+<hr class="hr-dashed">
 
 ### 3. List mode
 
