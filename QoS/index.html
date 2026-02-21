@@ -1,0 +1,1891 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ROS 2 QoS Dependency Conflict Detector">
+      
+      
+      
+        <link rel="canonical" href="https://csi-dgist.github.io/QoS-Guard/QoS/">
+      
+      
+        <link rel="prev" href="../QoS_Guard/">
+      
+      
+        <link rel="next" href="../rules/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>QoS Encyclopedia - QoS Guard</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dds-qos-policy-guide-16-policies" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="QoS Guard" class="md-header__button md-logo" aria-label="QoS Guard" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            QoS Guard
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              QoS Encyclopedia
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/csi-dgist/QoS-Guard" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../QoS_Guard/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  How to use
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QoS Encyclopedia
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../rules/" class="md-tabs__link">
+          
+  
+  
+  QoS Rules
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="QoS Guard" class="md-nav__button md-logo" aria-label="QoS Guard" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    QoS Guard
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/csi-dgist/QoS-Guard" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QoS_Guard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to use
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS Encyclopedia
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS Encyclopedia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qos-mapping-by-lifecycle-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        QoS Mapping by Lifecycle Phase
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-entity-factory-entfac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ENTITY FACTORY (ENTFAC)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-partition-part" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. PARTITION (PART)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-user-data-usrdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. USER DATA (USRDATA)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-group-data-grpdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. GROUP DATA (GRPDATA)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-topic-data-topdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. TOPIC DATA (TOPDATA)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-reliability-reliab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. RELIABILITY (RELIAB)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-durability-durabl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. DURABILITY (DURABL)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-deadline-deadln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. DEADLINE (DEADLN)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-liveliness-livens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. LIVELINESS (LIVENS)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-history-hist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. HISTORY (HIST)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-resource-limits-reslim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. RESOURCE LIMITS (RESLIM)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-lifespan-lfspan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. LIFESPAN (LFSPAN)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-ownership-strength-ownst" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. OWNERSHIP (+STRENGTH) (OWNST)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-destination-order-destord" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. DESTINATION ORDER (DESTORD)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-writer-data-lifecycle-wdlife" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. WRITER DATA LIFECYCLE (WDLIFE)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-reader-data-lifecycle-rdlife" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. READER DATA LIFECYCLE (RDLIFE)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-metadata-matching-cache-and-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: Metadata, Matching, Cache, and Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS Rules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    QoS Rules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rules/STD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STD Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rules/IMP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IMP Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rules/EMP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EMP Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qos-mapping-by-lifecycle-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        QoS Mapping by Lifecycle Phase
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-entity-factory-entfac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ENTITY FACTORY (ENTFAC)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-partition-part" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. PARTITION (PART)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-user-data-usrdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. USER DATA (USRDATA)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-group-data-grpdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. GROUP DATA (GRPDATA)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-topic-data-topdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. TOPIC DATA (TOPDATA)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-reliability-reliab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. RELIABILITY (RELIAB)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-durability-durabl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. DURABILITY (DURABL)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-deadline-deadln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. DEADLINE (DEADLN)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-liveliness-livens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. LIVELINESS (LIVENS)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-history-hist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. HISTORY (HIST)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-resource-limits-reslim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. RESOURCE LIMITS (RESLIM)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-lifespan-lfspan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. LIFESPAN (LFSPAN)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-ownership-strength-ownst" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. OWNERSHIP (+STRENGTH) (OWNST)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-destination-order-destord" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. DESTINATION ORDER (DESTORD)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-writer-data-lifecycle-wdlife" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. WRITER DATA LIFECYCLE (WDLIFE)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-reader-data-lifecycle-rdlife" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. READER DATA LIFECYCLE (RDLIFE)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-metadata-matching-cache-and-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: Metadata, Matching, Cache, and Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="dds-qos-policy-guide-16-policies">DDS QoS Policy Guide (16 Policies)</h1>
+<blockquote>
+<p>Source: <em>Dependency Chain Analysis of ROS 2 DDS QoS Policies: From Lifecycle Tutorial to Static Verification</em><br />
+DDS Publish–Subscribe communication is divided into three phases: <strong>Discovery → Data Exchange → Disassociation</strong>.</p>
+</blockquote>
+<style>
+/* qos.md 전용 커스텀 스타일 */
+.qos-toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.qos-card {
+    background: #ffffff;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    padding: 12px 16px;
+    text-decoration: none !important;
+    color: #24292e !important;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.qos-card:hover {
+    border-color: #0366d6;
+    background-color: #f6f8fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.qos-num {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: #0366d6;
+    margin-right: 12px;
+    font-size: 1.1em;
+}
+
+.qos-title {
+    font-weight: 500;
+    font-size: 0.95em;
+    line-height: 1.2;
+}
+
+.qos-abbr {
+    display: block;
+    font-size: 0.75em;
+    color: #6a737d;
+    margin-top: 2px;
+}  
+</style>
+
+<hr class="hr-grad-left">
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<div class="qos-toc-grid">
+  <a href="#1-entity-factory-entfac" class="qos-card"><span class="qos-num">01</span><div class="qos-title">ENTITY FACTORY<span class="qos-abbr">ENTFAC</span></div></a>
+  <a href="#2-partition-part" class="qos-card"><span class="qos-num">02</span><div class="qos-title">PARTITION<span class="qos-abbr">PART</span></div></a>
+  <a href="#3-user-data-usrdata" class="qos-card"><span class="qos-num">03</span><div class="qos-title">USER DATA<span class="qos-abbr">USRDATA</span></div></a>
+  <a href="#4-group-data-grpdata" class="qos-card"><span class="qos-num">04</span><div class="qos-title">GROUP DATA<span class="qos-abbr">GRPDATA</span></div></a>
+  <a href="#5-topic-data-topdata" class="qos-card"><span class="qos-num">05</span><div class="qos-title">TOPIC DATA<span class="qos-abbr">TOPDATA</span></div></a>
+  <a href="#6-reliability-reliab" class="qos-card"><span class="qos-num">06</span><div class="qos-title">RELIABILITY<span class="qos-abbr">RELIAB</span></div></a>
+  <a href="#7-durability-durabl" class="qos-card"><span class="qos-num">07</span><div class="qos-title">DURABILITY<span class="qos-abbr">DURABL</span></div></a>
+  <a href="#8-deadline-deadln" class="qos-card"><span class="qos-num">08</span><div class="qos-title">DEADLINE<span class="qos-abbr">DEADLN</span></div></a>
+  <a href="#9-liveliness-livens" class="qos-card"><span class="qos-num">09</span><div class="qos-title">LIVELINESS<span class="qos-abbr">LIVENS</span></div></a>
+  <a href="#10-history-hist" class="qos-card"><span class="qos-num">10</span><div class="qos-title">HISTORY<span class="qos-abbr">HIST</span></div></a>
+  <a href="#11-resource-limits-reslim" class="qos-card"><span class="qos-num">11</span><div class="qos-title">RESOURCE LIMITS<span class="qos-abbr">RESLIM</span></div></a>
+  <a href="#12-lifespan-lfspan" class="qos-card"><span class="qos-num">12</span><div class="qos-title">LIFESPAN<span class="qos-abbr">LFSPAN</span></div></a>
+  <a href="#13-ownership-strength-ownst" class="qos-card"><span class="qos-num">13</span><div class="qos-title">OWNERSHIP<span class="qos-abbr">OWNST</span></div></a>
+  <a href="#14-destination-order-destord" class="qos-card"><span class="qos-num">14</span><div class="qos-title">DESTINATION ORDER<span class="qos-abbr">DESTORD</span></div></a>
+  <a href="#15-writer-data-lifecycle-wdlife" class="qos-card"><span class="qos-num">15</span><div class="qos-title">WRITER DATA LIFECYCLE<span class="qos-abbr">WDLIFE</span></div></a>
+  <a href="#16-reader-data-lifecycle-rdlife" class="qos-card"><span class="qos-num">16</span><div class="qos-title">READER DATA LIFECYCLE<span class="qos-abbr">RDLIFE</span></div></a>
+</div>
+
+<hr class="hr-grad-left">
+
+<h2 id="qos-mapping-by-lifecycle-phase">QoS Mapping by Lifecycle Phase</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Applicable QoS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Discovery</strong></td>
+<td>ENTFAC, PART, USRDATA, GRPDATA, TOPDATA</td>
+</tr>
+<tr>
+<td><strong>Data Exchange</strong></td>
+<td>RELIAB, DURABL, DEADLN, LIVENS, HIST, RESLIM, LFSPAN, OWNST, DESTORD</td>
+</tr>
+<tr>
+<td><strong>Disassociation</strong></td>
+<td>RELIAB, DURABL, LIVENS, OWNST, WDLIFE, RDLIFE</td>
+</tr>
+</tbody>
+</table>
+<hr class="hr-grad-left">
+
+<h2 id="1-entity-factory-entfac">1. ENTITY FACTORY (ENTFAC)</h2>
+<p><strong>Role:</strong> Controls <strong>when</strong> newly created DDS entities begin participating in discovery.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parameter</strong></td>
+<td><code>autoenable_created_entities</code> (boolean, default: TRUE)</td>
+</tr>
+<tr>
+<td><strong>TRUE</strong></td>
+<td>Child entities are enabled immediately upon creation and participate in discovery</td>
+</tr>
+<tr>
+<td><strong>FALSE</strong></td>
+<td>Entities do not participate in discovery until the application explicitly calls <code>enable()</code></td>
+</tr>
+<tr>
+<td><strong>Lifecycle</strong></td>
+<td>Determines when the Discovery phase starts</td>
+</tr>
+<tr>
+<td><strong>Mutability</strong></td>
+<td>Can be changed at runtime; changes apply only to entities <strong>created after</strong> the update</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong> To activate a navigation module’s Publishers/Subscribers only after local sensor calibration or localization is complete, set <code>autoenable_created_entities=false</code> and call <code>enable()</code> at the appropriate time.</p>
+<hr class="hr-dashed">
+
+<h2 id="2-partition-part">2. PARTITION (PART)</h2>
+<p><strong>Role:</strong> Introduces <strong>logical segmentation</strong> within a single DDS domain so that only certain Publisher/Subscriber groups match.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parameter</strong></td>
+<td><code>names</code> (array of strings, default: empty string)</td>
+</tr>
+<tr>
+<td><strong>Applies to</strong></td>
+<td>Both Publisher and Subscriber</td>
+</tr>
+<tr>
+<td><strong>Matching</strong></td>
+<td>Publisher and Subscriber match only if they share <strong>at least one</strong> partition name</td>
+</tr>
+<tr>
+<td><strong>Exchanged</strong></td>
+<td>During the SEDP stage of the Discovery phase</td>
+</tr>
+<tr>
+<td><strong>Mutability</strong></td>
+<td>Can be changed at runtime; changes trigger rematching via SEDP (existing connections are broken)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong> Delivery and inventory robots may use the same domain and topics such as <code>status</code> and <code>command</code>. A central management system can subscribe with <code>names=delivery</code> or <code>names=inventory</code> to receive data only from the desired group.</p>
+<hr class="hr-dashed">
+
+<h2 id="3-user-data-usrdata">3. USER DATA (USRDATA)</h2>
+<p><strong>Role:</strong> Attaches <strong>application-specific metadata</strong> to entities such as DomainParticipant, Publisher, and Subscriber.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parameter</strong></td>
+<td><code>value</code> (arbitrary byte sequence, default: empty)</td>
+</tr>
+<tr>
+<td><strong>Purpose</strong></td>
+<td>DDS does not interpret it; the value is carried in built-in topic samples (discovery messages)</td>
+</tr>
+<tr>
+<td><strong>Propagation</strong></td>
+<td>DomainParticipant → SPDP; Publisher/Subscriber → SEDP</td>
+</tr>
+<tr>
+<td><strong>Mutability</strong></td>
+<td>Can be changed at runtime; changes are reflected in the next built-in topic sample</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong> Each robot can embed <code>robot_id=R12</code>, <code>token=ABCD123</code> in its participant so the server can validate the token during SPDP and admit only authorized robots. A LiDAR Publisher can include <code>sensor=LiDAR</code>, <code>fov=270</code> so subscribers can choose an appropriate filtering strategy before receiving samples.</p>
+<hr class="hr-dashed">
+
+<h2 id="4-group-data-grpdata">4. GROUP DATA (GRPDATA)</h2>
+<p><strong>Role:</strong> Attaches <strong>application-specific metadata</strong> to Publisher and Subscriber entities. Structure and behavior are the same as USRDATA.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parameter</strong></td>
+<td><code>value</code> (arbitrary byte sequence)</td>
+</tr>
+<tr>
+<td><strong>Propagation</strong></td>
+<td>SEDP phase</td>
+</tr>
+<tr>
+<td><strong>Mutability</strong></td>
+<td>Can be changed freely at runtime</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong> Similar to PART for separating delivery vs. inventory robots; PART is used by DDS for matching, while GRPDATA is <strong>interpreted by the application</strong> in discovery callbacks.</p>
+<hr class="hr-dashed">
+
+<h2 id="5-topic-data-topdata">5. TOPIC DATA (TOPDATA)</h2>
+<p><strong>Role:</strong> Attaches application-specific metadata to the <strong>topic</strong> entity. Not used for RxO matching; serves as an auxiliary channel for application information.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Format/Behavior</strong></td>
+<td>Same as USRDATA and GRPDATA</td>
+</tr>
+<tr>
+<td><strong>Propagation</strong></td>
+<td>SEDP phase</td>
+</tr>
+<tr>
+<td><strong>Mutability</strong></td>
+<td>Can be changed freely at runtime</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong> Embed <code>schema=2.1</code>, <code>frame=lidar</code> in the scan cloud topic’s TOPDATA so an inventory app can check schema compatibility during topic discovery and avoid parsing errors.</p>
+<hr class="hr-dashed">
+
+<h2 id="6-reliability-reliab">6. RELIABILITY (RELIAB)</h2>
+<p><strong>Role:</strong> Determines whether data is sent <strong>reliably</strong> (with retransmission) or <strong>best effort</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parameters</strong></td>
+<td><code>kind</code> (best_effort / reliable), <code>max_blocking_time</code> (reliable mode only)</td>
+</tr>
+<tr>
+<td><strong>Defaults</strong></td>
+<td>Publisher: reliable; Subscriber and topic: best_effort</td>
+</tr>
+<tr>
+<td><strong>best_effort</strong></td>
+<td>No ACK wait or retransmission; data is sent as fast as possible</td>
+</tr>
+<tr>
+<td><strong>reliable</strong></td>
+<td>All samples in the Publisher HistoryCache are delivered; ACK/NACK triggers retransmission; order is preserved</td>
+</tr>
+<tr>
+<td><strong>max_blocking_time</strong></td>
+<td>In reliable mode, maximum time <code>write()</code>/<code>dispose()</code> may block due to delayed ACKs or buffer unavailability</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lifecycle</strong></p>
+<ul>
+<li><strong>Discovery:</strong> SEDP RxO check. Matching succeeds only if Publisher.kind ≥ Subscriber.kind (best_effort &lt; reliable).</li>
+<li><strong>Data Exchange:</strong> In reliable mode, HEARTBEAT and ACKNACK/NACK FRAG enable retransmission. In best_effort, no control meta-traffic.</li>
+<li><strong>Disassociation:</strong> dispose/unregister samples follow the same reliability rules.</li>
+</ul>
+<p><strong>Example:</strong> Use <code>reliable</code> on both sides for emergency stop or task assignment. Use <code>best_effort</code> for high-frequency streams (e.g., LiDAR, camera) to avoid retransmission overhead.</p>
+<hr class="hr-dashed">
+
+<h2 id="7-durability-durabl">7. DURABILITY (DURABL)</h2>
+<p><strong>Role:</strong> Defines how <strong>late-joining Subscribers</strong> can receive previously published samples.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parameter</strong></td>
+<td><code>kind</code> (volatile / transient_local / transient / persistent)</td>
+</tr>
+<tr>
+<td><strong>Default</strong></td>
+<td>volatile</td>
+</tr>
+<tr>
+<td><strong>volatile</strong></td>
+<td>No delivery of past samples</td>
+</tr>
+<tr>
+<td><strong>transient_local</strong></td>
+<td>Samples retained in the Publisher’s HistoryCache while it is active; delivered to late joiners</td>
+</tr>
+<tr>
+<td><strong>transient</strong></td>
+<td>Data retained after the Publisher ends, in <strong>volatile memory</strong></td>
+</tr>
+<tr>
+<td><strong>persistent</strong></td>
+<td>Data retained in <strong>non-volatile storage</strong> (e.g., files, database)</td>
+</tr>
+<tr>
+<td><strong>Mutability</strong></td>
+<td><strong>Immutable</strong> after the entity is enabled</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lifecycle</strong></p>
+<ul>
+<li><strong>Discovery:</strong> Matching succeeds only if Publisher.kind ≥ Subscriber.kind (volatile &lt; transient_local &lt; transient &lt; persistent).</li>
+<li><strong>Data Exchange:</strong> A non-volatile Publisher retransmits retained samples from HistoryCache to late joiners.</li>
+<li><strong>Disassociation:</strong> For transient/persistent, the durability service retains samples and state.</li>
+</ul>
+<p><strong>Example:</strong> For global maps or mission plans that must remain available to robots that join later (or after restarts), use <code>transient</code> (survives process restart) or <code>persistent</code> (survives system reboot).</p>
+<hr class="hr-dashed">
+
+<h2 id="8-deadline-deadln">8. DEADLINE (DEADLN)</h2>
+<p><strong>Role:</strong> Specifies the <strong>maximum period</strong> within which a new sample for a given data instance must be produced by the Publisher and received by the Subscriber. If exceeded, DDS raises alarms on both sides.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parameter</strong></td>
+<td><code>period</code> (default: infinity)</td>
+</tr>
+<tr>
+<td><strong>Meaning</strong></td>
+<td>A new sample must be produced and received within this period</td>
+</tr>
+<tr>
+<td><strong>Use case</strong></td>
+<td>Monitoring <strong>periodic updates</strong> (e.g., periodic sensor data)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lifecycle</strong></p>
+<ul>
+<li><strong>Discovery:</strong> RxO matching succeeds only if Publisher.period ≤ Subscriber.period.</li>
+<li><strong>Data Exchange:</strong> Period is monitored per instance. Missed deadline on Publisher or Subscriber raises a notification for recovery or alerting.</li>
+</ul>
+<p><strong>Example:</strong> A robot publishes position and battery every second; the monitoring Subscriber uses period=1 s. If a sample is not received within that interval, a deadline-miss alarm indicates communication or robot failure.</p>
+<hr class="hr-dashed">
+
+<h2 id="9-liveliness-livens">9. LIVELINESS (LIVENS)</h2>
+<p><strong>Role:</strong> Allows a Subscriber to determine whether the corresponding <strong>Publisher is still active</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parameters</strong></td>
+<td><code>kind</code>, <code>lease_duration</code></td>
+</tr>
+<tr>
+<td><strong>kind</strong></td>
+<td>Who asserts liveliness: <strong>automatic</strong> (default), <strong>manual_by_participant</strong>, <strong>manual_by_topic</strong></td>
+</tr>
+<tr>
+<td><strong>lease_duration</strong></td>
+<td>Maximum time the Subscriber waits after missing liveliness assertions before declaring the Publisher “not alive” (default: infinite)</td>
+</tr>
+<tr>
+<td><strong>manual_by_topic</strong></td>
+<td>Each Publisher asserts via HEARTBEAT or <code>assert_liveliness()</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lifecycle</strong></p>
+<ul>
+<li><strong>Discovery:</strong> Matching succeeds only if Publisher.kind ≥ Subscriber.kind and Publisher.lease_duration ≤ Subscriber.lease_duration.</li>
+<li><strong>Data Exchange:</strong> Periodic liveliness assertions or <code>assert_liveliness()</code>. In manual_by_topic, the LivelinessFlag in HEARTBEAT is used.</li>
+<li><strong>Disassociation:</strong> If no assertion is received within lease_duration, the Subscriber marks the Publisher as not alive. If all writers disappear, the instance state becomes <em>not alive no writers</em>.</li>
+</ul>
+<p><strong>Example:</strong> A central monitor configures each robot’s Publisher with <code>kind=automatic</code> and <code>lease_duration=5</code> seconds. If no signal is received within 5 seconds, the monitor can gray out the robot’s icon or issue a warning.</p>
+<hr class="hr-dashed">
+
+<h2 id="10-history-hist">10. HISTORY (HIST)</h2>
+<p><strong>Role:</strong> Determines <strong>how many samples</strong> per instance the Publisher keeps for retransmission and the Subscriber keeps before delivery to the application.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parameters</strong></td>
+<td><code>kind</code>, <code>depth</code></td>
+</tr>
+<tr>
+<td><strong>kind</strong></td>
+<td><strong>keep_last</strong>: retain only the most recent samples per instance, up to <code>depth</code> (default depth=1) / <strong>keep_all</strong>: retain all samples per instance; <code>depth</code> is ignored</td>
+</tr>
+<tr>
+<td><strong>Applies to</strong></td>
+<td>Topic, Publisher, Subscriber. <strong>Immutable</strong> (set only at creation)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lifecycle</strong></p>
+<ul>
+<li><strong>Data Exchange:</strong> Publisher and Subscriber each maintain a HistoryCache; data exchange is the process of synchronizing these caches. <code>kind</code> and <code>depth</code> limit how many samples are retained.</li>
+</ul>
+<p><strong>Example:</strong> For a control station that must keep all robot positions since startup, use <code>keep_all</code>. For real-time tracking where only the latest position matters, use <code>keep_last</code> with <code>depth=1</code>.</p>
+<hr class="hr-dashed">
+
+<h2 id="11-resource-limits-reslim">11. RESOURCE LIMITS (RESLIM)</h2>
+<p><strong>Role:</strong> Sets <strong>upper bounds</strong> on the number of instances and samples that topic, Publisher, and Subscriber entities can manage.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parameters</strong></td>
+<td><code>max_samples</code>, <code>max_instances</code>, <code>max_samples_per_instance</code></td>
+</tr>
+<tr>
+<td><strong>Instance</strong></td>
+<td>A data object identified by the topic type’s key</td>
+</tr>
+<tr>
+<td><strong>Sample</strong></td>
+<td>A transmission unit containing an instance’s data and metadata</td>
+</tr>
+<tr>
+<td><strong>Defaults</strong></td>
+<td>OMG standard: unlimited; implementations may impose defaults</td>
+</tr>
+<tr>
+<td><strong>Mutability</strong></td>
+<td><strong>Immutable</strong> after configuration</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lifecycle</strong></p>
+<ul>
+<li><strong>Data Exchange:</strong> Limits how many samples/instances can be stored in HistoryCache, preventing overflow and memory exhaustion.</li>
+</ul>
+<p><strong>Example:</strong> For real-time position only, set the Publisher’s <code>max_instances</code> low to save memory. On the Subscriber, set <code>max_samples_per_instance</code> high enough when many robot instances may be present.</p>
+<hr class="hr-dashed">
+
+<h2 id="12-lifespan-lfspan">12. LIFESPAN (LFSPAN)</h2>
+<p><strong>Role:</strong> Defines <strong>how long</strong> a sample published by a Publisher remains valid. After expiration, the sample is removed from both Publisher and Subscriber HistoryCache.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parameter</strong></td>
+<td><code>duration</code> (default: infinity)</td>
+</tr>
+<tr>
+<td><strong>Applies to</strong></td>
+<td>Topic, Publisher (and possibly Subscriber, depending on implementation)</td>
+</tr>
+<tr>
+<td><strong>Behavior</strong></td>
+<td>Expiration time = publication time + duration; expired samples are automatically removed</td>
+</tr>
+<tr>
+<td><strong>Mutability</strong></td>
+<td><strong>Mutable</strong>; can be changed after the entity is enabled</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lifecycle</strong></p>
+<ul>
+<li><strong>Data Exchange:</strong> Expiration is tracked per sample. Expired samples are no longer accessible to the Subscriber and help manage memory.</li>
+</ul>
+<p><strong>Example:</strong> For position or battery data where only the last few seconds matter, set <code>duration</code> accordingly so older samples are removed. For command logs that must be delivered over a long time, set <code>duration=infinity</code>.</p>
+<hr class="hr-dashed">
+
+<h2 id="13-ownership-strength-ownst">13. OWNERSHIP (+STRENGTH) (OWNST)</h2>
+<p><strong>Role:</strong> Determines whether <strong>multiple Publishers</strong> can update the same instance, and if not, <strong>which Publisher’s</strong> value is accepted.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>kind</strong></td>
+<td><strong>shared</strong> (default): multiple Publishers can update concurrently / <strong>exclusive</strong>: only one Publisher per instance; only its updates are delivered to Subscribers</td>
+</tr>
+<tr>
+<td><strong>OWNERSHIP_STRENGTH</strong></td>
+<td>Meaningful only in exclusive mode. Each Publisher has an integer strength (default 0). The highest strength is the “owner.”</td>
+</tr>
+<tr>
+<td><strong>Mutability</strong></td>
+<td>kind is <strong>immutable</strong> after enable; strength is <strong>mutable</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lifecycle</strong></p>
+<ul>
+<li><strong>Discovery:</strong> Matching succeeds only if Publisher.kind and Subscriber.kind are <strong>identical</strong>.</li>
+<li><strong>Data Exchange:</strong> In shared mode, the Subscriber receives updates from all Publishers; in exclusive mode, only from the highest-strength Publisher.</li>
+<li><strong>Disassociation:</strong> In exclusive mode, only the <strong>current owner</strong> can effectively issue <code>dispose()</code>/<code>unregister()</code>.</li>
+</ul>
+<p><strong>Example:</strong> Use <code>shared</code> when multiple robots update a shared map. For a task that must be performed by a single robot, use <code>exclusive</code> with strength so the active robot is the owner; on failure, ownership can transfer to the next-highest strength robot.</p>
+<hr class="hr-dashed">
+
+<h2 id="14-destination-order-destord">14. DESTINATION ORDER (DESTORD)</h2>
+<p><strong>Role:</strong> Determines <strong>in what order</strong> a Subscriber applies samples when <strong>multiple Publishers</strong> write to the same instance.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>kind</strong></td>
+<td><strong>by_reception_timestamp</strong> (default): order by arrival time at the Subscriber / <strong>by_source_timestamp</strong>: order by timestamp assigned by the Publisher (preserves creation order)</td>
+</tr>
+<tr>
+<td><strong>Mutability</strong></td>
+<td><strong>Immutable</strong> after enable</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lifecycle</strong></p>
+<ul>
+<li><strong>Discovery:</strong> Matching succeeds only if Publisher.kind ≥ Subscriber.kind (by_reception_timestamp &lt; by_source_timestamp).</li>
+<li><strong>Data Exchange:</strong> The chosen kind governs the processing order of samples from multiple Publishers for the same instance.</li>
+</ul>
+<p><strong>Example:</strong> Use <code>by_source_timestamp</code> when multiple robots update the same map instance so all share a consistent view. For real-time position where “latest received” matters, use <code>by_reception_timestamp</code>.</p>
+<hr class="hr-dashed">
+
+<h2 id="15-writer-data-lifecycle-wdlife">15. WRITER DATA LIFECYCLE (WDLIFE)</h2>
+<p><strong>Role:</strong> Determines whether the Publisher <strong>notifies Subscribers with dispose()</strong> when it <strong>unregisters</strong> an instance.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parameter</strong></td>
+<td><code>autodispose_unregistered_instances</code> (default: true)</td>
+</tr>
+<tr>
+<td><strong>Applies to</strong></td>
+<td>Publisher only</td>
+</tr>
+<tr>
+<td><strong>true</strong></td>
+<td>When <code>unregister()</code> is called, the instance is automatically marked disposed → Subscriber sees it as deleted</td>
+</tr>
+<tr>
+<td><strong>false</strong></td>
+<td><code>unregister()</code> only disassociates the writer from the instance; the application must explicitly call <code>dispose()</code> to delete it</td>
+</tr>
+<tr>
+<td><strong>Mutability</strong></td>
+<td><strong>Mutable</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lifecycle</strong></p>
+<ul>
+<li><strong>Disassociation:</strong> When the Publisher calls <code>unregister()</code> or is deleted, this setting determines whether the Subscriber treats the instance as <em>not alive disposed</em> or <em>not alive no writers</em>.</li>
+</ul>
+<p><strong>Example:</strong> When a robot publishes detected objects, <code>autodispose_unregistered_instances=true</code> removes the instance from the map as “processed” when the task is done. Set to <code>false</code> if another robot may rediscover and update the same object.</p>
+<hr class="hr-dashed">
+
+<h2 id="16-reader-data-lifecycle-rdlife">16. READER DATA LIFECYCLE (RDLIFE)</h2>
+<p><strong>Role:</strong> Determines <strong>how long</strong> a Subscriber retains samples for instances that are <strong>disposed</strong> or have <strong>no associated Publishers</strong> before purging them.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parameters</strong></td>
+<td><code>autopurge_disposed_samples_delay</code>, <code>autopurge_no_writer_samples_delay</code></td>
+</tr>
+<tr>
+<td><strong>Applies to</strong></td>
+<td>Subscriber only</td>
+</tr>
+<tr>
+<td><strong>autopurge_disposed_samples_delay</strong></td>
+<td>Time to retain samples/metadata after the instance becomes <em>not alive disposed</em> (default: infinity)</td>
+</tr>
+<tr>
+<td><strong>autopurge_no_writer_samples_delay</strong></td>
+<td>Time to retain after the instance becomes <em>not alive no writers</em> (default: infinity)</td>
+</tr>
+<tr>
+<td><strong>Mutability</strong></td>
+<td><strong>Mutable</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lifecycle</strong></p>
+<ul>
+<li><strong>Disassociation:</strong> When the Publisher calls <code>dispose()</code>, the instance becomes <em>not alive disposed</em>. When all writers disappear, it becomes <em>not alive no writers</em>. After the corresponding delay, the Subscriber purges the instance and samples to reclaim memory.</li>
+</ul>
+<p><strong>Example:</strong> In a temporary storage area with fast-moving pallets, set <code>autopurge_disposed_samples_delay=0</code> to purge as soon as dispose() is received. For critical static objects, set <code>autopurge_no_writer_samples_delay=300</code> seconds so newly joined robots can still inspect after brief communication loss.</p>
+<hr class="hr-grad-left">
+
+<h2 id="summary-metadata-matching-cache-and-lifecycle">Summary: Metadata, Matching, Cache, and Lifecycle</h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>QoS</th>
+<th>One-line summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Discovery timing</strong></td>
+<td>ENTFAC</td>
+<td>When entities participate in discovery</td>
+</tr>
+<tr>
+<td><strong>Logical segmentation</strong></td>
+<td>PART</td>
+<td>Partition names to separate or group topic flows</td>
+</tr>
+<tr>
+<td><strong>Metadata</strong></td>
+<td>USRDATA, GRPDATA, TOPDATA</td>
+<td>Application info on Participant / Pub-Sub / Topic</td>
+</tr>
+<tr>
+<td><strong>Delivery guarantee</strong></td>
+<td>RELIAB</td>
+<td>best_effort vs reliable (retransmission, ordering)</td>
+</tr>
+<tr>
+<td><strong>Late joiners</strong></td>
+<td>DURABL</td>
+<td>How much past data late joiners can receive</td>
+</tr>
+<tr>
+<td><strong>Temporal constraints</strong></td>
+<td>DEADLN, LIVENS</td>
+<td>Period (deadline) monitoring; Publisher liveness</td>
+</tr>
+<tr>
+<td><strong>Cache</strong></td>
+<td>HIST, RESLIM, LFSPAN</td>
+<td>How many samples, upper bounds, validity duration</td>
+</tr>
+<tr>
+<td><strong>Multiple writers</strong></td>
+<td>OWNST, DESTORD</td>
+<td>Single owner vs shared; order by reception vs source timestamp</td>
+</tr>
+<tr>
+<td><strong>Instance cleanup</strong></td>
+<td>WDLIFE, RDLIFE</td>
+<td>Dispose on unregister; when to purge disposed/no-writer samples</td>
+</tr>
+</tbody>
+</table>
+<p>This document is based on the lifecycle-based QoS tutorial and mobile-robot examples (Appendix A) from the paper.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy", "navigation.expand"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
