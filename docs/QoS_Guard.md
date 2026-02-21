@@ -265,19 +265,19 @@ qos_guard --xml ./profiles/writer.xml ./profiles/reader.xml fast humble
 qos_guard -x pub_qos.xml sub_qos.xml connext jazzy publish_period=10ms
 ```
 
-> **Cyclone DDS** does not support XML QoS profiles. For Cyclone, use **package mode** only (code scan). The `--xml` option is not available when `dds=cyclone`.
+> **Cyclone DDS** does not support XML QoS profiles. <br>For Cyclone, use **package mode** only (code scan). <br>The `--xml` option is not available when `dds=cyclone`.
 
 <hr class="hr-dashed">
 
 ### 3. List mode
 
-**When to use:** See which XML files the tool would scan under a package (useful to confirm config layout).
+**When to use** See which XML files the tool would scan under a package (useful to confirm config layout).
 
 ```bash
 qos_guard --list <package_path>
 ```
 
-**Example output:**
+**Example output**
 
 ```
 Found 4 XML file(s) in /path/to/my_pkg
