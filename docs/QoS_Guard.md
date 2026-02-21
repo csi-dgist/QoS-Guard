@@ -324,18 +324,18 @@ Found 4 XML file(s) in /path/to/my_pkg
 
 ## DDS support
 
-<div class="req-container req-table">
+<div class="req-container">
   <div class="req-item">
     <span class="req-label">Fast DDS</span>
-    <span class="req-value">XML profiles ✓ · Source code scan ✓ · XML and code are merged; 5-level priority applied.</span>
+    <span class="req-value">XML profiles ✓<br>Source code scan ✓<br>XML and code are merged; 5-level priority applied.</span>
   </div>
   <div class="req-item">
     <span class="req-label">RTI Connext</span>
-    <span class="req-value">XML profiles ✓ · Source code scan ✓ · Full XML parsing and profile matching.</span>
+    <span class="req-value">XML profiles ✓<br>Source code scan ✓<br>Full XML parsing and profile matching.</span>
   </div>
   <div class="req-item">
     <span class="req-label">Cyclone DDS</span>
-    <span class="req-value">XML profiles — · Source code scan ✓ · No XML QoS; use package mode and code scan only.</span>
+    <span class="req-value">XML profiles —<br>Source code scan ✓<br>No XML QoS; use package mode and code scan only.</span>
   </div>
 </div>
 
@@ -345,26 +345,26 @@ Found 4 XML file(s) in /path/to/my_pkg
 
 When both XML and code define QoS, the **highest priority** source wins (and overrides lower ones):
 
-<div class="req-container req-table">
+<div class="req-container">
   <div class="req-item">
     <span class="req-label">L1</span>
-    <span class="req-value">Code (<code>rclcpp::QoS</code>, etc.) · Non-default values in code override XML.</span>
+    <span class="req-value">Code (<code>rclcpp::QoS</code>, etc.)<br>Non-default values in code override XML.</span>
   </div>
   <div class="req-item">
     <span class="req-label">L2</span>
-    <span class="req-value"><code>&lt;topic profile_name="/topic_name"&gt;</code> · Matched by topic name; works across ROS 2 versions.</span>
+    <span class="req-value"><code>&lt;topic profile_name="/topic_name"&gt;</code><br>Matched by topic name; works across ROS 2 versions.</span>
   </div>
   <div class="req-item">
     <span class="req-label">L3</span>
-    <span class="req-value"><code>&lt;data_writer&gt;</code> / <code>&lt;data_reader&gt;</code> · Jazzy/Kilted style; topic name matching.</span>
+    <span class="req-value"><code>&lt;data_writer&gt;</code> / <code>&lt;data_reader&gt;</code><br>Jazzy/Kilted style; topic name matching.</span>
   </div>
   <div class="req-item">
     <span class="req-label">L4</span>
-    <span class="req-value"><code>&lt;publisher&gt;</code> / <code>&lt;subscriber&gt;</code> · Humble style; profile name from code.</span>
+    <span class="req-value"><code>&lt;publisher&gt;</code> / <code>&lt;subscriber&gt;</code><br>Humble style; profile name from code.</span>
   </div>
   <div class="req-item">
     <span class="req-label">L5</span>
-    <span class="req-value"><code>is_default_profile="true"</code> · Fallback when nothing else matches.</span>
+    <span class="req-value"><code>is_default_profile="true"</code><br>Fallback when nothing else matches.</span>
   </div>
 </div>
 
