@@ -1,10 +1,9 @@
 # QoS-Guard
 
 <style>
-  /* 특징 그리드 레이아웃 */
 .feature-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2열 배치 */
+    grid-template-columns: 1fr 1fr;
     gap: 16px;
     margin: 24px 0;
 }
@@ -44,7 +43,6 @@
     line-height: 1.5;
 }
 
-/* 모바일대응: 화면이 작아지면 1열로 변환 */
 @media (max-width: 768px) {
     .feature-grid {
         grid-template-columns: 1fr;
@@ -55,7 +53,7 @@
     margin: 20px 0;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
-    background-color: #ffffff; /* 흰색 배경 고정 */
+    background-color: #ffffff; 
     overflow: hidden;
 }
 
@@ -64,7 +62,6 @@
     align-items: center;
     padding: 12px 16px;
     border-bottom: 1px solid #e2e8f0;
-    /* 호버 효과 없음 */
 }
 
 .req-item:last-child {
@@ -74,13 +71,12 @@
 .req-label {
     min-width: 100px;
     font-weight: 700;
-    color: #334155; /* 오른쪽 텍스트와 동일한 색상으로 수정 */
+    color: #334155; 
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
-/* 표 형태 섹션: 첫 번째 열 너비 통일 */
 .req-container.req-table .req-label {
     width: 220px;
     min-width: 220px;
@@ -90,14 +86,13 @@
 }
 
 .req-value {
-    color: #334155; /* 기준 색상 */
+    color: #334155;
     font-size: 14px;
     border-left: 2px solid #e2e8f0;
     padding-left: 16px;
     margin-left: 8px;
 }
 
-/* DDS support: 헤더 + 3열 표 (열 비율 1.5:1:1, 가운데 정렬) */
 .dds-table .dds-header {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr;
@@ -196,7 +191,6 @@
     }
 }
 
-/* FAQ: Q&A 카드 리스트 */
 .faq-list {
     margin: 20px 0;
     display: flex;
