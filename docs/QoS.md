@@ -183,7 +183,7 @@
 ## QoS Mapping by Lifecycle Phase
 
 <div align="center">
-  <img src="../images/lifecycle.jpg" width="800">
+  <img src="../images/lifecycle.jpg" width="700">
     <figcaption style="font-style: italic; color: #666; margin-top: 10px;">
     Lifecycle of DDS Communication
   </figcaption>
