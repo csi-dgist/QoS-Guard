@@ -129,7 +129,7 @@
     max-width: 800px;
   }
   .phase-card {
-    border-left: 5px solid #4E5EB4;
+    border-left: 5px solid #4b95dd;
     background-color: #f1f5f9;
     padding: 10px 20px;
     margin-bottom: 20px;
@@ -191,14 +191,14 @@
   </div>
 </div>
 
-<div class="phase-card" style="border-left-color: #4E5EB4;">
+<div class="phase-card" style="border-left-color: #01af4e;">
   <div class="phase-title">2. Data Exchange Phase</div>
   <div class="phase-desc">
     Matched pairs exchange <b>user data</b> and <b>control metatraffic</b> (HEARTBEAT/ACKNACK) to ensure reliability and timeliness.
   </div>
 </div>
 
-<div class="phase-card" style="border-left-color: #4E5EB4;">
+<div class="phase-card" style="border-left-color: #f17232;">
   <div class="phase-title">3. Disassociation Phase</div>
   <div class="phase-desc">
     Communication ends by <b>disposing instances</b> or removing GUIDs, followed by purging all history after a <b>timeout</b>.
