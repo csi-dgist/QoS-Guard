@@ -180,12 +180,12 @@
 
 <hr class="hr-grad-left">
 
-## QoS Mapping by Lifecycle Phase
+## Lifecycle of DDS Communication
 
 <div align="center">
   <img src="../images/lifecycle.jpg" width="700">
     <figcaption style="font-style: italic; color: #666; margin-top: 10px;">
-    Lifecycle of DDS Communication
+    Three Phases: Discovery → Data Exchange → Disassociation.
   </figcaption>
 </div>
 
