@@ -43,7 +43,7 @@
     padding-left: 16px;
     margin-left: 8px;
 }
-/* 3열 표 (헤더 + 행) */
+
 .dds-table .dds-header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
