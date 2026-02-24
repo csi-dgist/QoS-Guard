@@ -130,7 +130,7 @@
   }
   .phase-card {
     border-left: 5px solid #4b95dd;
-    background-color: #f1f5f9;
+    background-color: #ffffff;
     padding: 10px 20px;
     margin-bottom: 20px;
     border-radius: 0 8px 8px 0;
