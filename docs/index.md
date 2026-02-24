@@ -1,7 +1,7 @@
-<h1 align="center">QoS Guard: ROS 2 QoS Static Verifier</h1>
+<h1 align="center">QoS Guard: ROS 2 QoS Static Validator</h1>
 
 <p align="center">
-  <strong>Dependency Chain Analysis of ROS 2 DDS QoS Policies: From Lifecycle Tutorial to Static Verification</strong>
+  <strong>Dependency Chain Analysis of ROS 2 DDS QoS Policies: From Lifecycle Tutorial to Static Validation</strong>
 </p>
 <p align="center">
   <img alt="ROS2 logo" src="https://img.shields.io/badge/ROS--2-Humble-blue?style=for-the-badge">
