@@ -180,86 +180,86 @@
         <span class="req-value" style="flex: 1; text-align: center;"></span>
     </div>
     <div class="req-item"><span class="req-label" style="flex: 2;">PARTITION</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
     </div>
     <div class="req-item"><span class="req-label" style="flex: 2;">USER_DATA</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
     </div>
     <div class="req-item"><span class="req-label" style="flex: 2;">GROUP_DATA</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
     </div>
     <div class="req-item">
         <span class="req-label" style="flex: 2;">TOPIC_DATA</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
     </div>
     <div class="req-item"><span class="req-label" style="flex: 2;">RELIABILITY</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
     </div>
     <div class="req-item">
         <span class="req-label" style="flex: 2;">DURABILITY</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
     </div><div class="req-item"><span class="req-label" style="flex: 2;">DEADLINE</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
     </div>
     <div class="req-item">
         <span class="req-label" style="flex: 2;">LIVELINESS</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
     </div>
     <div class="req-item">
         <span class="req-label" style="flex: 2;">HISTORY</span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
     </div>
     <div class="req-item">
         <span class="req-label" style="flex: 2;">RESOURCE_LIMITS</span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
     </div>
     <div class="req-item"><span class="req-label" style="flex: 2;">LIFESPAN</span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
     </div>
     <div class="req-item">
         <span class="req-label" style="flex: 2;">OWNERSHIP</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
     </div>
     <div class="req-item"><span class="req-label" style="flex: 2;">DESTINATION_ORDER</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
     </div>
     <div class="req-item">
         <span class="req-label" style="flex: 2;">WRITER_DATA_LIFECYCLE</span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
     </div>
     <div class="req-item">
         <span class="req-label" style="flex: 2;">READER_DATA_LIFECYCLE</span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
     </div>
 </div>
 
