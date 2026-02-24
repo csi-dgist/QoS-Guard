@@ -168,14 +168,14 @@
 </div>
 
 <div class="req-container">
-    <div class="req-item" style="font-weight: bold; background-color: #f0f0f0;">
+    <div class="req-item" style="font-weight: bold; background-color: #f1f5f9;">
         <span class="req-label" style="flex: 2;">QoS Policy</span>
         <span class="req-value" style="flex: 1; text-align: center;">Discovery</span>
-        <span class="req-value" style="flex: 1; text-align: center;">Data Exch.</span>
-        <span class="req-value" style="flex: 1; text-align: center;">Disassoc.</span>
+        <span class="req-value" style="flex: 1; text-align: center;">Data Exchange</span>
+        <span class="req-value" style="flex: 1; text-align: center;">Disassociation</span>
     </div>
     <div class="req-item"><span class="req-label" style="flex: 2;">ENTITY_FACTORY</span>
-        <span class="req-value" style="flex: 1; text-align: center;">$\checkmark$</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
         <span class="req-value" style="flex: 1; text-align: center;"></span>
     </div>
