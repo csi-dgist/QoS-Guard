@@ -6,6 +6,75 @@
 
 <style>
 /* qos.md 전용 커스텀 스타일 */
+/* 표 스타일 (QoS_Guard.md 참고) */
+.req-container {
+    margin: 20px 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+.req-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+}
+.req-item:last-child {
+    border-bottom: none;
+}
+.req-label {
+    min-width: 100px;
+    font-weight: 700;
+    color: #334155;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.req-container.req-table .req-label {
+    width: 220px;
+    min-width: 220px;
+    max-width: 220px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+.req-value {
+    color: #334155;
+    font-size: 14px;
+    border-left: 2px solid #e2e8f0;
+    padding-left: 16px;
+    margin-left: 8px;
+}
+/* 3열 표 (헤더 + 행) */
+.dds-table .dds-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    padding: 12px 16px;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 2px solid #e2e8f0;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #475569;
+    text-align: center;
+}
+.dds-table .dds-header span { text-align: center; }
+.dds-table .dds-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 14px;
+    color: #334155;
+}
+.dds-table .dds-row:last-child { border-bottom: none; }
+.dds-table .dds-row span { text-align: center; }
+.dds-table .dds-row span:first-child { font-weight: 700; text-align: left; }
+
 .qos-toc-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -53,37 +122,7 @@
     font-size: 0.75em;
     color: #6a737d;
     margin-top: 2px;
-}
-
-/* QoS 스펙 정의 목록 (테이블 대체) */
-.qos-spec {
-    margin: 1em 0;
-    padding: 1rem 1.25rem;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 0.9em;
-    line-height: 1.5;
-}
-.qos-spec dt {
-    font-weight: 600;
-    color: #1e293b;
-    margin-top: 0.6em;
-    margin-bottom: 0.2em;
-}
-.qos-spec dt:first-child { margin-top: 0; }
-.qos-spec dd {
-    margin-left: 0;
-    margin-bottom: 0.4em;
-    color: #475569;
-}
-.qos-spec dd:last-child { margin-bottom: 0; }
-.qos-spec code {
-    background: #e2e8f0;
-    padding: 0.15em 0.4em;
-    border-radius: 4px;
-    font-size: 0.92em;
-}
+}  
 </style>
 
 <hr class="hr-grad-left"> 
@@ -113,11 +152,20 @@
 
 ## QoS Mapping by Lifecycle Phase
 
-| Phase | Applicable QoS |
-|-------|----------------|
-| **Discovery** | ENTFAC, PART, USRDATA, GRPDATA, TOPDATA |
-| **Data Exchange** | RELIAB, DURABL, DEADLN, LIVENS, HIST, RESLIM, LFSPAN, OWNST, DESTORD |
-| **Disassociation** | RELIAB, DURABL, LIVENS, OWNST, WDLIFE, RDLIFE |
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Discovery</span>
+    <span class="req-value">ENTFAC, PART, USRDATA, GRPDATA, TOPDATA</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Data Exchange</span>
+    <span class="req-value">RELIAB, DURABL, DEADLN, LIVENS, HIST, RESLIM, LFSPAN, OWNST, DESTORD</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Disassociation</span>
+    <span class="req-value">RELIAB, DURABL, LIVENS, OWNST, WDLIFE, RDLIFE</span>
+  </div>
+</div>
 
 <hr class="hr-grad-left">
 
@@ -125,18 +173,28 @@
 
 **Role:** Controls **when** newly created DDS entities begin participating in discovery.
 
-<dl class="qos-spec">
-  <dt>Parameter</dt>
-  <dd><code>autoenable_created_entities</code> (boolean, default: TRUE)</dd>
-  <dt>TRUE</dt>
-  <dd>Child entities are enabled immediately upon creation and participate in discovery</dd>
-  <dt>FALSE</dt>
-  <dd>Entities do not participate in discovery until the application explicitly calls <code>enable()</code></dd>
-  <dt>Lifecycle</dt>
-  <dd>Determines when the Discovery phase starts</dd>
-  <dt>Mutability</dt>
-  <dd>Can be changed at runtime; changes apply only to entities <strong>created after</strong> the update</dd>
-</dl>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (boolean, default: TRUE)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">TRUE</span>
+    <span class="req-value">Child entities are enabled immediately upon creation and participate in discovery</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">FALSE</span>
+    <span class="req-value">Entities do not participate in discovery until the application explicitly calls <code>enable()</code></span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Lifecycle</span>
+    <span class="req-value">Determines when the Discovery phase starts</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed at runtime; changes apply only to entities <strong>created after</strong> the update</span>
+  </div>
+</div>
 
 **Example:** To activate a navigation module’s Publishers/Subscribers only after local sensor calibration or localization is complete, set `autoenable_created_entities=false` and call `enable()` at the appropriate time.
 
@@ -146,18 +204,28 @@
 
 **Role:** Introduces **logical segmentation** within a single DDS domain so that only certain Publisher/Subscriber groups match.
 
-<dl class="qos-spec">
-  <dt>Parameter</dt>
-  <dd><code>names</code> (array of strings, default: empty string)</dd>
-  <dt>Applies to</dt>
-  <dd>Both Publisher and Subscriber</dd>
-  <dt>Matching</dt>
-  <dd>Publisher and Subscriber match only if they share <strong>at least one</strong> partition name</dd>
-  <dt>Exchanged</dt>
-  <dd>During the SEDP stage of the Discovery phase</dd>
-  <dt>Mutability</dt>
-  <dd>Can be changed at runtime; changes trigger rematching via SEDP (existing connections are broken)</dd>
-</dl>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>names</code> (array of strings, default: empty string)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Applies to</span>
+    <span class="req-value">Both Publisher and Subscriber</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Matching</span>
+    <span class="req-value">Publisher and Subscriber match only if they share <strong>at least one</strong> partition name</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Exchanged</span>
+    <span class="req-value">During the SEDP stage of the Discovery phase</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed at runtime; changes trigger rematching via SEDP (existing connections are broken)</span>
+  </div>
+</div>
 
 **Example:** Delivery and inventory robots may use the same domain and topics such as `status` and `command`. A central management system can subscribe with `names=delivery` or `names=inventory` to receive data only from the desired group.
 
@@ -167,16 +235,24 @@
 
 **Role:** Attaches **application-specific metadata** to entities such as DomainParticipant, Publisher, and Subscriber.
 
-<dl class="qos-spec">
-  <dt>Parameter</dt>
-  <dd><code>value</code> (arbitrary byte sequence, default: empty)</dd>
-  <dt>Purpose</dt>
-  <dd>DDS does not interpret it; the value is carried in built-in topic samples (discovery messages)</dd>
-  <dt>Propagation</dt>
-  <dd>DomainParticipant → SPDP; Publisher/Subscriber → SEDP</dd>
-  <dt>Mutability</dt>
-  <dd>Can be changed at runtime; changes are reflected in the next built-in topic sample</dd>
-</dl>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>value</code> (arbitrary byte sequence, default: empty)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Purpose</span>
+    <span class="req-value">DDS does not interpret it; the value is carried in built-in topic samples (discovery messages)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Propagation</span>
+    <span class="req-value">DomainParticipant → SPDP; Publisher/Subscriber → SEDP</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed at runtime; changes are reflected in the next built-in topic sample</span>
+  </div>
+</div>
 
 **Example:** Each robot can embed `robot_id=R12`, `token=ABCD123` in its participant so the server can validate the token during SPDP and admit only authorized robots. A LiDAR Publisher can include `sensor=LiDAR`, `fov=270` so subscribers can choose an appropriate filtering strategy before receiving samples.
 
@@ -186,14 +262,20 @@
 
 **Role:** Attaches **application-specific metadata** to Publisher and Subscriber entities. Structure and behavior are the same as USRDATA.
 
-<dl class="qos-spec">
-  <dt>Parameter</dt>
-  <dd><code>value</code> (arbitrary byte sequence)</dd>
-  <dt>Propagation</dt>
-  <dd>SEDP phase</dd>
-  <dt>Mutability</dt>
-  <dd>Can be changed freely at runtime</dd>
-</dl>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>value</code> (arbitrary byte sequence)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Propagation</span>
+    <span class="req-value">SEDP phase</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed freely at runtime</span>
+  </div>
+</div>
 
 **Example:** Similar to PART for separating delivery vs. inventory robots; PART is used by DDS for matching, while GRPDATA is **interpreted by the application** in discovery callbacks.
 
@@ -203,14 +285,20 @@
 
 **Role:** Attaches application-specific metadata to the **topic** entity. Not used for RxO matching; serves as an auxiliary channel for application information.
 
-<dl class="qos-spec">
-  <dt>Format/Behavior</dt>
-  <dd>Same as USRDATA and GRPDATA</dd>
-  <dt>Propagation</dt>
-  <dd>SEDP phase</dd>
-  <dt>Mutability</dt>
-  <dd>Can be changed freely at runtime</dd>
-</dl>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Format/Behavior</span>
+    <span class="req-value">Same as USRDATA and GRPDATA</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Propagation</span>
+    <span class="req-value">SEDP phase</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed freely at runtime</span>
+  </div>
+</div>
 
 **Example:** Embed `schema=2.1`, `frame=lidar` in the scan cloud topic’s TOPDATA so an inventory app can check schema compatibility during topic discovery and avoid parsing errors.
 
@@ -220,18 +308,28 @@
 
 **Role:** Determines whether data is sent **reliably** (with retransmission) or **best effort**.
 
-<dl class="qos-spec">
-  <dt>Parameters</dt>
-  <dd><code>kind</code> (best_effort / reliable), <code>max_blocking_time</code> (reliable mode only)</dd>
-  <dt>Defaults</dt>
-  <dd>Publisher: reliable; Subscriber and topic: best_effort</dd>
-  <dt>best_effort</dt>
-  <dd>No ACK wait or retransmission; data is sent as fast as possible</dd>
-  <dt>reliable</dt>
-  <dd>All samples in the Publisher HistoryCache are delivered; ACK/NACK triggers retransmission; order is preserved</dd>
-  <dt>max_blocking_time</dt>
-  <dd>In reliable mode, maximum time <code>write()</code>/<code>dispose()</code> may block due to delayed ACKs or buffer unavailability</dd>
-</dl>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameters</span>
+    <span class="req-value"><code>kind</code> (best_effort / reliable), <code>max_blocking_time</code> (reliable mode only)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Defaults</span>
+    <span class="req-value">Publisher: reliable; Subscriber and topic: best_effort</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">best_effort</span>
+    <span class="req-value">No ACK wait or retransmission; data is sent as fast as possible</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">reliable</span>
+    <span class="req-value">All samples in the Publisher HistoryCache are delivered; ACK/NACK triggers retransmission; order is preserved</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">max_blocking_time</span>
+    <span class="req-value">In reliable mode, maximum time <code>write()</code>/<code>dispose()</code> may block due to delayed ACKs or buffer unavailability</span>
+  </div>
+</div>
 
 **Lifecycle**
 
@@ -271,14 +369,20 @@
 
 **Role:** Specifies the **maximum period** within which a new sample for a given data instance must be produced by the Publisher and received by the Subscriber. If exceeded, DDS raises alarms on both sides.
 
-<dl class="qos-spec">
-  <dt>Parameter</dt>
-  <dd><code>period</code> (default: infinity)</dd>
-  <dt>Meaning</dt>
-  <dd>A new sample must be produced and received within this period</dd>
-  <dt>Use case</dt>
-  <dd>Monitoring <strong>periodic updates</strong> (e.g., periodic sensor data)</dd>
-</dl>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>period</code> (default: infinity)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Meaning</span>
+    <span class="req-value">A new sample must be produced and received within this period</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Use case</span>
+    <span class="req-value">Monitoring <strong>periodic updates</strong> (e.g., periodic sensor data)</span>
+  </div>
+</div>
 
 **Lifecycle**
 
@@ -314,14 +418,20 @@
 
 **Role:** Determines **how many samples** per instance the Publisher keeps for retransmission and the Subscriber keeps before delivery to the application.
 
-<dl class="qos-spec">
-  <dt>Parameters</dt>
-  <dd><code>kind</code>, <code>depth</code></dd>
-  <dt>kind</dt>
-  <dd><strong>keep_last</strong>: retain only the most recent samples per instance, up to <code>depth</code> (default depth=1) / <strong>keep_all</strong>: retain all samples per instance; <code>depth</code> is ignored</dd>
-  <dt>Applies to</dt>
-  <dd>Topic, Publisher, Subscriber. <strong>Immutable</strong> (set only at creation)</dd>
-</dl>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameters</span>
+    <span class="req-value"><code>kind</code>, <code>depth</code></span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">kind</span>
+    <span class="req-value"><strong>keep_last</strong>: retain only the most recent samples per instance, up to <code>depth</code> (default depth=1) / <strong>keep_all</strong>: retain all samples per instance; <code>depth</code> is ignored</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Applies to</span>
+    <span class="req-value">Topic, Publisher, Subscriber. <strong>Immutable</strong> (set only at creation)</span>
+  </div>
+</div>
 
 **Lifecycle**
 
@@ -355,16 +465,24 @@
 
 **Role:** Defines **how long** a sample published by a Publisher remains valid. After expiration, the sample is removed from both Publisher and Subscriber HistoryCache.
 
-<dl class="qos-spec">
-  <dt>Parameter</dt>
-  <dd><code>duration</code> (default: infinity)</dd>
-  <dt>Applies to</dt>
-  <dd>Topic, Publisher (and possibly Subscriber, depending on implementation)</dd>
-  <dt>Behavior</dt>
-  <dd>Expiration time = publication time + duration; expired samples are automatically removed</dd>
-  <dt>Mutability</dt>
-  <dd><strong>Mutable</strong>; can be changed after the entity is enabled</dd>
-</dl>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>duration</code> (default: infinity)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Applies to</span>
+    <span class="req-value">Topic, Publisher (and possibly Subscriber, depending on implementation)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Behavior</span>
+    <span class="req-value">Expiration time = publication time + duration; expired samples are automatically removed</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value"><strong>Mutable</strong>; can be changed after the entity is enabled</span>
+  </div>
+</div>
 
 **Lifecycle**
 
@@ -398,12 +516,16 @@
 
 **Role:** Determines **in what order** a Subscriber applies samples when **multiple Publishers** write to the same instance.
 
-<dl class="qos-spec">
-  <dt>kind</dt>
-  <dd><strong>by_reception_timestamp</strong> (default): order by arrival time at the Subscriber / <strong>by_source_timestamp</strong>: order by timestamp assigned by the Publisher (preserves creation order)</dd>
-  <dt>Mutability</dt>
-  <dd><strong>Immutable</strong> after enable</dd>
-</dl>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">kind</span>
+    <span class="req-value"><strong>by_reception_timestamp</strong> (default): order by arrival time at the Subscriber / <strong>by_source_timestamp</strong>: order by timestamp assigned by the Publisher (preserves creation order)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value"><strong>Immutable</strong> after enable</span>
+  </div>
+</div>
 
 **Lifecycle**
 
@@ -418,18 +540,28 @@
 
 **Role:** Determines whether the Publisher **notifies Subscribers with dispose()** when it **unregisters** an instance.
 
-<dl class="qos-spec">
-  <dt>Parameter</dt>
-  <dd><code>autodispose_unregistered_instances</code> (default: true)</dd>
-  <dt>Applies to</dt>
-  <dd>Publisher only</dd>
-  <dt>true</dt>
-  <dd>When <code>unregister()</code> is called, the instance is automatically marked disposed → Subscriber sees it as deleted</dd>
-  <dt>false</dt>
-  <dd><code>unregister()</code> only disassociates the writer from the instance; the application must explicitly call <code>dispose()</code> to delete it</dd>
-  <dt>Mutability</dt>
-  <dd><strong>Mutable</strong></dd>
-</dl>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>autodispose_unregistered_instances</code> (default: true)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Applies to</span>
+    <span class="req-value">Publisher only</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">true</span>
+    <span class="req-value">When <code>unregister()</code> is called, the instance is automatically marked disposed → Subscriber sees it as deleted</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">false</span>
+    <span class="req-value"><code>unregister()</code> only disassociates the writer from the instance; the application must explicitly call <code>dispose()</code> to delete it</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value"><strong>Mutable</strong></span>
+  </div>
+</div>
 
 **Lifecycle**
 
@@ -443,18 +575,28 @@
 
 **Role:** Determines **how long** a Subscriber retains samples for instances that are **disposed** or have **no associated Publishers** before purging them.
 
-<dl class="qos-spec">
-  <dt>Parameters</dt>
-  <dd><code>autopurge_disposed_samples_delay</code>, <code>autopurge_no_writer_samples_delay</code></dd>
-  <dt>Applies to</dt>
-  <dd>Subscriber only</dd>
-  <dt>autopurge_disposed_samples_delay</dt>
-  <dd>Time to retain samples/metadata after the instance becomes <em>not alive disposed</em> (default: infinity)</dd>
-  <dt>autopurge_no_writer_samples_delay</dt>
-  <dd>Time to retain after the instance becomes <em>not alive no writers</em> (default: infinity)</dd>
-  <dt>Mutability</dt>
-  <dd><strong>Mutable</strong></dd>
-</dl>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameters</span>
+    <span class="req-value"><code>autopurge_disposed_samples_delay</code>, <code>autopurge_no_writer_samples_delay</code></span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Applies to</span>
+    <span class="req-value">Subscriber only</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">autopurge_disposed_samples_delay</span>
+    <span class="req-value">Time to retain samples/metadata after the instance becomes <em>not alive disposed</em> (default: infinity)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">autopurge_no_writer_samples_delay</span>
+    <span class="req-value">Time to retain after the instance becomes <em>not alive no writers</em> (default: infinity)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value"><strong>Mutable</strong></span>
+  </div>
+</div>
 
 **Lifecycle**
 
@@ -466,16 +608,57 @@
 
 ## Summary: Metadata, Matching, Cache, and Lifecycle
 
-| Category | QoS | One-line summary |
-|----------|-----|------------------|
-| **Discovery timing** | ENTFAC | When entities participate in discovery |
-| **Logical segmentation** | PART | Partition names to separate or group topic flows |
-| **Metadata** | USRDATA, GRPDATA, TOPDATA | Application info on Participant / Pub-Sub / Topic |
-| **Delivery guarantee** | RELIAB | best_effort vs reliable (retransmission, ordering) |
-| **Late joiners** | DURABL | How much past data late joiners can receive |
-| **Temporal constraints** | DEADLN, LIVENS | Period (deadline) monitoring; Publisher liveness |
-| **Cache** | HIST, RESLIM, LFSPAN | How many samples, upper bounds, validity duration |
-| **Multiple writers** | OWNST, DESTORD | Single owner vs shared; order by reception vs source timestamp |
-| **Instance cleanup** | WDLIFE, RDLIFE | Dispose on unregister; when to purge disposed/no-writer samples |
+<div class="req-container dds-table">
+  <div class="dds-header">
+    <span>Category</span>
+    <span>QoS</span>
+    <span>One-line summary</span>
+  </div>
+  <div class="dds-row">
+    <span>Discovery timing</span>
+    <span>ENTFAC</span>
+    <span>When entities participate in discovery</span>
+  </div>
+  <div class="dds-row">
+    <span>Logical segmentation</span>
+    <span>PART</span>
+    <span>Partition names to separate or group topic flows</span>
+  </div>
+  <div class="dds-row">
+    <span>Metadata</span>
+    <span>USRDATA, GRPDATA, TOPDATA</span>
+    <span>Application info on Participant / Pub-Sub / Topic</span>
+  </div>
+  <div class="dds-row">
+    <span>Delivery guarantee</span>
+    <span>RELIAB</span>
+    <span>best_effort vs reliable (retransmission, ordering)</span>
+  </div>
+  <div class="dds-row">
+    <span>Late joiners</span>
+    <span>DURABL</span>
+    <span>How much past data late joiners can receive</span>
+  </div>
+  <div class="dds-row">
+    <span>Temporal constraints</span>
+    <span>DEADLN, LIVENS</span>
+    <span>Period (deadline) monitoring; Publisher liveness</span>
+  </div>
+  <div class="dds-row">
+    <span>Cache</span>
+    <span>HIST, RESLIM, LFSPAN</span>
+    <span>How many samples, upper bounds, validity duration</span>
+  </div>
+  <div class="dds-row">
+    <span>Multiple writers</span>
+    <span>OWNST, DESTORD</span>
+    <span>Single owner vs shared; order by reception vs source timestamp</span>
+  </div>
+  <div class="dds-row">
+    <span>Instance cleanup</span>
+    <span>WDLIFE, RDLIFE</span>
+    <span>Dispose on unregister; when to purge disposed/no-writer samples</span>
+  </div>
+</div>
 
 This document is based on the lifecycle-based QoS tutorial and mobile-robot examples (Appendix A) from the paper.
