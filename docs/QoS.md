@@ -310,6 +310,19 @@
     </div>
 </div>
 
+<details>
+  <summary>DDS Discovery Phase Details</summary>
+  <div class="details-content">
+    The Discovery phase is supported by the <b>Real-Time Publish–Subscribe (RTPS)</b> protocol. It consists of:
+    <ul>
+      <li><b>PDP (Participant Discovery Protocol)</b>: Discovers DomainParticipants.</li>
+      <li><b>EDP (Endpoint Discovery Protocol)</b>: Matches Publisher and Subscriber endpoints.</li>
+      <li><b>RxO Check</b>: Verifies QoS compatibility before establishing a connection.</li>
+    </ul>
+  </div>
+</details>
+
+
 <hr class="hr-grad-left">
 
 ## 1. ENTITY FACTORY (ENTFAC)
