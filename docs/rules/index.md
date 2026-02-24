@@ -123,7 +123,7 @@ These are implemented in **QoS Guard** for static verification.
 | 6 | LFSPAN → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [LFSPAN.duration > 0]$ | Functional | Pub | EMP |
 | 7 | LFSPAN → DEADLN | $LFSPAN.duration < DEADLN.period$ | Functional | Sub | IMP |
 | 8 | HIST → DESTORD | $[DESTORD = BY\_SOURCE] \wedge [HIST.kind = KEEP\_LAST] \wedge [HIST.depth = 1]$ | Functional | Sub | IMP |
-| 9 | RESLIM → DESTORD | $[DESTORD = BY\_SOURCE] \wedge [KEEP\_ALL] \wedge [RESLIM.mpi = 1]$ | Functional | Sub | IMP |
+| 9 | RESLIM → DESTORD | $[DESTORD = BY\_SOURCE] \wedge [HIST.kind = KEEP\_ALL] \wedge [RESLIM.mpi = 1]$ | Functional | Sub | IMP |
 | 10 | DEADLN → OWNST | $[OWNST = EXCLUSIVE] \wedge [DEADLN.period = \infty]$ | Functional | Sub | IMP |
 | 11 | LIVENS → OWNST | $[OWNST = EXCLUSIVE] \wedge [LIVENS.lease = \infty]$ | Functional | Sub | IMP |
 | 12 | LIVENS → RDLIFE | $[autopurge\_nowriter > 0] \wedge [LIVENS.lease = \infty]$ | Functional | Sub | IMP |
@@ -161,13 +161,13 @@ These are implemented in **QoS Guard** for static verification.
 
 | No | Identifier | QoS Conflict Condition (Violation) | Dependency | Entity | Basis |
 |:---:|:---|:---|:---:|:---:|:---:|
-| 31 | HIST → RELIAB | $[RELIABLE] \wedge [KEEP\_LAST] \wedge [HIST.depth < \lceil 2 \times RTT/PP \rceil + 1]$ | Functional | Pub | EMP |
-| 32 | RESLIM → RELIAB | $[RELIABLE] \wedge [KEEP\_ALL] \wedge [RESLIM.mpi < \lceil 2 \times RTT/PP \rceil + 1]$ | Functional | Pub | EMP |
+| 31 | HIST → RELIAB | $[RELIABLE] \wedge [HIST.kind=KEEP\_LAST] \wedge [HIST.depth < \lceil 2 \times RTT/PP \rceil + 1]$ | Functional | Pub | EMP |
+| 32 | RESLIM → RELIAB | $[RELIABLE] \wedge [HIST.kind=KEEP\_ALL] \wedge [RESLIM.mpi < \lceil 2 \times RTT/PP \rceil + 1]$ | Functional | Pub | EMP |
 | 33 | LFSPAN → RELIAB | $[RELIABLE] \wedge [LFSPAN.duration < PP = 2 \times RTT]$ | Functional | Pub | EMP |
 | 34 | RELIAB → WDLIFE | $[autodispose = TRUE] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub | IMP |
 | 35 | RELIAB → DEADLN | $[DEADLN.period > 0] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub ↔ Sub | IMP |
 | 36 | LIVENS → DEADLN | $[DEADLN.period > 0] \wedge [LIVENS.lease < DEADLN.period]$ | Functional | Sub | EMP |
-| 37 | HIST → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [KEEP\_ALL] \wedge [RESLIM.mpi \ge default]$ | Operational | Pub | EMP |
+| 37 | HIST → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [HIST.kind=KEEP\_ALL] \wedge [RESLIM.mpi \ge default]$ | Operational | Pub | EMP |
 | 38 | DEADLN → OWNST | $[OWNST = EXCLUSIVE] \wedge [DEADLN.period < PP +  2 \times RTT]$ | Operational | Sub | EMP |
 | 39 | LIVENS → OWNST | $[OWNST = EXCLUSIVE] \wedge [LIVENS.lease < PP +  2 \times RTT]$ | Operational | Sub | EMP |
 | 40 | DURABL → DEADLN | $[DEADLN.period > 0] \wedge [DURABL \ge TRAN\_LOCAL]$ | Operational | Sub | EMP |
