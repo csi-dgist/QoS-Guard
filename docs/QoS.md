@@ -312,6 +312,28 @@
 
 <hr class="hr-grad-left">
 
+
+[!TIP]
+
+> [!IMPORTANT]
+ 
+<dl>
+<dt><b>RELIABILITY</b></dt>
+<dd>데이터 전송의 신뢰성을 보장하는 정책입니다.</dd>
+
+<dt><b>DURABILITY</b></dt>
+<dd>나중에 접속한 수신자에게 과거 데이터를 전달할지 결정합니다.</dd>
+</dl>
+
+> [!CAUTION]
+> **Critical Warning:** `RELIABILITY`를 `RELIABLE`로 설정하고 하드웨어 성능이 낮으면 시스템이 멈출 수 있습니다.
+
+> [!ABSTRACT]
+
+
+<hr class="hr-grad-left">
+
+
 ## 1. ENTITY FACTORY (ENTFAC)
 
 **Role:** Controls **when** newly created DDS entities begin participating in discovery.
