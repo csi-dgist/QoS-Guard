@@ -187,21 +187,21 @@
 <div class="phase-card">
   <div class="phase-title">1. Discovery Phase</div>
   <div class="phase-desc">
-    Entities with the same topic are matched through <b>PDP/EDP protocols</b> and established after verifying <b>QoS compatibility</b>.
+    Entities with the same topic are matched through <b>PDP/EDP protocols</b> and <br>established after verifying <b>QoS compatibility</b>.
   </div>
 </div>
 
 <div class="phase-card" style="border-left-color: #01af4e;">
   <div class="phase-title">2. Data Exchange Phase</div>
   <div class="phase-desc">
-    Matched pairs exchange <b>user data</b> and <b>control metatraffic</b> (HEARTBEAT/ACKNACK) to ensure reliability and timeliness.
+    Matched pairs exchange <b>user data</b> and <b>control metatraffic</b> (HEARTBEAT/ACKNACK) to <br>ensure reliability and timeliness.
   </div>
 </div>
 
 <div class="phase-card" style="border-left-color: #f17232;">
   <div class="phase-title">3. Disassociation Phase</div>
   <div class="phase-desc">
-    Communication ends by <b>disposing instances</b> or removing GUIDs, followed by purging all history after a <b>timeout</b>.
+    Communication ends by <b>disposing instances</b> or removing GUIDs, followed by <br>purging all history after a <b>timeout</b>.
   </div>
 </div>
 
