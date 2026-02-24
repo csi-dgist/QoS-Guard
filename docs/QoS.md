@@ -360,12 +360,12 @@ The PART QoS can be used to separate identical data types into multiple logical 
 
 ## 3. USER DATA (USRDATA)
 
-> **Controls whether newly createdDDS entities automatically start participating in discovery**
+> **Allows application-specific meta data to be attached to DDS entities such as Domain Participant, Publisher, and Subscriber**
 
 <div class="req-container">
   <div class="req-item">
     <span class="req-label">Parameter</span>
-    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
+    <span class="req-value"><code>value</code> (default: empty sequence)</span>
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
@@ -374,22 +374,21 @@ The PART QoS can be used to separate identical data types into multiple logical 
 </div>
 
 ### Mode
-* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
-* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
+* DDS doesnot interpret this sequence or use it for matching; it is simply carried in built-in topic samples (i.e., discovery messages).
 
 ### Example
-The ENTFAC 
+The USRDATA QoS can be used to flexibly deliver iden tity, authentication, and configuration information without re quiring additional topics or separate domains. For example, each robot may embed value such as robot id=R12 and to ken=ABCD123 in its participant, allowing the server to inspect the token during the SPDP phase and admit only authorized robots while blocking others. Similarly, a Publisher for a LiDAR topic may include value such as sensor=LiDAR and fov=270 in its USRDATA, enabling the subscribing application to determine sensor configuration and immediately select an appropriate filtering strategy before receiving any samples.
 
 <hr class="hr-dashed">
 
 ## 4. GROUP DATA (GRPDATA)
 
-> **Controls whether newly createdDDS entities automatically start participating in discovery**
+> **Attaches application-specific metadata to the Publisher and Subscriber entities**
 
 <div class="req-container">
   <div class="req-item">
     <span class="req-label">Parameter</span>
-    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
+    <span class="req-value"><code>value</code> (default: empty sequence)</span>
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
@@ -397,13 +396,8 @@ The ENTFAC
   </div>
 </div>
 
-### Mode
-* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
-* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
-
 ### Example
-The ENTFAC 
-
+The GRPDATA QoS can be used to logically segment data f lows in a manner similar to the PART QoS. For example, if delivery and inventory robots share topics within the same domain, assigning value=delivery or value=inventory to each Publisher or Subscriber allows the central management server to read these values during discovery callbacks. Although similar to PART, the key distinction is that PART enforces matching at the DDS level, whereas GRPDATA leaves the interpretation of the field entirely to the application.
 
 <hr class="hr-dashed">
 
@@ -414,7 +408,7 @@ The ENTFAC
 <div class="req-container">
   <div class="req-item">
     <span class="req-label">Parameter</span>
-    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
+    <span class="req-value"><code>value</code> (default: empty sequence)</span>
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
@@ -427,8 +421,7 @@ The ENTFAC
 * **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
 ### Example
-The ENTFAC 
-
+The TOPDATA QoS can be used by applications to verify schema compatibility in advance. For example, each robot can embed value such as schema=2.1 and frame=lidar in the TOPDATA of the scan cloud topic. During topic discovery, an inventory management application can read this information, and if the schema is incompatible, it can prevent subscription and avoid data parsing errors.
 
 <hr class="hr-dashed">
 
@@ -452,8 +445,7 @@ The ENTFAC
 * **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
 ### Example
-The ENTFAC 
-
+The RELIAB QoS can be used to balance safety and efficiency by configuring topics according to their criticality. For commands such as emergency stops or task assignments, both Publisher and Subscriber should use reliable, ensuring guaranteed delivery. In contrast, high-frequency data such as LiDAR scans or camera streams can use best effort, which avoids retransmission overhead and tolerates occasional loss. 
 
 <hr class="hr-dashed">
 
@@ -477,7 +469,7 @@ The ENTFAC
 * **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
 ### Example
-The ENTFAC 
+The DURABL QoS can be used to allow newly added or recovered robots to immediately access the same information, thereby improving both system robustness and collaborative efficiency. Data such as global maps or mission plans, whose availability must not depend on the lifespan of a specific robot, should remain accessible to robots that join after the Publisher has terminated or rebooted. In such cases, DURABL should be set to transient if data must persist throughout process restarts, or to persistent if it must survive system-wide reboots.
 
 <hr class="hr-dashed">
 
@@ -501,7 +493,7 @@ The ENTFAC
 * **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
 ### Example
-The ENTFAC 
+The DEADLN QoS can be used for real-time monitoring of robot status. Each robot may publish its position and battery level through ROS 2 topics every second. The Publisher and the central monitoring system’s Subscriber are both configured with a period of 1 second. If a new sample fails to arrive within this interval, the monitoring system receives a deadline-miss notification, enabling immediate detection of communication failures or faults in that data stream. The application can then respond by issuing alerts or stopping the robot, thereby enhancing overall system safety and reliability.
 
 <hr class="hr-dashed">
 
@@ -525,7 +517,7 @@ The ENTFAC
 * **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
 ### Example
-The ENTFAC 
+The LIVENS QoS can be used to verify whether the pub lishing process itself is still active, whereas the DEADLN QoS ensures the timely delivery of individual data samples. This policy enables a central monitoring system to automatically track the operational status of each robot. For instance, each robot may publish position and battery level via a Publisher. The central Subscriber is configured with kind set to automatic and lease duration set to 5 seconds, causing DDS to refresh liveliness every five seconds. If a signal is not received within the lease duration, a liveliness notification is triggered to indicate that the robot is inactive. The monitoring application can then respond by graying out the robot’s icon on the map or issuing a warning.
 
 <hr class="hr-dashed">
 
@@ -549,7 +541,7 @@ The ENTFAC
 * **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
 ### Example
-The ENTFAC 
+The HIST QoS can be used to control how much robot data is retained. If a control station must preserve all robot positions since startup, kind=keep all can be set so that both the Publisher and the Subscriber store every sample. In contrast, for real-time tracking where only the latest position matters, setting kind=keep last with depth=1 ensures that each robot’s Publisher retains and transmits only the most recent position, while the Subscriber receives only that single value.
 
 <hr class="hr-dashed">
 
@@ -573,7 +565,7 @@ The ENTFAC
 * **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
 ### Example
-The ENTFAC 
+The RESLIM QoS can be used to manage resources and maintain communication stability. For instance, where only the most recent information is important and historical records are less critical, such as a robot’s real-time position, the Publisher’s max instances can be set to a small value to avoid excessive memory usage. On the Subscriber side, where the number of participating robots may be large or variable, the max samples per instance value should be set high enough to keep minimal data for each robot instance.
 
 <hr class="hr-dashed">
 
@@ -597,8 +589,7 @@ The ENTFAC
 * **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
 ### Example
-The ENTFAC 
-
+The LFSPAN QoS can be used to prevent robots from retaining outdated samples unnecessarily. For data such as po sition or battery level, where only the last few seconds matter, setting the duration accordingly ensures that the Publisher’s HistoryCache stores only the most recent samples, with older ones automatically deleted to conserve memory. In contrast, for data such as command logs– where long-term delivery is more important than freshness– it is preferable to set duration to infinity and rely on other QoS policies to ensure reliability.
 
 <hr class="hr-dashed">
 
@@ -622,7 +613,7 @@ The ENTFAC
 * **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
 ### Example
-The ENTFAC 
+The OWNSTandOWNERSHIP STRENGTHQoSpolicies can be used to manage shared resources or mission states con sistently. For example, if multiple robots scan the environment simultaneously to build a shared map, shared mode allows the server to receive updates from all robots and generate a unified map. In contrast, for tasks that must be performed by a single robot, exclusive mode can be used with appropriate value assigned to each Publisher, ensuring that the active robot becomes the instance owner. If the current owner robot fails to respond due to a fault, DDS automatically transfers ownership to the standby robot with the next highest value, allowing the task to continue without interruption.
 
 <hr class="hr-dashed">
 
@@ -646,7 +637,7 @@ The ENTFAC
 * **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
 ### Example
-The ENTFAC 
+The DESTORD QoS policy can be used to maintain data consistency when multiple robots simultaneously update the same instance. By configuring by source timestamp, samples are ordered by their creation time regardless of network delays or arrival order, allowing all robots to share a consistent view of the map. In contrast, for real-time data such as current posi tions, where the latest received value is most important, using by reception timestamp enables the Subscriber to reflect the earliest arriving sample immediately.
 
 <hr class="hr-dashed">
 
@@ -670,7 +661,7 @@ The ENTFAC
 * **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
 ### Example
-The ENTFAC 
+The WDLIFE QoS can be used to explicitly manage the lifecycle of object-based tasks. For example, when a robot detects an object with its sensors, it can publish the object’s key, position, type, and status on a topic, allowing other robots or the control system to subscribe and build a shared environment model. When the task is completed, the post processing behavior depends on the detecting robot’s autodis pose unregistered instances setting. If true, the instance is immediately disposed of and removed from the map or marked as “processed”; if false, only the Publisher-instance link is removed while the object information remains active, allowing another robot to rediscover and update the same object, thereby improving collaboration flexibility.
 
 
 <hr class="hr-dashed">
@@ -695,7 +686,7 @@ The ENTFAC
 * **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
 ### Example
-The ENTFAC 
+The RDLIFE QoS policy enables tiered instance man agement for improved efficiency. For example, in a tempo rary storage area where hundreds of pallets move quickly and historical positions become obsolete immediately, set ting autopurge disposed samples delay to 0 seconds ensures that the cache is cleared as soon as a robot calls dis pose(). This keeps the cache lightweight and prevents un necessary memory growth. In contrast, for static, critical objects awaiting inspection after relocation, setting autop urge no writer samples delay to 300 seconds allows newly joined robots to continue inspection even after brief com munication interruptions. By adjusting the reader-side delay values based on context, essential data can be preserved while irrelevant information is promptly discarded, ensuring efficient use of system resources.
 
 <hr class="hr-grad-left">
 
