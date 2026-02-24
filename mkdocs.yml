@@ -47,3 +47,4 @@ nav:
     - STD Rules: rules/STD.md
     - IMP Rules: rules/IMP.md
     - EMP Rules: rules/EMP.md
+  - XML Generator: XML_Generator.md
