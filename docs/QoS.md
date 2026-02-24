@@ -207,17 +207,8 @@
 
 </div>
 
-
-
 <div align="center">
-  <img src="../images/lifecycle.jpg" width="500">
-</div>
-
-
-<div align="center" style="zoom: 0.5;">
-
-![Lifecycle of DDS Communication](./images/lifecycle.jpg)
-
+  <img src="../images/lifecycle.jpg" width="800">
 </div>
 
 
