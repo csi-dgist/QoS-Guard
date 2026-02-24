@@ -318,7 +318,7 @@
 <div class="req-container">
   <div class="req-item">
     <span class="req-label">Parameter</span>
-    <span class="req-value"><code>autoenable_created_entities</code> (boolean, default: TRUE)</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
@@ -337,441 +337,366 @@ The ENTFAC QoS can be used to conserve resources and allow multiple robots to in
 
 ## 2. PARTITION (PART)
 
-**Role:** Introduces **logical segmentation** within a single DDS domain so that only certain Publisher/Subscriber groups match.
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
     <span class="req-label">Parameter</span>
-    <span class="req-value"><code>names</code> (array of strings, default: empty string)</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">Applies to</span>
-    <span class="req-value">Both Publisher and Subscriber</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">Matching</span>
-    <span class="req-value">Publisher and Subscriber match only if they share <strong>at least one</strong> partition name</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">Exchanged</span>
-    <span class="req-value">During the SEDP stage of the Discovery phase</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can be changed at runtime; changes trigger rematching via SEDP (existing connections are broken)</span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
-**Example:** Delivery and inventory robots may use the same domain and topics such as `status` and `command`. A central management system can subscribe with `names=delivery` or `names=inventory` to receive data only from the desired group.
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
+
+### Example
+The ENTFAC 
 
 <hr class="hr-dashed">
 
 ## 3. USER DATA (USRDATA)
 
-**Role:** Attaches **application-specific metadata** to entities such as DomainParticipant, Publisher, and Subscriber.
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
     <span class="req-label">Parameter</span>
-    <span class="req-value"><code>value</code> (arbitrary byte sequence, default: empty)</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">Purpose</span>
-    <span class="req-value">DDS does not interpret it; the value is carried in built-in topic samples (discovery messages)</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">Propagation</span>
-    <span class="req-value">DomainParticipant → SPDP; Publisher/Subscriber → SEDP</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can be changed at runtime; changes are reflected in the next built-in topic sample</span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
-**Example:** Each robot can embed `robot_id=R12`, `token=ABCD123` in its participant so the server can validate the token during SPDP and admit only authorized robots. A LiDAR Publisher can include `sensor=LiDAR`, `fov=270` so subscribers can choose an appropriate filtering strategy before receiving samples.
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
+
+### Example
+The ENTFAC 
 
 <hr class="hr-dashed">
 
 ## 4. GROUP DATA (GRPDATA)
 
-**Role:** Attaches **application-specific metadata** to Publisher and Subscriber entities. Structure and behavior are the same as USRDATA.
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
     <span class="req-label">Parameter</span>
-    <span class="req-value"><code>value</code> (arbitrary byte sequence)</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">Propagation</span>
-    <span class="req-value">SEDP phase</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can be changed freely at runtime</span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
-**Example:** Similar to PART for separating delivery vs. inventory robots; PART is used by DDS for matching, while GRPDATA is **interpreted by the application** in discovery callbacks.
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
+
+### Example
+The ENTFAC 
+
 
 <hr class="hr-dashed">
 
 ## 5. TOPIC DATA (TOPDATA)
 
-**Role:** Attaches application-specific metadata to the **topic** entity. Not used for RxO matching; serves as an auxiliary channel for application information.
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
-    <span class="req-label">Format/Behavior</span>
-    <span class="req-value">Same as USRDATA and GRPDATA</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">Propagation</span>
-    <span class="req-value">SEDP phase</span>
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can be changed freely at runtime</span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
-**Example:** Embed `schema=2.1`, `frame=lidar` in the scan cloud topic’s TOPDATA so an inventory app can check schema compatibility during topic discovery and avoid parsing errors.
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
+
+### Example
+The ENTFAC 
+
 
 <hr class="hr-dashed">
 
 ## 6. RELIABILITY (RELIAB)
 
-**Role:** Determines whether data is sent **reliably** (with retransmission) or **best effort**.
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
-    <span class="req-label">Parameters</span>
-    <span class="req-value"><code>kind</code> (best_effort / reliable), <code>max_blocking_time</code> (reliable mode only)</span>
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
   <div class="req-item">
-    <span class="req-label">Defaults</span>
-    <span class="req-value">Publisher: reliable; Subscriber and topic: best_effort</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">best_effort</span>
-    <span class="req-value">No ACK wait or retransmission; data is sent as fast as possible</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">reliable</span>
-    <span class="req-value">All samples in the Publisher HistoryCache are delivered; ACK/NACK triggers retransmission; order is preserved</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">max_blocking_time</span>
-    <span class="req-value">In reliable mode, maximum time <code>write()</code>/<code>dispose()</code> may block due to delayed ACKs or buffer unavailability</span>
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
-**Lifecycle**
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
-- **Discovery:** SEDP RxO check. Matching succeeds only if Publisher.kind ≥ Subscriber.kind (best_effort < reliable).
-- **Data Exchange:** In reliable mode, HEARTBEAT and ACKNACK/NACK FRAG enable retransmission. In best_effort, no control meta-traffic.
-- **Disassociation:** dispose/unregister samples follow the same reliability rules.
+### Example
+The ENTFAC 
 
-**Example:** Use `reliable` on both sides for emergency stop or task assignment. Use `best_effort` for high-frequency streams (e.g., LiDAR, camera) to avoid retransmission overhead.
 
 <hr class="hr-dashed">
 
 ## 7. DURABILITY (DURABL)
 
-**Role:** Defines how **late-joining Subscribers** can receive previously published samples.
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
-    <span class="req-label">Parameters</span>
-    <span class="req-value"><code>kind</code> (volatile / transient_local / transient / persistent) </span>
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
-  <div class="req-item">
-    <span class="req-label">Defaults</span>
-    <span class="req-value">VOLATILE</span>
-  </div>
-
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Immutable after the entity is enabled</span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
-**Lifecycle**
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
-- **Discovery:** Matching succeeds only if Publisher.kind ≥ Subscriber.kind (volatile < transient_local < transient < persistent).
-- **Data Exchange:** A non-volatile Publisher retransmits retained samples from HistoryCache to late joiners.
-- **Disassociation:** For transient/persistent, the durability service retains samples and state.
-
-**Example:** For global maps or mission plans that must remain available to robots that join later (or after restarts), use `transient` (survives process restart) or `persistent` (survives system reboot).
+### Example
+The ENTFAC 
 
 <hr class="hr-dashed">
 
 ## 8. DEADLINE (DEADLN)
 
-**Role:** Specifies the **maximum period** within which a new sample for a given data instance must be produced by the Publisher and received by the Subscriber. If exceeded, DDS raises alarms on both sides.
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
     <span class="req-label">Parameter</span>
-    <span class="req-value"><code>period</code> (default: infinity)</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
   <div class="req-item">
-    <span class="req-label">Meaning</span>
-    <span class="req-value">A new sample must be produced and received within this period</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">Use case</span>
-    <span class="req-value">Monitoring <strong>periodic updates</strong> (e.g., periodic sensor data)</span>
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
-**Lifecycle**
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
-- **Discovery:** RxO matching succeeds only if Publisher.period ≤ Subscriber.period.
-- **Data Exchange:** Period is monitored per instance. Missed deadline on Publisher or Subscriber raises a notification for recovery or alerting.
-
-**Example:** A robot publishes position and battery every second; the monitoring Subscriber uses period=1 s. If a sample is not received within that interval, a deadline-miss alarm indicates communication or robot failure.
+### Example
+The ENTFAC 
 
 <hr class="hr-dashed">
 
 ## 9. LIVELINESS (LIVENS)
 
-**Role:** Allows a Subscriber to determine whether the corresponding **Publisher is still active**.
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
-    <span class="req-label">Parameters</span>
-    <span class="req-value"><code>kind</code>  **automatic** (default), **manual_by_participant**, **manual_by_topic** <code>lease_duration</code> </span>
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
-  <div class="req-item">
-    <span class="req-label">Defaults</span>
-    <span class="req-value">Automatic </span>
-  </div>
-
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Immutable after the entity is enabled</span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
-**Lifecycle**
-
-- **Discovery:** Matching succeeds only if Publisher.kind ≥ Subscriber.kind and Publisher.lease_duration ≤ Subscriber.lease_duration.
-- **Data Exchange:** Periodic liveliness assertions or `assert_liveliness()`. In manual_by_topic, the LivelinessFlag in HEARTBEAT is used.
-- **Disassociation:** If no assertion is received within lease_duration, the Subscriber marks the Publisher as not alive. If all writers disappear, the instance state becomes *not alive no writers*.
-
-**Example:** A central monitor configures each robot’s Publisher with `kind=automatic` and `lease_duration=5` seconds. If no signal is received within 5 seconds, the monitor can gray out the robot’s icon or issue a warning.
+### Example
+The ENTFAC 
 
 <hr class="hr-dashed">
 
 ## 10. HISTORY (HIST)
 
-**Role:** Determines **how many samples** per instance the Publisher keeps for retransmission and the Subscriber keeps before delivery to the application.
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
-    <span class="req-label">Parameters</span>
-    <span class="req-value"><code>kind</code>, <code>depth</code></span>
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
   <div class="req-item">
-    <span class="req-label">kind</span>
-    <span class="req-value"><strong>keep_last</strong>: retain only the most recent samples per instance, up to <code>depth</code> (default depth=1) / <strong>keep_all</strong>: retain all samples per instance; <code>depth</code> is ignored</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">Applies to</span>
-    <span class="req-value">Topic, Publisher, Subscriber. <strong>Immutable</strong> (set only at creation)</span>
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
-**Lifecycle**
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
-- **Data Exchange:** Publisher and Subscriber each maintain a HistoryCache; data exchange is the process of synchronizing these caches. `kind` and `depth` limit how many samples are retained.
-
-**Example:** For a control station that must keep all robot positions since startup, use `keep_all`. For real-time tracking where only the latest position matters, use `keep_last` with `depth=1`.
+### Example
+The ENTFAC 
 
 <hr class="hr-dashed">
 
 ## 11. RESOURCE LIMITS (RESLIM)
 
-**Role:** Sets **upper bounds** on the number of instances and samples that topic, Publisher, and Subscriber entities can manage.
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
-    <span class="req-label">Parameters</span>
-    <span class="req-value">`max_samples`, `max_instances`, `max_samples_per_instance`</span>
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
-  <div class="req-item">
-    <span class="req-label">Defaults</span>
-    <span class="req-value">OMG standard: unlimited; implementations may impose defaults </span>
-  </div>
-
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Immutable after configuration</span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
-**Lifecycle**
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
-- **Data Exchange:** Limits how many samples/instances can be stored in HistoryCache, preventing overflow and memory exhaustion.
-
-**Example:** For real-time position only, set the Publisher’s `max_instances` low to save memory. On the Subscriber, set `max_samples_per_instance` high enough when many robot instances may be present.
+### Example
+The ENTFAC 
 
 <hr class="hr-dashed">
 
 ## 12. LIFESPAN (LFSPAN)
 
-**Role:** Defines **how long** a sample published by a Publisher remains valid. After expiration, the sample is removed from both Publisher and Subscriber HistoryCache.
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
     <span class="req-label">Parameter</span>
-    <span class="req-value"><code>duration</code> (default: infinity)</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">Applies to</span>
-    <span class="req-value">Topic, Publisher (and possibly Subscriber, depending on implementation)</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">Behavior</span>
-    <span class="req-value">Expiration time = publication time + duration; expired samples are automatically removed</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value"><strong>Mutable</strong>; can be changed after the entity is enabled</span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
-**Lifecycle**
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
-- **Data Exchange:** Expiration is tracked per sample. Expired samples are no longer accessible to the Subscriber and help manage memory.
+### Example
+The ENTFAC 
 
-**Example:** For position or battery data where only the last few seconds matter, set `duration` accordingly so older samples are removed. For command logs that must be delivered over a long time, set `duration=infinity`.
 
 <hr class="hr-dashed">
 
 ## 13. OWNERSHIP (+STRENGTH) (OWNST)
 
-**Role:** Determines whether **multiple Publishers** can update the same instance, and if not, **which Publisher’s** value is accepted.
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
-    <span class="req-label">Parameters</span>
-    <span class="req-value">shared, Exclusive</span>
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
-  <div class="req-item">
-    <span class="req-label">Defaults</span>
-    <span class="req-value">OMG standard: unlimited; implementations may impose defaults </span>
-  </div>
-
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Immutable after enable</span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
-**Lifecycle**
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
-- **Discovery:** Matching succeeds only if Publisher.kind and Subscriber.kind are **identical**.
-- **Data Exchange:** In shared mode, the Subscriber receives updates from all Publishers; in exclusive mode, only from the highest-strength Publisher.
-- **Disassociation:** In exclusive mode, only the **current owner** can effectively issue `dispose()`/`unregister()`.
-
-**Example:** Use `shared` when multiple robots update a shared map. For a task that must be performed by a single robot, use `exclusive` with strength so the active robot is the owner; on failure, ownership can transfer to the next-highest strength robot.
+### Example
+The ENTFAC 
 
 <hr class="hr-dashed">
 
 ## 14. DESTINATION ORDER (DESTORD)
 
-**Role:** Determines **in what order** a Subscriber applies samples when **multiple Publishers** write to the same instance.
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
-    <span class="req-label">kind</span>
-    <span class="req-value"><strong>by_reception_timestamp</strong> (default): order by arrival time at the Subscriber / <strong>by_source_timestamp</strong>: order by timestamp assigned by the Publisher (preserves creation order)</span>
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value"><strong>Immutable</strong> after enable</span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
-**Lifecycle**
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
-- **Discovery:** Matching succeeds only if Publisher.kind ≥ Subscriber.kind (by_reception_timestamp < by_source_timestamp).
-- **Data Exchange:** The chosen kind governs the processing order of samples from multiple Publishers for the same instance.
-
-**Example:** Use `by_source_timestamp` when multiple robots update the same map instance so all share a consistent view. For real-time position where “latest received” matters, use `by_reception_timestamp`.
+### Example
+The ENTFAC 
 
 <hr class="hr-dashed">
 
 ## 15. WRITER DATA LIFECYCLE (WDLIFE)
 
-**Role:** Determines whether the Publisher **notifies Subscribers with dispose()** when it **unregisters** an instance.
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
     <span class="req-label">Parameter</span>
-    <span class="req-value"><code>autodispose_unregistered_instances</code> (default: true)</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">Applies to</span>
-    <span class="req-value">Publisher only</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">true</span>
-    <span class="req-value">When <code>unregister()</code> is called, the instance is automatically marked disposed → Subscriber sees it as deleted</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">false</span>
-    <span class="req-value"><code>unregister()</code> only disassociates the writer from the instance; the application must explicitly call <code>dispose()</code> to delete it</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value"><strong>Mutable</strong></span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
-**Lifecycle**
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
-- **Disassociation:** When the Publisher calls `unregister()` or is deleted, this setting determines whether the Subscriber treats the instance as *not alive disposed* or *not alive no writers*.
+### Example
+The ENTFAC 
 
-**Example:** When a robot publishes detected objects, `autodispose_unregistered_instances=true` removes the instance from the map as “processed” when the task is done. Set to `false` if another robot may rediscover and update the same object.
 
 <hr class="hr-dashed">
 
 ## 16. READER DATA LIFECYCLE (RDLIFE)
 
-**Role:** Determines **how long** a Subscriber retains samples for instances that are **disposed** or have **no associated Publishers** before purging them.
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
-    <span class="req-label">Parameters</span>
-    <span class="req-value"><code>autopurge_disposed_samples_delay</code>, <code>autopurge_no_writer_samples_delay</code></span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">Applies to</span>
-    <span class="req-value">Subscriber only</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">autopurge_disposed_samples_delay</span>
-    <span class="req-value">Time to retain samples/metadata after the instance becomes <em>not alive disposed</em> (default: infinity)</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">autopurge_no_writer_samples_delay</span>
-    <span class="req-value">Time to retain after the instance becomes <em>not alive no writers</em> (default: infinity)</span>
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value"><strong>Mutable</strong></span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
-**Lifecycle**
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
-- **Disassociation:** When the Publisher calls `dispose()`, the instance becomes *not alive disposed*. When all writers disappear, it becomes *not alive no writers*. After the corresponding delay, the Subscriber purges the instance and samples to reclaim memory.
-
-**Example:** In a temporary storage area with fast-moving pallets, set `autopurge_disposed_samples_delay=0` to purge as soon as dispose() is received. For critical static objects, set `autopurge_no_writer_samples_delay=300` seconds so newly joined robots can still inspect after brief communication loss.
+### Example
+The ENTFAC 
 
 <hr class="hr-grad-left">
 
@@ -829,5 +754,3 @@ The ENTFAC QoS can be used to conserve resources and allow multiple robots to in
     <span>Dispose on unregister; when to purge disposed/no-writer samples</span>
   </div>
 </div>
-
-This document is based on the lifecycle-based QoS tutorial and mobile-robot examples (Appendix A) from the paper.
