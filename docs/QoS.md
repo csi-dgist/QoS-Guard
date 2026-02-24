@@ -5,8 +5,6 @@
 
 
 <style>
-/* qos.md 전용 커스텀 스타일 */
-/* 표 스타일 (QoS_Guard.md 참고) */
 .req-container {
     margin: 20px 0;
     border: 1px solid #e2e8f0;
@@ -132,25 +130,19 @@
   }
   .phase-card {
     border-left: 5px solid #2c3e50;
-    background-color: #f8f9fa;
+    background-color: #f1f5f9;
     padding: 15px 20px;
     margin-bottom: 20px;
     border-radius: 0 8px 8px 0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   }
   .phase-title {
-    font-size: 1.2rem;
+    font-size: 20px;
     font-weight: bold;
     color: #2c3e50;
     margin-bottom: 8px;
     display: flex;
     align-items: center;
-  }
-  .phase-title::before {
-    content: "•";
-    margin-right: 10px;
-    color: #3498db;
-    font-size: 1.5rem;
   }
   .phase-desc {
     font-size: 0.95rem;
