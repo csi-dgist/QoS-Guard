@@ -1,4 +1,4 @@
-# DDS QoS Policy Guide (16 Policies)
+# DDS QoS Policy Guide
 
 > A comprehensive reference for configuring 16 key DDS QoS policies
 
@@ -155,7 +155,7 @@
 
 <hr class="hr-grad-left"> 
 
-## Table of Contents
+## 16 QoS Policies
 
 <div class="qos-toc-grid">
   <a href="#1-entity-factory-entfac" class="qos-card"><span class="qos-num">01</span><div class="qos-title">ENTITY FACTORY<span class="qos-abbr">ENTFAC</span></div></a>
@@ -309,34 +309,11 @@
 </div>
 </details>
 
-
 <hr class="hr-grad-left">
-
-
-[!TIP]
-
-> [!IMPORTANT]
- 
-<dl>
-<dt><b>RELIABILITY</b></dt>
-<dd>데이터 전송의 신뢰성을 보장하는 정책입니다.</dd>
-
-<dt><b>DURABILITY</b></dt>
-<dd>나중에 접속한 수신자에게 과거 데이터를 전달할지 결정합니다.</dd>
-</dl>
-
-> [!CAUTION]
-> **Critical Warning:** `RELIABILITY`를 `RELIABLE`로 설정하고 하드웨어 성능이 낮으면 시스템이 멈출 수 있습니다.
-
-> [!ABSTRACT]
-
-
-<hr class="hr-grad-left">
-
 
 ## 1. ENTITY FACTORY (ENTFAC)
 
-**Role:** Controls **when** newly created DDS entities begin participating in discovery.
+> Controls whether newly createdDDS entities automatically start participating in discovery
 
 <div class="req-container">
   <div class="req-item">
@@ -344,24 +321,20 @@
     <span class="req-value"><code>autoenable_created_entities</code> (boolean, default: TRUE)</span>
   </div>
   <div class="req-item">
-    <span class="req-label">TRUE</span>
-    <span class="req-value">Child entities are enabled immediately upon creation and participate in discovery</span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">FALSE</span>
-    <span class="req-value">Entities do not participate in discovery until the application explicitly calls <code>enable()</code></span>
-  </div>
-  <div class="req-item">
-    <span class="req-label">Lifecycle</span>
-    <span class="req-value">Determines when the Discovery phase starts</span>
-  </div>
-  <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can be changed at runtime; changes apply only to entities <strong>created after</strong> the update</span>
+    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
   </div>
 </div>
 
-**Example:** To activate a navigation module’s Publishers/Subscribers only after local sensor calibration or localization is complete, set `autoenable_created_entities=false` and call `enable()` at the appropriate time.
+<dl>
+<dt><b>TRUE</b></dt>
+<dd>Newly created child entities are immediately enabled and begin participating in discovery.</dd>
+
+<dt><b>FALSE</b></dt>
+<dd>The application must explicitly call enable() before the entity can participate in discovery.</dd>
+</dl>
+
+**Example:** The ENTFAC QoS can be used to conserve resources and allow multiple robots to initiate discovery simultaneously under synchronized conditions. For instance, the Publishers and Subscribers of a navigation module may be activated only after completing local sensor calibration or localization. By setting autoenable created entities=false, the system delays communication until the robot is ready by explicitly calling enable() at the appropriate time
 
 <hr class="hr-dashed">
 
