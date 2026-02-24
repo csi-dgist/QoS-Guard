@@ -153,48 +153,6 @@
   }
   b { color: #394a5b; }
 
-details {
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    transition: all 0.3s ease;
-  }
-
-  summary {
-    font-weight: bold;
-    color: #4E5EB4;
-    cursor: pointer;
-    list-style: none; 
-    outline: none;
-  }
-
-  summary::-webkit-details-marker {
-    display: none;
-  }
-
-  summary::before {
-    content: "▶ ";
-    font-size: 0.8rem;
-    margin-right: 5px;
-    transition: transform 0.2s;
-  }
-
-  details[open] summary::before {
-    content: "▼ ";
-  }
-
-  .details-content {
-    margin-top: 10px;
-    padding-left: 15px;
-    border-left: 2px solid #cbd5e1;
-    font-size: 0.9rem;
-    color: #475569;
-    line-height: 1.6;
-  }
-    
-
 </style>
 
 <hr class="hr-grad-left"> 
@@ -224,6 +182,10 @@ details {
 
 ## QoS Mapping by Lifecycle Phase
 
+<div align="center">
+  <img src="../images/lifecycle.jpg" width="800">
+</div>
+
 <div class="lifecycle-container">
 <div class="phase-card">
   <div class="phase-title">1. Discovery Phase</div>
@@ -245,108 +207,6 @@ details {
     Communication ends by <b>disposing instances</b> or removing GUIDs, followed by <br>purging all history after a <b>timeout</b>.
   </div>
 </div>
-
-</div>
-
-<div align="center">
-  <img src="../images/lifecycle.jpg" width="800">
-</div>
-
-
-<div class="req-container">
-    <div class="req-item" style="font-weight: bold; background-color: #f1f5f9;">
-        <span class="req-label" style="flex: 2;">QoS Policy</span>
-        <span class="req-value" style="flex: 1; text-align: center;">Discovery</span>
-        <span class="req-value" style="flex: 1; text-align: center;">Data Exchange</span>
-        <span class="req-value" style="flex: 1; text-align: center;">Disassociation</span>
-    </div>
-    <div class="req-item"><span class="req-label" style="flex: 2;">ENTITY_FACTORY</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-    </div>
-    <div class="req-item"><span class="req-label" style="flex: 2;">PARTITION</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-    </div>
-    <div class="req-item"><span class="req-label" style="flex: 2;">USER_DATA</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-    </div>
-    <div class="req-item"><span class="req-label" style="flex: 2;">GROUP_DATA</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-    </div>
-    <div class="req-item">
-        <span class="req-label" style="flex: 2;">TOPIC_DATA</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-    </div>
-    <div class="req-item"><span class="req-label" style="flex: 2;">RELIABILITY</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-    </div>
-    <div class="req-item">
-        <span class="req-label" style="flex: 2;">DURABILITY</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-    </div><div class="req-item"><span class="req-label" style="flex: 2;">DEADLINE</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-    </div>
-    <div class="req-item">
-        <span class="req-label" style="flex: 2;">LIVELINESS</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-    </div>
-    <div class="req-item">
-        <span class="req-label" style="flex: 2;">HISTORY</span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-    </div>
-    <div class="req-item">
-        <span class="req-label" style="flex: 2;">RESOURCE_LIMITS</span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-    </div>
-    <div class="req-item"><span class="req-label" style="flex: 2;">LIFESPAN</span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-    </div>
-    <div class="req-item">
-        <span class="req-label" style="flex: 2;">OWNERSHIP</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-    </div>
-    <div class="req-item"><span class="req-label" style="flex: 2;">DESTINATION_ORDER</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-    </div>
-    <div class="req-item">
-        <span class="req-label" style="flex: 2;">WRITER_DATA_LIFECYCLE</span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-    </div>
-    <div class="req-item">
-        <span class="req-label" style="flex: 2;">READER_DATA_LIFECYCLE</span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;"></span>
-        <span class="req-value" style="flex: 1; text-align: center;">O</span>
-    </div>
 </div>
 
 <details>
