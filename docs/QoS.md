@@ -189,6 +189,8 @@
 
 ## QoS Mapping by Lifecycle Phase
 
+
+
 <div class="lifecycle-container">
 <div class="phase-card">
   <div class="phase-title">1. Discovery Phase</div>
@@ -212,6 +214,13 @@
 </div>
 
 </div>
+
+<figure style="text-align: center;">
+  <img src="images/lifecycle.png" width="1000px" alt="QoS Guard Overview">
+  <figcaption style="font-style: italic; color: #666; margin-top: 10px;">
+    QoS Guard Framework
+  </figcaption>
+</figure>
 
 <div class="req-container">
     <div class="req-item" style="font-weight: bold; background-color: #f1f5f9;">
