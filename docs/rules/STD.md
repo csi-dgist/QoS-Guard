@@ -118,7 +118,7 @@ This page describes the QoS dependency and consistency rules derived from the **
       <span style="font-size: 0.8em; color: #999;">Structural</span>
     </div>
     <div class="std-condition">
-      [HIST.kind = KEEP_LAST] ∧ [HIST.depth > mpi]
+      [HIST.kind = KEEP_LAST] ∧ [HIST.depth > RESLIM.mpi]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
