@@ -454,7 +454,7 @@ The RELIAB QoS can be used to balance safety and efficiency by configuring topic
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can not be changed at runtime</span>
+    <span class="req-value">Can <b>not</b> be changed at runtime</span>
   </div>
 </div>
 
