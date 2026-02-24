@@ -149,7 +149,7 @@
     color: #555;
     margin-left: 20px;
   }
-  b { color: #4E5EB4; }
+  b { color: #394a5b; }
 
 
 </style>
