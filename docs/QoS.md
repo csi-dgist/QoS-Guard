@@ -123,6 +123,43 @@
     color: #6a737d;
     margin-top: 2px;
 }  
+
+.lifecycle-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 800px;
+  }
+  .phase-card {
+    border-left: 5px solid #2c3e50;
+    background-color: #f8f9fa;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  .phase-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+  }
+  .phase-title::before {
+    content: "•";
+    margin-right: 10px;
+    color: #3498db;
+    font-size: 1.5rem;
+  }
+  .phase-desc {
+    font-size: 0.95rem;
+    color: #555;
+    margin-left: 20px;
+  }
+  b { color: #2980b9; }
+
+
 </style>
 
 <hr class="hr-grad-left"> 
@@ -152,19 +189,28 @@
 
 ## QoS Mapping by Lifecycle Phase
 
-<div class="req-container">
-  <div class="req-item">
-    <span class="req-label">Discovery</span>
-    <span class="req-value">ENTFAC, PART, USRDATA, GRPDATA, TOPDATA</span>
+<div class="lifecycle-container">
+<div class="phase-card">
+  <div class="phase-title">1. Discovery Phase</div>
+  <div class="phase-desc">
+    Entities with the same topic are matched through <b>PDP/EDP protocols</b> and established after verifying <b>QoS compatibility</b>.
   </div>
-  <div class="req-item">
-    <span class="req-label">Data Exchange</span>
-    <span class="req-value">RELIAB, DURABL, DEADLN, LIVENS, HIST, RESLIM, LFSPAN, OWNST, DESTORD</span>
+</div>
+
+<div class="phase-card" style="border-left-color: #3498db;">
+  <div class="phase-title">2. Data Exchange Phase</div>
+  <div class="phase-desc">
+    Matched pairs exchange <b>user data</b> and <b>control metatraffic</b> (HEARTBEAT/ACKNACK) to ensure reliability and timeliness.
   </div>
-  <div class="req-item">
-    <span class="req-label">Disassociation</span>
-    <span class="req-value">RELIAB, DURABL, LIVENS, OWNST, WDLIFE, RDLIFE</span>
+</div>
+
+<div class="phase-card" style="border-left-color: #27ae60;">
+  <div class="phase-title">3. Disassociation Phase</div>
+  <div class="phase-desc">
+    Communication ends by <b>disposing instances</b> or removing GUIDs, followed by purging all history after a <b>timeout</b>.
   </div>
+</div>
+
 </div>
 
 <div class="req-container">
