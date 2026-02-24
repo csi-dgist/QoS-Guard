@@ -134,7 +134,9 @@
     padding: 10px 20px;
     margin-bottom: 20px;
     border-radius: 0 8px 8px 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05),
+        2px 0 4px rgba(0,0,0,0.05),
+        0px -2px 4px rgba(0,0,0,0.05);
   }
   .phase-title {
     font-size: 20px;
