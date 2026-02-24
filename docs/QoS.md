@@ -1,8 +1,6 @@
 # DDS QoS Policy Guide (16 Policies)
 
-> Source: *Dependency Chain Analysis of ROS 2 DDS QoS Policies: From Lifecycle Tutorial to Static Verification*  
-> DDS Publish–Subscribe communication is divided into three phases: **Discovery → Data Exchange → Disassociation**.
-
+> A comprehensive reference for configuring 16 key DDS QoS policies
 
 <style>
 .req-container {
