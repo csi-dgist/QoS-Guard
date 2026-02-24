@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://csi-dgist.github.io/QoS-Guard/</loc>
+         <lastmod>2026-02-24</lastmod>
+    </url>
+    <url>
+         <loc>https://csi-dgist.github.io/QoS-Guard/QoS/</loc>
+         <lastmod>2026-02-24</lastmod>
+    </url>
+    <url>
+         <loc>https://csi-dgist.github.io/QoS-Guard/QoS_Guard/</loc>
+         <lastmod>2026-02-24</lastmod>
+    </url>
+    <url>
+         <loc>https://csi-dgist.github.io/QoS-Guard/XML_Generator/</loc>
+         <lastmod>2026-02-24</lastmod>
+    </url>
+    <url>
+         <loc>https://csi-dgist.github.io/QoS-Guard/rules/</loc>
+         <lastmod>2026-02-24</lastmod>
+    </url>
+    <url>
+         <loc>https://csi-dgist.github.io/QoS-Guard/rules/EMP/</loc>
+         <lastmod>2026-02-24</lastmod>
+    </url>
+    <url>
+         <loc>https://csi-dgist.github.io/QoS-Guard/rules/IMP/</loc>
+         <lastmod>2026-02-24</lastmod>
+    </url>
+    <url>
+         <loc>https://csi-dgist.github.io/QoS-Guard/rules/STD/</loc>
+         <lastmod>2026-02-24</lastmod>
+    </url>
+</urlset>

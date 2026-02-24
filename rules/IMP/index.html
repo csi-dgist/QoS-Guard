@@ -1,0 +1,2455 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ROS 2 QoS Dependency Conflict Detector">
+      
+      
+      
+        <link rel="canonical" href="https://csi-dgist.github.io/QoS-Guard/rules/IMP/">
+      
+      
+        <link rel="prev" href="../STD/">
+      
+      
+        <link rel="next" href="../EMP/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>IMP Rules - QoS Guard</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#stage-1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="QoS Guard" class="md-header__button md-logo" aria-label="QoS Guard" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            QoS Guard
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              IMP Rules
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/csi-dgist/QoS-Guard" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../QoS_Guard/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  How to use
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../QoS/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QoS Encyclopedia
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  QoS Rules
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../XML_Generator/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  XML Generator
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="QoS Guard" class="md-nav__button md-logo" aria-label="QoS Guard" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    QoS Guard
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/csi-dgist/QoS-Guard" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../QoS_Guard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to use
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../QoS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS Encyclopedia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS Rules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    QoS Rules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../STD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STD Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IMP Rules
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IMP Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stage-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-evidence-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Evidence Details
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Evidence Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rule-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 5
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 7
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 8
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 9
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 10
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 11
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 12
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 13
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 14
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 15
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 16
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 17
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 18
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 19
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 20
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-28-rule-29-rule-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 28 / Rule 29 / Rule 30
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 34
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 40
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EMP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EMP Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../XML_Generator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    XML Generator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stage-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-evidence-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Evidence Details
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Evidence Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rule-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 5
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 7
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 8
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 9
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 10
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 11
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 12
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 13
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 14
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 15
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 16
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 17
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 18
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 19
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 20
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-28-rule-29-rule-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 28 / Rule 29 / Rule 30
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 34
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 40
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>IMP Rules</h1>
+
+<p># IMP Rules</p>
+<style>
+/* 전체 리스트 컨테이너 */
+.std-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+/* 개별 규칙 카드 */
+.std-item {
+  border: 1px solid #e1e4e8;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 16px 20px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+/* 호버 효과: 그림자와 보라색 포인트 */
+.std-item:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border-color: #4e37e6;
+  transform: translateY(-2px);
+}
+
+/* 상단 라인: 번호와 타이틀 */
+.std-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.std-no {
+  background: #f0f0f0;
+  color: #444;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.std-item:hover .std-no {
+  background: #4e37e6;
+  color: #fff;
+}
+
+.std-id {
+  font-weight: 700;
+  font-size: 1.05em;
+  color: #2c3e50;
+  flex-grow: 1;
+  margin-left: 12px;
+}
+
+/* 위반 조건 박스 (수식 강조) */
+.std-condition {
+  background: #f8f9fa;
+  padding: 14px;
+  border-radius: 6px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  border-left: 4px solid #4e37e6;
+  margin: 8px 0;
+  font-size: 0.95em;
+  color: #000000;
+  line-height: 1.5;
+}
+
+/* 하단 메타 데이터 */
+.std-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 0.82em;
+}
+
+.std-tag {
+  display: flex;
+  align-items: center;
+  background: #f1f3f5;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: #666;
+}
+
+.std-tag b {
+  color: #4e37e6;
+  margin-right: 5px;
+  font-weight: 600;
+}
+</style>
+
+<p>This page describes the QoS dependency rules derived from the specific implementation behaviors of ROS 2 Middlewares (RMWs) such as eProsima Fast DDS and Eclipse Cyclone DDS. These dependencies are not explicitly mandated by the DDS standard but are critical for functional consistency in practice.</p>
+<hr class="hr-grad-left">
+
+<h2 id="stage-1">Stage 1</h2>
+<p><em>Intra-entity Dependency Validation</em></p>
+<div class="std-list">
+
+  <a href="#rule-3" class="std-item">
+    <div class="std-header">
+      <span class="std-no">3</span>
+      <span class="std-id">RELIAB → DURABL</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [DURABL ≥ TRAN_LOCAL] ∧ [RELIAB = BEST_EFFORT]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-4" class="std-item">
+    <div class="std-header">
+      <span class="std-no">4</span>
+      <span class="std-id">RELIAB → OWNST</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [OWNST = EXCLUSIVE] ∧ [RELIAB = BEST_EFFORT]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-5" class="std-item">
+    <div class="std-header">
+      <span class="std-no">5</span>
+      <span class="std-id">RELIAB → LIVENS</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [LIVENS = MANUAL] ∧ [RELIAB = BEST_EFFORT]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-7" class="std-item">
+    <div class="std-header">
+      <span class="std-no">7</span>
+      <span class="std-id">LFSPAN → DEADLN</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      LFSPAN.duration < DEADLN.period
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-8" class="std-item">
+    <div class="std-header">
+      <span class="std-no">8</span>
+      <span class="std-id">HIST → DESTORD</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [DESTORD = BY_SOURCE] ∧ [HIST.kind = KEEP_LAST] ∧ [HIST.depth = 1]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-9" class="std-item">
+    <div class="std-header">
+      <span class="std-no">9</span>
+      <span class="std-id">RESLIM → DESTORD</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [DESTORD = BY_SOURCE] ∧ [HIST.kind = KEEP_ALL] ∧ [RESLIM.mpi = 1]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-10" class="std-item">
+    <div class="std-header">
+      <span class="std-no">10</span>
+      <span class="std-id">DEADLN → OWNST</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [OWNST = EXCLUSIVE] ∧ [DEADLN.period = ∞]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-11" class="std-item">
+    <div class="std-header">
+      <span class="std-no">11</span>
+      <span class="std-id">LIVENS → OWNST</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [OWNST = EXCLUSIVE] ∧ [LIVENS.lease = ∞]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-12" class="std-item">
+    <div class="std-header">
+      <span class="std-no">12</span>
+      <span class="std-id">LIVENS → RDLIFE</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [autopurge_nowriter > 0] ∧ [LIVENS.lease = ∞]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-13" class="std-item">
+    <div class="std-header">
+      <span class="std-no">13</span>
+      <span class="std-id">RDLIFE → DURABL</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [DURABL ≥ TRANSIENT] ∧ [autopurge_disposed ≠ ∞]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-14" class="std-item">
+    <div class="std-header">
+      <span class="std-no">14</span>
+      <span class="std-id">PART → DEADLN</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [DEADLN.period > 0] ∧ [PART.names ≠ ∅]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-15" class="std-item">
+    <div class="std-header">
+      <span class="std-no">15</span>
+      <span class="std-id">PART → LIVENS</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [LIVENS = MANUAL] ∧ [PART.names ≠ ∅]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-16" class="std-item">
+    <div class="std-header">
+      <span class="std-no">16</span>
+      <span class="std-id">OWNST → WDLIFE</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [autodispose = TRUE] ∧ [OWNST = EXCLUSIVE]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-17" class="std-item">
+    <div class="std-header">
+      <span class="std-no">17</span>
+      <span class="std-id">HIST → LFSPAN</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      [HIST.kind = KEEP_LAST] ∧ [LFSPAN.duration > HIST.depth × PP]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-18" class="std-item">
+    <div class="std-header">
+      <span class="std-no">18</span>
+      <span class="std-id">RESLIM → LFSPAN</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      [HIST.kind = KEEP_ALL] ∧ [LFSPAN.duration > RESLIM.mpi × PP]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-19" class="std-item">
+    <div class="std-header">
+      <span class="std-no">19</span>
+      <span class="std-id">ENTFAC → DURABL</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      [DURABL = VOLATILE] ∧ [autoenable = FALSE]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-20" class="std-item">
+    <div class="std-header">
+      <span class="std-no">20</span>
+      <span class="std-id">PART → DURABL</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      [DURABL ≥ TRAN_LOCAL] ∧ [PART.names ≠ ∅]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+</div>
+
+<hr class="hr-grad-left">
+
+<h2 id="stage-2">Stage 2</h2>
+<p><em>Inter-entity Dependency Validation</em></p>
+<div class="std-list">
+
+  <a href="#rule-28" class="std-item">
+    <div class="std-header">
+      <span class="std-no">28</span>
+      <span class="std-id">WDLIFE → RDLIFE</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [W.autodispose = FALSE] ∧ [R.autopurge_nowriter = 0]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-29" class="std-item">
+    <div class="std-header">
+      <span class="std-no">29</span>
+      <span class="std-id">WDLIFE → RDLIFE</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      [W.autodispose = FALSE] ∧ [R.autopurge_disposed > 0]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-30" class="std-item">
+    <div class="std-header">
+      <span class="std-no">30</span>
+      <span class="std-id">WDLIFE → RDLIFE</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      [W.autodispose = FALSE] ∧ [R.autopurge_nowriter = ∞]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+</div>
+
+<hr class="hr-grad-left">
+
+<h2 id="stage-3">Stage 3</h2>
+<p><em>Dynamic &amp; Performance Rules</em></p>
+<div class="std-list">
+
+  <a href="#rule-34" class="std-item">
+    <div class="std-header">
+      <span class="std-no">34</span>
+      <span class="std-id">RELIAB → WDLIFE</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [autodispose = TRUE] ∧ [RELIAB = BEST_EFFORT]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-40" class="std-item">
+    <div class="std-header">
+      <span class="std-no">40</span>
+      <span class="std-id">DURABL → DEADLN</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      [DEADLN.period > 0] ∧ [DURABL ≥ TRAN_LOCAL]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> IMP</div>
+    </div>
+  </a>
+
+</div>
+
+<hr class="hr-grad-left">
+
+<h2 id="implementation-evidence-details">Implementation Evidence Details</h2>
+<p><em>Below are the code-level justifications and source references for each IMP rule.</em></p>
+<hr class="hr-double">
+
+<p><span id="rule-3"></span></p>
+<h3 id="rule-3">Rule 3</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// [TRANSIENT_LOCAL late-joiner logic resides within if (is_reliable)]</span>
+<span class="c1">// → When best-effort, it returns false, preventing the later-joiner logic from executing → Transient behaviour does not occur</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">is_reliable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rp</span><span class="o">-&gt;</span><span class="n">is_reliable</span><span class="p">();</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">is_reliable</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">SequenceNumber_t</span><span class="w"> </span><span class="n">min_seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_seq_num_min</span><span class="p">();</span><span class="w"> </span>
+<span class="n">SequenceNumber_t</span><span class="w"> </span><span class="n">last_seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_seq_num_max</span><span class="p">();</span><span class="w"> </span>
+<span class="n">RTPSMessageGroup</span><span class="w"> </span><span class="nf">group</span><span class="p">(</span><span class="n">mp_RTPSParticipant</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">rp</span><span class="o">-&gt;</span><span class="n">message_sender</span><span class="p">());</span><span class="w"> </span>
+<span class="c1">// History not empty </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">min_seq</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">SequenceNumber_t</span><span class="o">::</span><span class="n">unknown</span><span class="p">())</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">last_seq</span><span class="p">;</span><span class="w"> </span><span class="n">assert</span><span class="p">(</span><span class="n">last_seq</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">SequenceNumber_t</span><span class="o">::</span><span class="n">unknown</span><span class="p">());</span><span class="w"> </span><span class="n">assert</span><span class="p">(</span><span class="n">min_seq</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">last_seq</span><span class="p">);</span>
+<span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="c1">// Late-joiner </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TRANSIENT_LOCAL</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">rp</span><span class="o">-&gt;</span><span class="n">durability_kind</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">TRANSIENT_LOCAL</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">m_att</span><span class="p">.</span><span class="n">durabilityKind</span><span class="p">)</span>
+</code></pre></div></li>
+<li><strong>RMW/Implementation: CycloneDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// Providing historical data to late joiners is only performed when it is more efficient than best-effort processing.</span>
+<span class="w">  </span><span class="cm">/* Store available data into the late joining reader when it is reliable (we don&#39;t do</span>
+<span class="cm">historical data for best-effort data over the wire, so also not locally). */</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rd</span><span class="o">-&gt;</span><span class="n">xqos</span><span class="o">-&gt;</span><span class="n">reliability</span><span class="p">.</span><span class="n">kind</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">DDS_RELIABILITY_BEST_EFFORT</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rd</span><span class="o">-&gt;</span><span class="n">xqos</span><span class="o">-&gt;</span><span class="n">durability</span><span class="p">.</span><span class="n">kind</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">DDS_DURABILITY_VOLATILE</span><span class="p">)</span>
+<span class="n">ddsi_deliver_historical_data</span><span class="w"> </span><span class="p">(</span><span class="n">wr</span><span class="p">,</span><span class="w"> </span><span class="n">rd</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-4"></span></p>
+<h3 id="rule-4">Rule 4</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// Only the FastDDS code contains code that checks this rule.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m_reliability</span><span class="p">.</span><span class="n">kind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">BEST_EFFORT_RELIABILITY_QOS</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">m_ownership</span><span class="p">.</span><span class="n">kind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">EXCLUSIVE_OWNERSHIP_QOS</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span>
+<span class="n">logError</span><span class="p">(</span><span class="n">RTPS_QOS_CHECK</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;BEST_EFFORT incompatible with EXCLUSIVE ownership&quot;</span><span class="p">);</span><span class="w"> </span>
+<span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span>
+<span class="p">}</span><span class="w"> </span>
+<span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-5"></span></p>
+<h3 id="rule-5">Rule 5</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// When using best effort, a StatelessWriter is created.</span>
+<span class="c1">// When using Manual_by_topic, a heartbeat is sent only if it is a StatefulWriter ⇒ No heartbeat is sent.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">qos_</span><span class="p">.</span><span class="n">liveliness</span><span class="p">().</span><span class="n">kind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">MANUAL_BY_TOPIC_LIVELINESS_QOS</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span>
+<span class="c1">// As described in the RTPS specification, if liveliness kind is manual a heartbeat must be sent // This only applies to stateful writers, as stateless writers do not send heartbeats </span>
+<span class="n">StatefulWriter</span><span class="o">*</span><span class="w"> </span><span class="n">stateful_writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">dynamic_cast</span><span class="o">&lt;</span><span class="n">StatefulWriter</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">writer_</span><span class="p">);</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">stateful_writer</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">stateful_writer</span><span class="o">-&gt;</span><span class="n">send_periodic_heartbeat</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="k">return</span><span class="w"> </span><span class="n">RETCODE_OK</span><span class="p">;</span>
+</code></pre></div></li>
+<li><strong>RMW/Implementation: CycloneDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// Only when reliable → HB transmission</span>
+<span class="c1">// When best-effort, loss is possible, so live link status determination may be incorrect</span>
+<span class="cm">/* heartbeat event will be deleted when the handler can&#39;t find a</span>
+<span class="cm">writer for it in the hash table. NEVER =&gt; won&#39;t ever be</span>
+<span class="cm">scheduled, and this can only change by writing data, which won&#39;t</span>
+<span class="cm">happen until after it becomes visible. */</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">wr</span><span class="o">-&gt;</span><span class="n">reliable</span><span class="p">)</span>
+<span class="n">wr</span><span class="o">-&gt;</span><span class="n">heartbeat_xevent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qxev_heartbeat</span><span class="w"> </span><span class="p">(</span><span class="n">wr</span><span class="o">-&gt;</span><span class="n">evq</span><span class="p">,</span><span class="w"> </span><span class="n">DDSRT_MTIME_NEVER</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">wr</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">guid</span><span class="p">);</span>
+<span class="k">else</span>
+<span class="n">wr</span><span class="o">-&gt;</span><span class="n">heartbeat_xevent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-7"></span></p>
+<h3 id="rule-7">Rule 7</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// The Reader&#39;s Lifespan and Deadline timers share the same History </span>
+<span class="o">!</span><span class="n">History</span><span class="w"> </span>
+<span class="n">detail</span><span class="o">::</span><span class="n">DataReaderHistory</span><span class="w"> </span><span class="n">history_</span><span class="p">;</span>
+</code></pre></div></li>
+<li><strong>RMW/Implementation: CycloneDDS</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// Both timers operate independently</span>
+
+<span class="c1">// Deadline</span>
+<span class="n">ddsrt_mtime_t</span><span class="w"> </span><span class="nf">deadline_next_missed_locked</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">deadline_adm</span><span class="w"> </span><span class="o">*</span><span class="n">deadline_adm</span><span class="p">,</span><span class="w"> </span><span class="n">ddsrt_mtime_t</span><span class="w"> </span><span class="n">tnow</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">**</span><span class="n">instance</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">deadline_elem</span><span class="w"> </span><span class="o">*</span><span class="n">elem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">ddsrt_circlist_isempty</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">deadline_adm</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">))</span>
+<span class="p">{</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">ddsrt_circlist_elem</span><span class="w"> </span><span class="o">*</span><span class="n">list_elem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ddsrt_circlist_oldest</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">deadline_adm</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">);</span>
+<span class="n">elem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DDSRT_FROM_CIRCLIST</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">deadline_elem</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">list_elem</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">elem</span><span class="o">-&gt;</span><span class="n">t_deadline</span><span class="p">.</span><span class="n">v</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">tnow</span><span class="p">.</span><span class="n">v</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="n">ddsrt_circlist_remove</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">deadline_adm</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">elem</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instance</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="o">*</span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">elem</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">deadline_adm</span><span class="o">-&gt;</span><span class="n">elem_offset</span><span class="p">;</span>
+<span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">ddsrt_mtime_t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instance</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="o">*</span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">elem</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">elem</span><span class="o">-&gt;</span><span class="n">t_deadline</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">DDSRT_MTIME_NEVER</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Lifespan</span>
+<span class="n">ddsrt_mtime_t</span><span class="w"> </span><span class="nf">lifespan_next_expired_locked</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">lifespan_adm</span><span class="w"> </span><span class="o">*</span><span class="n">lifespan_adm</span><span class="p">,</span><span class="w"> </span><span class="n">ddsrt_mtime_t</span><span class="w"> </span><span class="n">tnow</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">**</span><span class="n">sample</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">lifespan_fhnode</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ddsrt_fibheap_min</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lifespan_fhdef</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lifespan_adm</span><span class="o">-&gt;</span><span class="n">ls_exp_heap</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">t_expire</span><span class="p">.</span><span class="n">v</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">tnow</span><span class="p">.</span><span class="n">v</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="o">*</span><span class="n">sample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">node</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">lifespan_adm</span><span class="o">-&gt;</span><span class="n">fhn_offset</span><span class="p">;</span>
+<span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">ddsrt_mtime_t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+<span class="o">*</span><span class="n">sample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">t_expire</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">DDSRT_MTIME_NEVER</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-8"></span></p>
+<h3 id="rule-8">Rule 8</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// Removal is performed by comparing the sourceTimestamp; if depth=1, existing older data is simply deleted.</span>
+<span class="c1">// Therefore, as there is only one piece of archived data, there is nothing to compare it with, rendering the process meaningless.</span>
+<span class="c1">// Try to substitute the oldest sample.</span>
+<span class="n">CacheChange_t</span><span class="o">*</span><span class="w"> </span><span class="n">first_change</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">instance_changes</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a_change</span><span class="o">-&gt;</span><span class="n">sourceTimestamp</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">first_change</span><span class="o">-&gt;</span><span class="n">sourceTimestamp</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="c1">// As the instance is ordered by source timestamp, we can always remove the first one.</span>
+<span class="n">ret_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">remove_change_sub</span><span class="p">(</span><span class="n">first_change</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+<span class="c1">// Received change is older than oldest, and should be discarded</span>
+<span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><strong>RMW/Implementation: CycloneDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// In BY_SOURCE_TIMESTAMP mode, samples that are &quot;reversed relative to the source timestamp (i.e., past-time samples arriving late)&quot; are discarded unconditionally.</span>
+<span class="c1">// This behaviour results in retaining only the single most recent sample, rather than performing any sorting function.</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">inst_accepts_sample</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">dds_rhc_default</span><span class="w"> </span><span class="o">*</span><span class="n">rhc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">rhc_instance</span><span class="w"> </span><span class="o">*</span><span class="n">inst</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ddsi_writer_info</span><span class="w"> </span><span class="o">*</span><span class="n">wrinfo</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ddsi_serdata</span><span class="w"> </span><span class="n">sample</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">has_data</span><span class="p">)</span>
+<span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">by_source_ordering</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">timestamp</span><span class="p">.</span><span class="n">v</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">tstamp</span><span class="p">.</span><span class="n">v</span><span class="p">)</span>
+<span class="p">{</span><span class="o">/</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">/</span><span class="p">}</span>
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">timestamp</span><span class="p">.</span><span class="n">v</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">tstamp</span><span class="p">.</span><span class="n">v</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;}</span>
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inst_accepts_sample_by_writer_guid</span><span class="w"> </span><span class="p">(</span><span class="n">inst</span><span class="p">,</span><span class="w"> </span><span class="n">wrinfo</span><span class="p">))</span>
+<span class="p">{</span><span class="o">/</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">/</span><span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;}}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">exclusive_ownership</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">wr_iid_islive</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">wr_iid</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">wrinfo</span><span class="o">-&gt;</span><span class="n">iid</span><span class="p">)</span>
+<span class="p">{</span><span class="kt">int32_t</span><span class="w"> </span><span class="n">strength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wrinfo</span><span class="o">-&gt;</span><span class="n">ownership_strength</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strength</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">strength</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="o">/</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">/</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strength</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">strength</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inst_accepts_sample_by_writer_guid</span><span class="w"> </span><span class="p">(</span><span class="n">inst</span><span class="p">,</span><span class="w"> </span><span class="n">wrinfo</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="o">/</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">/</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;}}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">has_data</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">content_filter_accepts</span><span class="w"> </span><span class="p">(</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">reader</span><span class="p">,</span><span class="w"> </span><span class="n">sample</span><span class="p">,</span><span class="w"> </span><span class="n">inst</span><span class="p">,</span><span class="w"> </span><span class="n">wrinfo</span><span class="o">-&gt;</span><span class="n">iid</span><span class="p">,</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">iid</span><span class="p">))</span>
+<span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;}</span>
+<span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;}</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-9"></span></p>
+<h3 id="rule-9">Rule 9</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// The KeepAll policy is capped at 1 by resourcelimits, meaning no new samples are added once the buffer is full.</span>
+<span class="c1">// Consequently, with only one piece of data being retained, there is nothing to compare it with, rendering it meaningless.</span>
+<span class="p">(</span><span class="n">DataReaderHistory</span><span class="p">.</span><span class="n">cpp</span><span class="p">)</span>
+<span class="n">InstanceCollection</span><span class="o">::</span><span class="n">iterator</span><span class="w"> </span><span class="n">vit</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">find_key</span><span class="p">(</span><span class="n">a_change</span><span class="o">-&gt;</span><span class="n">instanceHandle</span><span class="p">,</span><span class="w"> </span><span class="n">vit</span><span class="p">))</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">DataReaderInstance</span><span class="o">::</span><span class="n">ChangeCollection</span><span class="o">&amp;</span><span class="w"> </span><span class="n">instance_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vit</span><span class="o">-&gt;</span><span class="n">second</span><span class="o">-&gt;</span><span class="n">cache_changes</span><span class="p">;</span><span class="w"> </span>
+<span class="kt">size_t</span><span class="w"> </span><span class="n">total_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">instance_changes</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">unknown_missing_changes_up_to</span><span class="p">;</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">total_size</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">resource_limited_qos_</span><span class="p">.</span><span class="n">max_samples_per_instance</span><span class="p">))</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span>
+<span class="k">return</span><span class="w"> </span><span class="n">add_received_change_with_key</span><span class="p">(</span><span class="n">a_change</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">vit</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">);</span><span class="w"> </span>
+<span class="p">}</span><span class="w"> </span>
+<span class="n">logInfo</span><span class="p">(</span><span class="n">SUBSCRIBER</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Change not added due to maximum number of samples per instance&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></li>
+<li><strong>RMW/Implementation: CycloneDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// Set to Keep_all, but limited to 1 due to max_samples_per_instance</span>
+<span class="cm">/* Check if resource max_samples QoS exceeded */</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">reader</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">max_samples</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">DDS_LENGTH_UNLIMITED</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">n_vsamples</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="w"> </span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">max_samples</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">raw_status_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">DDS_SAMPLE_REJECTED_STATUS_ID</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">extra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DDS_REJECTED_BY_SAMPLES_LIMIT</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">iid</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">  </span>
+<span class="p">}</span><span class="w"> </span>
+<span class="cm">/* Check if resource max_samples_per_instance QoS exceeded */</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">reader</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">max_samples_per_instance</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">DDS_LENGTH_UNLIMITED</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">nvsamples</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="w"> </span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">max_samples_per_instance</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">raw_status_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">DDS_SAMPLE_REJECTED_STATUS_ID</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">extra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DDS_REJECTED_BY_SAMPLES_PER_INSTANCE_LIMIT</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">iid</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-10"></span></p>
+<h3 id="rule-10">Rule 10</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// Changing the owner in deadline_missed()</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">deadline_missed</span><span class="p">()</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fastdds</span><span class="o">::</span><span class="n">rtps</span><span class="o">::</span><span class="n">c_Guid_Unknown</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">current_owner</span><span class="p">.</span><span class="n">first</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">alive_writers</span><span class="p">.</span><span class="n">remove_if</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="n">WriterOwnership</span><span class="o">&amp;</span><span class="w"> </span><span class="n">item</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">item</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">current_owner</span><span class="p">.</span><span class="n">first</span><span class="p">;</span><span class="w"> </span><span class="p">}))</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span>
+<span class="n">current_owner</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">current_owner</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fastdds</span><span class="o">::</span><span class="n">rtps</span><span class="o">::</span><span class="n">c_Guid_Unknown</span><span class="p">;</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">alive_writers</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">InstanceStateKind</span><span class="o">::</span><span class="n">ALIVE_INSTANCE_STATE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">instance_state</span><span class="p">))</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">instance_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InstanceStateKind</span><span class="o">::</span><span class="n">NOT_ALIVE_NO_WRITERS_INSTANCE_STATE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ALIVE_INSTANCE_STATE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">instance_state</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">update_owner</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// However, assume that the `deadline_missed()` function is not infinite!</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">DataReaderImpl::deadline_timer_reschedule</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">qos_</span><span class="p">.</span><span class="n">deadline</span><span class="p">().</span><span class="n">period</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">dds</span><span class="o">::</span><span class="n">c_TimeInfinite</span><span class="p">);</span>
+</code></pre></div></li>
+<li><strong>RMW/Implementation: CycloneDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// When a deadline is missed, inst-&gt;wr_iid_islive is reset to 0, thereby changing ownership. </span>
+<span class="c1">// However, if the deadline is set to infinity, inst-&gt;wr_iid_islive will never be reset to 0.</span>
+<span class="cp">#endif </span><span class="cm">/* DDS_HAS_LIFESPAN */</span>
+<span class="cp">#ifdef DDS_HAS_DEADLINE_MISSED</span>
+<span class="n">ddsrt_mtime_t</span><span class="w"> </span><span class="nf">dds_rhc_default_deadline_missed_cb</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">hc</span><span class="p">,</span><span class="w"> </span><span class="n">ddsrt_mtime_t</span><span class="w"> </span><span class="n">tnow</span><span class="p">)</span>
+<span class="p">{</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">dds_rhc_default</span><span class="w"> </span><span class="o">*</span><span class="n">rhc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hc</span><span class="p">;</span><span class="w"> </span>
+<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">vinst</span><span class="p">;</span><span class="w"> </span>
+<span class="n">ddsrt_mtime_t</span><span class="w"> </span><span class="n">tnext</span><span class="p">;</span><span class="w"> </span>
+<span class="n">ddsrt_mutex_lock</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span><span class="w"> </span>
+<span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">tnext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deadline_next_missed_locked</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">deadline</span><span class="p">,</span><span class="w"> </span><span class="n">tnow</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">vinst</span><span class="p">)).</span><span class="n">v</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">rhc_instance</span><span class="w"> </span><span class="o">*</span><span class="n">inst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vinst</span><span class="p">;</span><span class="w"> </span><span class="n">deadline_reregister_instance_locked</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">deadline</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">deadline</span><span class="p">,</span><span class="w"> </span><span class="n">tnow</span><span class="p">);</span><span class="w"> </span>
+<span class="n">inst</span><span class="o">-&gt;</span><span class="n">wr_iid_islive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
+<span class="n">ddsi_status_cb_data_t</span><span class="w"> </span><span class="n">cb_data</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="p">.</span><span class="n">raw_status_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">DDS_REQUESTED_DEADLINE_MISSED_STATUS_ID</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="p">.</span><span class="n">extra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="p">.</span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">iid</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="p">.</span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span>
+<span class="n">ddsrt_mutex_unlock</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span><span class="w"> </span>
+<span class="n">dds_reader_status_cb</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">m_entity</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cb_data</span><span class="p">);</span><span class="w"> </span><span class="n">ddsrt_mutex_lock</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span><span class="w"> </span>
+<span class="n">tnow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ddsrt_time_monotonic</span><span class="w"> </span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="n">ddsrt_mutex_unlock</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span><span class="w"> </span>
+<span class="k">return</span><span class="w"> </span><span class="n">tnext</span><span class="p">;}</span>
+<span class="cp">#endif </span><span class="cm">/* DDS_HAS_DEADLINE_MISSED */</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-11"></span></p>
+<h3 id="rule-11">Rule 11</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// If the lease duration is infinite, the writer is not registered. Consequently, lease expiry → not alive does not occur → owner change fails.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">liveliness_lease_duration_</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">c_TimeInfinite</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">wlp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">mp_RTPSParticipant</span><span class="o">-&gt;</span><span class="n">wlp</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">wlp</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span>
+<span class="p">{</span><span class="w"> </span>
+<span class="n">wlp</span><span class="o">-&gt;</span><span class="n">sub_liveliness_manager_</span><span class="o">-&gt;</span><span class="n">add_writer</span><span class="p">(</span>
+<span class="n">wdata</span><span class="p">.</span><span class="n">guid</span><span class="p">(),</span>
+<span class="n">liveliness_kind_</span><span class="p">,</span>
+<span class="n">liveliness_lease_duration_</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-12"></span></p>
+<h3 id="rule-12">Rule 12</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// livelinss lost switched to NOT_ALIVE</span>
+<span class="c1">// However, if set to infinite, the transition does not occur, so the sample cannot be automatically removed.</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">LivelinessManager::timer_expired</span><span class="p">()</span>
+<span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lock</span><span class="p">(</span><span class="n">mutex_</span><span class="p">);</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">timer_owner_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">EPROSIMA_LOG_ERROR</span><span class="p">(</span><span class="n">RTPS_WRITER</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Liveliness timer expired but there is no writer&quot;</span><span class="p">);</span><span class="w"> </span>
+<span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">timer_owner_</span><span class="o">-&gt;</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LivelinessData</span><span class="o">::</span><span class="n">WriterStatus</span><span class="o">::</span><span class="n">NOT_ALIVE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></li>
+<li><strong>RMW/Implementation: CycloneDDS</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// Upon expiry of the lease term,</span>
+<span class="k">case</span><span class="w"> </span><span class="no">DDSI_EK_PROXY_WRITER</span><span class="p">:</span>
+<span class="n">ddsi_proxy_writer_set_notalive</span><span class="w"> </span><span class="p">((</span><span class="k">struct</span><span class="w"> </span><span class="nc">ddsi_proxy_writer</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">entity</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="k">break</span><span class="p">;</span>
+<span class="k">case</span><span class="w"> </span><span class="no">DDSI_EK_WRITER</span><span class="p">:</span>
+<span class="n">ddsi_writer_set_notalive</span><span class="w"> </span><span class="p">((</span><span class="k">struct</span><span class="w"> </span><span class="nc">ddsi_writer</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">l</span><span class="o">-&gt;</span><span class="n">entity</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="k">break</span><span class="p">;</span>
+<span class="c1">// However, if set to infinite, it will not expire, so the data deletion function will not operate.</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-13"></span></p>
+<h3 id="rule-13">Rule 13</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// Stored in permanent storage</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">StatefulPersistentReader::set_last_notified</span><span class="p">(</span>
+<span class="k">const</span><span class="w"> </span><span class="n">GUID_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">writer_guid</span><span class="p">,</span>
+<span class="k">const</span><span class="w"> </span><span class="n">SequenceNumber_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">seq</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="n">history_state_</span><span class="o">-&gt;</span><span class="n">history_record</span><span class="p">[</span><span class="n">writer_guid</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">;</span>
+<span class="n">persistence_</span><span class="o">-&gt;</span><span class="n">update_writer_seq_on_storage</span><span class="p">(</span><span class="n">persistence_guid_</span><span class="p">,</span><span class="w"> </span><span class="n">writer_guid</span><span class="p">,</span><span class="w"> </span><span class="n">seq</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// But the data vanished in an instant.</span>
+<span class="n">Duration_t</span><span class="w"> </span><span class="n">autopurge_no_writer_samples_delay</span><span class="p">;</span>
+<span class="cm">/**</span>
+<span class="cm">* @brief Indicates the duration the DataReader must retain information regarding instances that have the</span>
+<span class="cm">* instance_state NOT_ALIVE_DISPOSED. &lt;br&gt;</span>
+<span class="cm">* By default, c_TimeInfinite.</span>
+<span class="cm">*/</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-14"></span></p>
+<h3 id="rule-14">Rule 14</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// Partition change → Unmatching → Call ddsi_rhc_unregister_wr (rd-&gt;rhc, &amp;wrinfo);</span>
+<span class="c1">// ⇒ Instance is immediately unregistered from the deadline. → Deadline timer is not updated.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">deadline_reg</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="n">inst</span><span class="o">-&gt;</span><span class="n">deadline_reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">deadline_unregister_instance_locked</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">deadline</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">deadline</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// During the process of dynamically changing partitions, instances are removed from the deadline list due to writer unregistration.</span>
+<span class="c1">// Since the timer is not reset to the &quot;next expiry time&quot; upon unregistration, the deadline timer ceases to function once the list becomes empty.</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-15"></span></p>
+<h3 id="rule-15">Rule 15</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// The writer signals liveliness, but if a reader becomes involved in the partition dynamic change process, it no longer receives updates to the writer&#39;s liveliness</span>
+<span class="c1">// → Subsequently, when the lease expires, the notification is sent only to readers that are &quot;still matched&quot;.</span>
+<span class="c1">// However, if there are no readers, the liveliness notification is disabled even during the partition dynamic change process.</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">proxy_writer_notify_liveliness_change_may_unlock</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ddsi_proxy_writer</span><span class="w"> </span><span class="o">*</span><span class="n">pwr</span><span class="p">)</span>
+<span class="p">{</span><span class="w"> </span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">ddsi_alive_state</span><span class="w"> </span><span class="n">alive_state</span><span class="p">;</span><span class="w"> </span>
+<span class="n">proxy_writer_get_alive_state_locked</span><span class="w"> </span><span class="p">(</span><span class="n">pwr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">alive_state</span><span class="p">);</span><span class="w"> </span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">ddsi_guid</span><span class="w"> </span><span class="n">rdguid</span><span class="p">;</span><span class="w"> </span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">ddsi_pwr_rd_match</span><span class="w"> </span><span class="o">*</span><span class="n">m</span><span class="p">;</span><span class="w"> </span><span class="n">memset</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rdguid</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="w"> </span><span class="p">(</span><span class="n">rdguid</span><span class="p">));</span><span class="w"> </span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">pwr</span><span class="o">-&gt;</span><span class="n">alive_vclock</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">alive_state</span><span class="p">.</span><span class="n">vclock</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ddsrt_avl_lookup_succ</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">ddsi_pwr_readers_treedef</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pwr</span><span class="o">-&gt;</span><span class="n">readers</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rdguid</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">rdguid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="o">-&gt;</span><span class="n">rd_guid</span><span class="p">;</span><span class="w"> </span><span class="n">ddsrt_mutex_unlock</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">pwr</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span><span class="w"> </span>
+<span class="cm">/* unlocking pwr means alive state may have changed already; we break out of the loop once we detect this but there for the reader in the current iteration, anything is possible */</span><span class="w"> </span>
+<span class="n">ddsi_reader_update_notify_pwr_alive_state_guid</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rdguid</span><span class="p">,</span><span class="w"> </span><span class="n">pwr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">alive_state</span><span class="p">);</span><span class="w"> </span>
+<span class="n">ddsrt_mutex_lock</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">pwr</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span><span class="w"> </span><span class="p">}}</span>
+<span class="c1">// → The recipients of the notification are only the readers listed in pwr→readers.</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-16"></span></p>
+<h3 id="rule-16">Rule 16</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// The system is designed so that not just anyone can delete data;</span>
+<span class="c1">// only the sender with the most powerful permissions can alter the status.</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">writer_dispose</span>
+<span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">fastrtps</span><span class="o">::</span><span class="n">rtps</span><span class="o">::</span><span class="n">GUID_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">writer_guid</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ownership_strength</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">ret_val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span><span class="n">writer_set</span><span class="p">(</span><span class="n">writer_guid</span><span class="p">,</span><span class="w"> </span><span class="n">ownership_strength</span><span class="p">);</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ownership_strength</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">current_owner</span><span class="p">.</span><span class="n">second</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">current_owner</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">writer_guid</span><span class="p">;</span><span class="w"> </span><span class="n">current_owner</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ownership_strength</span><span class="p">;</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">InstanceStateKind</span><span class="o">::</span><span class="n">ALIVE_INSTANCE_STATE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">instance_state</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">ret_val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="n">instance_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InstanceStateKind</span><span class="o">::</span><span class="n">NOT_ALIVE_DISPOSED_INSTANCE_STATE</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="k">return</span><span class="w"> </span><span class="n">ret_val</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></li>
+<li><strong>RMW/Implementation: CycloneDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// Only writers with a stronger strength can now modify the instance&#39;s state.</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">inst_accepts_sample</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">dds_rhc_default</span><span class="w"> </span><span class="o">*</span><span class="n">rhc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">rhc_instance</span><span class="w"> </span><span class="o">*</span><span class="n">inst</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ddsi_writer_info</span><span class="w"> </span><span class="o">*</span><span class="n">wrinfo</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ddsi_serdata</span><span class="w"> </span><span class="n">sample</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">has_data</span><span class="p">)</span>
+<span class="p">{</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">by_source_ordering</span><span class="p">){</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">timestamp</span><span class="p">.</span><span class="n">v</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">tstamp</span><span class="p">.</span><span class="n">v</span><span class="p">)</span>
+<span class="p">{</span><span class="o">/</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">/</span><span class="p">}</span>
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">timestamp</span><span class="p">.</span><span class="n">v</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">tstamp</span><span class="p">.</span><span class="n">v</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;}</span>
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inst_accepts_sample_by_writer_guid</span><span class="w"> </span><span class="p">(</span><span class="n">inst</span><span class="p">,</span><span class="w"> </span><span class="n">wrinfo</span><span class="p">))</span>
+<span class="p">{</span><span class="o">/</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">/</span><span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;}}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">exclusive_ownership</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">wr_iid_islive</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">wr_iid</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">wrinfo</span><span class="o">-&gt;</span><span class="n">iid</span><span class="p">)</span>
+<span class="p">{</span><span class="kt">int32_t</span><span class="w"> </span><span class="n">strength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wrinfo</span><span class="o">-&gt;</span><span class="n">ownership_strength</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strength</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">strength</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="o">/</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">/</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strength</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">strength</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inst_accepts_sample_by_writer_guid</span><span class="w"> </span><span class="p">(</span><span class="n">inst</span><span class="p">,</span><span class="w"> </span><span class="n">wrinfo</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="o">/</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">*/</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;}}</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-17"></span></p>
+<h3 id="rule-17">Rule 17</h3>
+<ul>
+<li><strong>RMW/Implementation:FastDDS</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// Keep_last removes the oldest sample when the depth is full.</span>
+<span class="w"> </span><span class="p">{</span><span class="c1">// Try to substitute the oldest sample.</span>
+<span class="n">CacheChange_t</span><span class="o">*</span><span class="w"> </span><span class="n">first_change</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">instance_changes</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a_change</span><span class="o">-&gt;</span><span class="n">sourceTimestamp</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">first_change</span><span class="o">-&gt;</span><span class="n">sourceTimestamp</span><span class="p">){</span>
+<span class="c1">// As the instance is ordered by source timestamp, we can always remove the first one.</span>
+<span class="n">ret_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">remove_change_sub</span><span class="p">(</span><span class="n">first_change</span><span class="p">);}</span>
+<span class="k">else</span><span class="p">{</span>
+<span class="c1">// Received change is older than oldest, and should be discarded</span>
+<span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;}}</span>
+
+<span class="c1">// Looking at the lifespan timer code, it states that it &quot;may already have been removed from the history&quot;.</span>
+<span class="n">CacheChange_t</span><span class="o">*</span><span class="w"> </span><span class="n">earliest_change</span><span class="p">;</span><span class="w"> </span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">history_</span><span class="p">.</span><span class="n">get_earliest_change</span><span class="p">(</span><span class="o">&amp;</span><span class="n">earliest_change</span><span class="p">))</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">fastdds</span><span class="o">::</span><span class="n">rtps</span><span class="o">::</span><span class="n">Time_t</span><span class="w"> </span><span class="n">expiration_ts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">earliest_change</span><span class="o">-&gt;</span><span class="n">sourceTimestamp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qos_</span><span class="p">.</span><span class="n">lifespan</span><span class="p">().</span><span class="n">duration</span><span class="p">;</span><span class="w"> </span>
+<span class="c1">// Check that the earliest change has expired (the change which started the timer could have been removed from the history) </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">current_ts</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">expiration_ts</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">fastdds</span><span class="o">::</span><span class="n">rtps</span><span class="o">::</span><span class="n">Time_t</span><span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">expiration_ts</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">current_ts</span><span class="p">;</span><span class="w"> </span><span class="n">lifespan_timer_</span><span class="o">-&gt;</span><span class="n">update_interval_millisec</span><span class="p">(</span><span class="n">interval</span><span class="p">.</span><span class="n">to_ns</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">);</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="c1">// The earliest change has expired </span>
+<span class="n">history_</span><span class="p">.</span><span class="n">remove_change_sub</span><span class="p">(</span><span class="n">earliest_change</span><span class="p">);</span><span class="w"> </span>
+<span class="n">try_notify_read_conditions</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+</code></pre></div></li>
+<li><strong>RMW/Implementation:CycloneDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// A situation where a sample is overwritten and disappears due to history depth before it &quot;expires&quot; based on its lifespan.</span>
+<span class="c1">// In the code, it deletes data using keep_last and then deletes it again based on lifespan.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">nvsamples</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">history_depth</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="cm">/* replace oldest sample; latest points to the latest one, the list is circular from old -&gt; new, so latest-&gt;next is the oldest */</span><span class="w"> </span>
+<span class="n">inst_clear_invsample_if_exists</span><span class="w"> </span><span class="p">(</span><span class="n">rhc</span><span class="p">,</span><span class="w"> </span><span class="n">inst</span><span class="p">,</span><span class="w"> </span><span class="n">trig_qc</span><span class="p">);</span><span class="w"> </span>
+<span class="n">assert</span><span class="w"> </span><span class="p">(</span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">latest</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">latest</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span><span class="w"> </span>
+<span class="n">assert</span><span class="w"> </span><span class="p">(</span><span class="n">trig_qc</span><span class="o">-&gt;</span><span class="n">dec_conds_sample</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"> </span>
+<span class="n">ddsi_serdata_unref</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">sample</span><span class="p">);</span>
+<span class="cp">#ifdef DDS_HAS_LIFESPAN </span>
+<span class="n">lifespan_unregister_sample_locked</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">lifespan</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">lifespan</span><span class="p">);</span>
+<span class="cp">#endif </span>
+<span class="n">trig_qc</span><span class="o">-&gt;</span><span class="n">dec_sample_read</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="o">-&gt;</span><span class="n">isread</span><span class="p">;</span><span class="w"> </span>
+<span class="n">trig_qc</span><span class="o">-&gt;</span><span class="n">dec_conds_sample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="o">-&gt;</span><span class="n">conds</span><span class="p">;</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">isread</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">nvread</span><span class="o">--</span><span class="p">;</span><span class="w"> </span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">n_vread</span><span class="o">--</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-18"></span></p>
+<h3 id="rule-18">Rule 18</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// Keep_All waits until an ACK is received confirming that the oldest data has been successfully delivered to the other party before deleting the data.</span>
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">history_qos_</span><span class="p">.</span><span class="n">kind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">KEEP_ALL_HISTORY_QOS</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vit</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">cache_changes</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">resource_limited_qos_</span><span class="p">.</span><span class="n">max_samples_per_instance</span><span class="p">))</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="n">SequenceNumber_t</span><span class="w"> </span><span class="n">seq_to_remove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vit</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">cache_changes</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">sequenceNumber</span><span class="p">;</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">mp_writer</span><span class="o">-&gt;</span><span class="n">wait_for_acknowledgement</span><span class="p">(</span><span class="n">seq_to_remove</span><span class="p">,</span><span class="w"> </span><span class="n">max_blocking_time</span><span class="p">,</span><span class="w"> </span><span class="n">lock</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="c1">// Timeout waiting. Will not add change to history. </span>
+<span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="c1">// vit may have been invalidated </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">find_or_add_key</span><span class="p">(</span><span class="n">change</span><span class="o">-&gt;</span><span class="n">instanceHandle</span><span class="p">,</span><span class="w"> </span><span class="n">change</span><span class="o">-&gt;</span><span class="n">serializedPayload</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">vit</span><span class="p">))</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="c1">// If the change we were trying to remove was already removed, try again </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vit</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">cache_changes</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">vit</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">cache_changes</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">sequenceNumber</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">seq_to_remove</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="c1">// Remove change if still present </span>
+<span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">remove_change_pub</span><span class="p">(</span><span class="n">vit</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">cache_changes</span><span class="p">.</span><span class="n">front</span><span class="p">());</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// Looking at the lifespan timer code, it states that it &quot;may already have been removed from the history&quot;.</span>
+<span class="n">CacheChange_t</span><span class="o">*</span><span class="w"> </span><span class="n">earliest_change</span><span class="p">;</span><span class="w"> </span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">history_</span><span class="p">.</span><span class="n">get_earliest_change</span><span class="p">(</span><span class="o">&amp;</span><span class="n">earliest_change</span><span class="p">))</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">fastdds</span><span class="o">::</span><span class="n">rtps</span><span class="o">::</span><span class="n">Time_t</span><span class="w"> </span><span class="n">expiration_ts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">earliest_change</span><span class="o">-&gt;</span><span class="n">sourceTimestamp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qos_</span><span class="p">.</span><span class="n">lifespan</span><span class="p">().</span><span class="n">duration</span><span class="p">;</span><span class="w"> </span>
+<span class="c1">// Check that the earliest change has expired (the change which started the timer could have been removed from the history) </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">current_ts</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">expiration_ts</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">fastdds</span><span class="o">::</span><span class="n">rtps</span><span class="o">::</span><span class="n">Time_t</span><span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">expiration_ts</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">current_ts</span><span class="p">;</span><span class="w"> </span><span class="n">lifespan_timer_</span><span class="o">-&gt;</span><span class="n">update_interval_millisec</span><span class="p">(</span><span class="n">interval</span><span class="p">.</span><span class="n">to_ns</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">);</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="c1">// The earliest change has expired </span>
+<span class="n">history_</span><span class="p">.</span><span class="n">remove_change_sub</span><span class="p">(</span><span class="n">earliest_change</span><span class="p">);</span><span class="w"> </span>
+<span class="n">try_notify_read_conditions</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+</code></pre></div></li>
+<li><strong>RMW/Implementation: CycloneDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// Although set to Keep_all, due to max_samples_per_instance, samples are not saved at all before their lifespan expires, meaning no samples are deleted by lifespan.</span>
+<span class="cm">/* Check if resource max_samples QoS exceeded */</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">reader</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">max_samples</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">DDS_LENGTH_UNLIMITED</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">n_vsamples</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="w"> </span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">max_samples</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">raw_status_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">DDS_SAMPLE_REJECTED_STATUS_ID</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">extra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DDS_REJECTED_BY_SAMPLES_LIMIT</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">iid</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span>
+<span class="p">}</span><span class="w"> </span>
+<span class="cm">/* Check if resource max_samples_per_instance QoS exceeded */</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">reader</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">max_samples_per_instance</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">DDS_LENGTH_UNLIMITED</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">nvsamples</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="w"> </span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">max_samples_per_instance</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">raw_status_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">DDS_SAMPLE_REJECTED_STATUS_ID</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">extra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DDS_REJECTED_BY_SAMPLES_PER_INSTANCE_LIMIT</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">iid</span><span class="p">;</span><span class="w"> </span>
+<span class="n">cb_data</span><span class="o">-&gt;</span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-19"></span></p>
+<h3 id="rule-19">Rule 19</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// autoenable_created_entities = FALSE means entities are not automatically enabled.</span>
+<span class="n">publisher_</span><span class="o">-&gt;</span><span class="n">rtps_participant</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">register_writer</span><span class="p">(</span><span class="n">writer_</span><span class="p">,</span><span class="w"> </span><span class="n">topic_desc</span><span class="p">,</span><span class="w"> </span><span class="n">wqos</span><span class="p">);</span>
+<span class="c1">// ⇒ Only within enable() are register_writer() / register_reader() called to register with discovery.</span>
+<span class="c1">// As VOLATILE entities do not become existing until enabled, any previously sent data is discarded.</span>
+<span class="c1">// When set to Volatile, upon enabling, all previous data will not be received. </span>
+</code></pre></div></li>
+<li><strong>RMW/Implementation: CycloneDDS</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// When set to VOLATILE, previous data is not fully retrieved.</span>
+<span class="c1">// The implementation where autoenable_created_entities=FALSE is not present.</span>
+<span class="k">if</span><span class="p">(</span><span class="n">qos</span><span class="o">-&gt;</span><span class="n">durability</span><span class="p">.</span><span class="n">kind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DDS_DURABILITY_VOLATILE</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">opts</span><span class="p">.</span><span class="n">historyCapacity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="k">else</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span>
+<span class="c1">// Transient Local and stronger  </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">qos</span><span class="o">-&gt;</span><span class="n">durability_service</span><span class="p">.</span><span class="n">history</span><span class="p">.</span><span class="n">kind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DDS_HISTORY_KEEP_LAST</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span>
+<span class="n">opts</span><span class="p">.</span><span class="n">historyCapacity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint64_t</span><span class="p">)</span><span class="n">qos</span><span class="o">-&gt;</span><span class="n">durability_service</span><span class="p">.</span><span class="n">history</span><span class="p">.</span><span class="n">depth</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">opts</span><span class="p">.</span><span class="n">historyCapacity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-20"></span></p>
+<h3 id="rule-20">Rule 20</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// Upon successful matching, it may be treated as a later-join, potentially resulting in duplicate data being received.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">matched</span><span class="p">)</span><span class="w"> </span><span class="c1">//Different partitions</span>
+<span class="p">{</span>
+<span class="n">EPROSIMA_LOG_WARNING</span><span class="p">(</span><span class="n">RTPS_EDP</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;INCOMPATIBLE QOS (topic: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rdata</span><span class="o">-&gt;</span><span class="n">topic_name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;): Different Partitions&quot;</span><span class="p">);</span>
+<span class="n">reason</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">MatchingFailureMask</span><span class="o">::</span><span class="n">partitions</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// transient_local always enters PRMSS_SYNC upon (re)matching and does not verify whether it has already received the entire data</span>
+<span class="c1">// → Consequently, even if the partition is rematched, it is treated as a new match, leading to redundant data reception.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rd</span><span class="o">-&gt;</span><span class="n">handle_as_transient_local</span><span class="p">)</span>
+<span class="n">m</span><span class="o">-&gt;</span><span class="n">in_sync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PRMSS_OUT_OF_SYNC</span><span class="p">;</span>
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vendor_is_eclipse</span><span class="w"> </span><span class="p">(</span><span class="n">pwr</span><span class="o">-&gt;</span><span class="n">c</span><span class="p">.</span><span class="n">vendor</span><span class="p">))</span>
+<span class="n">m</span><span class="o">-&gt;</span><span class="n">in_sync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PRMSS_OUT_OF_SYNC</span><span class="p">;</span>
+<span class="k">else</span>
+<span class="n">m</span><span class="o">-&gt;</span><span class="n">in_sync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PRMSS_SYNC</span><span class="p">;</span>
+<span class="n">m</span><span class="o">-&gt;</span><span class="n">u</span><span class="p">.</span><span class="n">not_in_sync</span><span class="p">.</span><span class="n">end_of_tl_seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MAX_SEQ_NUMBER</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-28"></span><span id="rule-29"></span><span id="rule-30"></span></p>
+<h3 id="rule-28-rule-29-rule-30">Rule 28 / Rule 29 / Rule 30</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// If autodispose_unregistered_instances=false and the application does not explicitly call dispose(), the DataWriter will not send a disposal notification (DISPOSE), meaning the NOT_ALIVE_DISPOSED state is not passed to the DataReader.</span>
+<span class="c1">// Consequently, the autopurge_disposed_samples_delay setting in READER_DATA_LIFECYCLE becomes irrelevant for that instance, rendering it meaningless.</span>
+<span class="cm">/**</span>
+<span class="cm">* @brief Indicates the duration the DataReader must retain information regarding instances that have the</span>
+<span class="cm">* instance_state NOT_ALIVE_DISPOSED. &lt;br&gt;</span>
+<span class="cm">* By default, dds::c_TimeInfinite.</span>
+<span class="cm">*/</span>
+<span class="n">dds</span><span class="o">::</span><span class="n">Duration_t</span><span class="w"> </span><span class="n">autopurge_disposed_samples_delay</span><span class="p">;</span>
+</code></pre></div></li>
+<li><strong>RMW/Implementation: CycloneDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// As the instance is not in the DISPOSED state, autopurge_disposed_samples_delay does not apply to it in the first place.</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">ddsi_reader_update_notify_pwr_alive_state</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ddsi_reader</span><span class="w"> </span><span class="o">*</span><span class="n">rd</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ddsi_proxy_writer</span><span class="w"> </span><span class="o">*</span><span class="n">pwr</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ddsi_alive_state</span><span class="w"> </span><span class="o">*</span><span class="n">alive_state</span><span class="p">)</span>
+<span class="p">{</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ddsi_rd_pwr_match</span><span class="w"> </span><span class="o">*</span><span class="n">m</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">notify</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span>
+<span class="kt">int</span><span class="w"> </span><span class="n">delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
+<span class="cm">/* -1: alive -&gt; not_alive; 0: unchanged; 1: not_alive -&gt; alive */</span><span class="w"> </span>
+<span class="n">ddsrt_mutex_lock</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rd</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ddsrt_avl_lookup</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">ddsi_rd_writers_treedef</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rd</span><span class="o">-&gt;</span><span class="n">writers</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pwr</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">guid</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="kt">int32_t</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">alive_state</span><span class="o">-&gt;</span><span class="n">vclock</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">m</span><span class="o">-&gt;</span><span class="n">pwr_alive_vclock</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">alive_state</span><span class="o">-&gt;</span><span class="n">alive</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">m</span><span class="o">-&gt;</span><span class="n">pwr_alive</span><span class="p">;</span><span class="w"> </span><span class="n">notify</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span>
+<span class="n">m</span><span class="o">-&gt;</span><span class="n">pwr_alive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alive_state</span><span class="o">-&gt;</span><span class="n">alive</span><span class="p">;</span><span class="w"> </span>
+<span class="n">m</span><span class="o">-&gt;</span><span class="n">pwr_alive_vclock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alive_state</span><span class="o">-&gt;</span><span class="n">vclock</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="n">ddsrt_mutex_unlock</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rd</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">delta</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rd</span><span class="o">-&gt;</span><span class="n">rhc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ddsi_writer_info</span><span class="w"> </span><span class="n">wrinfo</span><span class="p">;</span><span class="w"> </span>
+<span class="n">ddsi_make_writer_info</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">wrinfo</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pwr</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">pwr</span><span class="o">-&gt;</span><span class="n">c</span><span class="p">.</span><span class="n">xqos</span><span class="p">,</span><span class="w"> </span><span class="n">NN_STATUSINFO_UNREGISTER</span><span class="p">);</span><span class="w"> </span><span class="n">ddsi_rhc_unregister_wr</span><span class="w"> </span><span class="p">(</span><span class="n">rd</span><span class="o">-&gt;</span><span class="n">rhc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">wrinfo</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-34"></span></p>
+<h3 id="rule-34">Rule 34</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// Set to best-effort mode, so NOT_ALIVE_DISPOSED_UNREGISTERED messages may be lost.</span>
+<span class="n">f</span><span class="w"> </span><span class="o">!</span><span class="n">defined</span><span class="p">(</span><span class="n">NDEBUG</span><span class="p">)</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">history_</span><span class="p">.</span><span class="n">is_key_registered</span><span class="p">(</span><span class="n">ih</span><span class="p">))</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">WriteParams</span><span class="w"> </span><span class="n">wparams</span><span class="p">;</span><span class="w"> </span><span class="n">ChangeKind_t</span><span class="w"> </span><span class="n">change_kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NOT_ALIVE_DISPOSED</span><span class="p">;</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">dispose</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">change_kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qos_</span><span class="p">.</span><span class="n">writer_data_lifecycle</span><span class="p">().</span><span class="n">autodispose_unregistered_instances</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">NOT_ALIVE_DISPOSED_UNREGISTERED</span><span class="w"> </span><span class="o">:</span><span class="w"> </span>
+<span class="n">NOT_ALIVE_UNREGISTERED</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></li>
+<li><strong>RMW/Implementation: CycloneDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// There is absolutely no retransmission/ACK-based guarantee for the transmitted sample (data + unregister/dispose control message).</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">rhc_unregister_updateinst</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="err">…</span><span class="p">.</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">isdisposed</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">latest</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">latest</span><span class="o">-&gt;</span><span class="n">isread</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="n">inst_set_invsample</span><span class="w"> </span><span class="p">(</span><span class="n">rhc</span><span class="p">,</span><span class="w"> </span><span class="n">inst</span><span class="p">,</span><span class="w"> </span><span class="n">trig_qc</span><span class="p">,</span><span class="w"> </span><span class="n">nda</span><span class="p">);</span>
+<span class="n">update_inst_no_wr_iid</span><span class="w"> </span><span class="p">(</span><span class="n">inst</span><span class="p">,</span><span class="w"> </span><span class="n">wrinfo</span><span class="p">,</span><span class="w"> </span><span class="n">tstamp</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">autodispose</span><span class="p">)</span>
+<span class="n">rhc</span><span class="o">-&gt;</span><span class="n">n_not_alive_no_writers</span><span class="o">++</span><span class="p">;</span>
+<span class="c1">// When the Writer sends an unregister request, the Reader&#39;s RHC receives it and, if auto_dispose == 1, transitions the instance to the DISPOSED state.</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-dashed">
+
+<p><span id="rule-40"></span></p>
+<h3 id="rule-40">Rule 40</h3>
+<ul>
+<li><strong>RMW/Implementation: FastDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="c1">// 1. Writer previously issued multiple samples (e.g., one hour ago)</span>
+<span class="c1">// 2. Reader joins late and receives past samples as TRANSIENT_LOCAL</span>
+<span class="c1">// 3. Each retransmitted sample calls on_new_cache_change_added</span>
+<span class="c1">// 4. Deadline timer is reset with each retransmission</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">DataReaderImpl::on_new_cache_change_added</span><span class="p">(</span><span class="w"> </span>
+<span class="k">const</span><span class="w"> </span><span class="n">CacheChange_t</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">change</span><span class="p">)</span>
+<span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">RecursiveTimedMutex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">guard</span><span class="p">(</span><span class="n">reader_</span><span class="o">-&gt;</span><span class="n">getMutex</span><span class="p">());</span><span class="w"> </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">qos_</span><span class="p">.</span><span class="n">deadline</span><span class="p">().</span><span class="n">period</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">c_TimeInfinite</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">history_</span><span class="p">.</span><span class="n">set_next_deadline</span><span class="p">(</span><span class="w"> </span><span class="n">change</span><span class="o">-&gt;</span><span class="n">instanceHandle</span><span class="p">,</span><span class="w"> </span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">system_clock</span><span class="o">::</span><span class="n">duration</span><span class="o">&gt;</span><span class="p">(</span><span class="n">deadline_duration_us_</span><span class="p">)))</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">logError</span><span class="p">(</span><span class="n">SUBSCRIBER</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Could not set next deadline in the history&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">timer_owner_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">change</span><span class="o">-&gt;</span><span class="n">instanceHandle</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">timer_owner_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">InstanceHandle_t</span><span class="p">())</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">deadline_timer_reschedule</span><span class="p">())</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">deadline_timer_</span><span class="o">-&gt;</span><span class="n">cancel_timer</span><span class="p">();</span><span class="w"> </span><span class="n">deadline_timer_</span><span class="o">-&gt;</span><span class="n">restart_timer</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></li>
+<li><strong>RMW/Implementation: CycloneDDS</strong> 
+<div class="highlight"><pre><span></span><code><span class="n">The</span><span class="w"> </span><span class="n">deadline</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">based</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">sample</span><span class="w"> </span><span class="n">reception</span><span class="w"> </span><span class="n">time</span>
+<span class="c1">// → With the transient setting, previous data arrives, causing the sample reception time to reset the deadline.</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">postprocess_instance_update</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">dds_rhc_default</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">__restrict</span><span class="w"> </span><span class="n">rhc</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">rhc_instance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">__restrict</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">__restrict</span><span class="w"> </span><span class="n">instptr</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">trigger_info_pre</span><span class="w"> </span><span class="o">*</span><span class="n">pre</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">trigger_info_post</span><span class="w"> </span><span class="o">*</span><span class="n">post</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">trigger_info_qcond</span><span class="w"> </span><span class="o">*</span><span class="n">trig_qc</span><span class="p">)</span>
+<span class="p">{</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">rhc_instance</span><span class="w"> </span><span class="o">*</span><span class="n">inst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">instptr</span><span class="p">;</span>
+<span class="cp">#ifdef DDS_HAS_DEADLINE_MISSED </span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">isdisposed</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">deadline_reg</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">deadline_reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
+<span class="n">deadline_unregister_instance_locked</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">deadline</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">deadline</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="k">else</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">deadline_reg</span><span class="p">)</span><span class="w"> </span>
+<span class="n">deadline_renew_instance_locked</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">deadline</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">deadline</span><span class="p">);</span><span class="w"> </span>
+<span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">deadline_register_instance_locked</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">rhc</span><span class="o">-&gt;</span><span class="n">deadline</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">inst</span><span class="o">-&gt;</span><span class="n">deadline</span><span class="p">,</span><span class="w"> </span><span class="n">ddsrt_time_monotonic</span><span class="w"> </span><span class="p">());</span><span class="w"> </span>
+<span class="n">inst</span><span class="o">-&gt;</span><span class="n">deadline_reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="cp">#endif</span>
+</code></pre></div></li>
+</ul>
+<hr class="hr-double">
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy", "navigation.expand"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,115 @@
+hr.hr-solid {
+    border: 0;
+    height: 2px;
+    background: #4E5EB4;
+    opacity: 0.5;
+    margin: 40px 0;
+}
+
+hr.hr-grad-center {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0,0,0,0), #4E5EB4, rgba(0,0,0,0));
+    margin: 30px 0;
+}
+
+hr.hr-grad-left {
+    border: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, #4E5EB4, rgba(0,0,0,0));
+    opacity: 0.6;
+    margin: 25px 0;
+}
+
+hr.hr-dashed {
+    border: 0;
+    border-top: 1px dashed #4E5EB4;
+    opacity: 0.4;
+    margin: 20px 0;
+}
+
+hr.hr-double {
+    border: none;
+    border-top: 4px double #4E5EB4;
+    opacity: 0.6;
+    height: 4px;
+    margin: 40px 0;
+}
+
+hr.hr-short-bar {
+    border: 0;
+    height: 4px;
+    background: #4E5EB4;
+    width: 80px;
+    margin: 50px auto;
+    opacity: 0.8;
+    border-radius: 10px;
+}
+
+.divider-dots {
+    text-align: center;
+    color: #4E5EB4;
+    opacity: 0.5;
+    font-size: 20px;
+    letter-spacing: 15px;
+    margin: 35px 0;
+}
+
+.hr-edge-fade {
+    height: 3px;
+    background: linear-gradient(to right, #4E5EB4 10%, rgba(78, 94, 180, 0.1) 90%);
+    border-radius: 2px;
+    margin: 20px 0;
+    border: none; 
+}
+
+
+/* info icon custom */
+
+:root {
+  --md-admonition-icon--info: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 9h-2V7h2m0 10h-2v-6h2m-1-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2Z"/></svg>');
+  --md-typeset-admonition-info: #4E5EB4;
+}
+
+.md-typeset .admonition.info,
+.md-typeset details.info {
+  border-color: #4E5EB4;
+  border-left: 0.2rem solid #4E5EB4 !important;
+}
+
+.md-typeset .info > .admonition-title,
+.md-typeset .info > summary {
+  background-color: rgba(78, 94, 180, 0.1); 
+}
+
+.md-typeset .info > .admonition-title::before,
+.md-typeset .info > summary::before {
+  background-color: #4E5EB4;
+}
+
+/* scroll custom */
+.scroll-container {
+  width: 50%;           
+  margin: 0 auto;       
+  overflow-x: auto;    
+  white-space: nowrap;  
+  padding-bottom: 10px; 
+}
+
+.scroll-container::-webkit-scrollbar {
+  height: 10px;       
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #D9DFF2;  
+  border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #4E5EB4;  
+  border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #3B4A91;
+}

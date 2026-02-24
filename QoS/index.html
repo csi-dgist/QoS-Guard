@@ -1,0 +1,2667 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ROS 2 QoS Dependency Conflict Detector">
+      
+      
+      
+        <link rel="canonical" href="https://csi-dgist.github.io/QoS-Guard/QoS/">
+      
+      
+        <link rel="prev" href="../QoS_Guard/">
+      
+      
+        <link rel="next" href="../rules/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>QoS Encyclopedia - QoS Guard</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dds-qos-policy-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="QoS Guard" class="md-header__button md-logo" aria-label="QoS Guard" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            QoS Guard
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              QoS Encyclopedia
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/csi-dgist/QoS-Guard" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../QoS_Guard/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  How to use
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QoS Encyclopedia
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../rules/" class="md-tabs__link">
+          
+  
+  
+  QoS Rules
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../XML_Generator/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  XML Generator
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="QoS Guard" class="md-nav__button md-logo" aria-label="QoS Guard" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    QoS Guard
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/csi-dgist/QoS-Guard" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QoS_Guard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to use
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS Encyclopedia
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS Encyclopedia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#16-qos-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16 QoS Policies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle-of-dds-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifecycle of DDS Communication
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-entity-factory-entfac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ENTITY FACTORY (ENTFAC)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. ENTITY FACTORY (ENTFAC)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-partition-part" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. PARTITION (PART)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. PARTITION (PART)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-user-data-usrdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. USER DATA (USRDATA)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. USER DATA (USRDATA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-group-data-grpdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. GROUP DATA (GRPDATA)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. GROUP DATA (GRPDATA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-topic-data-topdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. TOPIC DATA (TOPDATA)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. TOPIC DATA (TOPDATA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-reliability-reliab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. RELIABILITY (RELIAB)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. RELIABILITY (RELIAB)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kind-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kind Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-durability-durabl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. DURABILITY (DURABL)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. DURABILITY (DURABL)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kind-mode_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kind Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-deadline-deadln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. DEADLINE (DEADLN)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. DEADLINE (DEADLN)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-liveliness-livens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. LIVELINESS (LIVENS)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. LIVELINESS (LIVENS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kind-mode_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kind Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-history-hist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. HISTORY (HIST)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. HISTORY (HIST)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kind-mode_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kind Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-resource-limits-reslim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. RESOURCE LIMITS (RESLIM)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. RESOURCE LIMITS (RESLIM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-lifespan-lfspan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. LIFESPAN (LFSPAN)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. LIFESPAN (LFSPAN)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-ownership-strength-ownst" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. OWNERSHIP (+STRENGTH) (OWNST)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. OWNERSHIP (+STRENGTH) (OWNST)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kind-mode_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kind Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-destination-order-destord" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. DESTINATION ORDER (DESTORD)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. DESTINATION ORDER (DESTORD)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-writer-data-lifecycle-wdlife" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. WRITER DATA LIFECYCLE (WDLIFE)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. WRITER DATA LIFECYCLE (WDLIFE)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-reader-data-lifecycle-rdlife" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. READER DATA LIFECYCLE (RDLIFE)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. READER DATA LIFECYCLE (RDLIFE)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-metadata-matching-cache-and-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: Metadata, Matching, Cache, and Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS Rules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    QoS Rules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rules/STD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STD Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rules/IMP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IMP Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rules/EMP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EMP Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../XML_Generator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    XML Generator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#16-qos-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16 QoS Policies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle-of-dds-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifecycle of DDS Communication
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-entity-factory-entfac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ENTITY FACTORY (ENTFAC)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. ENTITY FACTORY (ENTFAC)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-partition-part" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. PARTITION (PART)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. PARTITION (PART)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-user-data-usrdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. USER DATA (USRDATA)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. USER DATA (USRDATA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-group-data-grpdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. GROUP DATA (GRPDATA)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. GROUP DATA (GRPDATA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-topic-data-topdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. TOPIC DATA (TOPDATA)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. TOPIC DATA (TOPDATA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-reliability-reliab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. RELIABILITY (RELIAB)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. RELIABILITY (RELIAB)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kind-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kind Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-durability-durabl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. DURABILITY (DURABL)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. DURABILITY (DURABL)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kind-mode_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kind Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-deadline-deadln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. DEADLINE (DEADLN)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. DEADLINE (DEADLN)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-liveliness-livens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. LIVELINESS (LIVENS)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. LIVELINESS (LIVENS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kind-mode_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kind Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-history-hist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. HISTORY (HIST)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. HISTORY (HIST)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kind-mode_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kind Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-resource-limits-reslim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. RESOURCE LIMITS (RESLIM)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. RESOURCE LIMITS (RESLIM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-lifespan-lfspan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. LIFESPAN (LFSPAN)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. LIFESPAN (LFSPAN)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-ownership-strength-ownst" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. OWNERSHIP (+STRENGTH) (OWNST)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. OWNERSHIP (+STRENGTH) (OWNST)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kind-mode_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kind Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-destination-order-destord" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. DESTINATION ORDER (DESTORD)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. DESTINATION ORDER (DESTORD)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-writer-data-lifecycle-wdlife" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. WRITER DATA LIFECYCLE (WDLIFE)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. WRITER DATA LIFECYCLE (WDLIFE)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-reader-data-lifecycle-rdlife" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. READER DATA LIFECYCLE (RDLIFE)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. READER DATA LIFECYCLE (RDLIFE)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-metadata-matching-cache-and-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: Metadata, Matching, Cache, and Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="dds-qos-policy-guide">DDS QoS Policy Guide</h1>
+<blockquote>
+<p>A comprehensive reference for configuring 16 key DDS QoS policies</p>
+</blockquote>
+<style>
+.req-container {
+    margin: 20px 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+.req-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+}
+.req-item:last-child {
+    border-bottom: none;
+}
+.req-label {
+    min-width: 100px;
+    font-weight: 700;
+    color: #334155;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.req-container.req-table .req-label {
+    width: 220px;
+    min-width: 220px;
+    max-width: 220px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+.req-value {
+    color: #334155;
+    font-size: 14px;
+    border-left: 2px solid #e2e8f0;
+    padding-left: 16px;
+    margin-left: 8px;
+}
+
+.dds-table .dds-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    padding: 12px 16px;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 2px solid #e2e8f0;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #475569;
+    text-align: center;
+}
+.dds-table .dds-header span { text-align: center; }
+.dds-table .dds-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 14px;
+    color: #334155;
+}
+.dds-table .dds-row:last-child { border-bottom: none; }
+.dds-table .dds-row span { text-align: center; }
+.dds-table .dds-row span:first-child { font-weight: 700; text-align: left; }
+
+.qos-toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.qos-card {
+    background: #ffffff;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    padding: 12px 16px;
+    text-decoration: none !important;
+    color: #24292e !important;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.qos-card:hover { 
+    border-color: #4E5EB4;
+    background-color: #f6f8fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.qos-num {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: #4E5EB4;
+    margin-right: 12px;
+    font-size: 1.1em;
+}
+
+.qos-title {
+    font-weight: 500;
+    font-size: 0.95em;
+    line-height: 1.2;
+}
+
+.qos-abbr {
+    display: block;
+    font-size: 0.75em;
+    color: #6a737d;
+    margin-top: 2px;
+}  
+
+.lifecycle-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 800px;
+  }
+  .phase-card {
+    border-left: 5px solid #4b95dd;
+    background-color: #ffffff;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05),
+        2px 0 6px rgba(0,0,0,0.05),
+        0px -2px 6px rgba(0,0,0,0.05);
+  }
+  .phase-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+  }
+  .phase-desc {
+    font-size: 15px;
+    color: #555;
+    margin-left: 20px;
+  }
+  b { color: #394a5b; }
+
+</style>
+
+<hr class="hr-grad-left">
+
+<h2 id="16-qos-policies">16 QoS Policies</h2>
+<div class="qos-toc-grid">
+  <a href="#1-entity-factory-entfac" class="qos-card"><span class="qos-num">01</span><div class="qos-title">ENTITY FACTORY<span class="qos-abbr">ENTFAC</span></div></a>
+  <a href="#2-partition-part" class="qos-card"><span class="qos-num">02</span><div class="qos-title">PARTITION<span class="qos-abbr">PART</span></div></a>
+  <a href="#3-user-data-usrdata" class="qos-card"><span class="qos-num">03</span><div class="qos-title">USER DATA<span class="qos-abbr">USRDATA</span></div></a>
+  <a href="#4-group-data-grpdata" class="qos-card"><span class="qos-num">04</span><div class="qos-title">GROUP DATA<span class="qos-abbr">GRPDATA</span></div></a>
+  <a href="#5-topic-data-topdata" class="qos-card"><span class="qos-num">05</span><div class="qos-title">TOPIC DATA<span class="qos-abbr">TOPDATA</span></div></a>
+  <a href="#6-reliability-reliab" class="qos-card"><span class="qos-num">06</span><div class="qos-title">RELIABILITY<span class="qos-abbr">RELIAB</span></div></a>
+  <a href="#7-durability-durabl" class="qos-card"><span class="qos-num">07</span><div class="qos-title">DURABILITY<span class="qos-abbr">DURABL</span></div></a>
+  <a href="#8-deadline-deadln" class="qos-card"><span class="qos-num">08</span><div class="qos-title">DEADLINE<span class="qos-abbr">DEADLN</span></div></a>
+  <a href="#9-liveliness-livens" class="qos-card"><span class="qos-num">09</span><div class="qos-title">LIVELINESS<span class="qos-abbr">LIVENS</span></div></a>
+  <a href="#10-history-hist" class="qos-card"><span class="qos-num">10</span><div class="qos-title">HISTORY<span class="qos-abbr">HIST</span></div></a>
+  <a href="#11-resource-limits-reslim" class="qos-card"><span class="qos-num">11</span><div class="qos-title">RESOURCE LIMITS<span class="qos-abbr">RESLIM</span></div></a>
+  <a href="#12-lifespan-lfspan" class="qos-card"><span class="qos-num">12</span><div class="qos-title">LIFESPAN<span class="qos-abbr">LFSPAN</span></div></a>
+  <a href="#13-ownership-strength-ownst" class="qos-card"><span class="qos-num">13</span><div class="qos-title">OWNERSHIP<span class="qos-abbr">OWNST</span></div></a>
+  <a href="#14-destination-order-destord" class="qos-card"><span class="qos-num">14</span><div class="qos-title">DESTINATION ORDER<span class="qos-abbr">DESTORD</span></div></a>
+  <a href="#15-writer-data-lifecycle-wdlife" class="qos-card"><span class="qos-num">15</span><div class="qos-title">WRITER DATA LIFECYCLE<span class="qos-abbr">WDLIFE</span></div></a>
+  <a href="#16-reader-data-lifecycle-rdlife" class="qos-card"><span class="qos-num">16</span><div class="qos-title">READER DATA LIFECYCLE<span class="qos-abbr">RDLIFE</span></div></a>
+</div>
+
+<hr class="hr-grad-left">
+
+<h2 id="lifecycle-of-dds-communication">Lifecycle of DDS Communication</h2>
+<div align="center">
+  <img src="../images/lifecycle.jpg" width="700">
+    <figcaption style="font-style: italic; color: #666; margin-top: 10px;">
+    Three Phases: Discovery → Data Exchange → Disassociation.
+  </figcaption>
+</div>
+
+<div class="lifecycle-container">
+<div class="phase-card">
+  <div class="phase-title">1. Discovery Phase</div>
+  <div class="phase-desc">
+    Entities with the same topic are matched through <b>PDP/EDP protocols</b> and <br>established after verifying <b>QoS compatibility</b>.
+  </div>
+</div>
+
+<div class="phase-card" style="border-left-color: #01af4e;">
+  <div class="phase-title">2. Data Exchange Phase</div>
+  <div class="phase-desc">
+    Matched pairs exchange <b>user data</b> and <b>control metatraffic</b> (HEARTBEAT/ACKNACK) to <br>ensure reliability and timeliness.
+  </div>
+</div>
+
+<div class="phase-card" style="border-left-color: #f17232;">
+  <div class="phase-title">3. Disassociation Phase</div>
+  <div class="phase-desc">
+    Communication ends by <b>disposing instances</b> or removing GUIDs, followed by <br>purging all history after a <b>timeout</b>.
+  </div>
+</div>
+</div>
+
+<details>
+  <summary>Lifecycle Mapping</summary>
+  <div class="req-container">
+    <div class="req-item" style="font-weight: bold; background-color: #f1f5f9;">
+        <span class="req-label" style="flex: 2;">QoS Policy</span>
+        <span class="req-value" style="flex: 1; text-align: center;">Discovery</span>
+        <span class="req-value" style="flex: 1; text-align: center;">Data Exchange</span>
+        <span class="req-value" style="flex: 1; text-align: center;">Disassociation</span>
+    </div>
+    <div class="req-item"><span class="req-label" style="flex: 2;">ENTITY_FACTORY</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+    </div>
+    <div class="req-item"><span class="req-label" style="flex: 2;">PARTITION</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+    </div>
+    <div class="req-item"><span class="req-label" style="flex: 2;">USER_DATA</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+    </div>
+    <div class="req-item"><span class="req-label" style="flex: 2;">GROUP_DATA</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+    </div>
+    <div class="req-item">
+        <span class="req-label" style="flex: 2;">TOPIC_DATA</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+    </div>
+    <div class="req-item"><span class="req-label" style="flex: 2;">RELIABILITY</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+    </div>
+    <div class="req-item">
+        <span class="req-label" style="flex: 2;">DURABILITY</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+    </div><div class="req-item"><span class="req-label" style="flex: 2;">DEADLINE</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+    </div>
+    <div class="req-item">
+        <span class="req-label" style="flex: 2;">LIVELINESS</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+    </div>
+    <div class="req-item">
+        <span class="req-label" style="flex: 2;">HISTORY</span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+    </div>
+    <div class="req-item">
+        <span class="req-label" style="flex: 2;">RESOURCE_LIMITS</span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+    </div>
+    <div class="req-item"><span class="req-label" style="flex: 2;">LIFESPAN</span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+    </div>
+    <div class="req-item">
+        <span class="req-label" style="flex: 2;">OWNERSHIP</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+    </div>
+    <div class="req-item"><span class="req-label" style="flex: 2;">DESTINATION_ORDER</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+    </div>
+    <div class="req-item">
+        <span class="req-label" style="flex: 2;">WRITER_DATA_LIFECYCLE</span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+    </div>
+    <div class="req-item">
+        <span class="req-label" style="flex: 2;">READER_DATA_LIFECYCLE</span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+        <span class="req-value" style="flex: 1; text-align: center;"></span>
+        <span class="req-value" style="flex: 1; text-align: center;">O</span>
+    </div>
+</div>
+</details>
+
+<hr class="hr-grad-left">
+
+<h2 id="1-entity-factory-entfac">1. ENTITY FACTORY (ENTFAC)</h2>
+<blockquote>
+<p><strong>Controls whether newly created DDS entities automatically start participating in discovery</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="mode">Mode</h3>
+<ul>
+<li><strong>TRUE</strong>: Newly created child entities are immediately enabled and begin participating in discovery.</li>
+<li><strong>FALSE</strong>: The application must explicitly call enable() before the entity can participate in discovery.</li>
+</ul>
+<h3 id="example">Example</h3>
+<p>The ENTFAC QoS can be used to conserve resources and allow multiple robots to initiate discovery simultaneously under synchronized conditions. For instance, the Publishers and Subscribers of a navigation module may be activated only after completing local sensor calibration or localization. By setting autoenable created entities=false, the system delays communication until the robot is ready by explicitly calling enable() at the appropriate time</p>
+<hr class="hr-dashed">
+
+<h2 id="2-partition-part">2. PARTITION (PART)</h2>
+<blockquote>
+<p><strong>Introduces logical segmentation with in a single DDS domain</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>names</code> (default: emptystring)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="example_1">Example</h3>
+<p>The PART QoS can be used to separate identical data types into multiple logical groups without the need to define additional topics or create new domains. For instance, delivery robots and inventory robots may share common topics such as “status” and “command” within the same domain, but still require distinct data flows. By setting the names=delivery for the delivery robots and names=inventory for the inventory robots, a central management system can subscribe only to the desired partition and selectively receive data from a specific group of robots.</p>
+<hr class="hr-dashed">
+
+<h2 id="3-user-data-usrdata">3. USER DATA (USRDATA)</h2>
+<blockquote>
+<p><strong>Allows application-specific meta data to be attached to DDS entities such as Domain Participant, Publisher, and Subscriber</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>value</code> (default: empty sequence)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="example_2">Example</h3>
+<p>The USRDATA QoS can be used to flexibly deliver iden tity, authentication, and configuration information without re quiring additional topics or separate domains. For example, each robot may embed value such as robot id=R12 and to ken=ABCD123 in its participant, allowing the server to inspect the token during the SPDP phase and admit only authorized robots while blocking others. Similarly, a Publisher for a LiDAR topic may include value such as sensor=LiDAR and fov=270 in its USRDATA, enabling the subscribing application to determine sensor configuration and immediately select an appropriate filtering strategy before receiving any samples.</p>
+<hr class="hr-dashed">
+
+<h2 id="4-group-data-grpdata">4. GROUP DATA (GRPDATA)</h2>
+<blockquote>
+<p><strong>Attaches application-specific metadata to the Publisher and Subscriber entities</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>value</code> (default: empty sequence)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="example_3">Example</h3>
+<p>The GRPDATA QoS can be used to logically segment data f lows in a manner similar to the PART QoS. For example, if delivery and inventory robots share topics within the same domain, assigning value=delivery or value=inventory to each Publisher or Subscriber allows the central management server to read these values during discovery callbacks. Although similar to PART, the key distinction is that PART enforces matching at the DDS level, whereas GRPDATA leaves the interpretation of the field entirely to the application.</p>
+<hr class="hr-dashed">
+
+<h2 id="5-topic-data-topdata">5. TOPIC DATA (TOPDATA)</h2>
+<blockquote>
+<p><strong>Attaches application-specific metadata to the topic entity</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>value</code> (default: empty sequence)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="example_4">Example</h3>
+<p>The TOPDATA QoS can be used by applications to verify schema compatibility in advance. For example, each robot can embed value such as schema=2.1 and frame=lidar in the TOPDATA of the scan cloud topic. During topic discovery, an inventory management application can read this information, and if the schema is incompatible, it can prevent subscription and avoid data parsing errors.</p>
+<hr class="hr-dashed">
+
+<h2 id="6-reliability-reliab">6. RELIABILITY (RELIAB)</h2>
+<blockquote>
+<p><strong>Determines whether entities such as topic, Publisher, and Subscriber transmit data reliably</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter1</span>
+    <span class="req-value"><code>kind</code> (default: Publisher-reliable, Subscriber-best_effrot)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Parameter2</span>
+    <span class="req-value"><code>max blocking time</code></span>
+  </div>  
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can <b>not</b> be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="kind-mode">kind Mode</h3>
+<ul>
+<li><strong>RELIABLE</strong>: Attempts to deliver all samples stored in the Publisher HistoryCache to the Subscriber.<br>Retransmissions occur upon request using ACK/NACK signaling. <br>(max blocking time limits how long a Publisher’s write() or dispose() operation can be blocked due to delayed ACKs or buffer unavailability.)</li>
+<li><strong>BEST_EFFORT</strong>: Publisher does not wait for ACKs and does not retransmit lost samples.</li>
+</ul>
+<h3 id="example_5">Example</h3>
+<p>The RELIAB QoS can be used to balance safety and efficiency by configuring topics according to their criticality. For commands such as emergency stops or task assignments, both Publisher and Subscriber should use reliable, ensuring guaranteed delivery. In contrast, high-frequency data such as LiDAR scans or camera streams can use best effort, which avoids retransmission overhead and tolerates occasional loss. </p>
+<hr class="hr-dashed">
+
+<h2 id="7-durability-durabl">7. DURABILITY (DURABL)</h2>
+<blockquote>
+<p><strong>Determines how a late-joining Subscriber can receive previously published samples from a Publisher</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>kind</code> (default: VOLATILE)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can <b>not</b> be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="kind-mode_1">kind Mode</h3>
+<ul>
+<li><strong>VOLATILE</strong>: Does not send any previous samples to newly joined Subscribers.</li>
+<li><strong>TRANSIENT_LOCAL</strong>: Retains samples in the Publisher’s HistoryCache while it is active, allowing late-joining Subscribers to access previously published data.</li>
+<li><strong>TRANSIENT</strong>: Preserve data after a Publisher has been terminated. Retains data in volatile memory.</li>
+<li><strong>PERSISTENT</strong>: Preserve data after a Publisher has been terminated. Uses non-volatile storage such as files or databases</li>
+</ul>
+<h3 id="example_6">Example</h3>
+<p>The DURABL QoS can be used to allow newly added or recovered robots to immediately access the same information, thereby improving both system robustness and collaborative efficiency. Data such as global maps or mission plans, whose availability must not depend on the lifespan of a specific robot, should remain accessible to robots that join after the Publisher has terminated or rebooted. In such cases, DURABL should be set to transient if data must persist throughout process restarts, or to persistent if it must survive system-wide reboots.</p>
+<hr class="hr-dashed">
+
+<h2 id="8-deadline-deadln">8. DEADLINE (DEADLN)</h2>
+<blockquote>
+<p><strong>Specifies the maximum interval within which a new sample for a given data instance must be produced by the Publisher and
+received by the Subscriber</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>period</code> (default: infinity)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="example_7">Example</h3>
+<p>The DEADLN QoS can be used for real-time monitoring of robot status. Each robot may publish its position and battery level through ROS 2 topics every second. The Publisher and the central monitoring system’s Subscriber are both configured with a period of 1 second. If a new sample fails to arrive within this interval, the monitoring system receives a deadline-miss notification, enabling immediate detection of communication failures or faults in that data stream. The application can then respond by issuing alerts or stopping the robot, thereby enhancing overall system safety and reliability.</p>
+<hr class="hr-dashed">
+
+<h2 id="9-liveliness-livens">9. LIVELINESS (LIVENS)</h2>
+<blockquote>
+<p><strong>Determine whether its corresponding Publisher is still active</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter1</span>
+    <span class="req-value"><code>kind</code> (default: AUTOMATIC)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Parameter2</span>
+    <span class="req-value"><code>lease_duration (default: infinite)</code></span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can <b>not</b> be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="kind-mode_2">kind Mode</h3>
+<ul>
+<li><strong>AUTOMATIC</strong>: The DomainParticipant asserts liveliness implicitly by periodical liveliness assertions.</li>
+<li><strong>MANUAL_BY_PARTICIPANT</strong>: A single assertion from any entity within a DomainParticipant marks all of its Publishers as alive.</li>
+<li><strong>MANUAL_BY_TOPIC</strong>: Each Publisher must explicitly assert its own liveliness by publishing HEARTBEAT samples or calling assert liveliness().</li>
+</ul>
+<h3 id="example_8">Example</h3>
+<p>The LIVENS QoS can be used to verify whether the pub lishing process itself is still active, whereas the DEADLN QoS ensures the timely delivery of individual data samples. This policy enables a central monitoring system to automatically track the operational status of each robot. For instance, each robot may publish position and battery level via a Publisher. The central Subscriber is configured with kind set to automatic and lease duration set to 5 seconds, causing DDS to refresh liveliness every five seconds. If a signal is not received within the lease duration, a liveliness notification is triggered to indicate that the robot is inactive. The monitoring application can then respond by graying out the robot’s icon on the map or issuing a warning.</p>
+<hr class="hr-dashed">
+
+<h2 id="10-history-hist">10. HISTORY (HIST)</h2>
+<blockquote>
+<p><strong>Determines how many samples a Publisher retains in its HistoryCache for retransmission, and how many samples a Subscriber stores before they are delivered to the application.</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>kind</code> (default: KEEP_LAST, depth=1)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can <b>not</b> be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="kind-mode_3">kind Mode</h3>
+<ul>
+<li><strong>KEEP_LAST</strong>: Retains only the most recent samples per instance, with depth specifying the maximum number of samples to keep.</li>
+<li><strong>KEEP_ALL</strong>: Stores all samples for each instance and attempts to deliver as many as possible.</li>
+</ul>
+<h3 id="example_9">Example</h3>
+<p>The HIST QoS can be used to control how much robot data is retained. If a control station must preserve all robot positions since startup, kind=keep all can be set so that both the Publisher and the Subscriber store every sample. In contrast, for real-time tracking where only the latest position matters, setting kind=keep last with depth=1 ensures that each robot’s Publisher retains and transmits only the most recent position, while the Subscriber receives only that single value.</p>
+<hr class="hr-dashed">
+
+<h2 id="11-resource-limits-reslim">11. RESOURCE LIMITS (RESLIM)</h2>
+<blockquote>
+<p><strong>Defines upper bounds on the number of instances and samples that the topic, Publishe, and Subscriber entities can manage</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter1</span>
+    <span class="req-value"><code>max_samples</code></span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Parameter2</span>
+    <span class="req-value"><code>max_instances</code></span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Parameter3</span>
+    <span class="req-value"><code>max samples per instance</code></span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can <b>not</b> be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="example_10">Example</h3>
+<p>The RESLIM QoS can be used to manage resources and maintain communication stability. For instance, where only the most recent information is important and historical records are less critical, such as a robot’s real-time position, the Publisher’s max instances can be set to a small value to avoid excessive memory usage. On the Subscriber side, where the number of participating robots may be large or variable, the max samples per instance value should be set high enough to keep minimal data for each robot instance.</p>
+<hr class="hr-dashed">
+
+<h2 id="12-lifespan-lfspan">12. LIFESPAN (LFSPAN)</h2>
+<blockquote>
+<p><strong>How long a sample published by a Publisher remains valid</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>duration</code> (default: infinity)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="example_11">Example</h3>
+<p>The LFSPAN QoS can be used to prevent robots from retaining outdated samples unnecessarily. For data such as po sition or battery level, where only the last few seconds matter, setting the duration accordingly ensures that the Publisher’s HistoryCache stores only the most recent samples, with older ones automatically deleted to conserve memory. In contrast, for data such as command logs– where long-term delivery is more important than freshness– it is preferable to set duration to infinity and rely on other QoS policies to ensure reliability.</p>
+<hr class="hr-dashed">
+
+<h2 id="13-ownership-strength-ownst">13. OWNERSHIP (+STRENGTH) (OWNST)</h2>
+<blockquote>
+<p><strong>Whether multiple Publishers can concurrently update the same instance, or, if not, which Publisher’s value should be accepted</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>kind</code> (default: SHARED)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can <b>not</b> be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="kind-mode_4">kind Mode</h3>
+<ul>
+<li><strong>SHARED</strong>: Allows multiple Publishers to freely update the same instance.</li>
+<li><strong>EXCLUSIVE</strong>: Only a single Publisher is allowed to update an instance, and its updates alone are delivered to Subscribers.<br>Priority is determined by the value of the OWNST STRENGTH QoS policy.</li>
+</ul>
+<h3 id="example_12">Example</h3>
+<p>The OWNSTandOWNERSHIP STRENGTHQoSpolicies can be used to manage shared resources or mission states con sistently. For example, if multiple robots scan the environment simultaneously to build a shared map, shared mode allows the server to receive updates from all robots and generate a unified map. In contrast, for tasks that must be performed by a single robot, exclusive mode can be used with appropriate value assigned to each Publisher, ensuring that the active robot becomes the instance owner. If the current owner robot fails to respond due to a fault, DDS automatically transfers ownership to the standby robot with the next highest value, allowing the task to continue without interruption.</p>
+<hr class="hr-dashed">
+
+<h2 id="14-destination-order-destord">14. DESTINATION ORDER (DESTORD)</h2>
+<blockquote>
+<p><strong>How a Subscriber orders samples from multiple Publishers targeting the same instance</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>kind</code> (default: BY_RECEPTION_TIMESTAMP)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can <b>not</b> be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="mode_1">Mode</h3>
+<ul>
+<li><strong>BY_RECEPTION_TIMESTAMP</strong>: Orders samples by their reception time at the Subscriber.</li>
+<li><strong>BY_SOURCE_TIMESTAMP</strong>: Uses the timestamp assigned by the Publisher at publication, preserving the original creation order regardless of delays.</li>
+</ul>
+<h3 id="example_13">Example</h3>
+<p>The DESTORD QoS policy can be used to maintain data consistency when multiple robots simultaneously update the same instance. By configuring by source timestamp, samples are ordered by their creation time regardless of network delays or arrival order, allowing all robots to share a consistent view of the map. In contrast, for real-time data such as current posi tions, where the latest received value is most important, using by reception timestamp enables the Subscriber to reflect the earliest arriving sample immediately.</p>
+<hr class="hr-dashed">
+
+<h2 id="15-writer-data-lifecycle-wdlife">15. WRITER DATA LIFECYCLE (WDLIFE)</h2>
+<blockquote>
+<p><strong>whether a Publisher should notify Subscribers with a dispose() when it unregisters an instance</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter</span>
+    <span class="req-value"><code>autodispose unregistered instances</code> (default: TRUE)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="mode_2">Mode</h3>
+<ul>
+<li><strong>TRUE</strong>: An instance to be automatically marked as disposed when an unregister() is called, so that it is recognized as deleted on the Subscriber side.</li>
+<li><strong>FALSE</strong>: The unregister() only disassociates the writer from the instance without disposing of it; the application must explicitly call dispose() to fully delete the instance.</li>
+</ul>
+<h3 id="example_14">Example</h3>
+<p>The WDLIFE QoS can be used to explicitly manage the lifecycle of object-based tasks. For example, when a robot detects an object with its sensors, it can publish the object’s key, position, type, and status on a topic, allowing other robots or the control system to subscribe and build a shared environment model. When the task is completed, the post processing behavior depends on the detecting robot’s autodis pose unregistered instances setting. If true, the instance is immediately disposed of and removed from the map or marked as “processed”; if false, only the Publisher-instance link is removed while the object information remains active, allowing another robot to rediscover and update the same object, thereby improving collaboration flexibility.</p>
+<hr class="hr-dashed">
+
+<h2 id="16-reader-data-lifecycle-rdlife">16. READER DATA LIFECYCLE (RDLIFE)</h2>
+<blockquote>
+<p><strong>How long a Subscriber retains samples that have been disposed of or are no longer associated with any Publisher</strong></p>
+</blockquote>
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameter1</span>
+    <span class="req-value"><code>autopurge disposed samples delay</code> (default: infinity)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Parameter2</span>
+    <span class="req-value"><code>autopurge no writer samples delay</code> (default: infinity)</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Can be changed at runtime</span>
+  </div>
+</div>
+
+<h3 id="example_15">Example</h3>
+<p>The RDLIFE QoS policy enables tiered instance man agement for improved efficiency. For example, in a tempo rary storage area where hundreds of pallets move quickly and historical positions become obsolete immediately, set ting autopurge disposed samples delay to 0 seconds ensures that the cache is cleared as soon as a robot calls dis pose(). This keeps the cache lightweight and prevents un necessary memory growth. In contrast, for static, critical objects awaiting inspection after relocation, setting autop urge no writer samples delay to 300 seconds allows newly joined robots to continue inspection even after brief com munication interruptions. By adjusting the reader-side delay values based on context, essential data can be preserved while irrelevant information is promptly discarded, ensuring efficient use of system resources.</p>
+<hr class="hr-grad-left">
+
+<h2 id="summary-metadata-matching-cache-and-lifecycle">Summary: Metadata, Matching, Cache, and Lifecycle</h2>
+<div class="req-container dds-table">
+  <div class="dds-header">
+    <span>Category</span>
+    <span>QoS</span>
+    <span>One-line summary</span>
+  </div>
+  <div class="dds-row">
+    <span>Discovery timing</span>
+    <span>ENTFAC</span>
+    <span>When entities participate in discovery</span>
+  </div>
+  <div class="dds-row">
+    <span>Logical segmentation</span>
+    <span>PART</span>
+    <span>Partition names to separate or group topic flows</span>
+  </div>
+  <div class="dds-row">
+    <span>Metadata</span>
+    <span>USRDATA, GRPDATA, TOPDATA</span>
+    <span>Application info on Participant / Pub-Sub / Topic</span>
+  </div>
+  <div class="dds-row">
+    <span>Delivery guarantee</span>
+    <span>RELIAB</span>
+    <span>best_effort vs reliable (retransmission, ordering)</span>
+  </div>
+  <div class="dds-row">
+    <span>Late joiners</span>
+    <span>DURABL</span>
+    <span>How much past data late joiners can receive</span>
+  </div>
+  <div class="dds-row">
+    <span>Temporal constraints</span>
+    <span>DEADLN, LIVENS</span>
+    <span>Period (deadline) monitoring; Publisher liveness</span>
+  </div>
+  <div class="dds-row">
+    <span>Cache</span>
+    <span>HIST, RESLIM, LFSPAN</span>
+    <span>How many samples, upper bounds, validity duration</span>
+  </div>
+  <div class="dds-row">
+    <span>Multiple writers</span>
+    <span>OWNST, DESTORD</span>
+    <span>Single owner vs shared; order by reception vs source timestamp</span>
+  </div>
+  <div class="dds-row">
+    <span>Instance cleanup</span>
+    <span>WDLIFE, RDLIFE</span>
+    <span>Dispose on unregister; when to purge disposed/no-writer samples</span>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy", "navigation.expand"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
