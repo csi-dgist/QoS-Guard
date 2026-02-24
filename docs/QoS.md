@@ -207,32 +207,12 @@
 
 </div>
 
-<figure style="text-align: center;">
-  <img src="./images/lifecycle.jpg" width="1000px" alt="Lifecycle of DDS Communication">
-  <figcaption style="font-style: italic; color: #666; margin-top: 10px;">
-    Lifecycle of DDS Communication
-  </figcaption>
-</figure>
+
 
 <div align="center">
-  <img src="./images/lifecycle.jpg" width="500">
+  <img src="../images/lifecycle.jpg" width="500">
 </div>
 
-![Lifecycle of DDS Communication](./images/lifecycle.jpg)
-
-<img src="images/lifecycle.jpg" width="500">
-
-<div align="center">
-  <img src="images/lifecycle.jpg" width="500" alt="DDS Lifecycle">
-</div>
-
-<p align="center">
-  <img src="images/lifecycle.jpg" width="500" />
-</p>
-
-<p align="center">
-  ![Lifecycle](./images/lifecycle.jpg){width=500}
-</p>
 
 <div class="req-container">
     <div class="req-item" style="font-weight: bold; background-color: #f1f5f9;">
