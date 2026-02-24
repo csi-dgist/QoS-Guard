@@ -131,7 +131,7 @@
   .phase-card {
     border-left: 5px solid #4E5EB4;
     background-color: #f1f5f9;
-    padding: 15px 20px;
+    padding: 10px 20px;
     margin-bottom: 20px;
     border-radius: 0 8px 8px 0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -145,7 +145,7 @@
     align-items: center;
   }
   .phase-desc {
-    font-size: 0.95rem;
+    font-size: 10px;
     color: #555;
     margin-left: 20px;
   }
