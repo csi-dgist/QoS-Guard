@@ -53,7 +53,37 @@
     font-size: 0.75em;
     color: #6a737d;
     margin-top: 2px;
-}  
+}
+
+/* QoS 스펙 정의 목록 (테이블 대체) */
+.qos-spec {
+    margin: 1em 0;
+    padding: 1rem 1.25rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+.qos-spec dt {
+    font-weight: 600;
+    color: #1e293b;
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
+}
+.qos-spec dt:first-child { margin-top: 0; }
+.qos-spec dd {
+    margin-left: 0;
+    margin-bottom: 0.4em;
+    color: #475569;
+}
+.qos-spec dd:last-child { margin-bottom: 0; }
+.qos-spec code {
+    background: #e2e8f0;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.92em;
+}
 </style>
 
 <hr class="hr-grad-left"> 
@@ -95,13 +125,18 @@
 
 **Role:** Controls **when** newly created DDS entities begin participating in discovery.
 
-| Item | Description |
-|------|-------------|
-| **Parameter** | `autoenable_created_entities` (boolean, default: TRUE) |
-| **TRUE** | Child entities are enabled immediately upon creation and participate in discovery |
-| **FALSE** | Entities do not participate in discovery until the application explicitly calls `enable()` |
-| **Lifecycle** | Determines when the Discovery phase starts |
-| **Mutability** | Can be changed at runtime; changes apply only to entities **created after** the update |
+<dl class="qos-spec">
+  <dt>Parameter</dt>
+  <dd><code>autoenable_created_entities</code> (boolean, default: TRUE)</dd>
+  <dt>TRUE</dt>
+  <dd>Child entities are enabled immediately upon creation and participate in discovery</dd>
+  <dt>FALSE</dt>
+  <dd>Entities do not participate in discovery until the application explicitly calls <code>enable()</code></dd>
+  <dt>Lifecycle</dt>
+  <dd>Determines when the Discovery phase starts</dd>
+  <dt>Mutability</dt>
+  <dd>Can be changed at runtime; changes apply only to entities <strong>created after</strong> the update</dd>
+</dl>
 
 **Example:** To activate a navigation module’s Publishers/Subscribers only after local sensor calibration or localization is complete, set `autoenable_created_entities=false` and call `enable()` at the appropriate time.
 
@@ -111,13 +146,18 @@
 
 **Role:** Introduces **logical segmentation** within a single DDS domain so that only certain Publisher/Subscriber groups match.
 
-| Item | Description |
-|------|-------------|
-| **Parameter** | `names` (array of strings, default: empty string) |
-| **Applies to** | Both Publisher and Subscriber |
-| **Matching** | Publisher and Subscriber match only if they share **at least one** partition name |
-| **Exchanged** | During the SEDP stage of the Discovery phase |
-| **Mutability** | Can be changed at runtime; changes trigger rematching via SEDP (existing connections are broken) |
+<dl class="qos-spec">
+  <dt>Parameter</dt>
+  <dd><code>names</code> (array of strings, default: empty string)</dd>
+  <dt>Applies to</dt>
+  <dd>Both Publisher and Subscriber</dd>
+  <dt>Matching</dt>
+  <dd>Publisher and Subscriber match only if they share <strong>at least one</strong> partition name</dd>
+  <dt>Exchanged</dt>
+  <dd>During the SEDP stage of the Discovery phase</dd>
+  <dt>Mutability</dt>
+  <dd>Can be changed at runtime; changes trigger rematching via SEDP (existing connections are broken)</dd>
+</dl>
 
 **Example:** Delivery and inventory robots may use the same domain and topics such as `status` and `command`. A central management system can subscribe with `names=delivery` or `names=inventory` to receive data only from the desired group.
 
@@ -127,12 +167,16 @@
 
 **Role:** Attaches **application-specific metadata** to entities such as DomainParticipant, Publisher, and Subscriber.
 
-| Item | Description |
-|------|-------------|
-| **Parameter** | `value` (arbitrary byte sequence, default: empty) |
-| **Purpose** | DDS does not interpret it; the value is carried in built-in topic samples (discovery messages) |
-| **Propagation** | DomainParticipant → SPDP; Publisher/Subscriber → SEDP |
-| **Mutability** | Can be changed at runtime; changes are reflected in the next built-in topic sample |
+<dl class="qos-spec">
+  <dt>Parameter</dt>
+  <dd><code>value</code> (arbitrary byte sequence, default: empty)</dd>
+  <dt>Purpose</dt>
+  <dd>DDS does not interpret it; the value is carried in built-in topic samples (discovery messages)</dd>
+  <dt>Propagation</dt>
+  <dd>DomainParticipant → SPDP; Publisher/Subscriber → SEDP</dd>
+  <dt>Mutability</dt>
+  <dd>Can be changed at runtime; changes are reflected in the next built-in topic sample</dd>
+</dl>
 
 **Example:** Each robot can embed `robot_id=R12`, `token=ABCD123` in its participant so the server can validate the token during SPDP and admit only authorized robots. A LiDAR Publisher can include `sensor=LiDAR`, `fov=270` so subscribers can choose an appropriate filtering strategy before receiving samples.
 
@@ -142,11 +186,14 @@
 
 **Role:** Attaches **application-specific metadata** to Publisher and Subscriber entities. Structure and behavior are the same as USRDATA.
 
-| Item | Description |
-|------|-------------|
-| **Parameter** | `value` (arbitrary byte sequence) |
-| **Propagation** | SEDP phase |
-| **Mutability** | Can be changed freely at runtime |
+<dl class="qos-spec">
+  <dt>Parameter</dt>
+  <dd><code>value</code> (arbitrary byte sequence)</dd>
+  <dt>Propagation</dt>
+  <dd>SEDP phase</dd>
+  <dt>Mutability</dt>
+  <dd>Can be changed freely at runtime</dd>
+</dl>
 
 **Example:** Similar to PART for separating delivery vs. inventory robots; PART is used by DDS for matching, while GRPDATA is **interpreted by the application** in discovery callbacks.
 
@@ -156,11 +203,14 @@
 
 **Role:** Attaches application-specific metadata to the **topic** entity. Not used for RxO matching; serves as an auxiliary channel for application information.
 
-| Item | Description |
-|------|-------------|
-| **Format/Behavior** | Same as USRDATA and GRPDATA |
-| **Propagation** | SEDP phase |
-| **Mutability** | Can be changed freely at runtime |
+<dl class="qos-spec">
+  <dt>Format/Behavior</dt>
+  <dd>Same as USRDATA and GRPDATA</dd>
+  <dt>Propagation</dt>
+  <dd>SEDP phase</dd>
+  <dt>Mutability</dt>
+  <dd>Can be changed freely at runtime</dd>
+</dl>
 
 **Example:** Embed `schema=2.1`, `frame=lidar` in the scan cloud topic’s TOPDATA so an inventory app can check schema compatibility during topic discovery and avoid parsing errors.
 
@@ -170,13 +220,18 @@
 
 **Role:** Determines whether data is sent **reliably** (with retransmission) or **best effort**.
 
-| Item | Description |
-|------|-------------|
-| **Parameters** | `kind` (best_effort / reliable), `max_blocking_time` (reliable mode only) |
-| **Defaults** | Publisher: reliable; Subscriber and topic: best_effort |
-| **best_effort** | No ACK wait or retransmission; data is sent as fast as possible |
-| **reliable** | All samples in the Publisher HistoryCache are delivered; ACK/NACK triggers retransmission; order is preserved |
-| **max_blocking_time** | In reliable mode, maximum time `write()`/`dispose()` may block due to delayed ACKs or buffer unavailability |
+<dl class="qos-spec">
+  <dt>Parameters</dt>
+  <dd><code>kind</code> (best_effort / reliable), <code>max_blocking_time</code> (reliable mode only)</dd>
+  <dt>Defaults</dt>
+  <dd>Publisher: reliable; Subscriber and topic: best_effort</dd>
+  <dt>best_effort</dt>
+  <dd>No ACK wait or retransmission; data is sent as fast as possible</dd>
+  <dt>reliable</dt>
+  <dd>All samples in the Publisher HistoryCache are delivered; ACK/NACK triggers retransmission; order is preserved</dd>
+  <dt>max_blocking_time</dt>
+  <dd>In reliable mode, maximum time <code>write()</code>/<code>dispose()</code> may block due to delayed ACKs or buffer unavailability</dd>
+</dl>
 
 **Lifecycle**
 
@@ -216,11 +271,14 @@
 
 **Role:** Specifies the **maximum period** within which a new sample for a given data instance must be produced by the Publisher and received by the Subscriber. If exceeded, DDS raises alarms on both sides.
 
-| Item | Description |
-|------|-------------|
-| **Parameter** | `period` (default: infinity) |
-| **Meaning** | A new sample must be produced and received within this period |
-| **Use case** | Monitoring **periodic updates** (e.g., periodic sensor data) |
+<dl class="qos-spec">
+  <dt>Parameter</dt>
+  <dd><code>period</code> (default: infinity)</dd>
+  <dt>Meaning</dt>
+  <dd>A new sample must be produced and received within this period</dd>
+  <dt>Use case</dt>
+  <dd>Monitoring <strong>periodic updates</strong> (e.g., periodic sensor data)</dd>
+</dl>
 
 **Lifecycle**
 
@@ -256,11 +314,14 @@
 
 **Role:** Determines **how many samples** per instance the Publisher keeps for retransmission and the Subscriber keeps before delivery to the application.
 
-| Item | Description |
-|------|-------------|
-| **Parameters** | `kind`, `depth` |
-| **kind** | **keep_last**: retain only the most recent samples per instance, up to `depth` (default depth=1) / **keep_all**: retain all samples per instance; `depth` is ignored |
-| **Applies to** | Topic, Publisher, Subscriber. **Immutable** (set only at creation) |
+<dl class="qos-spec">
+  <dt>Parameters</dt>
+  <dd><code>kind</code>, <code>depth</code></dd>
+  <dt>kind</dt>
+  <dd><strong>keep_last</strong>: retain only the most recent samples per instance, up to <code>depth</code> (default depth=1) / <strong>keep_all</strong>: retain all samples per instance; <code>depth</code> is ignored</dd>
+  <dt>Applies to</dt>
+  <dd>Topic, Publisher, Subscriber. <strong>Immutable</strong> (set only at creation)</dd>
+</dl>
 
 **Lifecycle**
 
@@ -294,12 +355,16 @@
 
 **Role:** Defines **how long** a sample published by a Publisher remains valid. After expiration, the sample is removed from both Publisher and Subscriber HistoryCache.
 
-| Item | Description |
-|------|-------------|
-| **Parameter** | `duration` (default: infinity) |
-| **Applies to** | Topic, Publisher (and possibly Subscriber, depending on implementation) |
-| **Behavior** | Expiration time = publication time + duration; expired samples are automatically removed |
-| **Mutability** | **Mutable**; can be changed after the entity is enabled |
+<dl class="qos-spec">
+  <dt>Parameter</dt>
+  <dd><code>duration</code> (default: infinity)</dd>
+  <dt>Applies to</dt>
+  <dd>Topic, Publisher (and possibly Subscriber, depending on implementation)</dd>
+  <dt>Behavior</dt>
+  <dd>Expiration time = publication time + duration; expired samples are automatically removed</dd>
+  <dt>Mutability</dt>
+  <dd><strong>Mutable</strong>; can be changed after the entity is enabled</dd>
+</dl>
 
 **Lifecycle**
 
@@ -333,10 +398,12 @@
 
 **Role:** Determines **in what order** a Subscriber applies samples when **multiple Publishers** write to the same instance.
 
-| Item | Description |
-|------|-------------|
-| **kind** | **by_reception_timestamp** (default): order by arrival time at the Subscriber / **by_source_timestamp**: order by timestamp assigned by the Publisher (preserves creation order) |
-| **Mutability** | **Immutable** after enable |
+<dl class="qos-spec">
+  <dt>kind</dt>
+  <dd><strong>by_reception_timestamp</strong> (default): order by arrival time at the Subscriber / <strong>by_source_timestamp</strong>: order by timestamp assigned by the Publisher (preserves creation order)</dd>
+  <dt>Mutability</dt>
+  <dd><strong>Immutable</strong> after enable</dd>
+</dl>
 
 **Lifecycle**
 
@@ -351,13 +418,18 @@
 
 **Role:** Determines whether the Publisher **notifies Subscribers with dispose()** when it **unregisters** an instance.
 
-| Item | Description |
-|------|-------------|
-| **Parameter** | `autodispose_unregistered_instances` (default: true) |
-| **Applies to** | Publisher only |
-| **true** | When `unregister()` is called, the instance is automatically marked disposed → Subscriber sees it as deleted |
-| **false** | `unregister()` only disassociates the writer from the instance; the application must explicitly call `dispose()` to delete it |
-| **Mutability** | **Mutable** |
+<dl class="qos-spec">
+  <dt>Parameter</dt>
+  <dd><code>autodispose_unregistered_instances</code> (default: true)</dd>
+  <dt>Applies to</dt>
+  <dd>Publisher only</dd>
+  <dt>true</dt>
+  <dd>When <code>unregister()</code> is called, the instance is automatically marked disposed → Subscriber sees it as deleted</dd>
+  <dt>false</dt>
+  <dd><code>unregister()</code> only disassociates the writer from the instance; the application must explicitly call <code>dispose()</code> to delete it</dd>
+  <dt>Mutability</dt>
+  <dd><strong>Mutable</strong></dd>
+</dl>
 
 **Lifecycle**
 
@@ -371,13 +443,18 @@
 
 **Role:** Determines **how long** a Subscriber retains samples for instances that are **disposed** or have **no associated Publishers** before purging them.
 
-| Item | Description |
-|------|-------------|
-| **Parameters** | `autopurge_disposed_samples_delay`, `autopurge_no_writer_samples_delay` |
-| **Applies to** | Subscriber only |
-| **autopurge_disposed_samples_delay** | Time to retain samples/metadata after the instance becomes *not alive disposed* (default: infinity) |
-| **autopurge_no_writer_samples_delay** | Time to retain after the instance becomes *not alive no writers* (default: infinity) |
-| **Mutability** | **Mutable** |
+<dl class="qos-spec">
+  <dt>Parameters</dt>
+  <dd><code>autopurge_disposed_samples_delay</code>, <code>autopurge_no_writer_samples_delay</code></dd>
+  <dt>Applies to</dt>
+  <dd>Subscriber only</dd>
+  <dt>autopurge_disposed_samples_delay</dt>
+  <dd>Time to retain samples/metadata after the instance becomes <em>not alive disposed</em> (default: infinity)</dd>
+  <dt>autopurge_no_writer_samples_delay</dt>
+  <dd>Time to retain after the instance becomes <em>not alive no writers</em> (default: infinity)</dd>
+  <dt>Mutability</dt>
+  <dd><strong>Mutable</strong></dd>
+</dl>
 
 **Lifecycle**
 
