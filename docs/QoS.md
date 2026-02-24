@@ -430,7 +430,7 @@ The TOPDATA QoS can be used by applications to verify schema compatibility in ad
   </div>  
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can not be changed at runtime</span>
+    <span class="req-value">Can <b>not</b> be changed at runtime</span>
   </div>
 </div>
 
@@ -505,7 +505,7 @@ The DEADLN QoS can be used for real-time monitoring of robot status. Each robot 
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can not be changed at runtime</span>
+    <span class="req-value">Can <b>not</b> be changed at runtime</span>
   </div>
 </div>
 
@@ -530,7 +530,7 @@ The LIVENS QoS can be used to verify whether the pub lishing process itself is s
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can not be changed at runtime</span>
+    <span class="req-value">Can <b>not</b> be changed at runtime</span>
   </div>
 </div>
 
@@ -562,7 +562,7 @@ The HIST QoS can be used to control how much robot data is retained. If a contro
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can not be changed at runtime</span>
+    <span class="req-value">Can <b>not</b> be changed at runtime</span>
   </div>
 </div>
 
@@ -602,7 +602,7 @@ The LFSPAN QoS can be used to prevent robots from retaining outdated samples unn
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can not be changed at runtime</span>
+    <span class="req-value">Can <b>not</b> be changed at runtime</span>
   </div>
 </div>
 
@@ -626,7 +626,7 @@ The OWNSTandOWNERSHIP STRENGTHQoSpolicies can be used to manage shared resources
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can not be changed at runtime</span>
+    <span class="req-value">Can <b>not</b> be changed at runtime</span>
   </div>
 </div>
 
