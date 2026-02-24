@@ -313,7 +313,7 @@
 
 ## 1. ENTITY FACTORY (ENTFAC)
 
-> **Controls whether newly createdDDS entities automatically start participating in discovery**
+> **Controls whether newly created DDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
@@ -337,12 +337,12 @@ The ENTFAC QoS can be used to conserve resources and allow multiple robots to in
 
 ## 2. PARTITION (PART)
 
-> **Controls whether newly createdDDS entities automatically start participating in discovery**
+> **Introduces logical segmentation with in a single DDS domain**
 
 <div class="req-container">
   <div class="req-item">
     <span class="req-label">Parameter</span>
-    <span class="req-value"><code>autoenable_created_entities</code> (default: TRUE)</span>
+    <span class="req-value"><code>names</code> (default: emptystring)</span>
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
@@ -351,11 +351,10 @@ The ENTFAC QoS can be used to conserve resources and allow multiple robots to in
 </div>
 
 ### Mode
-* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
-* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
+* Publisher and Subscriber are matched only if they share at least one common partition name in the irrespective lists.
 
 ### Example
-The ENTFAC 
+The PART QoS can be used to separate identical data types into multiple logical groups without the need to define additional topics or create new domains. For instance, delivery robots and inventory robots may share common topics such as “status” and “command” within the same domain, but still require distinct data flows. By setting the names=delivery for the delivery robots and names=inventory for the inventory robots, a central management system can subscribe only to the desired partition and selectively receive data from a specific group of robots.
 
 <hr class="hr-dashed">
 
