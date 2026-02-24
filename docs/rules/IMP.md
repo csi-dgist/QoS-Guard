@@ -192,7 +192,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      [DESTORD = BY_SOURCE] ∧ [HIST.kind=KEEP_ALL] ∧ [RESLIM.mpi = 1]
+      [DESTORD = BY_SOURCE] ∧ [HIST.kind = KEEP_ALL] ∧ [RESLIM.mpi = 1]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -312,7 +312,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      [HIST.KEEP_LAST] ∧ [LFSPAN.duration > HIST.depth × PP]
+      [HIST.kind = KEEP_LAST] ∧ [LFSPAN.duration > HIST.depth × PP]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
@@ -327,7 +327,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      [KEEP_ALL] ∧ [LFSPAN.duration > mpi × PP]
+      [HIST.kind = KEEP_ALL] ∧ [LFSPAN.duration > RESLIM.mpi × PP]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
@@ -342,7 +342,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      [DURABL ≠ VOLATILE] ∧ [autoenable = FALSE]
+      [DURABL = VOLATILE] ∧ [autoenable = FALSE]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
