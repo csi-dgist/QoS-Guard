@@ -153,6 +153,47 @@
   }
   b { color: #394a5b; }
 
+details {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+  }
+
+  summary {
+    font-weight: bold;
+    color: #4E5EB4;
+    cursor: pointer;
+    list-style: none; 
+    outline: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::before {
+    content: "▶ ";
+    font-size: 0.8rem;
+    margin-right: 5px;
+    transition: transform 0.2s;
+  }
+
+  details[open] summary::before {
+    content: "▼ ";
+  }
+
+  .details-content {
+    margin-top: 10px;
+    padding-left: 15px;
+    border-left: 2px solid #cbd5e1;
+    font-size: 0.9rem;
+    color: #475569;
+    line-height: 1.6;
+  }
+    
 
 </style>
 
