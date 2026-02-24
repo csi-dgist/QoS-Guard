@@ -145,7 +145,7 @@
     align-items: center;
   }
   .phase-desc {
-    font-size: 10px;
+    font-size: 15px;
     color: #555;
     margin-left: 20px;
   }
