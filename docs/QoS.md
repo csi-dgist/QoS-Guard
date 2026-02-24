@@ -216,7 +216,7 @@
 </div>
 
 <figure style="text-align: center;">
-  <img src="images/lifecycle.png" width="1000px" alt="QoS Guard Overview">
+  <img src="images/lifecycle.jpg" width="1000px" alt="QoS Guard Overview">
   <figcaption style="font-style: italic; color: #666; margin-top: 10px;">
     QoS Guard Framework
   </figcaption>
