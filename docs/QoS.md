@@ -345,15 +345,21 @@
 
 **Role:** Defines how **late-joining Subscribers** can receive previously published samples.
 
-| Item | Description |
-|------|-------------|
-| **Parameter** | `kind` (volatile / transient_local / transient / persistent) |
-| **Default** | volatile |
-| **volatile** | No delivery of past samples |
-| **transient_local** | Samples retained in the Publisher’s HistoryCache while it is active; delivered to late joiners |
-| **transient** | Data retained after the Publisher ends, in **volatile memory** |
-| **persistent** | Data retained in **non-volatile storage** (e.g., files, database) |
-| **Mutability** | **Immutable** after the entity is enabled |
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameters</span>
+    <span class="req-value"><code>kind</code> (volatile / transient_local / transient / persistent) </span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Defaults</span>
+    <span class="req-value">VOLATILE</span>
+  </div>
+
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Immutable after the entity is enabled</span>
+  </div>
+</div>
 
 **Lifecycle**
 
@@ -397,12 +403,22 @@
 
 **Role:** Allows a Subscriber to determine whether the corresponding **Publisher is still active**.
 
-| Item | Description |
-|------|-------------|
-| **Parameters** | `kind`, `lease_duration` |
-| **kind** | Who asserts liveliness: **automatic** (default), **manual_by_participant**, **manual_by_topic** |
-| **lease_duration** | Maximum time the Subscriber waits after missing liveliness assertions before declaring the Publisher “not alive” (default: infinite) |
-| **manual_by_topic** | Each Publisher asserts via HEARTBEAT or `assert_liveliness()` |
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameters</span>
+    <span class="req-value"><code>kind</code>  **automatic** (default), **manual_by_participant**, **manual_by_topic** <code>lease_duration</code> </span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Defaults</span>
+    <span class="req-value">Automatic </span>
+  </div>
+
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Immutable after the entity is enabled</span>
+  </div>
+</div>
+
 
 **Lifecycle**
 
@@ -445,13 +461,21 @@
 
 **Role:** Sets **upper bounds** on the number of instances and samples that topic, Publisher, and Subscriber entities can manage.
 
-| Item | Description |
-|------|-------------|
-| **Parameters** | `max_samples`, `max_instances`, `max_samples_per_instance` |
-| **Instance** | A data object identified by the topic type’s key |
-| **Sample** | A transmission unit containing an instance’s data and metadata |
-| **Defaults** | OMG standard: unlimited; implementations may impose defaults |
-| **Mutability** | **Immutable** after configuration |
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameters</span>
+    <span class="req-value">`max_samples`, `max_instances`, `max_samples_per_instance`</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Defaults</span>
+    <span class="req-value">OMG standard: unlimited; implementations may impose defaults </span>
+  </div>
+
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Immutable after configuration</span>
+  </div>
+</div>
 
 **Lifecycle**
 
@@ -496,11 +520,21 @@
 
 **Role:** Determines whether **multiple Publishers** can update the same instance, and if not, **which Publisher’s** value is accepted.
 
-| Item | Description |
-|------|-------------|
-| **kind** | **shared** (default): multiple Publishers can update concurrently / **exclusive**: only one Publisher per instance; only its updates are delivered to Subscribers |
-| **OWNERSHIP_STRENGTH** | Meaningful only in exclusive mode. Each Publisher has an integer strength (default 0). The highest strength is the “owner.” |
-| **Mutability** | kind is **immutable** after enable; strength is **mutable** |
+<div class="req-container">
+  <div class="req-item">
+    <span class="req-label">Parameters</span>
+    <span class="req-value">shared, Exclusive</span>
+  </div>
+  <div class="req-item">
+    <span class="req-label">Defaults</span>
+    <span class="req-value">OMG standard: unlimited; implementations may impose defaults </span>
+  </div>
+
+  <div class="req-item">
+    <span class="req-label">Mutability</span>
+    <span class="req-value">Immutable after enable</span>
+  </div>
+</div>
 
 **Lifecycle**
 
