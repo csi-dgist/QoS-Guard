@@ -1,4 +1,4 @@
-# IMP Rules
+ # IMP Rules
 
 <style>
 /* 전체 리스트 컨테이너 */
@@ -177,7 +177,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      [DESTORD = BY_SOURCE] ∧ [HIST.kind = KEEP_LAST] ∧ [depth = 1]
+      [DESTORD = BY_SOURCE] ∧ [HIST.kind = KEEP_LAST] ∧ [HIST.depth = 1]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -192,7 +192,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      [DESTORD = BY_SOURCE] ∧ [KEEP_ALL] ∧ [mpi = 1]
+      [DESTORD = BY_SOURCE] ∧ [HIST.kind=KEEP_ALL] ∧ [RESLIM.mpi = 1]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
