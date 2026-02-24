@@ -133,7 +133,7 @@ These are implemented in **QoS Guard** for static verification.
 | 16 | OWNST → WDLIFE | $[autodispose = TRUE] \wedge [OWNST = EXCLUSIVE]$ | Functional | Sub | IMP |
 | 17 | HIST → LFSPAN | $[HIST.kind=KEEP\_LAST] \wedge [LFSPAN.duration > HIST.depth \times PP]$ | Operational | Pub, Sub | IMP |
 | 18 | RESLIM → LFSPAN | $[HIST.kind=KEEP\_ALL] \wedge [LFSPAN.duration > RESLIM.mpi \times PP]$ | Operational | Pub, Sub | IMP |
-| 19 | ENTFAC → DURABL | $[DURABL \neq VOLATILE] \wedge [autoenable = FALSE]$ | Operational | Pub, Sub | <span class="basis-tag">IMP</span> |
+| 19 | ENTFAC → DURABL | $[DURABL = VOLATILE] \wedge [autoenable = FALSE]$ | Operational | Pub, Sub | <span class="basis-tag">IMP</span> |
 | 20 | PART → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [PART.names \neq \emptyset]$ | Operational | Pub, Sub | IMP |
 
 <hr class="hr-grad-left">
