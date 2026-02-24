@@ -220,6 +220,8 @@
 
 ![Lifecycle of DDS Communication](./images/lifecycle.jpg)
 
+<img src="images/lifecycle.jpg" width="500">
+
 <div class="req-container">
     <div class="req-item" style="font-weight: bold; background-color: #f1f5f9;">
         <span class="req-label" style="flex: 2;">QoS Policy</span>
