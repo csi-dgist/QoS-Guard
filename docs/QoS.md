@@ -208,14 +208,14 @@
 </div>
 
 <figure style="text-align: center;">
-  <img src="images/lifecycle.jpg" width="1000px" alt="QoS Guard Overview">
+  <img src="./images/lifecycle.jpg" width="1000px" alt="Lifecycle of DDS Communication">
   <figcaption style="font-style: italic; color: #666; margin-top: 10px;">
-    QoS Guard Framework
+    Lifecycle of DDS Communication
   </figcaption>
 </figure>
 
 <div align="center">
-  <img src="images/lifecycle.jpg" width="500">
+  <img src="./images/lifecycle.jpg" width="500">
 </div>
 
 <div class="req-container">
