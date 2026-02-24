@@ -237,7 +237,7 @@
 </style>
 
 
-**Offline static verification of DDS QoS for ROS 2.** 
+**Offline static validation of DDS QoS for ROS 2.** 
 
 Find QoS mismatches and dependency violations before you run your nodes—no ROS 2 runtime required.
 
