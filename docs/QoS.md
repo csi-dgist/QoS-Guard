@@ -226,6 +226,14 @@
   <img src="images/lifecycle.jpg" width="500" alt="DDS Lifecycle">
 </div>
 
+<p align="center">
+  <img src="images/lifecycle.jpg" width="500" />
+</p>
+
+<p align="center">
+  ![Lifecycle](./images/lifecycle.jpg){width=500}
+</p>
+
 <div class="req-container">
     <div class="req-item" style="font-weight: bold; background-color: #f1f5f9;">
         <span class="req-label" style="flex: 2;">QoS Policy</span>
