@@ -80,7 +80,7 @@
     margin-top: 20px;
     font-family: 'Segoe UI', Roboto, sans-serif;
 }
-
+    
 .qos-card {
     background: #ffffff;
     border: 1px solid #e1e4e8;
@@ -94,8 +94,8 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.04);
 }
 
-.qos-card:hover {
-    border-color: #0366d6;
+.qos-card:hover { 
+    border-color: #4E5EB4;
     background-color: #f6f8fa;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -104,7 +104,7 @@
 .qos-num {
     font-family: 'Courier New', monospace;
     font-weight: bold;
-    color: #0366d6;
+    color: #4E5EB4;
     margin-right: 12px;
     font-size: 1.1em;
 }
