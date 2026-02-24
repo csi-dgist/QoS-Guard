@@ -322,7 +322,7 @@
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
+    <span class="req-value">Can be changed at runtime</span>
   </div>
 </div>
 
@@ -346,7 +346,7 @@ The ENTFAC QoS can be used to conserve resources and allow multiple robots to in
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
+    <span class="req-value">Can be changed at runtime</span>
   </div>
 </div>
 
@@ -366,7 +366,7 @@ The PART QoS can be used to separate identical data types into multiple logical 
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
+    <span class="req-value">Can be changed at runtime</span>
   </div>
 </div>
 
@@ -386,7 +386,7 @@ The USRDATA QoS can be used to flexibly deliver iden tity, authentication, and c
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
+    <span class="req-value">Can be changed at runtime</span>
   </div>
 </div>
 
@@ -406,7 +406,7 @@ The GRPDATA QoS can be used to logically segment data f lows in a manner similar
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
+    <span class="req-value">Can be changed at runtime</span>
   </div>
 </div>
 
@@ -505,7 +505,7 @@ The DEADLN QoS can be used for real-time monitoring of robot status. Each robot 
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can not be changed at runtime<br>changes affect only entities created after the update</span>
+    <span class="req-value">Can not be changed at runtime</span>
   </div>
 </div>
 
@@ -530,7 +530,7 @@ The LIVENS QoS can be used to verify whether the pub lishing process itself is s
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can not be changed at runtime<br>changes affect only entities created after the update</span>
+    <span class="req-value">Can not be changed at runtime</span>
   </div>
 </div>
 
@@ -562,7 +562,7 @@ The HIST QoS can be used to control how much robot data is retained. If a contro
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can not be changed at runtime<br>changes affect only entities created after the update</span>
+    <span class="req-value">Can not be changed at runtime</span>
   </div>
 </div>
 
@@ -582,7 +582,7 @@ The RESLIM QoS can be used to manage resources and maintain communication stabil
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
+    <span class="req-value">Can be changed at runtime</span>
   </div>
 </div>
 
@@ -602,7 +602,7 @@ The LFSPAN QoS can be used to prevent robots from retaining outdated samples unn
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can not be changed at runtime<br>changes affect only entities created after the update</span>
+    <span class="req-value">Can not be changed at runtime</span>
   </div>
 </div>
 
@@ -626,7 +626,7 @@ The OWNSTandOWNERSHIP STRENGTHQoSpolicies can be used to manage shared resources
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can not be changed at runtime<br>changes affect only entities created after the update</span>
+    <span class="req-value">Can not be changed at runtime</span>
   </div>
 </div>
 
@@ -650,7 +650,7 @@ The DESTORD QoS policy can be used to maintain data consistency when multiple ro
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
+    <span class="req-value">Can be changed at runtime</span>
   </div>
 </div>
 
@@ -679,7 +679,7 @@ The WDLIFE QoS can be used to explicitly manage the lifecycle of object-based ta
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
-    <span class="req-value">Can be changed at runtime<br>changes affect only entities created after the update</span>
+    <span class="req-value">Can be changed at runtime</span>
   </div>
 </div>
 
