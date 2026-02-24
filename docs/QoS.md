@@ -214,6 +214,13 @@
 </div>
 
 
+<div align="center" style="zoom: 0.5;">
+
+![Lifecycle of DDS Communication](./images/lifecycle.jpg)
+
+</div>
+
+
 <div class="req-container">
     <div class="req-item" style="font-weight: bold; background-color: #f1f5f9;">
         <span class="req-label" style="flex: 2;">QoS Policy</span>
