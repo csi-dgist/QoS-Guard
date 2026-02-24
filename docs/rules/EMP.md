@@ -82,7 +82,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      [RELIABLE] ∧ [KEEP_LAST] ∧ [depth < ⌈ RTT/PP ⌉ + 2]
+      [RELIABLE] ∧ [HIST.kind = KEEP_LAST] ∧ [HIST.depth < ⌈ 2 × RTT/PP ⌉ + 1]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub</div>
@@ -97,7 +97,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      [RELIABLE] ∧ [KEEP_ALL] ∧ [mpi < ⌈ RTT/PP ⌉ + 1]
+      [RELIABLE] ∧ [HIST.kind = KEEP_ALL] ∧ [RESLIM.mpi < ⌈ 2 × RTT/PP ⌉ + 1]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub</div>
@@ -112,7 +112,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      [RELIABLE] ∧ [LFSPAN.duration < RTT × 2]
+      [RELIABLE] ∧ [LFSPAN.duration < PP + 2 × RTT]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub</div>
@@ -157,7 +157,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      [DURABL ≥ TRAN_LOCAL] ∧ [KEEP_ALL] ∧ [mpi ≥ default]
+      [DURABL ≥ TRAN_LOCAL] ∧ [HIST.kind = KEEP_ALL] ∧ [RESLIM.mpi ≥ default]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub</div>
@@ -172,7 +172,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      [OWNST = EXCLUSIVE] ∧ [DEADLN.period < 2 × PP]
+      [OWNST = EXCLUSIVE] ∧ [DEADLN.period < PP + 2 × RTT]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
@@ -187,7 +187,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
       <span style="font-size: 0.8em; color: #999;">Operational</span>
     </div>
     <div class="std-condition">
-      [OWNST = EXCLUSIVE] ∧ [lease < 2 × PP]
+      [OWNST = EXCLUSIVE] ∧ [LIVENS.lease < PP + 2 × RTT]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Sub</div>
