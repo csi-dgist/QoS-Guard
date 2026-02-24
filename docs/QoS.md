@@ -313,7 +313,7 @@
 
 ## 1. ENTITY FACTORY (ENTFAC)
 
-> Controls whether newly createdDDS entities automatically start participating in discovery
+> **Controls whether newly createdDDS entities automatically start participating in discovery**
 
 <div class="req-container">
   <div class="req-item">
@@ -326,38 +326,14 @@
   </div>
 </div>
 
-<dl>
-<dt><b>TRUE</b></dt>
-<dd>Newly created child entities are immediately enabled and begin participating in discovery.</dd>
+### Mode
+* **TRUE**: Newly created child entities are immediately enabled and begin participating in discovery.
+* **FALSE**: The application must explicitly call enable() before the entity can participate in discovery.
 
-<dt><b>FALSE</b></dt>
-<dd>The application must explicitly call enable() before the entity can participate in discovery.</dd>
-</dl>
-
-**Example:** The ENTFAC QoS can be used to conserve resources and allow multiple robots to initiate discovery simultaneously under synchronized conditions. For instance, the Publishers and Subscribers of a navigation module may be activated only after completing local sensor calibration or localization. By setting autoenable created entities=false, the system delays communication until the robot is ready by explicitly calling enable() at the appropriate time
+### Example
+The ENTFAC QoS can be used to conserve resources and allow multiple robots to initiate discovery simultaneously under synchronized conditions. For instance, the Publishers and Subscribers of a navigation module may be activated only after completing local sensor calibration or localization. By setting autoenable created entities=false, the system delays communication until the robot is ready by explicitly calling enable() at the appropriate time
 
 <hr class="hr-dashed">
-
-## 1. ENTITY FACTORY (ENTFAC)
-
-> **"새로 생성된 DDS 개체가 자동으로 Discovery에 참여할지 제어합니다."**
-
-| 속성 (Attribute) | 세부 사항 (Details) |
-| :--- | :--- |
-| **Parameter** | `autoenable_created_entities` (boolean, default: **TRUE**) |
-| **Mutability** | ✅ Runtime 변경 가능 (이후 생성된 개체부터 적용) |
-| **Scope** | DomainParticipant, Factory Entities |
-
----
-
-### ⚙️ Behavior Mode
-* **TRUE**: 생성 즉시 활성화되어 Discovery 프로세스를 시작합니다.
-* **FALSE**: 응용 프로그램에서 `enable()`을 수동으로 호출하기 전까지 대기합니다.
-
-### 💡 Use Case
-내비게이션 모듈처럼 센서 캘리브레이션이 완료된 **특정 시점**에만 통신을 시작해야 할 때 유용합니다. 모든 로봇이 준비되었을 때 일제히 통신을 시작하게 하여 초기 네트워크 부하를 조절할 수 있습니다.
-
----
 
 ## 2. PARTITION (PART)
 
