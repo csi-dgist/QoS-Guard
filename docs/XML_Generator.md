@@ -14,6 +14,11 @@ A tool for automatically generating XML files for DDS QoS test cases. It produce
 
 ---
 
+## Download
+[Download XML Generator Package (ZIP)](./downloads/XML_Generator_Tool.zip)
+
+---
+
 ## Parameter List
 
 ### Overview
