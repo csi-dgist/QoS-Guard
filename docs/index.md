@@ -1,7 +1,7 @@
 <h1 align="center">QoS Guard: ROS 2 QoS Static Validator</h1>
 
 <p align="center">
-  <strong>Dependency Chain Analysis of ROS 2 DDS QoS Policies: From Lifecycle Tutorial to Static Validation</strong>
+  <strong>Dependency Chain Analysis of ROS 2 DDS QoS Policies: <br>From Lifecycle Tutorial to Static Validation</strong>
 </p>
 
 <p align="center">
