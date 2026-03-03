@@ -1,0 +1,1597 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ROS 2 QoS Dependency Conflict Detector">
+      
+      
+      
+        <link rel="canonical" href="https://csi-dgist.github.io/QoS-Guard/rules/EMP/">
+      
+      
+        <link rel="prev" href="../IMP/">
+      
+      
+        <link rel="next" href="../../XML_Generator/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>EMP Rules - QoS Guard</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#emp-rules" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="QoS Guard" class="md-header__button md-logo" aria-label="QoS Guard" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            QoS Guard
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              EMP Rules
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/csi-dgist/QoS-Guard" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../QoS_Guard/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  How to use
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../QoS/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QoS Encyclopedia
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  QoS Rules
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../XML_Generator/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  XML Generator
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="QoS Guard" class="md-nav__button md-logo" aria-label="QoS Guard" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    QoS Guard
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/csi-dgist/QoS-Guard" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../QoS_Guard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to use
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../QoS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS Encyclopedia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QoS Rules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    QoS Rules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../STD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STD Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IMP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IMP Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EMP Rules
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EMP Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stage-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experimental-evidence-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experimental Evidence Details
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Experimental Evidence Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rule-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 6
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 31
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 32
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 33
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 35
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 36
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 37
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 38
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 39
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../XML_Generator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    XML Generator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stage-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experimental-evidence-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experimental Evidence Details
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Experimental Evidence Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rule-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 6
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 31
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 32
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 33
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 35
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 36
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 37
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 38
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule 39
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="emp-rules">EMP Rules</h1>
+<style>
+.md-typeset table td:first-child {
+  text-align: center;
+  padding: 8px !important; 
+}
+
+.md-typeset table td:first-child a {
+  display: inline-block; 
+  width: 24px;         
+  height: 24px;        
+  line-height: 24px;    
+
+  border-radius: 50%;   
+  background-color: #f0f0f0; 
+  color: #000 !important;
+  text-decoration: none !important;
+  font-weight: bold;
+  font-size: 13px;      
+  transition: 0.2s;
+}
+
+.md-typeset table tr:hover td:first-child a {
+  background-color: #4e37e6 !important; 
+  color: #fff !important; 
+  transform: scale(1.1);
+}
+
+/* std-list card style (same as IMP) */
+.std-list { display: flex; flex-direction: column; gap: 16px; margin: 24px 0; }
+.std-item { border: 1px solid #e1e4e8; border-radius: 10px; background: #ffffff; padding: 16px 20px; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); position: relative; text-decoration: none !important; color: inherit !important; }
+.std-item:hover { box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-color: #4e37e6; transform: translateY(-2px); }
+.std-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.std-no { background: #f0f0f0; color: #444; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 800; font-size: 13px; transition: 0.3s; }
+.std-item:hover .std-no { background: #4e37e6; color: #fff; }
+.std-id { font-weight: 700; font-size: 1.05em; color: #2c3e50; flex-grow: 1; margin-left: 12px; }
+.std-condition { background: #f8f9fa; padding: 14px; border-radius: 6px; font-family: 'Consolas', 'Monaco', monospace; border-left: 4px solid #4e37e6; margin: 8px 0; font-size: 0.95em; color: #000000; line-height: 1.5; }
+.std-footer { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; font-size: 0.82em; }
+.std-tag { display: flex; align-items: center; background: #f1f3f5; padding: 2px 8px; border-radius: 4px; color: #666; }
+.std-tag b { color: #4e37e6; margin-right: 5px; font-weight: 600; }
+</style>
+
+<p>This page describes the QoS dependency rules derived from <strong>Empirical analysis and experimental results</strong>. These rules focus on runtime performance, network conditions (e.g., RTT), and timing-critical dependencies that were validated through systematic testing.</p>
+<hr class="hr-grad-left">
+
+<h2 id="stage-1">Stage 1</h2>
+<p><em>Intra-entity Dependency Validation</em></p>
+<div class="std-list">
+
+  <a href="#rule-6" class="std-item">
+    <div class="std-header">
+      <span class="std-no">6</span>
+      <span class="std-id">LFSPAN → DURABL</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [DURABL ≥ TRAN_LOCAL] ∧ [LFSPAN.duration > 0]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+</div>
+
+<hr class="hr-grad-left">
+
+<h2 id="stage-3">Stage 3</h2>
+<p><em>Timing-based Dependency Validation</em></p>
+<div class="std-list">
+
+  <a href="#rule-31" class="std-item">
+    <div class="std-header">
+      <span class="std-no">31</span>
+      <span class="std-id">HIST → RELIAB</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [RELIABLE] ∧ [HIST.kind = KEEP_LAST] ∧ [HIST.depth < ⌈ 2 × RTT/PP ⌉ + 1]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-32" class="std-item">
+    <div class="std-header">
+      <span class="std-no">32</span>
+      <span class="std-id">RESLIM → RELIAB</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [RELIABLE] ∧ [HIST.kind = KEEP_ALL] ∧ [RESLIM.mpi < ⌈ 2 × RTT/PP ⌉ + 1]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-33" class="std-item">
+    <div class="std-header">
+      <span class="std-no">33</span>
+      <span class="std-id">LFSPAN → RELIAB</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [RELIABLE] ∧ [LFSPAN.duration < PP + 2 × RTT]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-35" class="std-item">
+    <div class="std-header">
+      <span class="std-no">35</span>
+      <span class="std-id">RELIAB → DEADLN</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [DEADLN.period > 0] ∧ [RELIAB = BEST_EFFORT]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-36" class="std-item">
+    <div class="std-header">
+      <span class="std-no">36</span>
+      <span class="std-id">LIVENS → DEADLN</span>
+      <span style="font-size: 0.8em; color: #999;">Functional</span>
+    </div>
+    <div class="std-condition">
+      [DEADLN.period > 0] ∧ [LIVENS.lease < DEADLN.period]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-37" class="std-item">
+    <div class="std-header">
+      <span class="std-no">37</span>
+      <span class="std-id">HIST → DURABL</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      [DURABL ≥ TRAN_LOCAL] ∧ [HIST.kind = KEEP_ALL] ∧ [RESLIM.mpi ≥ default]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-38" class="std-item">
+    <div class="std-header">
+      <span class="std-no">38</span>
+      <span class="std-id">DEADLN → OWNST</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      [OWNST = EXCLUSIVE] ∧ [DEADLN.period < PP + 2 × RTT]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+  <a href="#rule-39" class="std-item">
+    <div class="std-header">
+      <span class="std-no">39</span>
+      <span class="std-id">LIVENS → OWNST</span>
+      <span style="font-size: 0.8em; color: #999;">Operational</span>
+    </div>
+    <div class="std-condition">
+      [OWNST = EXCLUSIVE] ∧ [LIVENS.lease < PP + 2 × RTT]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Basis</b> EMP</div>
+    </div>
+  </a>
+
+</div>
+
+<hr class="hr-grad-left">
+
+<div class="admonition info">
+<p class="admonition-title">Notation Summary</p>
+<ul>
+<li><strong>mpi</strong>: <code>max_samples_per_instance</code> </li>
+<li><strong>PP</strong>: <code>Publish Period</code> </li>
+<li><strong>RTT</strong>: <code>Round Trip Time</code></li>
+</ul>
+</div>
+<hr class="hr-double">
+
+<h2 id="experimental-evidence-details">Experimental Evidence Details</h2>
+<p><span id="rule-6"></span></p>
+<h3 id="rule-6">Rule 6</h3>
+<p><em>Validates why Durability (Transient Local) requires a non-zero Lifespan to provide late-joining data.</em></p>
+<p><strong>1. Experimental Setup</strong></p>
+<ul>
+<li><strong>Publisher:</strong> Durability = <code>TRANSIENT_LOCAL</code>, Lifespan = <code>50ms</code></li>
+<li><strong>Subscriber 1 (Existing):</strong> Launched before Publisher.</li>
+<li><strong>Subscriber 2 (Late-joiner):</strong> Launched after Publisher finishes sending 1,000 samples.</li>
+<li><strong>Total Samples Sent:</strong> 1,000</li>
+</ul>
+<p><strong>2. Test Scenario</strong></p>
+<ol>
+<li>Launch <strong>Subscriber 1</strong> to monitor live data.</li>
+<li>Launch <strong>Publisher</strong> and transmit 1,000 samples (Total time taken &gt; 50ms).</li>
+<li>Confirm <strong>Subscriber 1</strong> received all 1,000 samples.</li>
+<li>Launch <strong>Subscriber 2</strong> (Late-joiner) to retrieve historical data from the Publisher's buffer.</li>
+</ol>
+<p><strong>3. Experimental Observation</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Entity</th>
+<th style="text-align: center;">Expected Received</th>
+<th style="text-align: center;">Actual Received</th>
+<th style="text-align: center;">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><font size="4">Subscriber 1 (Live)</font></td>
+<td style="text-align: center;"><font size="4">1,000</font></td>
+<td style="text-align: center;"><font size="4">1,000</font></td>
+<td style="text-align: center;"><font size="4">✅ Success</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font size="4">Subscriber 2 (Late)</font></td>
+<td style="text-align: center;"><font size="4">1,000</font></td>
+<td style="text-align: center;"><font size="4"><strong>0</strong></font></td>
+<td style="text-align: center;"><font size="4">❌ Data Expired</font></td>
+</tr>
+</tbody>
+</table>
+<p><strong>4. Empirical Conclusion</strong></p>
+<p>Even though <code>TRANSIENT_LOCAL</code> is set to store data for late-joiners, the <strong>Lifespan (50ms)</strong> caused all buffered samples to be purged from the Publisher's queue before Subscriber 2 could connect.</p>
+<hr class="hr-dashed">
+
+<p><span id="rule-31"></span></p>
+<h3 id="rule-31">Rule 31</h3>
+<p><em>Justifies the minimum History Depth required to prevent data loss in Reliable communication under network delay and loss.</em></p>
+<p><strong>1. Experimental Setup</strong></p>
+<ul>
+<li><strong>QoS Profile:</strong> Reliability = <code>RELIABLE</code>, History Kind = <code>KEEP_LAST</code></li>
+<li><strong>Network Condition (Loss):</strong> 5% Packet Loss (Simulated via <code>tc</code>)</li>
+<li><strong>Network Condition (Delay):</strong> 100ms to 500ms RTT (Round Trip Time)</li>
+<li><strong>Publication Period (PP):</strong> 100ms (10Hz)</li>
+<li><strong>Variable:</strong> History Depth (<span class="arithmatex">\(1 \sim N\)</span>)</li>
+</ul>
+<p><strong>2. Test Scenario</strong></p>
+<ol>
+<li>Set the network packet loss to 5% and RTT to a range of 100ms to 500ms.</li>
+<li>Transmit 1,000 samples from Publisher to Subscriber.</li>
+<li>Decrease the History Depth incrementally for each test run.</li>
+</ol>
+<p><strong>3. Experimental Observation</strong></p>
+<div align="center">
+  <img src="../../images/rule31.png" width="500">
+</div>
+
+<p><strong>4. Empirical Conclusion</strong></p>
+<p>In a lossy network (5% loss), a Reliable connection requires retransmission of lost packets. If the <strong>History Depth</strong> is smaller than the number of samples sent during one <strong>RTT</strong>, the buffer is overwritten before a retransmission can be requested. </p>
+<hr class="hr-dashed">
+
+<p><span id="rule-32"></span></p>
+<h3 id="rule-32">Rule 32</h3>
+<p><em>Justifies the minimum Resource Limits (max_samples_per_instance) required to sustain reliable transmission under network delay.</em></p>
+<p><strong>1. Experimental Setup</strong></p>
+<ul>
+<li><strong>QoS Profile:</strong> Reliability = <code>RELIABLE</code>, History Kind = <code>KEEP_ALL</code></li>
+<li><strong>Resource Limits:</strong> <code>max_samples_per_instance</code> (Variable: <span class="arithmatex">\(1 \sim N\)</span>)</li>
+<li><strong>Network Condition:</strong> packet loss 5%</li>
+<li><strong>Network Latency (RTT):</strong> 100ms, 200ms, 300ms, 400ms (Simulated via <code>tc</code>)</li>
+<li><strong>Publication Period (PP):</strong> 100ms (10Hz)</li>
+</ul>
+<p><strong>2. Test Scenario</strong></p>
+<ol>
+<li>Connect two notebooks and verify the baseline RTT.</li>
+<li>Set the Publisher's History to <code>KEEP_ALL</code> to ensure all samples are subject to Resource Limits.</li>
+<li>Vary the RTT from 100ms to 400ms using network emulation tools.</li>
+<li>Decrease <code>max_samples_per_instance</code> until sample rejected or lost events occur.</li>
+<li>Record the minimum <code>mpi</code> value that ensures 100% successful delivery.</li>
+</ol>
+<p><strong>3. Experimental Observation</strong></p>
+<div align="center">
+  <img src="../../images/rule32.png" width="500">
+</div>
+
+<p><strong>4. Empirical Conclusion</strong></p>
+<p>When using <code>KEEP_ALL</code>, the <code>max_samples_per_instance</code> (mpi) acts as the effective buffer size for the reliability protocol. If mpi is insufficient to hold all samples sent during one <strong>RTT</strong> (plus the time for ACK/NACK processing), the Publisher will either block or drop samples.</p>
+<hr class="hr-dashed">
+
+<p><span id="rule-33"></span></p>
+<h3 id="rule-33">Rule 33</h3>
+<p><em>Justifies the minimum Lifespan duration required to ensure sample reception before expiration in reliable communication.</em></p>
+<p><strong>1. Experimental Setup</strong></p>
+<ul>
+<li><strong>QoS Profile:</strong> Reliability = <code>RELIABLE</code>, Lifespan = <code>Variable</code></li>
+<li><strong>Publication Period (PP):</strong> 10ms to 100ms</li>
+<li><strong>Lifespan Duration:</strong> 100ms to 1000ms</li>
+<li><strong>Total Samples:</strong> 10,000</li>
+</ul>
+<p><strong>2. Test Scenario</strong></p>
+<ol>
+<li>Fix the total number of samples to be sent at 10,000.</li>
+<li>Perform a grid search by varying the <strong>Publish Period (PP)</strong> from 10ms to 100ms and <strong>Lifespan duration</strong> from 100ms to 1000ms.</li>
+<li>Measure the total number of samples successfully received at the Subscriber.</li>
+<li>Identify the threshold where sample reception starts to drop despite using <code>RELIABLE</code> QoS.</li>
+</ol>
+<p><strong>3. Experimental Observation</strong></p>
+<div align="center">
+  <img src="../../images/rule33.png" width="500">
+</div>
+
+<ul>
+<li><strong>High Reception Zone (Blue):</strong> When Lifespan is sufficiently longer than RTT and PP, nearly all 10,000 samples are received.</li>
+<li><strong>Low Reception Zone (White/Gray):</strong> When Lifespan duration is close to or shorter than the round-trip retransmission time, samples expire before they can be successfully delivered or processed.</li>
+</ul>
+<p><strong>4. Empirical Conclusion</strong></p>
+<p>Even with <code>RELIABLE</code> settings, data loss occurs if the <strong>Lifespan duration</strong> is shorter than the time required for successful transmission and acknowledgement. </p>
+<hr class="hr-dashed">
+
+<p><span id="rule-35"></span></p>
+<h3 id="rule-35">Rule 35</h3>
+<p><em>Justifies how Reliability settings impact Deadline compliance under packet loss conditions.</em></p>
+<p><strong>1. Experimental Setup</strong></p>
+<ul>
+<li><strong>QoS Profile:</strong> Deadline Period = <code>150ms</code>, Reliability = <code>RELIABLE</code> vs <code>BEST_EFFORT</code></li>
+<li><strong>Network Condition (Loss):</strong> 5% Packet Loss (Simulated via <code>tc</code>)</li>
+<li><strong>Publication Period (PP):</strong> 100ms</li>
+<li><strong>Total Samples:</strong> 1,000</li>
+</ul>
+<p><strong>2. Test Scenario</strong></p>
+<ol>
+<li>Set the Publisher and Subscriber with a Deadline period of 150ms.</li>
+<li>Introduce 5% packet loss to the network interface.</li>
+<li>Case A: Configure both entities with <code>RELIABLE</code> Reliability.</li>
+<li>Case B: Configure both entities with <code>BEST_EFFORT</code> Reliability.</li>
+<li>Publish 1,000 samples and monitor the <code>on_requested_deadline_missed</code> callback at the Subscriber.</li>
+</ol>
+<p><strong>3. Experimental Observation</strong></p>
+<div align="center">
+  <img src="../../images/rule35.png" width="500">
+</div>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Reliability</th>
+<th style="text-align: center;">Total Samples</th>
+<th style="text-align: center;">Received Samples</th>
+<th style="text-align: center;">Deadline Missed Count</th>
+<th style="text-align: left;">Cause of Violation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>RELIABLE</strong></td>
+<td style="text-align: center;">1,000</td>
+<td style="text-align: center;">1,000</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: left;">Delay caused by Retransmission</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BEST_EFFORT</strong></td>
+<td style="text-align: center;">1,000</td>
+<td style="text-align: center;">~950</td>
+<td style="text-align: center;">48</td>
+<td style="text-align: left;">Gap caused by Packet Loss</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4. Empirical Conclusion</strong></p>
+<p>The experimental results highlight two different causes of Deadline violations:
+1. In <strong>RELIABLE</strong> mode, all 1,000 samples were received, but 25 samples violated the Deadline because the time taken for NACK-based retransmission exceeded the 150ms window.
+2. In <strong>BEST_EFFORT</strong> mode, violations nearly doubled (48 times) because lost packets created permanent gaps in the data stream, directly triggering the Deadline timer.</p>
+<hr class="hr-dashed">
+
+<p><span id="rule-36"></span></p>
+<h3 id="rule-36">Rule 36</h3>
+<p><em>Justifies the consistency requirement between Liveliness Lease Duration and Deadline Period to avoid redundant or conflicting fault detections.</em></p>
+<p><strong>1. Experimental Setup</strong></p>
+<ul>
+<li><strong>Publication Period (PP):</strong> 100ms</li>
+<li><strong>Deadline Period:</strong> 200ms</li>
+<li><strong>Total Samples:</strong> 600 (Total duration: 60s)</li>
+<li><strong>Liveliness Lease Duration</strong>: Variable</li>
+</ul>
+<p><strong>2. Test Scenario</strong></p>
+<p>The network condition is controlled over 60 seconds using the <code>tc</code> command:</p>
+<ol>
+<li><strong>0s ~ 20s (Loss 0%):</strong> Normal communication.</li>
+<li><strong>20s ~ 40s (Loss 10%):</strong> Induce occasional <strong>Deadline Missed</strong> due to retransmission delays.</li>
+<li><strong>40s ~ 45s (Loss 100%):</strong> Induce <strong>Liveliness Lost</strong> by blocking all packets.</li>
+<li><strong>45s ~ 60s (Loss 0%):</strong> Restore communication and observe recovery.</li>
+</ol>
+<p><strong>3. Experimental Observation &amp; Empirical Conclusion</strong></p>
+<p><strong>[ISSUE]</strong> Liveliness Lost is triggered prematurely (approx. 60~80ms). Even though the Publisher is already marked as 'Offline', <strong>Deadline Missed alarms continue to trigger late at the 200ms mark.</strong></p>
+<p><strong>[Conclusion]</strong>
+The experiment demonstrates that when <code>Lease Duration &lt; Deadline</code>, the system falls into a contradictory state: it continues to fire "Data Missing" alarms (Deadline Missed) for a Publisher that it has already declared "Dead" (Liveliness Lost). </p>
+<p>To prevent this <strong>state inconsistency</strong> and ensure a logical fault-detection sequence (where the data stream is monitored within the lifespan of the entity), the Liveliness Lease Duration must always be longer than the Deadline Period:
+<span class="arithmatex">\(LIVENS.lease ≥ DEADLN.period\)</span></p>
+<hr class="hr-dashed">
+
+<p><span id="rule-37"></span></p>
+<h3 id="rule-37">Rule 37</h3>
+<p><em>Justifies the impact of Resource Limits on the recovery latency for late-joining subscribers in durable communication.</em></p>
+<p><strong>1. Experimental Setup</strong></p>
+<ul>
+<li><strong>QoS Profile:</strong> Durability = <code>TRANSIENT_LOCAL</code>, History = <code>KEEP_ALL</code></li>
+<li><strong>Variable:</strong> <code>max_samples_per_instance</code> (mpi) ranging from 1,000 to 5,000</li>
+<li><strong>Data Volume:</strong> Sample count up to 1,600</li>
+<li><strong>Metric:</strong> Latency (ms) required for the system to reach steady-state convergence</li>
+</ul>
+<p><strong>2. Test Scenario</strong></p>
+<ol>
+<li>Initialize a Publisher that sends samples continuously with <code>TRANSIENT_LOCAL</code> durability.</li>
+<li>After a specific number of samples are published, introduce a Late-Joining Subscriber.</li>
+<li>Vary the <strong>max_samples_per_instance</strong> setting on the Subscriber side.</li>
+<li>Measure the latency between the sample generation time and the time it is actually processed by the late-joiner.</li>
+<li>Observe how long the "catch-up" phase lasts before latency returns to normal levels.</li>
+</ol>
+<p><strong>3. Experimental Observation</strong></p>
+<div align="center">
+  <img src="../../images/rule37.png" width="500">
+</div>
+
+<ul>
+<li><strong>Low mpi Zone:</strong> Recovery is relatively fast</li>
+<li><strong>High mpi Zone:</strong> As <code>max_samples_per_instance</code> increases towards 5,000, the recovery latency increases exponentially (reaching up to 50,000ms). The system takes significantly longer to converge to a steady state.</li>
+</ul>
+<p><strong>4. Empirical Conclusion</strong></p>
+<p>The experiment proves that setting an excessively high <code>max_samples_per_instance</code> for the sake of data completeness leads to a <strong>"Recovery Latency Storm."</strong> For a late-joining node, processing thousands of buffered historical samples simultaneously saturates the available bandwidth and CPU, causing current data to be delayed by tens of seconds.</p>
+<p>To balance data durability with system responsiveness, the resource limits must be tuned based on the expected maximum network downtime and the acceptable recovery window:
+<span class="arithmatex">\([DURABL ≥ TRAN_LOCAL] ∧ [KEEP_ALL] ⇒ mpi ≥ default\)</span>
+<em>(Note: <span class="arithmatex">\(default\)</span> should be calculated based on the maximum tolerable recovery time.)</em></p>
+<hr class="hr-dashed">
+
+<p><span id="rule-38"></span></p>
+<h3 id="rule-38">Rule 38</h3>
+<p><em>Justifies the minimum Deadline period required to maintain stable Ownership in exclusive communication under network instability.</em></p>
+<p><strong>1. Experimental Setup</strong></p>
+<ul>
+<li><strong>QoS Profile:</strong> Ownership = <code>EXCLUSIVE</code>, Reliability = <code>RELIABLE</code></li>
+<li><strong>Variable:</strong> Deadline Period (<code>100ms</code> vs <code>500ms</code>)</li>
+<li><strong>Network Condition:</strong> 5% Packet Loss (Simulated via <code>tc</code>)</li>
+<li><strong>Publication Period (PP):</strong> 100ms</li>
+<li><strong>Total Samples:</strong> 400</li>
+</ul>
+<p><strong>2. Test Scenario</strong></p>
+<ol>
+<li>Configure two Publishers with different strengths for <code>EXCLUSIVE</code> ownership.</li>
+<li>Set both Publishers and the Subscriber to <code>RELIABLE</code> reliability to ensure eventual delivery.</li>
+<li>Introduce a constant 5% packet loss using the <code>tc</code> command.</li>
+<li><strong>Case A:</strong> Set the Deadline period to <code>100ms</code> (equal to the PP).</li>
+<li><strong>Case B:</strong> Set the Deadline period to <code>500ms</code> (<span class="arithmatex">\(5 × PP\)</span>).</li>
+<li>Monitor the <code>on_requested_deadline_missed</code> callback and track how often the active owner is switched due to deadline timeouts.</li>
+</ol>
+<p><strong>3. Experimental Observation</strong></p>
+<div align="center">
+  <img src="../../images/rule38.png" width="500">
+</div>
+
+<ul>
+<li><strong>Case A (Deadline = 100ms - Orange):</strong> Numerous spikes are observed throughout the experiment. Any minor retransmission delay caused by the 5% loss immediately triggers a deadline miss, leading to unstable ownership.</li>
+<li><strong>Case B (Deadline = 500ms - Blue):</strong> Significantly fewer and more sparse spikes appear. The larger window provides sufficient time for the <code>RELIABLE</code> protocol to recover lost packets through NACK/retransmission before the 500ms timer expires, maintaining a more consistent owner state.</li>
+</ul>
+<p><strong>4. Empirical Conclusion</strong></p>
+<p>The experiment clearly demonstrates that <strong>Ownership Stability</strong> is highly dependent on the <strong>Deadline</strong> period in lossy networks. A tight deadline (Case A) causes "Ownership Churning," where control is frequently and unnecessarily handed over due to transient network jitters. </p>
+<p>By extending the Deadline (Case B), the system becomes more resilient to packet loss, ensuring that the primary owner remains active as long as retransmissions are successful within the extended margin. To ensure stable control in exclusive ownership, the Deadline should be at least twice the Publication Period:
+<span class="arithmatex">\([OWNST = EXCLUSIVE] ⇒ DEADLN.period ≥ 2 × PP\)</span></p>
+<hr class="hr-dashed">
+
+<p><span id="rule-39"></span></p>
+<h3 id="rule-39">Rule 39</h3>
+<p><em>Justifies the impact of Liveliness Lease Duration on Ownership stability by preventing premature entity failure detection.</em></p>
+<p><strong>1. Experimental Setup</strong></p>
+<ul>
+<li><strong>QoS Profile:</strong> Ownership = <code>EXCLUSIVE</code>, Liveliness = <code>AUTOMATIC</code></li>
+<li><strong>Variable (Lease Duration):</strong> 50ms, 100ms, 300ms, 500ms, 800ms</li>
+<li><strong>Network Condition:</strong> 80% Packet Loss (Simulated via <code>tc</code>)</li>
+<li><strong>Publication Period (PP):</strong> 100ms</li>
+<li><strong>Metric:</strong> Total count of Liveliness Lost events</li>
+</ul>
+<p><strong>2. Test Scenario</strong></p>
+<ol>
+<li>Initialize two Publishers with different strengths for <code>EXCLUSIVE</code> ownership.</li>
+<li>Apply a harsh network environment with <strong>80% packet loss</strong> using the <code>tc</code> command.</li>
+<li>Publish a total of <strong>10,000 samples</strong> to observe long-term stability.</li>
+<li>Vary the <strong>Liveliness Lease Duration</strong> from 50ms to 800ms.</li>
+<li>Record the frequency of ownership handovers triggered by <code>on_liveliness_changed</code> at the Subscriber side.</li>
+</ol>
+<p><strong>3. Experimental Observation</strong></p>
+<div align="center">
+  <img src="../../images/rule39.png" width="500">
+</div>
+
+<ul>
+<li><strong>Short Lease Duration (50ms - 100ms):</strong> A high frequency of Liveliness Lost events is observed (up to 26 times). Since the lease duration is shorter than or equal to the Publication Period (100ms), even a single delayed heartbeat triggers a failure detection.</li>
+<li><strong>Long Lease Duration (300ms - 800ms):</strong> The event count drops significantly as the lease duration increases. At 800ms, only 10 events occur, indicating that the system can tolerate multiple lost or delayed heartbeats without dropping the ownership.</li>
+</ul>
+<p><strong>4. Empirical Conclusion</strong></p>
+<p>The experiment highlights the risk of <strong>"False Positive Failures."</strong> When the Liveliness Lease Duration is too aggressive (close to the <span class="arithmatex">\(PP\)</span>), transient network issues cause the Subscriber to frequently revoke ownership from the primary Publisher. This leads to unstable system control and unnecessary handovers.</p>
+<p>To maintain a stable Ownership state, the Liveliness Lease Duration must be set with enough margin to accommodate at least two consecutive heartbeat losses or retransmission delays:
+<span class="arithmatex">\([OWNST = EXCLUSIVE] ⇒ lease_duration ≥ 2 × PP\)</span></p>
+<hr class="hr-double">
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy", "navigation.expand"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
