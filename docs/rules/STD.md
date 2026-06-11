@@ -139,7 +139,7 @@ This page describes the QoS dependency and consistency rules derived from the **
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b>
+      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
       "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
     </div>
   </a>
@@ -158,7 +158,8 @@ This page describes the QoS dependency and consistency rules derived from the **
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
+      "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
     </div>
   </a>
 
@@ -185,7 +186,8 @@ This page describes the QoS dependency and consistency rules derived from the **
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
+      "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
     </div>
   </a>
 
@@ -203,7 +205,8 @@ This page describes the QoS dependency and consistency rules derived from the **
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
+      "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
     </div>
   </a>
 
@@ -221,7 +224,8 @@ This page describes the QoS dependency and consistency rules derived from the **
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
+      "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
     </div>
   </a>
 
@@ -239,7 +243,8 @@ This page describes the QoS dependency and consistency rules derived from the **
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
+      "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
     </div>
   </a>
 
@@ -257,7 +262,8 @@ This page describes the QoS dependency and consistency rules derived from the **
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
+      "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
     </div>
   </a>
 
@@ -275,7 +281,8 @@ This page describes the QoS dependency and consistency rules derived from the **
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
+      "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
     </div>
   </a>
 
@@ -293,7 +300,8 @@ This page describes the QoS dependency and consistency rules derived from the **
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
+      "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
     </div>
   </a>
 
