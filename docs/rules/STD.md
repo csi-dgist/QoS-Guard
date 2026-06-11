@@ -1,5 +1,4 @@
 # STD Rules
-
 <style>
 /* 전체 리스트 컨테이너 */
 .std-list {
@@ -8,73 +7,23 @@
   gap: 16px;
   margin: 24px 0;
 }
-
-/* 🔥 [배경색 & 연필 아이콘 완전 박살] 모든 상태에서 무조건 순수 흰색 고정 및 가상 요소 차단 */
-.markdown-body .std-list details.std-item,
-.markdown-body details.std-item,
+/* 개별 규칙 카드 */
 .std-item {
-  border: 1px solid #e1e4e8 !important;
-  border-radius: 10px !important;
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-  padding: 16px 20px !important;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  border: 1px solid #e1e4e8;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 16px 20px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
   text-decoration: none !important;
   color: inherit !important;
-  display: block !important;
-  cursor: pointer;
-  outline: none !important;
-  box-shadow: none !important;
-  -webkit-tap-highlight-color: transparent;
 }
-
-/* 브라우저 기본 화살표(▶) 및 테마가 강제로 넣은 모든 가상 아이콘(연필 모양 등) 완전히 제거 */
-.markdown-body .std-list details.std-item summary {
-  display: block !important;
-  list-style: none !important;
-  outline: none !important;
-  background: transparent !important;
-  background-color: transparent !important;
+/* 호버 효과: 그림자와 보라색 포인트 (사용자 선호 색상 반영) */
+.std-item:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border-color: #4e37e6;
+  transform: translateY(-2px);
 }
-
-/* 연필 아이콘과 기본 화살표(>, ▶)의 범인이 될 수 있는 모든 가상 요소 지우기 */
-.markdown-body .std-list details.std-item summary::-webkit-details-marker,
-.markdown-body .std-list details.std-item::before,
-.markdown-body .std-list details.std-item::after,
-.markdown-body .std-list details.std-item summary::before,
-.markdown-body .std-list details.std-item summary::after,
-.markdown-body .std-list details.std-item *::before,
-.markdown-body .std-list details.std-item *::after {
-  display: none !important;
-  content: none !important;
-  background: none !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-/* 열렸을 때든, 닫혔을 때든, 포커스 상태든 무조건 하늘색을 지우고 투명/흰색 처리 */
-.markdown-body .std-list details.std-item[open],
-.markdown-body .std-list details.std-item:focus,
-.markdown-body .std-list details.std-item:active,
-.markdown-body .std-list details.std-item summary:focus,
-.markdown-body .std-list details.std-item .std-header {
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-  border: 1px solid #e1e4e8 !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* 호버 효과: 오직 마우스를 올렸을 때만 원래 만드신 보라색 포인트와 부드러운 그림자 허용 */
-.markdown-body .std-list details.std-item:hover {
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
-  border-color: #4e37e6 !important;
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-  transform: translateY(-2px) !important;
-}
-
 /* 상단 라인: 번호와 타이틀 */
 .std-header {
   display: flex;
@@ -82,7 +31,6 @@
   align-items: center;
   margin-bottom: 12px;
 }
-
 .std-no {
   background: #f0f0f0;
   color: #444;
@@ -96,12 +44,10 @@
   font-size: 13px;
   transition: 0.3s;
 }
-
-.markdown-body .std-list details.std-item:hover .std-no {
-  background: #4e37e6 !important;
-  color: #fff !important;
+.std-item:hover .std-no {
+  background: #4e37e6;
+  color: #fff;
 }
-
 .std-id {
   font-weight: 700;
   font-size: 1.05em;
@@ -109,20 +55,18 @@
   flex-grow: 1;
   margin-left: 12px;
 }
-
 /* 위반 조건 박스 (수식 강조) */
 .std-condition {
-  background: #f8f9fa !important;
+  background: #f8f9fa;
   padding: 14px;
   border-radius: 6px;
   font-family: 'Consolas', 'Monaco', monospace;
-  border-left: 4px solid #4e37e6 !important;
+  border-left: 4px solid #4e37e6;
   margin: 8px 0;
   font-size: 0.95em;
-  color: #000000 !important;
+  color: #000000; /* 수식 강조 색상 */
   line-height: 1.5;
 }
-
 /* 하단 메타 데이터 */
 .std-footer {
   display: flex;
@@ -131,229 +75,14 @@
   margin-top: 10px;
   font-size: 0.82em;
 }
-
 .std-tag {
   display: flex;
   align-items: center;
-  background: #f1f3f5 !important;
+  background: #f1f3f5;
   padding: 2px 8px;
   border-radius: 4px;
   color: #666;
 }
-
 .std-tag b {
   color: #4e37e6;
   margin-right: 5px;
-  font-weight: 600;
-}
-</style>
-
-This page describes the QoS dependency and consistency rules derived from the **OMG DDS** and **ROS 2 Standard** specifications. Violation of these rules typically results in entity creation failure or immediate communication incompatibility.
-
-<hr class="hr-grad-left">
-
-## Stage 1
-*Intra-entity Dependency Validation*
-
-<div class="std-list">
-
-  <details class="std-item" id="rule-1">
-    <summary>
-      <div class="std-header">
-        <span class="std-no">1</span>
-        <span class="std-id">HIST ↔ RESLIM</span>
-        <span style="font-size: 0.8em; color: #999;">Structural</span>
-      </div>
-      <div class="std-condition">
-        [HIST.kind = KEEP_LAST] ∧ [HIST.depth > RESLIM.mpi]
-      </div>
-      <div class="std-footer">
-        <div class="std-tag"><b>Entity</b> Pub, Sub</div>
-        <div class="std-tag"><b>Basis</b> STD</div>
-      </div>
-    </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
-      <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, HistoryQosPolicy</b><br>
-      "If history kind is KEEP_LAST, the depth must be less than or equal to max_samples_per_instance."
-    </div>
-  </details>
-
-  <details class="std-item" id="rule-2">
-    <summary>
-      <div class="std-header">
-        <span class="std-no">2</span>
-        <span class="std-id">RESLIM ↔ RESLIM</span>
-        <span style="font-size: 0.8em; color: #999;">Structural</span>
-      </div>
-      <div class="std-condition">
-        [max_samples < max_samples_per_instance]
-      </div>
-      <div class="std-footer">
-        <div class="std-tag"><b>Entity</b> Pub, Sub</div>
-        <div class="std-tag"><b>Basis</b> STD</div>
-      </div>
-    </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
-      <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, ResourceLimitsQosPolicy</b><br>
-      "The setting of max_samples must be consistent with max_samples_per_instance. It is required that max_samples >= max_samples_per_instance."
-    </div>
-  </details>
-
-</div>
-
-<hr class="hr-grad-left">
-
-## Stage 2
-*Inter-entity Dependency Validation*
-
-<div class="std-list">
-
-  <details class="std-item" id="rule-21">
-    <summary>
-      <div class="std-header">
-        <span class="std-no">21</span>
-        <span class="std-id">PART ↔ PART</span>
-        <span style="font-size: 0.8em; color: #999;">Structural</span>
-      </div>
-      <div class="std-condition">
-        [Writer.PART ∩ Reader.PART] = ∅
-      </div>
-      <div class="std-footer">
-        <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
-        <div class="std-tag"><b>Basis</b> STD</div>
-      </div>
-    </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
-      <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, PartitionQosPolicy</b><br>
-      "The PartitionQosPolicy allows the introduction of a logical partition... If the intersection of the set of partitions on the DataWriter and DataReader is empty, they will not communicate."
-    </div>
-  </details>
-
-  <details class="std-item" id="rule-22">
-    <summary>
-      <div class="std-header">
-        <span class="std-no">22</span>
-        <span class="std-id">RELIAB ↔ RELIAB</span>
-        <span style="font-size: 0.8em; color: #999;">Structural</span>
-      </div>
-      <div class="std-condition">
-        [Writer.RELIAB < Reader.RELIAB]
-      </div>
-      <div class="std-footer">
-        <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
-        <div class="std-tag"><b>Basis</b> STD</div>
-      </div>
-    </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
-      <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, ReliabilityQosPolicy</b><br>
-      "This policy follows the Requested/Offered (RxO) contract. The Offered RELIABILITY kind of the DataWriter must be greater than or equal to the Requested RELIABILITY kind of the DataReader."
-    </div>
-  </details>
-
-  <details class="std-item" id="rule-23">
-    <summary>
-      <div class="std-header">
-        <span class="std-no">23</span>
-        <span class="std-id">DURABL ↔ DURABL</span>
-        <span style="font-size: 0.8em; color: #999;">Structural</span>
-      </div>
-      <div class="std-condition">
-        [Writer.DURABL < Reader.DURABL]
-      </div>
-      <div class="std-footer">
-        <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
-        <div class="std-tag"><b>Basis</b> STD</div>
-      </div>
-    </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
-      <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, DurabilityQosPolicy</b><br>
-      "This policy follows the RxO contract. The Offered Durability kind of the DataWriter must be greater than or equal to the Requested Durability kind of the DataReader."
-    </div>
-  </details>
-
-  <details class="std-item" id="rule-24">
-    <summary>
-      <div class="std-header">
-        <span class="std-no">24</span>
-        <span class="std-id">DEADLN ↔ DEADLN</span>
-        <span style="font-size: 0.8em; color: #999;">Structural</span>
-      </div>
-      <div class="std-condition">
-        [Writer.DEADLN.period > Reader.DEADLN.period]
-      </div>
-      <div class="std-footer">
-        <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
-        <div class="std-tag"><b>Basis</b> STD</div>
-      </div>
-    </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
-      <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, DeadlineQosPolicy</b><br>
-      "This policy follows the RxO contract. The Offered deadline period of the DataWriter must be less than or equal to the Requested deadline period of the DataReader."
-    </div>
-  </details>
-
-  <details class="std-item" id="rule-25">
-    <summary>
-      <div class="std-header">
-        <span class="std-no">25</span>
-        <span class="std-id">LIVENS ↔ LIVENS</span>
-        <span style="font-size: 0.8em; color: #999;">Structural</span>
-      </div>
-      <div class="std-condition">
-        [W.LIVENS < R.LIVENS] ∨ [W.lease > R.lease]
-      </div>
-      <div class="std-footer">
-        <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
-        <div class="std-tag"><b>Basis</b> STD</div>
-      </div>
-    </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
-      <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, LivelinessQosPolicy</b><br>
-      "This policy follows the RxO contract. The Offered Liveliness kind must be greater than or equal to the Requested kind, and the writer's lease_duration must be less than or equal to the reader's."
-    </div>
-  </details>
-
-  <details class="std-item" id="rule-26">
-    <summary>
-      <div class="std-header">
-        <span class="std-no">26</span>
-        <span class="std-id">OWNST ↔ OWNST</span>
-        <span style="font-size: 0.8em; color: #999;">Structural</span>
-      </div>
-      <div class="std-condition">
-        [Writer.OWNST ≠ Reader.OWNST]
-      </div>
-      <div class="std-footer">
-        <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
-        <div class="std-tag"><b>Basis</b> STD</div>
-      </div>
-    </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
-      <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, OwnershipQosPolicy</b><br>
-      "This policy follows the RxO contract. The DataWriter and DataReader must share the exact same Ownership kind setting (SHARED or EXCLUSIVE)."
-    </div>
-  </details>
-
-  <details class="std-item" id="rule-27">
-    <summary>
-      <div class="std-header">
-        <span class="std-no">27</span>
-        <span class="std-id">DESTORD ↔ DESTORD</span>
-        <span style="font-size: 0.8em; color: #999;">Structural</span>
-      </div>
-      <div class="std-condition">
-        [Writer.DESTORD < Reader.DESTORD]
-      </div>
-      <div class="std-footer">
-        <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
-        <div class="std-tag"><b>Basis</b> STD</div>
-      </div>
-    </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
-      <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, DestinationOrderQosPolicy</b><br>
-      "This policy follows the RxO contract. The Offered DestinationOrder kind of the DataWriter must be greater than or equal to the Requested kind of the DataReader."
-    </div>
-  </details>
-
-</div>
-<hr class="hr-grad-left">
