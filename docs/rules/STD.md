@@ -145,7 +145,7 @@ This page describes the QoS dependency and consistency rules derived from the **
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.2 - Section 7.1.3.18, HISTORY</b><br><br>
+      <b>OMG DDS Specification v1.4 - Section 2.2.3.18, HISTORY</b><br><br>
       The setting of HISTORY depth must be consistent with the RESOURCE_LIMITS max_samples_per_instance. <br>For these
 two QoS to be consistent, they must verify that <b>depth <= max_samples_per_instance</b>.
     </div>
@@ -165,7 +165,7 @@ two QoS to be consistent, they must verify that <b>depth <= max_samples_per_inst
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.2 - Section 7.1.3.19, RESOURCE_LIMITS</b><br><br>
+      <b>OMG DDS Specification v1.4 - Section 2.2.3.19, RESOURCE_LIMITS</b><br><br>
       The setting of RESOURCE_LIMITS max_samples must be consistent with the max_samples_per_instance. <br>For these
 two values to be consistent they must verify that <b>max_samples >= max_samples_per_instance.</b>
     </div>
@@ -194,7 +194,7 @@ two values to be consistent they must verify that <b>max_samples >= max_samples_
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.2 - Section 7.1.3.13, PARTITION</b><br><br>
+      <b>OMG DDS Specification v1.4 - Section 2.2.3.13, PARTITION</b><br><br>
       For a DataReader to see the changes made to an instance by a DataWriter, not only the Topic must match, but also <b>they
 must share a common partition.</b>
     </div>
@@ -214,7 +214,7 @@ must share a common partition.</b>
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.2 - Section 7.1.3.14, REALIABILITY</b><br>
+      <b>OMG DDS Specification v1.4 - Section 2.2.3.14, REALIABILITY</b><br>
       <br>The value offered is considered compatible with the value requested if and only if the inequality “<b>offered kind >=
 requested kind</b>” evaluates to ‘TRUE.’ <br>For the purposes of this inequality, the values of RELIABILITY kind are
 considered ordered such that <b>BEST_EFFORT < RELIABLE</b>
@@ -235,7 +235,7 @@ considered ordered such that <b>BEST_EFFORT < RELIABLE</b>
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.2 - Section 7.1.3.4, DURABILITY</b><br>
+      <b>OMG DDS Specification v1.4 - Section 2.2.3.4, DURABILITY</b><br>
       <br>The value offered is considered compatible with the value requested if and only if the inequality “<b>offered kind >=
 requested kind</b> evaluates to ‘TRUE.’ <br>For the purposes of this inequality, the values of DURABILITY kind are considered
 ordered such that <b>VOLATILE < TRANSIENT_LOCAL < TRANSIENT < PERSISTENT</b>.
@@ -256,7 +256,7 @@ ordered such that <b>VOLATILE < TRANSIENT_LOCAL < TRANSIENT < PERSISTENT</b>.
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.2 - Section 7.1.3.7, DEADLINE</b><br>
+      <b>OMG DDS Specification v1.4 - Section 2.2.3.7, DEADLINE</b><br>
       <br>The value offered is considered compatible with the value requested if and only if the inequality “<b>offered deadline period
 <= requested deadline period</b>” evaluates to ‘TRUE'.
     </div>
@@ -276,8 +276,8 @@ ordered such that <b>VOLATILE < TRANSIENT_LOCAL < TRANSIENT < PERSISTENT</b>.
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.2 - Section 7.1.3.11, LIVELINESS</b><br>
-      <br>1. the inequality “<b>offered kind >= requested kind</b>” evaluates to ‘TRUE.’ For the purposes of this inequality, the
+      <b>OMG DDS Specification v1.4 - Section 2.2.3.11, LIVELINESS</b><br>
+      <br>1. the inequality “<b>offered kind >= requested kind</b>” evaluates to ‘TRUE.’ <br>  For the purposes of this inequality, the
 values of LIVELINESS kind are considered ordered such that:
 AUTOMATIC < MANUAL_BY_PARTICIPANT < MANUAL_BY_TOPIC.
 <br>2. the inequality “<b>offered lease_duration <= requested lease_duration</b>” evaluates to TRUE.
@@ -298,8 +298,8 @@ AUTOMATIC < MANUAL_BY_PARTICIPANT < MANUAL_BY_TOPIC.
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.2 - Section 7.1.3.9, OWNERSHIP</b><br>
-      <br>The value of the OWNERSHIP kind <b>offered must exactly match the one requested</b> or else they are considered.
+      <b>OMG DDS Specification v1.4 - Section 2.2.3.9, OWNERSHIP</b><br>
+      <br>The value of the OWNERSHIP kind <b>offered must exactly match the one requested</b> or else they are considered incompatible.
 incompat
     </div>
   </a>
@@ -318,7 +318,7 @@ incompat
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.2 - Section 7.1.3.17, DESTINATION_ORDER</b><br>
+      <b>OMG DDS Specification v1.4 - Section 2.2.3.17, DESTINATION_ORDER</b><br>
       <br>The value offered is considered compatible with the value requested if and only if the inequality “<b>offered kind >=
 requested kind</b>” evaluates to ‘TRUE.’ For the purposes of this inequality, the values of DESTINATION_ORDER kind are
 considered ordered such that <b>BY_RECEPTION_TIMESTAMP < BY_SOURCE_TIMESTAMP</b>.
