@@ -270,8 +270,11 @@ ordered such that <b>VOLATILE < TRANSIENT_LOCAL < TRANSIENT < PERSISTENT</b>.
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
-      "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
+      <b>OMG DDS Specification v1.2 - Section 7.1.3.11, LIVELINESS</b><br>
+      <br>1. the inequality “<b>offered kind >= requested kind</b>” evaluates to ‘TRUE.’ For the purposes of this inequality, the
+values of LIVELINESS kind are considered ordered such that:
+AUTOMATIC < MANUAL_BY_PARTICIPANT < MANUAL_BY_TOPIC.
+<br>2. the inequality “<b>offered lease_duration <= requested lease_duration</b>” evaluates to TRUE.
     </div>
   </a>
 
@@ -289,8 +292,9 @@ ordered such that <b>VOLATILE < TRANSIENT_LOCAL < TRANSIENT < PERSISTENT</b>.
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
-      "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
+      <b>OMG DDS Specification v1.2 - Section 7.1.3.9, OWNERSHIP</b><br>
+      <br>The value of the OWNERSHIP kind <b>offered must exactly match the one requested</b> or else they are considered.
+incompat
     </div>
   </a>
 
@@ -308,8 +312,10 @@ ordered such that <b>VOLATILE < TRANSIENT_LOCAL < TRANSIENT < PERSISTENT</b>.
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
-      "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
+      <b>OMG DDS Specification v1.2 - Section 7.1.3.17, DESTINATION_ORDER</b><br>
+      <br>The value offered is considered compatible with the value requested if and only if the inequality “<b>offered kind >=
+requested kind</b>” evaluates to ‘TRUE.’ For the purposes of this inequality, the values of DESTINATION_ORDER kind are
+considered ordered such that <b>BY_RECEPTION_TIMESTAMP < BY_SOURCE_TIMESTAMP</b>.
     </div>
   </a>
 
