@@ -1,10 +1,3 @@
-아이고, 제가 괜히 멋을 부린답시고 원래 가지고 계시던 깔끔하고 예쁜 디자인 톤앤매너를 깨뜨렸군요! 죄송합니다.
-
-원래 보여주셨던 외곽선, 그림자, 호버 효과, 폰트 스타일을 **단 1픽셀도 바꾸지 않고 그대로 유지**했습니다. 새로 추가되는 근거 영역도 원래 있던 `std-condition` 박스 디자인과 완벽하게 통일감을 이루도록 매칭했습니다.
-
-이 코드는 중간 생략 없는 **전체 코드**이므로, 기존 코드를 전부 지우시고 이대로 **전체 복사+붙여넣기** 하시면 됩니다!
-
-```html
 # STD Rules
 
 <style>
@@ -16,7 +9,7 @@
   margin: 24px 0;
 }
 
-/* 개별 규칙 카드 (원래 디자인 100% 완전 복원) */
+/* 개별 규칙 카드 (details 태그 스타일) */
 .std-item {
   border: 1px solid #e1e4e8;
   border-radius: 10px;
@@ -33,11 +26,17 @@
 .std-item summary::-webkit-details-marker { display: none; }
 .std-item summary { list-style: none; outline: none; cursor: pointer; }
 
-/* 호버 효과 (원래 디자인 그대로) */
+/* 호버 효과: 그림자와 보라색 포인트 */
 .std-item:hover {
   box-shadow: 0 8px 16px rgba(0,0,0,0.1);
   border-color: #4e37e6;
   transform: translateY(-2px);
+}
+
+/* 카드가 열려있을 때(open)의 스타일 */
+.std-item[open] {
+  border-color: #4e37e6;
+  box-shadow: 0 4px 12px rgba(78, 55, 230, 0.1);
 }
 
 /* 상단 라인: 번호와 타이틀 */
@@ -62,7 +61,8 @@
   transition: 0.3s;
 }
 
-.std-item:hover .std-no {
+.std-item:hover .std-no,
+.std-item[open] .std-no {
   background: #4e37e6;
   color: #fff;
 }
@@ -112,22 +112,36 @@
   font-weight: 600;
 }
 
-/* 💡 원래 디자인 양식과 완벽히 통일한 근거 데이터 박스 */
-.std-basis-box {
-  background: #f8f9fa;
-  padding: 14px;
-  border-radius: 6px;
-  border-left: 4px solid #6c757d; /* 차분한 회색 포인트로 수식 박스와 차별화 */
-  margin-top: 14px;
-  font-size: 0.92em;
-  color: #2c3e50;
-  line-height: 1.5;
+/* 명세서 근거 세부정보 스타일 */
+.std-basis-detail {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed #e1e4e8;
+  font-size: 0.9em;
+  color: #333;
+  animation: fadeIn 0.3s ease-out;
 }
 
-.std-basis-title {
-  font-weight: 700;
+.std-basis-detail .spec-location {
+  font-weight: 600;
   color: #4e37e6;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+}
+
+.std-basis-detail blockquote {
+  margin: 8px 0 0 0;
+  padding-left: 12px;
+  border-left: 3px solid #cbd5e1;
+  color: #555;
+  font-style: italic;
+  background: #fafafa;
+  padding: 10px;
+  border-radius: 0 4px 4px 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
 
@@ -155,9 +169,11 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div class="std-basis-box">
-      <div class="std-basis-title">📄 OMG DDS Specification v1.4 — Section 2.2.3, HistoryQosPolicy</div>
-      "If history kind is KEEP_LAST, the depth must be less than or equal to max_samples_per_instance. If it is greater, the open or creation will fail with inconsistent QoS."
+    <div class="std-basis-detail">
+      <div class="spec-location">📄 OMG DDS Specification v1.4 — Section 2.2.3, HistoryQosPolicy</div>
+      <blockquote>
+        "If history kind is KEEP_LAST, the depth must be less than or equal to max_samples_per_instance. If it is greater, the open or creation will fail with inconsistent QoS."
+      </blockquote>
     </div>
   </details>
 
@@ -176,9 +192,11 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div class="std-basis-box">
-      <div class="std-basis-title">📄 OMG DDS Specification v1.4 — Section 2.2.3, ResourceLimitsQosPolicy</div>
-      "The setting of max_samples must be consistent with max_samples_per_instance. It is required that max_samples >= max_samples_per_instance."
+    <div class="std-basis-detail">
+      <div class="spec-location">📄 OMG DDS Specification v1.4 — Section 2.2.3, ResourceLimitsQosPolicy</div>
+      <blockquote>
+        "The setting of max_samples must be consistent with max_samples_per_instance. It is required that max_samples >= max_samples_per_instance."
+      </blockquote>
     </div>
   </details>
 
@@ -206,9 +224,11 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div class="std-basis-box">
-      <div class="std-basis-title">📄 OMG DDS Specification v1.4 — Section 2.2.3, PartitionQosPolicy</div>
-      "The PartitionQosPolicy allows the introduction of a logical partition... If the intersection of the set of partitions on the DataWriter and DataReader is empty, they will not communicate."
+    <div class="std-basis-detail">
+      <div class="spec-location">📄 OMG DDS Specification v1.4 — Section 2.2.3, PartitionQosPolicy</div>
+      <blockquote>
+        "The PartitionQosPolicy allows the introduction of a logical partition... If the intersection of the set of partitions on the DataWriter and DataReader is empty, they will not communicate."
+      </blockquote>
     </div>
   </details>
 
@@ -227,9 +247,11 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div class="std-basis-box">
-      <div class="std-basis-title">📄 OMG DDS Specification v1.4 — Section 2.2.3, ReliabilityQosPolicy</div>
-      "This policy follows the Requested/Offered (RxO) contract. The Offered RELIABILITY kind of the DataWriter must be greater than or equal to the Requested RELIABILITY kind of the DataReader (where RELIABLE > BEST_EFFORT)."
+    <div class="std-basis-detail">
+      <div class="spec-location">📄 OMG DDS Specification v1.4 — Section 2.2.3, ReliabilityQosPolicy</div>
+      <blockquote>
+        "This policy follows the Requested/Offered (RxO) contract. The Offered RELIABILITY kind of the DataWriter must be greater than or equal to the Requested RELIABILITY kind of the DataReader (where RELIABLE > BEST_EFFORT)."
+      </blockquote>
     </div>
   </details>
 
@@ -248,9 +270,11 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div class="std-basis-box">
-      <div class="std-basis-title">📄 OMG DDS Specification v1.4 — Section 2.2.3, DurabilityQosPolicy</div>
-      "This policy follows the RxO contract. The Offered Durability kind of the DataWriter must be greater than or equal to the Requested Durability kind of the DataReader (where PERSISTENT > TRANSIENT > TRANSIENT_LOCAL > VOLATILE)."
+    <div class="std-basis-detail">
+      <div class="spec-location">📄 OMG DDS Specification v1.4 — Section 2.2.3, DurabilityQosPolicy</div>
+      <blockquote>
+        "This policy follows the RxO contract. The Offered Durability kind of the DataWriter must be greater than or equal to the Requested Durability kind of the DataReader (where PERSISTENT > TRANSIENT > TRANSIENT_LOCAL > VOLATILE)."
+      </blockquote>
     </div>
   </details>
 
@@ -269,9 +293,11 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div class="std-basis-box">
-      <div class="std-basis-title">📄 OMG DDS Specification v1.4 — Section 2.2.3, DeadlineQosPolicy</div>
-      "This policy follows the RxO contract. The Offered deadline period of the DataWriter must be less than or equal to the Requested deadline period of the DataReader."
+    <div class="std-basis-detail">
+      <div class="spec-location">📄 OMG DDS Specification v1.4 — Section 2.2.3, DeadlineQosPolicy</div>
+      <blockquote>
+        "This policy follows the RxO contract. The Offered deadline period of the DataWriter must be less than or equal to the Requested deadline period of the DataReader."
+      </blockquote>
     </div>
   </details>
 
@@ -290,9 +316,11 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div class="std-basis-box">
-      <div class="std-basis-title">📄 OMG DDS Specification v1.4 — Section 2.2.3, LivelinessQosPolicy</div>
-      "This policy follows the RxO contract. The Offered Liveliness kind must be greater than or equal to the Requested kind (MANUAL_BY_TOPIC > MANUAL_BY_PARTICIPANT > AUTOMATIC), and the writer's lease_duration must be less than or equal to the reader's."
+    <div class="std-basis-detail">
+      <div class="spec-location">📄 OMG DDS Specification v1.4 — Section 2.2.3, LivelinessQosPolicy</div>
+      <blockquote>
+        "This policy follows the RxO contract. The Offered Liveliness kind must be greater than or equal to the Requested kind (MANUAL_BY_TOPIC > MANUAL_BY_PARTICIPANT > AUTOMATIC), and the writer's lease_duration must be less than or equal to the reader's."
+      </blockquote>
     </div>
   </details>
 
@@ -311,9 +339,11 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div class="std-basis-box">
-      <div class="std-basis-title">📄 OMG DDS Specification v1.4 — Section 2.2.3, OwnershipQosPolicy</div>
-      "This policy follows the RxO contract. The DataWriter and DataReader must share the exact same Ownership kind setting (SHARED or EXCLUSIVE) to establish a proper communication link."
+    <div class="std-basis-detail">
+      <div class="spec-location">📄 OMG DDS Specification v1.4 — Section 2.2.3, OwnershipQosPolicy</div>
+      <blockquote>
+        "This policy follows the RxO contract. The DataWriter and DataReader must share the exact same Ownership kind setting (SHARED or EXCLUSIVE) to establish a proper communication link."
+      </blockquote>
     </div>
   </details>
 
@@ -332,13 +362,13 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div class="std-basis-box">
-      <div class="std-basis-title">📄 OMG DDS Specification v1.4 — Section 2.2.3, DestinationOrderQosPolicy</div>
-      "This policy follows the RxO contract. The Offered DestinationOrder kind of the DataWriter must be greater than or equal to the Requested kind of the DataReader (where BY_SOURCE_TIMESTAMP > BY_RECEPTION_TIMESTAMP)."
+    <div class="std-basis-detail">
+      <div class="spec-location">📄 OMG DDS Specification v1.4 — Section 2.2.3, DestinationOrderQosPolicy</div>
+      <blockquote>
+        "This policy follows the RxO contract. The Offered DestinationOrder kind of the DataWriter must be greater than or equal to the Requested kind of the DataReader (where BY_SOURCE_TIMESTAMP > BY_RECEPTION_TIMESTAMP)."
+      </blockquote>
     </div>
   </details>
 
 </div>
 <hr class="hr-grad-left">
-
-```
