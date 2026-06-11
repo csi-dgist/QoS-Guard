@@ -138,9 +138,9 @@ This page describes the QoS dependency and consistency rules derived from the **
       <div class="std-tag"><b>Entity</b> Pub, Sub</div>
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
-      <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, HistoryQosPolicy</b><br>
-      "If history kind is KEEP_LAST, the depth must be less than or equal to max_samples_per_instance."
+    <div class="std-reference">
+      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b>
+      "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
     </div>
   </a>
 
