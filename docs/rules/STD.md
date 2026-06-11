@@ -116,7 +116,10 @@
 }
 </style>
 
-This page describes the QoS dependency and consistency rules derived from the **OMG DDS** and **ROS 2 Standard** specifications. Violation of these rules typically results in entity creation failure or immediate communication incompatibility.
+This page describes the QoS dependency and consistency rules derived from the **OMG DDS** and **ROS 2 Standard** specifications. Violation of these rules typically results in entity creation failure or immediate communication incompatibility.<br>
+<a class="omg-doc-download" href="OMG-DDS.pdf" download>
+  OMG 1.2 document download
+</a>
 
 <hr class="hr-grad-left">
 
