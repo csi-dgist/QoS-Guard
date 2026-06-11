@@ -1052,6 +1052,9 @@ dds::Duration_t autopurge_disposed_samples_delay;
 - **RMW/Implementation: CycloneDDS** 
 ```cpp
 // As the instance is not in the DISPOSED state, autopurge_disposed_samples_delay does not apply to it in the first place.
+//If RDLIFE.autopurge_nowriter == 0: Triggers Rule #28 (Immediate purge of data).
+//If RDLIFE.autopurge_disposed > 0: Triggers Rule #29 (Delayed cleanup).
+//If RDLIFE.autopurge_nowriter == INF: Triggers Rule #30 (Inapplicable purge, causes memory leak).
 void ddsi_reader_update_notify_pwr_alive_state (struct ddsi_reader *rd, const struct ddsi_proxy_writer *pwr, const struct ddsi_alive_state *alive_state)
 { struct ddsi_rd_pwr_match *m; bool notify = false; 
 int delta = 0; 
