@@ -20,15 +20,36 @@
   text-decoration: none !important;
   color: inherit !important;
   display: block;
+  
+  /* 🔥 [해결] 클릭 시 브라우저/깃허브가 강제로 넣는 하늘색 테두리와 잔상 제거 */
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* 브라우저 기본 화살표 완전히 숨기기 (원래 카드 디자인 보존용) */
-.std-item summary { display: block; list-style: none; outline: none; cursor: pointer; }
-.std-item summary::-webkit-details-marker { display: none; }
+/* 브라우저 기본 화살표 및 클릭 시 하늘색 테두리 제거 */
+.std-item summary {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+  /* 🔥 [해결] 요소를 클릭했을 때 생기는 포커스 라인 제거 */
+  outline: none !important;
+}
+.std-item summary::-webkit-details-marker {
+  display: none;
+}
 
-/* 호버 효과: 그림자와 보라색 포인트 (사용자 선호 색상 반영) */
+/* 요소가 포커스되거나 열렸을 때 생기는 모든 하늘색 흔적 원천 차단 */
+.std-item:focus, 
+.std-item summary:focus, 
+.std-item[open] {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 호버 효과 (오직 마우스를 올렸을 때만 예쁜 보라색 포인트 작동) */
 .std-item:hover {
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
   border-color: #4e37e6;
   transform: translateY(-2px);
 }
@@ -130,7 +151,7 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6;">
+    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
       <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, HistoryQosPolicy</b><br>
       "If history kind is KEEP_LAST, the depth must be less than or equal to max_samples_per_instance."
     </div>
@@ -151,7 +172,7 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6;">
+    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
       <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, ResourceLimitsQosPolicy</b><br>
       "The setting of max_samples must be consistent with max_samples_per_instance. It is required that max_samples >= max_samples_per_instance."
     </div>
@@ -181,7 +202,7 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6;">
+    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
       <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, PartitionQosPolicy</b><br>
       "The PartitionQosPolicy allows the introduction of a logical partition... If the intersection of the set of partitions on the DataWriter and DataReader is empty, they will not communicate."
     </div>
@@ -202,7 +223,7 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6;">
+    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
       <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, ReliabilityQosPolicy</b><br>
       "This policy follows the Requested/Offered (RxO) contract. The Offered RELIABILITY kind of the DataWriter must be greater than or equal to the Requested RELIABILITY kind of the DataReader."
     </div>
@@ -223,7 +244,7 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6;">
+    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
       <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, DurabilityQosPolicy</b><br>
       "This policy follows the RxO contract. The Offered Durability kind of the DataWriter must be greater than or equal to the Requested Durability kind of the DataReader."
     </div>
@@ -244,7 +265,7 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6;">
+    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
       <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, DeadlineQosPolicy</b><br>
       "This policy follows the RxO contract. The Offered deadline period of the DataWriter must be less than or equal to the Requested deadline period of the DataReader."
     </div>
@@ -265,7 +286,7 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6;">
+    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
       <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, LivelinessQosPolicy</b><br>
       "This policy follows the RxO contract. The Offered Liveliness kind must be greater than or equal to the Requested kind, and the writer's lease_duration must be less than or equal to the reader's."
     </div>
@@ -286,7 +307,7 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6;">
+    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
       <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, OwnershipQosPolicy</b><br>
       "This policy follows the RxO contract. The DataWriter and DataReader must share the exact same Ownership kind setting (SHARED or EXCLUSIVE)."
     </div>
@@ -307,7 +328,7 @@ This page describes the QoS dependency and consistency rules derived from the **
         <div class="std-tag"><b>Basis</b> STD</div>
       </div>
     </summary>
-    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6;">
+    <div style="margin-top: 16px; font-size: 0.9em; color: #2c3e50; line-height: 1.6; cursor: default;">
       <b>📄 OMG DDS Specification v1.4 — Section 2.2.3, DestinationOrderQosPolicy</b><br>
       "This policy follows the RxO contract. The Offered DestinationOrder kind of the DataWriter must be greater than or equal to the Requested kind of the DataReader."
     </div>
