@@ -9,11 +9,14 @@
   margin: 24px 0;
 }
 
-/* 개별 규칙 카드 (원래 디자인 강제 고정) */
-.std-item {
+/* 🔥 [핵심 수정] 깃허브 기본 테마를 완벽히 이기도록 선택자 강화 및 모든 상태에서 하늘색/파란색 박스 원천 차단 */
+.std-list details.std-item,
+.std-list details.std-item:not([open]),
+.std-list details.std-item[open] {
   border: 1px solid #e1e4e8 !important;
   border-radius: 10px !important;
   background: #ffffff !important;
+  background-color: #ffffff !important;
   padding: 16px 20px !important;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
@@ -27,31 +30,33 @@
 }
 
 /* 브라우저 기본 화살표 제거 */
-.std-item summary {
+.std-list details.std-item summary {
   display: block;
   list-style: none;
   outline: none !important;
 }
-.std-item summary::-webkit-details-marker {
+.std-list details.std-item summary::-webkit-details-marker {
   display: none;
 }
 
-/* 🔥 [핵심 해결] 카드가 열리거나(open) 포커스되어도 파란색/하늘색 절대 금지, 무조건 원래의 흰색과 회색 테두리 유지 */
-.std-item[open],
-.std-item:focus,
-.std-item:active,
-.std-item summary:focus,
-.std-item summary:active {
+/* 포커스나 액티브 상태에서도 무조건 흰색 바탕 유지 */
+.std-list details.std-item:focus,
+.std-list details.std-item:active,
+.std-list details.std-item summary:focus,
+.std-list details.std-item summary:active {
   background: #ffffff !important;
+  background-color: #ffffff !important;
   border-color: #e1e4e8 !important;
   outline: none !important;
   box-shadow: none !important;
 }
 
 /* 호버 효과: 오직 마우스를 올렸을 때만 원래 만드신 보라색 포인트 허용 */
-.std-item:hover {
+.std-list details.std-item:hover {
   box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
   border-color: #4e37e6 !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
   transform: translateY(-2px);
 }
 
@@ -77,7 +82,7 @@
   transition: 0.3s;
 }
 
-.std-item:hover .std-no {
+.std-list details.std-item:hover .std-no {
   background: #4e37e6;
   color: #fff;
 }
