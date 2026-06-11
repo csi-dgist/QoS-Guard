@@ -211,7 +211,7 @@ must share a common partition.</b>
       <b>OMG DDS Specification v1.2 - Section 7.1.3.14, REALIABILITY</b><br>
       <br>The value offered is considered compatible with the value requested if and only if the inequality “<b>offered kind >=
 requested kind</b>” evaluates to ‘TRUE.’ <br>For the purposes of this inequality, the values of RELIABILITY kind are
-considered ordered such that BEST_EFFORT < RELIABLE
+considered ordered such that <b>BEST_EFFORT < RELIABLE</b>
     </div>
   </a>
 
