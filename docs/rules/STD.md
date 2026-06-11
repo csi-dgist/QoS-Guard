@@ -209,7 +209,7 @@ must share a common partition.</b>
     </div>
     <div class="std-reference">
       <b>OMG DDS Specification v1.2 - Section 7.1.3.14, REALIABILITY</b><br>
-      The value offered is considered compatible with the value requested if and only if the inequality “<b>offered kind >=
+      <br>The value offered is considered compatible with the value requested if and only if the inequality “<b>offered kind >=
 requested kind</b>” evaluates to ‘TRUE.’ <br>For the purposes of this inequality, the values of RELIABILITY kind are
 considered ordered such that BEST_EFFORT < RELIABLE
     </div>
@@ -229,10 +229,10 @@ considered ordered such that BEST_EFFORT < RELIABLE
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
+      <b>OMG DDS Specification v1.2 - Section 7.1.3.4, DURABILITY</b><br>
       <br>The value offered is considered compatible with the value requested if and only if the inequality “<b>offered kind >=
 requested kind</b> evaluates to ‘TRUE.’ <br>For the purposes of this inequality, the values of DURABILITY kind are considered
-ordered such that VOLATILE < TRANSIENT_LOCAL < TRANSIENT < PERSISTENT.
+ordered such that <b>VOLATILE < TRANSIENT_LOCAL < TRANSIENT < PERSISTENT</b>.
     </div>
   </a>
 
@@ -250,8 +250,9 @@ ordered such that VOLATILE < TRANSIENT_LOCAL < TRANSIENT < PERSISTENT.
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
-      "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
+      <b>OMG DDS Specification v1.2 - Section 7.1.3.7, DEADLINE</b><br>
+      <br>The value offered is considered compatible with the value requested if and only if the inequality “<b>offered deadline period
+<= requested deadline period</b>” evaluates to ‘TRUE'.
     </div>
   </a>
 
