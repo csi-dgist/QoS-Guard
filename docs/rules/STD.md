@@ -230,7 +230,9 @@ considered ordered such that BEST_EFFORT < RELIABLE
     </div>
     <div class="std-reference">
       <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
-      "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
+      <br>The value offered is considered compatible with the value requested if and only if the inequality “<b>offered kind >=
+requested kind</b> evaluates to ‘TRUE.’ <br>For the purposes of this inequality, the values of DURABILITY kind are considered
+ordered such that VOLATILE < TRANSIENT_LOCAL < TRANSIENT < PERSISTENT.
     </div>
   </a>
 
