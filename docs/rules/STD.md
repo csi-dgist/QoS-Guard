@@ -9,48 +9,49 @@
   margin: 24px 0;
 }
 
-/* 개별 규칙 카드 */
+/* 개별 규칙 카드 (원래 디자인 강제 고정) */
 .std-item {
-  border: 1px solid #e1e4e8;
-  border-radius: 10px;
-  background: #ffffff;
-  padding: 16px 20px;
+  border: 1px solid #e1e4e8 !important;
+  border-radius: 10px !important;
+  background: #ffffff !important;
+  padding: 16px 20px !important;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
   text-decoration: none !important;
   color: inherit !important;
   display: block;
-  
-  /* 🔥 [해결] 클릭 시 브라우저/깃허브가 강제로 넣는 하늘색 테두리와 잔상 제거 */
+  cursor: pointer;
   outline: none !important;
   box-shadow: none !important;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* 브라우저 기본 화살표 및 클릭 시 하늘색 테두리 제거 */
+/* 브라우저 기본 화살표 제거 */
 .std-item summary {
   display: block;
   list-style: none;
-  cursor: pointer;
-  /* 🔥 [해결] 요소를 클릭했을 때 생기는 포커스 라인 제거 */
   outline: none !important;
 }
 .std-item summary::-webkit-details-marker {
   display: none;
 }
 
-/* 요소가 포커스되거나 열렸을 때 생기는 모든 하늘색 흔적 원천 차단 */
-.std-item:focus, 
-.std-item summary:focus, 
-.std-item[open] {
+/* 🔥 [핵심 해결] 카드가 열리거나(open) 포커스되어도 파란색/하늘색 절대 금지, 무조건 원래의 흰색과 회색 테두리 유지 */
+.std-item[open],
+.std-item:focus,
+.std-item:active,
+.std-item summary:focus,
+.std-item summary:active {
+  background: #ffffff !important;
+  border-color: #e1e4e8 !important;
   outline: none !important;
   box-shadow: none !important;
 }
 
-/* 호버 효과 (오직 마우스를 올렸을 때만 예쁜 보라색 포인트 작동) */
+/* 호버 효과: 오직 마우스를 올렸을 때만 원래 만드신 보라색 포인트 허용 */
 .std-item:hover {
   box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
-  border-color: #4e37e6;
+  border-color: #4e37e6 !important;
   transform: translateY(-2px);
 }
 
@@ -98,7 +99,7 @@
   border-left: 4px solid #4e37e6;
   margin: 8px 0;
   font-size: 0.95em;
-  color: #000000; /* 수식 강조 색상 */
+  color: #000000;
   line-height: 1.5;
 }
 
