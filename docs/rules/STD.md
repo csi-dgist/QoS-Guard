@@ -9,7 +9,7 @@
   margin: 24px 0;
 }
 
-/* 🔥 [최종 해결] 깃허브 마크다운 테마(.markdown-body)의 기본 하늘색/파란색 설정을 완전히 박살내는 초강력 고정 규칙 */
+/* 🔥 [배경색 & 연필 아이콘 완전 박살] 모든 상태에서 무조건 순수 흰색 고정 및 가상 요소 차단 */
 .markdown-body .std-list details.std-item,
 .markdown-body details.std-item,
 .std-item {
@@ -29,26 +29,36 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* 브라우저 및 깃허브 테마의 기본 화살표(삼각형, > 모양 등) 완전히 제거 */
+/* 브라우저 기본 화살표(▶) 및 테마가 강제로 넣은 모든 가상 아이콘(연필 모양 등) 완전히 제거 */
 .markdown-body .std-list details.std-item summary {
   display: block !important;
   list-style: none !important;
   outline: none !important;
-}
-.markdown-body .std-list details.std-item summary::-webkit-details-marker,
-.markdown-body .std-list details.std-item summary::before,
-.markdown-body .std-list details.std-item summary::after,
-.std-item::before,
-.std-item::after {
-  display: none !important;
-  content: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
-/* 열렸을 때, 포커스되었을 때 등 모든 상태에서 무조건 순수 흰색 바탕과 연회색 테두리 고정 */
+/* 연필 아이콘과 기본 화살표(>, ▶)의 범인이 될 수 있는 모든 가상 요소 지우기 */
+.markdown-body .std-list details.std-item summary::-webkit-details-marker,
+.markdown-body .std-list details.std-item::before,
+.markdown-body .std-list details.std-item::after,
+.markdown-body .std-list details.std-item summary::before,
+.markdown-body .std-list details.std-item summary::after,
+.markdown-body .std-list details.std-item *::before,
+.markdown-body .std-list details.std-item *::after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 열렸을 때든, 닫혔을 때든, 포커스 상태든 무조건 하늘색을 지우고 투명/흰색 처리 */
 .markdown-body .std-list details.std-item[open],
 .markdown-body .std-list details.std-item:focus,
 .markdown-body .std-list details.std-item:active,
-.markdown-body .std-list details.std-item summary:focus {
+.markdown-body .std-list details.std-item summary:focus,
+.markdown-body .std-list details.std-item .std-header {
   background: #ffffff !important;
   background-color: #ffffff !important;
   border: 1px solid #e1e4e8 !important;
@@ -102,14 +112,14 @@
 
 /* 위반 조건 박스 (수식 강조) */
 .std-condition {
-  background: #f8f9fa;
+  background: #f8f9fa !important;
   padding: 14px;
   border-radius: 6px;
   font-family: 'Consolas', 'Monaco', monospace;
-  border-left: 4px solid #4e37e6;
+  border-left: 4px solid #4e37e6 !important;
   margin: 8px 0;
   font-size: 0.95em;
-  color: #000000;
+  color: #000000 !important;
   line-height: 1.5;
 }
 
@@ -125,7 +135,7 @@
 .std-tag {
   display: flex;
   align-items: center;
-  background: #f1f3f5;
+  background: #f1f3f5 !important;
   padding: 2px 8px;
   border-radius: 4px;
   color: #666;
