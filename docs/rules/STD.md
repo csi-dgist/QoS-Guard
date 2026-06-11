@@ -1,128 +1,309 @@
-Visual Studio Code 1.117
+# STD Rules
 
-Show release notes after an update
 
-Follow us on LinkedIn, X, Bluesky | View online
+<style>
+/* 전체 리스트 컨테이너 */
+.std-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
+}
 
-Release date: April 22, 2026
+/* 개별 규칙 카드 */
+.std-item {
+  border: 1px solid #e1e4e8;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 16px 20px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  text-decoration: none !important;
+  color: inherit !important;
+}
 
-Welcome to the 1.117 release of Visual Studio Code. This release adds new capabilities for Copilot Enterprise and Business users and further improves the agent experience in VS Code. Here are the highlights for this release:
+/* 호버 효과: 그림자와 보라색 포인트 (사용자 선호 색상 반영) */
+.std-item:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border-color: #4e37e6;
+  transform: translateY(-2px);
+}
 
-BYOK for Business and Enterprise: Connect your own API keys for preferred or specialized models directly in VS Code chat.
+/* 상단 라인: 번호와 타이틀 */
+.std-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
 
-Incremental chat rendering: Experience more fluid streaming of chat responses.
+.std-no {
+  background: #f0f0f0;
+  color: #444;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 13px;
+  transition: 0.3s;
+}
 
-Terminal improvements: Launch Copilot CLI from any terminal profile.
+.std-item:hover .std-no {
+  background: #4e37e6;
+  color: #fff;
+}
 
-Happy Coding!
+.std-id {
+  font-weight: 700;
+  font-size: 1.05em;
+  color: #2c3e50;
+  flex-grow: 1;
+  margin-left: 12px;
+}
 
-VS Code is rolling out gradually to all users. Use Check for Updates in VS Code to get the latest version immediately.
+/* 위반 조건 박스 (수식 강조) */
+.std-condition {
+  background: #f8f9fa;
+  padding: 14px;
+  border-radius: 6px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  border-left: 4px solid #4e37e6;
+  margin: 8px 0;
+  font-size: 0.95em;
+  color: #000000; /* 수식 강조 색상 */
+  line-height: 1.5;
+}
 
-To try new features as soon as possible, download the nightly Insiders build, which includes the latest updates as soon as they are available.
+/* 하단 메타 데이터 */
+.std-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 0.82em;
+}
 
-In this update
-GitHub Copilot
-Chat experience
-Agent experience
-Terminal
-Languages
-Deprecated features and settings
-Thank you
-Bring your own key for Copilot Business and Enterprise
-Teams often need specific models for compliance, performance, or cost reasons, but switching between tools to use them slows developers down. Bring your own language model key (BYOK) lets Copilot Business and Enterprise users connect their own API keys for providers like OpenRouter, Ollama, Google, OpenAI, and more, so they can use those models directly in VS Code chat.
+.std-tag {
+  display: flex;
+  align-items: center;
+  background: #f1f3f5;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: #666;
+}
 
-By default, BYOK is enabled and administrators can disable it with the Bring Your Own Language Model Key policy in the Copilot policy settings on GitHub.com. This gives administrators control over which model providers are available to their organization while keeping developers in their existing workflow.
+.std-tag b {
+  color: #4e37e6;
+  margin-right: 5px;
+  font-weight: 600;
+}
 
-After the policy is enabled, organization members can add models from built-in providers or install language model provider extensions.
+.std-reference {
+  display: none;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #edf0f2;
+  color: #4b5563;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
 
-Chat experience
-Incremental rendering of chat responses (Experimental)
-Chat responses feel more fluid and natural with incremental rendering, which streams content block-by-block with optional animations as tokens arrive. Instead of the default timer-based rendering, this experimental approach renders each block as it becomes ready, reducing the perceived wait time for longer responses.
+.std-item.is-open .std-reference {
+  display: block;
+}
+</style>
 
-Configure incremental response rendering with the following settings:
+This page describes the QoS dependency and consistency rules derived from the **OMG DDS** and **ROS 2 Standard** specifications. Violation of these rules typically results in entity creation failure or immediate communication incompatibility.
 
-  chat.experimental.incrementalRendering.enabled : Enable or disable incremental response rendering with optional block-level animation when streaming chat responses. Default: true.
-  chat.experimental.incrementalRendering.animationStyle : Configure the animation style for incremental response rendering. Options: none, fade, rise, blur, scale, slide, reveal. Default: fade.
-  chat.experimental.incrementalRendering.buffering : Configure how content is buffered before rendering during incremental response rendering. Lower buffering levels render faster but may show incomplete sentences or partially-formed Markdown. Options: off, word, paragraph. Default: word.
-Sort agent sessions by recent activity
-When you accumulate many agent sessions, finding the right one can be difficult. The Agent Sessions view supports sorting sessions by when they were created or last updated, so you can quickly pick up where you left off.
+<hr class="hr-grad-left">
 
-Screenshot of the Chat view with the filter context menu open, showing the sort by updated/created actions.
+## Stage 1
+*Intra-entity Dependency Validation*
 
-System notifications for background terminal commands
-When an agent runs a long-running terminal command in the background, it can be easy to lose track of its progress. These commands now surface as System notifications in the chat response, so you can monitor their status without switching to the terminal.
+<div class="std-list">
 
-Screenshot of a system notification appearing in the chat response.
+  <a href="#rule-1" class="std-item">
+    <div class="std-header">
+      <span class="std-no">1</span>
+      <span class="std-id">HIST ↔ RESLIM</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      [HIST.kind = KEEP_LAST] ∧ [HIST.depth > RESLIM.mpi]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+    <div class="std-reference">
+      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+    </div>
+  </a>
 
-Agent experience
-Visual Studio Code Agents (Insiders)
-Note: The Visual Studio Code Agents app is currently in preview and only available when installing VS Code Insiders.
+  <a href="#rule-2" class="std-item">
+    <div class="std-header">
+      <span class="std-no">2</span>
+      <span class="std-id">RESLIM ↔ RESLIM</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      [max_samples < max_samples_per_instance]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub, Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+    <div class="std-reference">
+      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+    </div>
+  </a>
 
-The Visual Studio Code Agents app is a companion app that ships alongside VS Code Insiders, providing a focused, agent-native environment where you can run parallel sessions across repos, review diffs inline, and iterate on multi-step coding tasks. Introduced in 1.115, the app continues to evolve based on feedback.
+</div>
 
-Updates in this release:
+<hr class="hr-grad-left">
 
-Create sub-sessions: Select + in the session title to spawn a sub-session from the current session. This is handy for starting additional work in context, such as parallel research or a code review, without losing your place in the parent session.
-Inline change rendering: Improvements to how changes are rendered inline make it easier to scan and compare diffs when the agent edits your code.
-Update experience: Improvements to the update flow across operating systems make it smoother to stay on the latest version.
-Theming, chat response, and UX polish: Continued refinements to theming, session list and response rendering, and overall UX across the app.
-Screenshot of the VS Code Agents - Insiders app with proposed changes.
+## Stage 2
+*Inter-entity Dependency Validation*
 
-As in previous releases, you can open the app via the same methods:
+<div class="std-list">
 
-Launch Visual Studio Code Agents - Insiders from your Start menu or Applications folder in the OS.
-Run Chat: Open Agents Application from the VS Code Insiders Command Palette.
-Select Try out the new Agents app from the VS Code Insiders welcome page.
-Terminal
-Launch Copilot CLI with a custom terminal profile
-The Copilot CLI terminal profile can now be launched from the terminal panel, even when your default terminal profile is set to a non-default shell, such as fish on macOS or Linux, or Git Bash on Windows.
+  <a href="#rule-21" class="std-item">
+    <div class="std-header">
+      <span class="std-no">21</span>
+      <span class="std-id">PART ↔ PART</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      [Writer.PART ∩ Reader.PART] = ∅
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+    <div class="std-reference">
+      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+    </div>
+  </a>
 
-Previously, selecting GitHub Copilot CLI from the terminal profile picker in this configuration produced a No terminal profile options provided for id 'copilot-cli' error and the terminal failed to start.
+  <a href="#rule-22" class="std-item">
+    <div class="std-header">
+      <span class="std-no">22</span>
+      <span class="std-id">RELIAB ↔ RELIAB</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      [Writer.RELIAB < Reader.RELIAB]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+    <div class="std-reference">
+      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+    </div>
+  </a>
 
-Terminal title for agent CLIs
-Agent CLIs like Copilot CLI, Claude Code, and Gemini CLI typically run as node processes, which meant the terminal title showed a generic node label. This made it hard to tell which agent was running in each terminal. The terminal now detects these agent CLIs as a distinct shell type and uses the OSC title sequence emitted by the CLI as the terminal title, so each terminal clearly identifies the agent it is hosting.
+  <a href="#rule-23" class="std-item">
+    <div class="std-header">
+      <span class="std-no">23</span>
+      <span class="std-id">DURABL ↔ DURABL</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      [Writer.DURABL < Reader.DURABL]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+    <div class="std-reference">
+      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+    </div>
+  </a>
 
-Screenshot showing the terminal title reflecting the running agent CLI via its OSC title sequence.
+  <a href="#rule-24" class="std-item">
+    <div class="std-header">
+      <span class="std-no">24</span>
+      <span class="std-id">DEADLN ↔ DEADLN</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      [Writer.DEADLN.period > Reader.DEADLN.period]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+    <div class="std-reference">
+      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+    </div>
+  </a>
 
-The improved detection covers Copilot CLI, Claude Code, and Gemini CLI on macOS, Linux, and Windows. Codex is not yet detected on macOS because it does not currently emit an OSC title sequence. This behavior is enabled by default and can be toggled with the   terminal.integrated.tabs.allowAgentCliTitle setting.
+  <a href="#rule-25" class="std-item">
+    <div class="std-header">
+      <span class="std-no">25</span>
+      <span class="std-id">LIVENS ↔ LIVENS</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      [W.LIVENS < R.LIVENS] ∨ [W.lease > R.lease]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+    <div class="std-reference">
+      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+    </div>
+  </a>
 
-Languages
-TypeScript 6.0.3
-This release includes the TypeScript 6.0.3 recovery release. This minor update fixes a few import bugs and regressions.
+  <a href="#rule-26" class="std-item">
+    <div class="std-header">
+      <span class="std-no">26</span>
+      <span class="std-id">OWNST ↔ OWNST</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      [Writer.OWNST ≠ Reader.OWNST]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+    <div class="std-reference">
+      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+    </div>
+  </a>
 
-Deprecated features and settings
-New deprecations in this release
-Upcoming deprecations
-Thank you
-Contributions to our issue tracking:
+  <a href="#rule-27" class="std-item">
+    <div class="std-header">
+      <span class="std-no">27</span>
+      <span class="std-id">DESTORD ↔ DESTORD</span>
+      <span style="font-size: 0.8em; color: #999;">Structural</span>
+    </div>
+    <div class="std-condition">
+      [Writer.DESTORD < Reader.DESTORD]
+    </div>
+    <div class="std-footer">
+      <div class="std-tag"><b>Entity</b> Pub ↔ Sub</div>
+      <div class="std-tag"><b>Basis</b> STD</div>
+    </div>
+    <div class="std-reference">
+      OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다.
+    </div>
+  </a>
 
-@gjsjohnmurray (John Murray)
-@RedCMD (RedCMD)
-@IllusionMH (Andrii Dieiev)
-@albertosantini (Alberto Santini)
-Contributions to vscode:
+</div>
+<hr class="hr-grad-left">
 
-@abadawi591 (abadawi-msft): Abadawi/send has image to router PR #308321
-@andysharman: fix: default session mode experiment not applying on first session PR #308905
-@bocan (Chris Funderburg): Fix crash on null entries in launch.json configurations array PR #308235
-@jamestut (James Nugraha): await openEditor in terminal editor split to prevent shadow tab PR #309167
-@maruthang (Maruthan G)
-fix(tasks): add hover description for required property in taskDefinitions contribution schema (#275670) PR #310764
-fix(debug): identify instruction breakpoints by resolved address to allow removal when instructionReference changes (#289678) PR #310763
-fix(terminal-chat): dedupe terminal tool-session registrations to prevent listener leak (#309906) PR #310740
-fix(chat): guard renderWelcomeViewContentIfNeeded against undisposed input part (#310356) PR #310822
-fix: prevent listener leak from duplicate status IDs in language status (#309042) PR #309159
-fix(chat): cancel in-flight streaming tool invocations when response is cancelled (#288701) PR #310979
-@matts1 (Matt): feat: Support switching to the main window. PR #306573
-@NikolaRHristov (Nikola Hristov): fix: make protected members public to resolve mangler build errors PR #310195
-@OscarPalafox (Oscar Palafox Verna): Consistent include pathing for new 2026 in theme-defaults PR #309880
-@RieBi (Sviatoslav Zubar): Additionaly to newest published version of package also show currently installed version PR #308569
-@yogeshwaran-c (Yogeshwaran C)
-json: fix language model cache evicting at capacity instead of overflow PR #309176
-Do not open debug view on first session start when openDebug is openOnDebugBreak PR #309133
-testing: align right-click menu with hover bar on compressed result rows PR #309139
-Adopt CodeAction type for built-in css server PR #310055
-We really appreciate people trying our new features as soon as they are ready, so check back here often and learn what's new.
-
-If you'd like to read release notes for previous VS Code versions, go to Updates on code.visualstudio.com.
-
+<script>
+document.querySelectorAll('.std-item').forEach((item) => {
+  item.addEventListener('click', (event) => {
+    event.preventDefault();
+    item.classList.toggle('is-open');
+  });
+});
+</script>
