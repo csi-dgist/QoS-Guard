@@ -139,8 +139,8 @@ This page describes the QoS dependency and consistency rules derived from the **
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.2 - Section 7.1.3.18, History</b><br>
-      "The setting of HISTORY depth must be consistent with the RESOURCE_LIMITS max_samples_per_instance. For these
+      <b>OMG DDS Specification v1.2 - Section 7.1.3.18, HISTORY</b><br><br>
+      "The setting of HISTORY depth must be consistent with the RESOURCE_LIMITS max_samples_per_instance. <br>For these
 two QoS to be consistent, they must verify that <b>depth <= max_samples_per_instance</b>."
     </div>
   </a>
@@ -159,8 +159,9 @@ two QoS to be consistent, they must verify that <b>depth <= max_samples_per_inst
       <div class="std-tag"><b>Basis</b> STD</div>
     </div>
     <div class="std-reference">
-      <b>OMG DDS Specification v1.4 - Section 2.2.3, HistoryQoSPolicy</b><br>
-      "OMG 문서의 ... 위치에 "..." 라고 명시되어 있습니다."
+      <b>OMG DDS Specification v1.2 - Section 7.1.3.19, RESOURCE_LIMITS</b><br><br>
+      "The setting of RESOURCE_LIMITS max_samples must be consistent with the max_samples_per_instance. <br>For these
+two values to be consistent they must verify that <b>max_samples >= max_samples_per_instance.</b>"
     </div>
   </a>
 
