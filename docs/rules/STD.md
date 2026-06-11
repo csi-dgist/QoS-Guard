@@ -9,55 +9,60 @@
   margin: 24px 0;
 }
 
-/* 🔥 [핵심 수정] 깃허브 기본 테마를 완벽히 이기도록 선택자 강화 및 모든 상태에서 하늘색/파란색 박스 원천 차단 */
-.std-list details.std-item,
-.std-list details.std-item:not([open]),
-.std-list details.std-item[open] {
+/* 🔥 [최종 해결] 깃허브 마크다운 테마(.markdown-body)의 기본 하늘색/파란색 설정을 완전히 박살내는 초강력 고정 규칙 */
+.markdown-body .std-list details.std-item,
+.markdown-body details.std-item,
+.std-item {
   border: 1px solid #e1e4e8 !important;
   border-radius: 10px !important;
   background: #ffffff !important;
   background-color: #ffffff !important;
   padding: 16px 20px !important;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
   position: relative;
   text-decoration: none !important;
   color: inherit !important;
-  display: block;
+  display: block !important;
   cursor: pointer;
   outline: none !important;
   box-shadow: none !important;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* 브라우저 기본 화살표 제거 */
-.std-list details.std-item summary {
-  display: block;
-  list-style: none;
+/* 브라우저 및 깃허브 테마의 기본 화살표(삼각형, > 모양 등) 완전히 제거 */
+.markdown-body .std-list details.std-item summary {
+  display: block !important;
+  list-style: none !important;
   outline: none !important;
 }
-.std-list details.std-item summary::-webkit-details-marker {
-  display: none;
+.markdown-body .std-list details.std-item summary::-webkit-details-marker,
+.markdown-body .std-list details.std-item summary::before,
+.markdown-body .std-list details.std-item summary::after,
+.std-item::before,
+.std-item::after {
+  display: none !important;
+  content: none !important;
 }
 
-/* 포커스나 액티브 상태에서도 무조건 흰색 바탕 유지 */
-.std-list details.std-item:focus,
-.std-list details.std-item:active,
-.std-list details.std-item summary:focus,
-.std-list details.std-item summary:active {
+/* 열렸을 때, 포커스되었을 때 등 모든 상태에서 무조건 순수 흰색 바탕과 연회색 테두리 고정 */
+.markdown-body .std-list details.std-item[open],
+.markdown-body .std-list details.std-item:focus,
+.markdown-body .std-list details.std-item:active,
+.markdown-body .std-list details.std-item summary:focus {
   background: #ffffff !important;
   background-color: #ffffff !important;
-  border-color: #e1e4e8 !important;
+  border: 1px solid #e1e4e8 !important;
   outline: none !important;
   box-shadow: none !important;
 }
 
-/* 호버 효과: 오직 마우스를 올렸을 때만 원래 만드신 보라색 포인트 허용 */
-.std-list details.std-item:hover {
+/* 호버 효과: 오직 마우스를 올렸을 때만 원래 만드신 보라색 포인트와 부드러운 그림자 허용 */
+.markdown-body .std-list details.std-item:hover {
   box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
   border-color: #4e37e6 !important;
   background: #ffffff !important;
   background-color: #ffffff !important;
-  transform: translateY(-2px);
+  transform: translateY(-2px) !important;
 }
 
 /* 상단 라인: 번호와 타이틀 */
@@ -82,9 +87,9 @@
   transition: 0.3s;
 }
 
-.std-list details.std-item:hover .std-no {
-  background: #4e37e6;
-  color: #fff;
+.markdown-body .std-list details.std-item:hover .std-no {
+  background: #4e37e6 !important;
+  color: #fff !important;
 }
 
 .std-id {
