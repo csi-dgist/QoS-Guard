@@ -221,11 +221,6 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 * **Subscriber 2 (Late-joiner):** Launched after Publisher finishes sending 1,000 samples.
 * **Total Samples Sent:** 1,000
 
-* **QoS Profile:** Reliability = `RELIABLE`, History Kind = `KEEP_LAST`
-* **Network Condition (Loss):** 5% Packet Loss (Simulated via `tc`)
-* **Network Condition (Delay):** 100ms to 500ms RTT (Round Trip Time)
-* **Publication Period (PP):** 100ms (10Hz)
-* **Variable:** History Depth ($1 \sim N$)
 
 **2. Test Scenario**
 
