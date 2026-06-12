@@ -588,7 +588,8 @@ return false;
 return true;
 ```
 - **RMW/Implementation: CycloneDDS** 
-```// Exclusive ownership is implemented by dropping all data from all writers
+```cpp
+// Exclusive ownership is implemented by dropping all data from all writers
    other than "wr_iid", unless "wr_iid" is 0 or the strength of the arriving
    sample is higher than the current strength of the instance (in "strength").
 
