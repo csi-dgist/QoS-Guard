@@ -248,10 +248,10 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 
 **1. Experimental Setup**
 
-* **QoS Profile:** Reliability = `RELIABLE`, History Kind = `KEEP_LAST`
+* **DATA:** 1kB, 10Hz
+* **QoS:** RELIABILITY(`RELIABLE`), HISTORY(`KEEP_LAST`)
 * **Network Condition (Loss):** 5% Packet Loss (Simulated via `tc`)
 * **Network Condition (Delay):** 100ms to 500ms RTT (Round Trip Time)
-* **Publication Period (PP):** 100ms (10Hz)
 * **Variable:** History Depth ($1 \sim N$)
 
 **2. Test Scenario**
