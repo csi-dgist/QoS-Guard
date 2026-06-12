@@ -310,14 +310,15 @@ When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effectiv
 
 **1. Experimental Setup**
 
-* **QoS Profile:** Reliability = `RELIABLE`, Lifespan = `Variable`
+* **DATA:** 1kB, 10Hz
+* **QoS:** RELIABILITY(`RELIABLE`), HISTORY(`KEEP_ALL`)
 * **Publication Period (PP):** 10ms to 100ms
 * **Lifespan Duration:** 100ms to 1000ms
 * **Total Samples:** 10,000
 
 **2. Test Scenario**
 
-1.  Fix the total number of samples to be sent at 10,000.
+1.  Set the network packet loss to 5% and RTT to a range of 100ms to 500ms.
 2.  Perform a grid search by varying the **Publish Period (PP)** from 10ms to 100ms and **Lifespan duration** from 100ms to 1000ms.
 3.  Measure the total number of samples successfully received at the Subscriber.
 4.  Identify the threshold where sample reception starts to drop despite using `RELIABLE` QoS.
@@ -328,8 +329,8 @@ When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effectiv
   <img src="../../images/rule33.png" width="500">
 </div>
 
-* **High Reception Zone (Blue):** When Lifespan is sufficiently longer than RTT and PP, nearly all 10,000 samples are received.
-* **Low Reception Zone (White/Gray):** When Lifespan duration is close to or shorter than the round-trip retransmission time, samples expire before they can be successfully delivered or processed.
+* **High Reception Zone (Blue):** When Lifespan is sufficiently longer than PP + 2 x RTT, nearly all 10,000 samples are received.
+* **Low Reception Zone (White/Gray):** When Lifespan duration is close to or shorter than PP + 2 x RTT, samples expire before they can be successfully delivered or processed.
 
 **4. Empirical Conclusion**
 
