@@ -167,13 +167,13 @@ This page describes the QoS dependency rules derived from the specific implement
       <tr><td>11</td><td>LIVENS → OWNST</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>12</td><td>LIVENS → RDLIFE</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
       <tr><td>13</td><td>RDLIFE → DURABL</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
-      <tr><td>14</td><td>PART → DEADLN</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
-      <tr><td>15</td><td>PART → LIVENS</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>14</td><td>PART → DEADLN</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
+      <tr><td>15</td><td>PART → LIVENS</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
       <tr><td>16</td><td>OWNST → WDLIFE</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>17</td><td>HIST → LFSPAN</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>18</td><td>RESLIM → LFSPAN</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>19</td><td>ENTFAC → DURABL</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
-      <tr><td>20</td><td>PART → DURABL</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>20</td><td>PART → DURABL</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
       <tr><td>28</td><td>WDLIFE → RDLIFE</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
       <tr><td>29</td><td>WDLIFE → RDLIFE</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
       <tr><td>30</td><td>WDLIFE → RDLIFE</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
@@ -1020,6 +1020,8 @@ deadline_unregister_instance_locked (&rhc->deadline, &inst->deadline);
 ```
 - **RMW/Implementation: CycloneDDS** 
 ```cpp
+//  The combination of partition rematch and transient-local is recognised as a design ambiguity, and it is not clearly defined whether past WHC data should be re-supplied during rematch.
+
   // Check partition first: not only is partition not an RxO QoS, we also shouldn't flag
   // any RxO QoS mismatch when the partitions don't match
   if ((mask & DDSI_QP_PARTITION) && !partitions_match_p (rd_qos, wr_qos))
@@ -1099,6 +1101,22 @@ ddsrt_mutex_lock (&pwr->e.lock); }}
 - **RMW/Implementation: CycloneDDS** 
 ```cpp
 
+//  The combination of partition rematch and transient-local is recognised as a design ambiguity, and it is not clearly defined whether past WHC data should be re-supplied during rematch.
+
+// If a rematch occurs following an unmatch due to a partition change, the Reader resets the alive tracking for that Writer from the beginning and updates the LIVELINESS_CHANGED counter from REMOVE to ADD.
+
+    if (rd->status_cb)
+    {
+      ddsi_status_cb_data_t data;
+      data.handle = pwr->e.iid;
+      data.add = true;
+      data.extra = (uint32_t) (alive_state->alive ? DDSI_LIVELINESS_CHANGED_ADD_ALIVE : DDSI_LIVELINESS_CHANGED_ADD_NOT_ALIVE);
+
+      data.raw_status_id = (int) DDS_SUBSCRIPTION_MATCHED_STATUS_ID;
+      (rd->status_cb) (rd->status_cb_entity, &data);
+
+      data.raw_status_id = (int) DDS_LIVELINESS_CHANGED_STATUS_ID;
+      (rd->status_cb) (rd->status_cb_entity, &data);
 ```
 
 <hr class="hr-dashed">
@@ -1296,6 +1314,25 @@ m->in_sync = PRMSS_OUT_OF_SYNC;
 else
 m->in_sync = PRMSS_SYNC;
 m->u.not_in_sync.end_of_tl_seq = MAX_SEQ_NUMBER;
+```
+
+- **RMW/Implementation: CycloneDDS** 
+```cpp
+//  The combination of partition rematch and transient-local is recognised as a design ambiguity, and it is not clearly defined whether past WHC data should be re-supplied during rematch.
+
+else if (delta & (DDSI_QP_RXO_MASK | DDSI_QP_PARTITION))
+    {
+      /* Cyclone doesn't (yet) support changing QoS that affect matching.  Simply re-doing the
+         matching is easy enough, but the consequences are very weird.  E.g., what is the
+         expectation if a transient-local writer has published data while its partition QoS is set
+         to A, and then changes its partition to B?  Should a reader in B get the data originally
+         published in A?
+
+         One can do the same thing with other RxO QoS settings, e.g., the latency budget setting.
+         I find that weird, and I'd rather have sane answers to these questions than set up these
+         traps and pitfalls for people to walk into ...
+       */
+      ret = DDS_RETCODE_UNSUPPORTED;
 ```
 
 <hr class="hr-dashed">
