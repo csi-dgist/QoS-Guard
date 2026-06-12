@@ -258,7 +258,7 @@ Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifes
 
 1.  Set the network packet loss to 5% and RTT to a range of 100ms to 500ms.
 2.  Transmit 1,000 samples from Publisher to Subscriber.
-3.  Decrease the History Depth incrementally for each test run.
+3.  Decrease the History Depth incrementally for each test run. (10 to 1)
 
 **3. Experimental Observation**
 
