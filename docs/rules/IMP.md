@@ -158,7 +158,7 @@ This page describes the QoS dependency rules derived from the specific implement
     </thead>
     <tbody>
       <tr><td>3</td><td>RELIAB → DURABL</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
-      <tr><td>4</td><td>RELIAB → OWNST</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
+      <tr><td>4</td><td>RELIAB → OWNST</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>5</td><td>RELIAB → LIVENS</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>7</td><td>LFSPAN → DEADLN</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>8</td><td>HIST → DESTORD</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
