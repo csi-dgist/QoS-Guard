@@ -911,14 +911,52 @@ else { timer_owner_->status = LivelinessData::WriterStatus::NOT_ALIVE; }
 ```
 - **RMW/Implementation: CycloneDDS**
 ```cpp
-// Upon expiry of the lease term,
-case DDSI_EK_PROXY_WRITER:
-ddsi_proxy_writer_set_notalive ((struct ddsi_proxy_writer *) l->entity, true);
-break;
-case DDSI_EK_WRITER:
-ddsi_writer_set_notalive ((struct ddsi_writer *) l->entity, true);
-break;
-// However, if set to infinite, it will not expire, so the data deletion function will not operate.
+// If there is no lease, Liveliness cannot detect an abnormal termination of the Writer.
+
+  if (pwr->c.xqos->liveliness.lease_duration != DDS_INFINITY)
+  {
+    ddsrt_etime_t texpire = ddsrt_etime_add_duration (ddsrt_time_elapsed (), pwr->c.xqos->liveliness.lease_duration);
+    pwr->lease = ddsi_lease_new (texpire, pwr->c.xqos->liveliness.lease_duration, &pwr->e);
+    if (pwr->c.xqos->liveliness.kind != DDS_LIVELINESS_MANUAL_BY_TOPIC)
+    {
+      ddsrt_mutex_lock (&proxypp->e.lock);
+      ddsi_proxy_participant_add_pwr_lease_locked (proxypp, pwr);
+      ddsrt_mutex_unlock (&proxypp->e.lock);
+    }
+    else
+    {
+      ddsi_lease_register (pwr->lease);
+    }
+  }
+  else
+  {
+    pwr->lease = NULL;
+  }
+
+// For `autopurge_nowriter` to work, all Writers must first be unregistered so that `wrcount == 0`. If `Liveliness=∞`, this path may not be called.
+
+  if (delta < 0 && rd->rhc)
+  {
+    struct ddsi_writer_info wrinfo;
+    ddsi_make_writer_info (&wrinfo, &pwr->e, pwr->c.xqos, DDSI_STATUSINFO_UNREGISTER);
+    ddsi_rhc_unregister_wr (rd->rhc, &wrinfo);
+  }
+
+// If the writer dies but is not unregistered, then wrcount > 0 → the instance remains ALIVE and is not a target for autopurge_nowriter.
+
+static uint32_t qmask_of_inst (const struct rhc_instance *inst)
+{
+  uint32_t qm = inst->isnew ? DDS_NEW_VIEW_STATE : DDS_NOT_NEW_VIEW_STATE;
+
+  if (inst->isdisposed)
+    qm |= DDS_NOT_ALIVE_DISPOSED_INSTANCE_STATE;
+  else if (inst->wrcount > 0)
+    qm |= DDS_ALIVE_INSTANCE_STATE;
+  else
+    qm |= DDS_NOT_ALIVE_NO_WRITERS_INSTANCE_STATE;
+
+  return qm;
+}
 ```
 
 <hr class="hr-dashed">
