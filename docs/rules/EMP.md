@@ -213,7 +213,8 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 *Let us prove that for late-joining data to be transmitted, the sample must not have expired.*
 
 **1. Experimental Setup**
-
+* **DATA:** 1kB, 10Hz
+* **QoS:** RELIABILITY(`RELIABLE`), HISTORY(`KEEP_ALL`)
 * **Publisher:** Durability = `TRANSIENT_LOCAL`, Lifespan = `50ms`
 * **Subscriber 1 (Existing):** Launched before Publisher.
 * **Subscriber 2 (Late-joiner):** Launched after Publisher finishes sending 1,000 samples.
@@ -222,7 +223,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 **2. Test Scenario**
 
 1.  Launch **Subscriber 1** to monitor live data.
-2.  Launch **Publisher** and transmit 1,000 samples (Total time taken > 50ms).
+2.  Launch **Publisher** and transmit 1,000 samples.
 3.  Confirm **Subscriber 1** received all 1,000 samples.
 4.  Launch **Subscriber 2** (Late-joiner) to retrieve historical data from the Publisher's buffer.
 
@@ -230,12 +231,12 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 | Entity | Expected Received | Actual Received | Status |
 | :--- | :---: | :---: | :---: |
-| <font size="4">Subscriber 1 (Live)</font> | <font size="4">1,000</font> | <font size="4">1,000</font> | <font size="4">✅ Success</font> |
+| <font size="4">Subscriber 1</font> | <font size="4">1,000</font> | <font size="4">1,000</font> | <font size="4">✅ Success</font> |
 | <font size="4">Subscriber 2 (Late)</font> | <font size="4">1,000</font> | <font size="4">**0**</font> | <font size="4">❌ Data Expired</font> |
 
 **4. Empirical Conclusion**
 
-Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifespan (50ms)** caused all buffered samples to be purged from the Publisher's queue before Subscriber 2 could connect.
+Even though `TRANSIENT_LOCAL` is set to store data for late-joiners, the **Lifespan (`50ms`)** caused all buffered samples to be purged from the Publisher's queue before Subscriber 2 could connect.
 
 <hr class="hr-dashed">
 
