@@ -165,7 +165,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <tr><td>9</td><td>RESLIM → DESTORD</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>10</td><td>DEADLN → OWNST</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>11</td><td>LIVENS → OWNST</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
-      <tr><td>12</td><td>LIVENS → RDLIFE</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>12</td><td>LIVENS → RDLIFE</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
       <tr><td>13</td><td>RDLIFE → DURABL</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
       <tr><td>14</td><td>PART → DEADLN</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
       <tr><td>15</td><td>PART → LIVENS</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
@@ -943,7 +943,26 @@ Duration_t autopurge_no_writer_samples_delay;
 * By default, c_TimeInfinite.
 */
 ```
+- **RMW/Implementation: CycloneDDS**
+```cpp
+    if (!inst_is_empty (inst))
+    {
+      /* Instance still has content - do not drop until application
+         takes the last sample.  Set the invalid sample if the latest
+         sample has been read already, so that the application can
+         read the change to not-alive.  (If the latest sample is still
+         unread, we don't bother, even though it means the application
+         won't see the timestamp for the unregister event. It shouldn't
+         care.) */
+// The Writer WHC retains the 'dispose' sample for a long time for lifecycle purposes, whereas the Reader purge can be deleted with a shorter delay.
 
+  /* Store available data into the late joining reader when it is reliable (we don't do
+     historical data for best-effort data over the wire, so also not locally). */
+  if (rd->xqos->reliability.kind > DDS_RELIABILITY_BEST_EFFORT && rd->xqos->durability.kind > DDS_DURABILITY_VOLATILE)
+    ddsi_deliver_historical_data (wr, rd);
+
+// Durable Reader performs out-of-sync catch-up on the assumption that the entire history has been received. Since `finite autopurge_disposed` deletes disposed data after a certain period of time, this is in direct contradiction to the requirement for ‘the entire history’.
+```
 <hr class="hr-dashed">
 
 <span id="rule-14"></span>
