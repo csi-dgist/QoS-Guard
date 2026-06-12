@@ -1,4 +1,4 @@
- # IMP Rules
+# IMP Rules
 
 <style>
 /* 전체 리스트 컨테이너 */
