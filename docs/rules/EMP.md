@@ -414,18 +414,17 @@ $LIVENS.lease ≥ DEADLN.period$
 
 **1. Experimental Setup**
 
-* **QoS Profile:** Durability = `TRANSIENT_LOCAL`, History = `KEEP_ALL`
+* **DATA:** 1kB, 10Hz
+* **QoS:** RELIABILITY(`RELIABLE`), HISTORY(`KEEP_ALL`), DURABILITY(`TRANSIENT_LOCAL`)
 * **Variable:** `max_samples_per_instance` (mpi) ranging from 1,000 to 5,000
-* **Data Volume:** Sample count up to 1,600
-* **Metric:** Latency (ms) required for the system to reach steady-state convergence
+* **Metric:** Latency (ms) - required for the system to reach steady-state convergence
 
 **2. Test Scenario**
 
 1.  Initialize a Publisher that sends samples continuously with `TRANSIENT_LOCAL` durability.
 2.  After a specific number of samples are published, introduce a Late-Joining Subscriber.
-3.  Vary the **max_samples_per_instance** setting on the Subscriber side.
+3.  Vary the **max_samples_per_instance** setting on the Pubscriber side.
 4.  Measure the latency between the sample generation time and the time it is actually processed by the late-joiner.
-5.  Observe how long the "catch-up" phase lasts before latency returns to normal levels.
 
 **3. Experimental Observation**
 
@@ -439,10 +438,6 @@ $LIVENS.lease ≥ DEADLN.period$
 **4. Empirical Conclusion**
 
 The experiment proves that setting an excessively high `max_samples_per_instance` for the sake of data completeness leads to a **"Recovery Latency Storm."** For a late-joining node, processing thousands of buffered historical samples simultaneously saturates the available bandwidth and CPU, causing current data to be delayed by tens of seconds.
-
-To balance data durability with system responsiveness, the resource limits must be tuned based on the expected maximum network downtime and the acceptable recovery window:
-$[DURABL ≥ TRAN_LOCAL] ∧ [KEEP_ALL] ⇒ mpi ≥ default$
-*(Note: $default$ should be calculated based on the maximum tolerable recovery time.)*
 
 <hr class="hr-dashed">
 
