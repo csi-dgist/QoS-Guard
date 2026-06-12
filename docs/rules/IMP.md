@@ -864,6 +864,35 @@ liveliness_kind_,
 liveliness_lease_duration_);
 }
 ```
+- **RMW/Implementation: CycloneDDS**
+```cpp
+// Writer fails to detect the death of Liveliness, so ownership (wr_iid) is not released
+  if (wr->xqos->liveliness.lease_duration != DDS_INFINITY)
+  {
+    wr->lease_duration = ddsrt_malloc (sizeof(*wr->lease_duration));
+    wr->lease_duration->ldur = wr->xqos->liveliness.lease_duration;
+  }
+  else
+  {
+    wr->lease_duration = NULL;
+  }
+
+// Lease expiry → not_alive → ownership release path
+      case DDSI_EK_PROXY_WRITER:
+        ddsi_proxy_writer_set_notalive ((struct ddsi_proxy_writer *) l->entity, true);
+        break;
+
+  if (delta < 0 && rd->rhc)
+  {
+    struct ddsi_writer_info wrinfo;
+    ddsi_make_writer_info (&wrinfo, &pwr->e, pwr->c.xqos, DDSI_STATUSINFO_UNREGISTER);
+    ddsi_rhc_unregister_wr (rd->rhc, &wrinfo);
+  }
+
+// Exclusive ownership is implemented by dropping all data from all writers other than "wr_iid", unless "wr_iid" is 0 or the strength of the arriving sample is higher than the current strength of the instance (in "strength").
+// The writer id is only reset by unregistering, in which case it is natural that ownership is up for grabs again.
+```
+
 
 <hr class="hr-dashed">
 
