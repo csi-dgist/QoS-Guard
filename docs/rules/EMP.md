@@ -210,7 +210,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 
 <span id="rule-6"></span>
 ### Rule 6
-*Validates why Durability (Transient Local) requires a non-zero Lifespan to provide late-joining data.*
+*Let us prove that for late-joining data to be transmitted, the sample must not have expired.*
 
 **1. Experimental Setup**
 
