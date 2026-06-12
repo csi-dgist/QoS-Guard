@@ -3,7 +3,7 @@
 <style>
 .md-typeset table td:first-child {
   text-align: center;
-  padding: 8px !important; 
+  padding: 8px !important;  
 }
 
 .md-typeset table td:first-child a {
