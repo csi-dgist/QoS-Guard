@@ -117,6 +117,11 @@
   list-style: none;
 }
 
+.impl-summary-box summary:focus {
+  outline: 2px solid #4e37e6;
+  outline-offset: 0;
+}
+
 .impl-summary-box summary::-webkit-details-marker {
   display: none;
 }
