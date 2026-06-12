@@ -166,7 +166,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <tr><td>10</td><td>DEADLN → OWNST</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>11</td><td>LIVENS → OWNST</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>12</td><td>LIVENS → RDLIFE</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
-      <tr><td>13</td><td>RDLIFE → DURABL</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
+      <tr><td>13</td><td>RDLIFE → DURABL</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
       <tr><td>14</td><td>PART → DEADLN</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
       <tr><td>15</td><td>PART → LIVENS</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
       <tr><td>16</td><td>OWNST → WDLIFE</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
