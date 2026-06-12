@@ -213,6 +213,7 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 *Let us prove that for late-joining data to be transmitted, the sample must not have expired.*
 
 **1. Experimental Setup**
+* **Variable:** History Depth ($1 \sim N$)
 * **DATA:** 1kB, 10Hz
 * **QoS:** RELIABILITY(`RELIABLE`), HISTORY(`KEEP_ALL`)
 * **Publisher:** Durability = `TRANSIENT_LOCAL`, Lifespan = `50ms`
