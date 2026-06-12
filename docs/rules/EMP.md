@@ -344,9 +344,10 @@ Even with `RELIABLE` settings, data loss occurs if the **Lifespan duration** is 
 
 **1. Experimental Setup**
 
-* **QoS Profile:** Deadline Period = `150ms`, Reliability = `RELIABLE` vs `BEST_EFFORT`
+* **DATA:** 1kB, 10Hz
+* **QoS:** HISTORY(`KEEP_ALL`)
+* **Variables:** Deadline Period = `150ms`, Reliability = `RELIABLE` vs `BEST_EFFORT`
 * **Network Condition (Loss):** 5% Packet Loss (Simulated via `tc`)
-* **Publication Period (PP):** 100ms
 * **Total Samples:** 1,000
 
 **2. Test Scenario**
