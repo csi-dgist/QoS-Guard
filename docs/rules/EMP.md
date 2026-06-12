@@ -295,7 +295,7 @@ In a lossy network (5% loss), a Reliable connection requires retransmission of l
 **3. Experimental Observation**
 
 <div align="center">
-  <img src="../../images/rule32.png" width="500">
+  <img src="../../images/Rule32.png" width="500">
 </div>
 
 **4. Empirical Conclusion**
