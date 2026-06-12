@@ -167,13 +167,13 @@ This page describes the QoS dependency rules derived from the specific implement
       <tr><td>11</td><td>LIVENS → OWNST</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>12</td><td>LIVENS → RDLIFE</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
       <tr><td>13</td><td>RDLIFE → DURABL</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
-      <tr><td>14</td><td>PART → DEADLN</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
-      <tr><td>15</td><td>PART → LIVENS</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
+      <tr><td>14</td><td>PART → DEADLN</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>15</td><td>PART → LIVENS</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>16</td><td>OWNST → WDLIFE</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>17</td><td>HIST → LFSPAN</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>18</td><td>RESLIM → LFSPAN</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>19</td><td>ENTFAC → DURABL</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
-      <tr><td>20</td><td>PART → DURABL</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
+      <tr><td>20</td><td>PART → DURABL</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>28</td><td>WDLIFE → RDLIFE</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
       <tr><td>29</td><td>WDLIFE → RDLIFE</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
       <tr><td>30</td><td>WDLIFE → RDLIFE</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
@@ -1009,6 +1009,7 @@ Duration_t autopurge_no_writer_samples_delay;
 ```cpp
 // Partition change → Unmatching → Call ddsi_rhc_unregister_wr (rd->rhc, &wrinfo);
 // ⇒ Instance is immediately unregistered from the deadline. → Deadline timer is not updated.
+
 if (inst->deadline_reg)
 {
 inst->deadline_reg = 0;
@@ -1016,6 +1017,60 @@ deadline_unregister_instance_locked (&rhc->deadline, &inst->deadline);
 }
 // During the process of dynamically changing partitions, instances are removed from the deadline list due to writer unregistration.
 // Since the timer is not reset to the "next expiry time" upon unregistration, the deadline timer ceases to function once the list becomes empty.
+```
+- **RMW/Implementation: CycloneDDS** 
+```cpp
+  // Check partition first: not only is partition not an RxO QoS, we also shouldn't flag
+  // any RxO QoS mismatch when the partitions don't match
+  if ((mask & DDSI_QP_PARTITION) && !partitions_match_p (rd_qos, wr_qos))
+    return false;
+
+// If the connection is lost, the Reader disconnects from the proxy writer and sends an unregister message to the RHC.
+
+void ddsi_reader_drop_connection (const struct ddsi_guid *rd_guid, const struct ddsi_proxy_writer *pwr)
+{
+  struct ddsi_reader *rd;
+  if ((rd = ddsi_entidx_lookup_reader_guid (pwr->e.gv->entity_index, rd_guid)) != NULL)
+  {
+    struct ddsi_rd_pwr_match *m;
+    ddsrt_mutex_lock (&rd->e.lock);
+    if ((m = ddsrt_avl_lookup (&ddsi_rd_writers_treedef, &rd->writers, &pwr->e.guid)) != NULL)
+    {
+      ddsrt_avl_delete (&ddsi_rd_writers_treedef, &rd->writers, m);
+      rd->num_writers--;
+    }
+
+    ddsrt_mutex_unlock (&rd->e.lock);
+    if (m != NULL)
+    {
+      if (rd->rhc)
+      {
+        struct ddsi_writer_info wrinfo;
+        ddsi_make_writer_info (&wrinfo, &pwr->e, pwr->c.xqos, DDSI_STATUSINFO_UNREGISTER);
+        ddsi_rhc_unregister_wr (rd->rhc, &wrinfo);
+
+// When deleted, the deadline will also be removed
+
+static void free_empty_instance (struct rhc_instance *inst, struct dds_rhc_default *rhc)
+{
+  assert (inst_is_empty (inst));
+  ddsi_tkmap_instance_unref (rhc->tkmap, inst->tk);
+#ifdef DDS_HAS_DEADLINE_MISSED
+  if (inst->deadline_reg)
+    ddsi_deadline_unregister_instance_locked (&rhc->deadline, &inst->deadline);
+#endif
+
+// If a new sample arrives after a partition change and is rematched, deadline_register is called if a new instance has been created or if deadline_reg == 0
+
+    else
+    {
+      if (inst->deadline_reg)
+        ddsi_deadline_renew_instance_locked (&rhc->deadline, &inst->deadline);
+      else
+      {
+        ddsi_deadline_register_instance_locked (&rhc->deadline, &inst->deadline, ddsrt_time_monotonic ());
+        inst->deadline_reg = 1;
+      }
 ```
 
 <hr class="hr-dashed">
@@ -1039,6 +1094,11 @@ while (pwr->alive_vclock == alive_state.vclock && (m = ddsrt_avl_lookup_succ (&
 ddsi_reader_update_notify_pwr_alive_state_guid (&rdguid, pwr, &alive_state); 
 ddsrt_mutex_lock (&pwr->e.lock); }}
 // → The recipients of the notification are only the readers listed in pwr→readers.
+```
+
+- **RMW/Implementation: CycloneDDS** 
+```cpp
+
 ```
 
 <hr class="hr-dashed">
