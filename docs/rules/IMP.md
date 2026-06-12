@@ -99,10 +99,89 @@
   margin-right: 5px;
   font-weight: 600;
 }
+
+ .impl-table-wrap {
+  margin: 24px 0;
+  overflow-x: auto;
+}
+
+.impl-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #e1e4e8;
+  background: #ffffff;
+  font-size: 0.92em;
+}
+
+.impl-table th,
+.impl-table td {
+  border: 1px solid #e1e4e8;
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.impl-table th {
+  background: #f8f9fa;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.impl-table td:nth-child(2) {
+  text-align: left;
+  font-family: 'Consolas', 'Monaco', monospace;
+  color: #000000;
+}
+
+.impl-o {
+  color: #4e37e6;
+  font-weight: 800;
+}
+
+.impl-x {
+  color: #999999;
+  font-weight: 800;
+}
+
+ 
 </style>
 
 This page describes the QoS dependency rules derived from the specific implementation behaviors of ROS 2 Middlewares (RMWs) such as eProsima Fast DDS and Eclipse Cyclone DDS. These dependencies are not explicitly mandated by the DDS standard but are critical for functional consistency in practice.
-
+<div class="impl-table-wrap">
+  <table class="impl-table">
+    <thead>
+      <tr>
+        <th>Rule</th>
+        <th>Dependency</th>
+        <th>FastDDS Code</th>
+        <th>CycloneDDS Code</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>3</td><td>RELIAB → DURABL</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>4</td><td>RELIAB → OWNST</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
+      <tr><td>5</td><td>RELIAB → LIVENS</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>7</td><td>LFSPAN → DEADLN</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>8</td><td>HIST → DESTORD</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>9</td><td>RESLIM → DESTORD</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>10</td><td>DEADLN → OWNST</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>11</td><td>LIVENS → OWNST</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
+      <tr><td>12</td><td>LIVENS → RDLIFE</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>13</td><td>RDLIFE → DURABL</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
+      <tr><td>14</td><td>PART → DEADLN</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
+      <tr><td>15</td><td>PART → LIVENS</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
+      <tr><td>16</td><td>OWNST → WDLIFE</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>17</td><td>HIST → LFSPAN</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>18</td><td>RESLIM → LFSPAN</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>19</td><td>ENTFAC → DURABL</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>20</td><td>PART → DURABL</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
+      <tr><td>28</td><td>WDLIFE → RDLIFE</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>29</td><td>WDLIFE → RDLIFE</td><td class="impl-x">X</td><td class="impl-x">X</td></tr>
+      <tr><td>30</td><td>WDLIFE → RDLIFE</td><td class="impl-x">X</td><td class="impl-x">X</td></tr>
+      <tr><td>34</td><td>RELIAB → WDLIFE</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+      <tr><td>40</td><td>DURABL → DEADLN</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
+    </tbody>
+  </table>
+</div>
 <hr class="hr-grad-left">
 
 ## Stage 1
