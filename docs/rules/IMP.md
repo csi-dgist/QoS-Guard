@@ -589,11 +589,41 @@ return true;
 ```
 - **RMW/Implementation: CycloneDDS** 
 ```cpp
-// Exclusive ownership is implemented by dropping all data from all writers
-   other than "wr_iid", unless "wr_iid" is 0 or the strength of the arriving
-   sample is higher than the current strength of the instance (in "strength").
-// The writer id is only reset by unregistering, in which case it is natural
-   that ownership is up for grabs again.
+// Exclusive ownership is implemented by dropping all data from all writers other than "wr_iid", unless "wr_iid" is 0 or the strength of the arriving sample is higher than the current strength of the instance (in "strength").
+// The writer id is only reset by unregistering, in which case it is natural that ownership is up for grabs again.
+
+if (rhc->exclusive_ownership && inst->wr_iid_islive && inst->wr_iid != wrinfo->iid)
+  {
+    int32_t strength = wrinfo->ownership_strength;
+    if (strength > inst->strength) {
+      /* ok */
+    } else if (strength < inst->strength) {
+      return false;
+    } else if (inst_accepts_sample_by_writer_guid (inst, wrinfo)) {
+      /* ok */
+    } else {
+      return false;
+    }
+  }
+
+// It is assumed that `unregister/dispose` must be called to clean up the Reader RHC
+    /* Don't set expiry for samples with flags unregister or dispose, because these are required
+     * for sample lifecycle and should always be delivered to the reader so that is can clean up
+     * its history cache. */
+
+if (--inst->wrcount > 0)
+  {
+    if (inst->wr_iid_islive && wrinfo->iid == inst->wr_iid)
+    {
+      /* Next register will have to do real work before we have a cached
+       wr_iid again */
+      inst->wr_iid_islive = 0;
+
+      /* Reset the ownership strength to allow samples to be read from other
+       writer(s) */
+      inst->strength = 0;
+
+// The transition can only take place once the Owner’s unregister message has been received, resetting strength to 0 so that another Writer can take over. If the message is lost (as this is a best-effort transmission), the transition will be blocked.
 ```
 
 <hr class="hr-dashed">
