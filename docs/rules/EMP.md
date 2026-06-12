@@ -464,7 +464,7 @@ The experiment proves that setting an excessively high `max_samples_per_instance
 **3. Experimental Observation**
 
 <div align="center">
-  <img src="../../images/Rule38.png" width="500">
+  <img src="../../images/rule38.png" width="500">
 </div>
 
 * **Case A (Deadline = 100ms - red):** Numerous spikes are observed throughout the experiment. Any minor retransmission delay caused by the 5% loss immediately triggers a deadline miss, leading to unstable ownership.
