@@ -443,24 +443,23 @@ The experiment proves that setting an excessively high `max_samples_per_instance
 
 <span id="rule-38"></span>
 ### Rule 38
-*Justifies the minimum Deadline period required to maintain stable Ownership in exclusive communication under network instability.*
+*Demonstrates that setting the DEADLN.period too short in EXCLUSIVE mode can result in unintended ownership transfers.*
 
 **1. Experimental Setup**
 
-* **QoS Profile:** Ownership = `EXCLUSIVE`, Reliability = `RELIABLE`
+* **DATA:** 1kB, 10Hz
+* **QoS:** RELIABILITY(`RELIABLE`), HISTORY(`KEEP_ALL`), OWNERSHIP(`EXCLUSIVE`)
 * **Variable:** Deadline Period (`100ms` vs `500ms`)
-* **Network Condition:** 5% Packet Loss (Simulated via `tc`)
-* **Publication Period (PP):** 100ms
-* **Total Samples:** 400
+* **Network Condition (Loss):** 5% Packet Loss (Simulated via `tc`)
+
 
 **2. Test Scenario**
 
 1.  Configure two Publishers with different strengths for `EXCLUSIVE` ownership.
-2.  Set both Publishers and the Subscriber to `RELIABLE` reliability to ensure eventual delivery.
-3.  Introduce a constant 5% packet loss using the `tc` command.
-4.  **Case A:** Set the Deadline period to `100ms` (equal to the PP).
-5.  **Case B:** Set the Deadline period to `500ms` ($5 × PP$).
-6.  Monitor the `on_requested_deadline_missed` callback and track how often the active owner is switched due to deadline timeouts.
+2.  Introduce a constant 5% packet loss using the `tc` command.
+3.  **Case A:** Set the Deadline period to `100ms`.
+4.  **Case B:** Set the Deadline period to `500ms`.
+5.  Monitor the `on_requested_deadline_missed` callback and track how often the active owner is switched due to deadline timeouts.
 
 **3. Experimental Observation**
 
@@ -475,21 +474,18 @@ The experiment proves that setting an excessively high `max_samples_per_instance
 
 The experiment clearly demonstrates that **Ownership Stability** is highly dependent on the **Deadline** period in lossy networks. A tight deadline (Case A) causes "Ownership Churning," where control is frequently and unnecessarily handed over due to transient network jitters. 
 
-By extending the Deadline (Case B), the system becomes more resilient to packet loss, ensuring that the primary owner remains active as long as retransmissions are successful within the extended margin. To ensure stable control in exclusive ownership, the Deadline should be at least twice the Publication Period:
-$[OWNST = EXCLUSIVE] ⇒ DEADLN.period ≥ 2 × PP$
-
 <hr class="hr-dashed">
 
 <span id="rule-39"></span>
 ### Rule 39
-*Justifies the impact of Liveliness Lease Duration on Ownership stability by preventing premature entity failure detection.*
+*Demonstrates that, in EXCLUSIVE mode, setting the lease duration for Liveliness too short can result in unintended transfers of ownership.*
 
 **1. Experimental Setup**
 
-* **QoS Profile:** Ownership = `EXCLUSIVE`, Liveliness = `AUTOMATIC`
+* **DATA:** 1kB, 10Hz
+* **QoS:** RELIABILITY(`RELIABLE`), HISTORY(`KEEP_ALL`), OWNERSHIP(`EXCLUSIVE`), LIVELINESS(`AUTOMATIC`)
 * **Variable (Lease Duration):** 50ms, 100ms, 300ms, 500ms, 800ms
-* **Network Condition:** 80% Packet Loss (Simulated via `tc`)
-* **Publication Period (PP):** 100ms
+* **Network Condition (Loss):** 80% Packet Loss (Simulated via `tc`)
 * **Metric:** Total count of Liveliness Lost events
 
 **2. Test Scenario**
@@ -511,9 +507,7 @@ $[OWNST = EXCLUSIVE] ⇒ DEADLN.period ≥ 2 × PP$
 
 **4. Empirical Conclusion**
 
-The experiment highlights the risk of **"False Positive Failures."** When the Liveliness Lease Duration is too aggressive (close to the $PP$), transient network issues cause the Subscriber to frequently revoke ownership from the primary Publisher. This leads to unstable system control and unnecessary handovers.
+The experiment highlights the risk of **"False Positive Failures."** When the Liveliness Lease Duration is too aggressive, transient network issues cause the Subscriber to frequently revoke ownership from the primary Publisher. This leads to unstable system control and unnecessary handovers.
 
-To maintain a stable Ownership state, the Liveliness Lease Duration must be set with enough margin to accommodate at least two consecutive heartbeat losses or retransmission delays:
-$[OWNST = EXCLUSIVE] ⇒ lease_duration ≥ 2 × PP$
 
 <hr class="hr-double">
