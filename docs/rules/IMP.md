@@ -174,7 +174,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <tr><td>18</td><td>RESLIM → LFSPAN</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>19</td><td>ENTFAC → DURABL</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
       <tr><td>20</td><td>PART → DURABL</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
-      <tr><td>28</td><td>WDLIFE → RDLIFE</td><td class="impl-o">O</td><td class="impl-x">X</td></tr>
+      <tr><td>28</td><td>WDLIFE → RDLIFE</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
       <tr><td>29</td><td>WDLIFE → RDLIFE</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
       <tr><td>30</td><td>WDLIFE → RDLIFE</td><td class="impl-x">X</td><td class="impl-o">O</td></tr>
       <tr><td>34</td><td>RELIAB → WDLIFE</td><td class="impl-o">O</td><td class="impl-o">O</td></tr>
