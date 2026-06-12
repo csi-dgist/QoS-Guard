@@ -589,12 +589,14 @@ return true;
 ```
 - **RMW/Implementation: CycloneDDS** 
 ```cpp
-// Exclusive ownership is implemented by dropping all data from all writers
-   other than "wr_iid", unless "wr_iid" is 0 or the strength of the arriving
-   sample is higher than the current strength of the instance (in "strength").
-
-   // The writer id is only reset by unregistering, in which case it is natural
-   that ownership is up for grabs again.```
+// Only the FastDDS code contains code that checks this rule.
+if (m_reliability.kind == BEST_EFFORT_RELIABILITY_QOS && m_ownership.kind == EXCLUSIVE_OWNERSHIP_QOS) 
+{
+logError(RTPS_QOS_CHECK, "BEST_EFFORT incompatible with EXCLUSIVE ownership"); 
+return false; 
+} 
+return true;
+```
 
 <hr class="hr-dashed">
 
@@ -625,12 +627,6 @@ wr->heartbeat_xevent = qxev_heartbeat (wr->evq, DDSRT_MTIME_NEVER, &wr->e.guid);
 else
 wr->heartbeat_xevent = NULL;
 ```
-
-
-
-
-
-
 
 
 <hr class="hr-dashed">
