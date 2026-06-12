@@ -295,7 +295,7 @@ In a lossy network (5% loss), a Reliable connection requires retransmission of l
 **3. Experimental Observation**
 
 <div align="center">
-  <img src="../../images/rule32.png" width="500">
+  <img src="../../images/Rule32.png" width="500">
 </div>
 
 **4. Empirical Conclusion**
@@ -361,7 +361,7 @@ Even with `RELIABLE` settings, data loss occurs if the **Lifespan duration** is 
 **3. Experimental Observation**
 
 <div align="center">
-  <img src="../../images/rule35.png" width="500">
+  <img src="../../images/Rule35.png" width="500">
 </div>
 
 | Reliability | Total Samples | Received Samples | Deadline Missed Count | Cause of Violation |
@@ -464,7 +464,7 @@ The experiment proves that setting an excessively high `max_samples_per_instance
 **3. Experimental Observation**
 
 <div align="center">
-  <img src="../../images/rule38.png" width="500">
+  <img src="../../images/Rule38.png" width="500">
 </div>
 
 * **Case A (Deadline = 100ms - Orange):** Numerous spikes are observed throughout the experiment. Any minor retransmission delay caused by the 5% loss immediately triggers a deadline miss, leading to unstable ownership.
@@ -499,7 +499,7 @@ The experiment clearly demonstrates that **Ownership Stability** is highly depen
 **3. Experimental Observation**
 
 <div align="center">
-  <img src="../../images/rule39.png" width="500">
+  <img src="../../images/Rule39.png" width="500">
 </div>
 
 * **Short Lease Duration (50ms - 100ms):** A high frequency of Liveliness Lost events is observed (up to 26 times). Since the lease duration is shorter than or equal to the Publication Period (100ms), even a single delayed heartbeat triggers a failure detection.
