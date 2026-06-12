@@ -117,15 +117,6 @@
   list-style: none;
 }
 
-.impl-summary-box summary:focus {
-  outline: none;
-}
-
-.impl-summary-box:focus-within {
-  border-color: #4e37e6;
-  box-shadow: 0 0 0 2px rgba(78, 55, 230, 0.15);
-}
-
 .impl-summary-box summary::-webkit-details-marker {
   display: none;
 }
