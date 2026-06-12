@@ -300,7 +300,7 @@ This page describes the QoS dependency rules derived from the specific implement
       [autodispose = TRUE] ∧ [OWNST = EXCLUSIVE]
     </div>
     <div class="std-footer">
-      <div class="std-tag"><b>Entity</b> Sub</div>
+      <div class="std-tag"><b>Entity</b> Pub</div>
       <div class="std-tag"><b>Basis</b> IMP</div>
     </div>
   </a>
