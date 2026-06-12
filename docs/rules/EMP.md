@@ -467,8 +467,8 @@ The experiment proves that setting an excessively high `max_samples_per_instance
   <img src="../../images/Rule38.png" width="500">
 </div>
 
-* **Case A (Deadline = 100ms - Orange):** Numerous spikes are observed throughout the experiment. Any minor retransmission delay caused by the 5% loss immediately triggers a deadline miss, leading to unstable ownership.
-* **Case B (Deadline = 500ms - Blue):** Significantly fewer and more sparse spikes appear. The larger window provides sufficient time for the `RELIABLE` protocol to recover lost packets through NACK/retransmission before the 500ms timer expires, maintaining a more consistent owner state.
+* **Case A (Deadline = 100ms - red):** Numerous spikes are observed throughout the experiment. Any minor retransmission delay caused by the 5% loss immediately triggers a deadline miss, leading to unstable ownership.
+* **Case B (Deadline = 500ms - green):** Significantly fewer and more sparse spikes appear. The larger window provides sufficient time for the `RELIABLE` protocol to recover lost packets through NACK/retransmission before the 500ms timer expires, maintaining a more consistent owner state.
 
 **4. Empirical Conclusion**
 
