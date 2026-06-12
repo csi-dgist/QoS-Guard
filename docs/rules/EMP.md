@@ -213,13 +213,19 @@ This page describes the QoS dependency rules derived from **Empirical analysis a
 *Let us prove that for late-joining data to be transmitted, the sample must not have expired.*
 
 **1. Experimental Setup**
-* **Variable:** History Depth ($1 \sim N$)
+
 * **DATA:** 1kB, 10Hz
 * **QoS:** RELIABILITY(`RELIABLE`), HISTORY(`KEEP_ALL`)
 * **Publisher:** Durability = `TRANSIENT_LOCAL`, Lifespan = `50ms`
 * **Subscriber 1 (Existing):** Launched before Publisher.
 * **Subscriber 2 (Late-joiner):** Launched after Publisher finishes sending 1,000 samples.
 * **Total Samples Sent:** 1,000
+
+* **QoS Profile:** Reliability = `RELIABLE`, History Kind = `KEEP_LAST`
+* **Network Condition (Loss):** 5% Packet Loss (Simulated via `tc`)
+* **Network Condition (Delay):** 100ms to 500ms RTT (Round Trip Time)
+* **Publication Period (PP):** 100ms (10Hz)
+* **Variable:** History Depth ($1 \sim N$)
 
 **2. Test Scenario**
 
