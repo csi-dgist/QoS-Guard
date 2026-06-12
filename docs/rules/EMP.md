@@ -383,7 +383,8 @@ The experimental results highlight two different causes of Deadline violations:
 
 **1. Experimental Setup**
 
-* **Publication Period (PP):** 100ms
+* **DATA:** 1kB, 10Hz
+* **QoS:** RELIABILITY(`RELIABLE`), HISTORY(`KEEP_ALL`)
 * **Deadline Period:** 200ms
 * **Total Samples:** 600 (Total duration: 60s)
 * **Liveliness Lease Duration**: Variable
@@ -399,9 +400,7 @@ The network condition is controlled over 60 seconds using the `tc` command:
 
 **3. Experimental Observation & Empirical Conclusion**
 
-**[ISSUE]** Liveliness Lost is triggered prematurely (approx. 60~80ms). Even though the Publisher is already marked as 'Offline', **Deadline Missed alarms continue to trigger late at the 200ms mark.**
-
-**[Conclusion]**
+**[RESULT]**
 The experiment demonstrates that when `Lease Duration < Deadline`, the system falls into a contradictory state: it continues to fire "Data Missing" alarms (Deadline Missed) for a Publisher that it has already declared "Dead" (Liveliness Lost). 
 
 To prevent this **state inconsistency** and ensure a logical fault-detection sequence (where the data stream is monitored within the lifespan of the entity), the Liveliness Lease Duration must always be longer than the Deadline Period:
