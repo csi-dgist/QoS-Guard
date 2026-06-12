@@ -159,7 +159,7 @@
 }
 
 .impl-table td:nth-child(2) {
-  text-align: left;
+  text-align: center;
   font-family: 'Consolas', 'Monaco', monospace;
   color: #000000;
 }
