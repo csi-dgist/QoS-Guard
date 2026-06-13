@@ -485,7 +485,11 @@ The experiment clearly demonstrates that **Ownership Stability** is highly depen
 * **DATA:** 1kB, 10Hz
 * **QoS:** RELIABILITY(`RELIABLE`), HISTORY(`KEEP_ALL`), OWNERSHIP(`EXCLUSIVE`), LIVELINESS(`AUTOMATIC`)
 * **Variable (Lease Duration):** 50ms, 100ms, 300ms, 500ms, 800ms
-* **Network Condition (Loss):** 80% Packet Loss (Simulated via `tc`)
+* **Network Condition (Loss):** (Simulated via `tc`)
+  - 0% - 20s
+  - 10% - 20s
+  - 100% - 5s
+  - 0% - 15s
 * **Metric:** Total count of Liveliness Lost events
 
 **2. Test Scenario**
