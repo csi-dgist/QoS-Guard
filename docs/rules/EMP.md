@@ -314,6 +314,7 @@ When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effectiv
 * **QoS:** RELIABILITY(`RELIABLE`), HISTORY(`KEEP_ALL`)
 * **Publication Period (PP):** 10ms to 100ms
 * **Lifespan Duration:** 100ms to 1000ms
+* **Network Condition (Loss):** 5% Packet Loss (Simulated via `tc`)
 * **Total Samples:** 10,000
 
 **2. Test Scenario**
