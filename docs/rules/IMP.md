@@ -412,7 +412,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      [autodispose = TRUE] ∧ [OWNST = EXCLUSIVE]
+      [W.autodispose = TRUE] ∧ [OWNST = EXCLUSIVE]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub</div>
