@@ -165,7 +165,7 @@ These are implemented in **QoS Guard** for static verification.
 | 32 | RESLIM → RELIAB | $[RELIABLE] \wedge [HIST.kind=KEEP\_ALL] \wedge [RESLIM.mpi < \lceil 2 \times RTT/PP \rceil + 1]$ | Functional | Pub | EMP |
 | 33 | LFSPAN → RELIAB | $[RELIABLE] \wedge [LFSPAN.duration < PP + 2 \times RTT]$ | Functional | Pub | EMP |
 | 34 | RELIAB → WDLIFE | $[W.autodispose = TRUE] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub | IMP |
-| 35 | RELIAB → DEADLN | $[DEADLN.period > 0] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub ↔ Sub | EMP |
+| 35 | RELIAB → DEADLN | $[DEADLN.period > 0] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Sub | EMP |
 | 36 | LIVENS → DEADLN | $[DEADLN.period > 0] \wedge [LIVENS.lease < DEADLN.period]$ | Functional | Sub | EMP |
 | 37 | HIST → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [HIST.kind=KEEP\_ALL] \wedge [RESLIM.mpi \ge default]$ | Operational | Pub | EMP |
 | 38 | DEADLN → OWNST | $[OWNST = EXCLUSIVE] \wedge [DEADLN.period < PP +  2 \times RTT]$ | Operational | Sub | EMP |
