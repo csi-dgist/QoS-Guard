@@ -392,11 +392,8 @@ The experimental results highlight two different causes of Deadline violations:
 **2. Test Scenario**
 
 The network condition is controlled over 60 seconds using the `tc` command:
+**40s ~ 45s (Loss 100%):** Induce **Liveliness Lost** by blocking all packets.
 
-1.  **0s ~ 20s (Loss 0%):** Normal communication.
-2.  **20s ~ 40s (Loss 10%):** Induce occasional **Deadline Missed** due to retransmission delays.
-3.  **40s ~ 45s (Loss 100%):** Induce **Liveliness Lost** by blocking all packets.
-4.  **45s ~ 60s (Loss 0%):** Restore communication and observe recovery.
 
 **3. Experimental Observation & Empirical Conclusion**
 
