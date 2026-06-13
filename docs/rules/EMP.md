@@ -392,7 +392,7 @@ The experimental results highlight two different causes of Deadline violations:<
 
 **2. Test Scenario**
 
-The network condition is controlled over 5 seconds using the `tc` command:
+The network condition is controlled over 5 seconds using the `tc` command:<br>
 **40s ~ 45s (Loss 100%):** Induce **Liveliness Lost** by blocking all packets.
 
 
