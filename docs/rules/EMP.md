@@ -488,7 +488,7 @@ The experiment clearly demonstrates that **Ownership Stability** is highly depen
 **2. Test Scenario**
 
 1.  Initialize two Publishers with different strengths for `EXCLUSIVE` ownership.
-2.  Apply a harsh network environment with **80% packet loss** using the `tc` command.
+2.  Apply a harsh network environment with **100% packet loss** using the `tc` command.
 3.  Publish a total of **10,000 samples** to observe long-term stability.
 4.  Vary the **Liveliness Lease Duration** from 50ms to 800ms.
 5.  Record the frequency of ownership handovers triggered by `on_liveliness_changed` at the Subscriber side.
