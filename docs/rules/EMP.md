@@ -388,10 +388,11 @@ The experimental results highlight two different causes of Deadline violations:
 * **Deadline Period:** 200ms
 * **Total Samples:** 600 (Total duration: 60s)
 * **Liveliness Lease Duration**: Variable
+* * **Network Condition (Loss):** 100% (Simulated via `tc`)
 
 **2. Test Scenario**
 
-The network condition is controlled over 60 seconds using the `tc` command:
+The network condition is controlled over 5 seconds using the `tc` command:
 **40s ~ 45s (Loss 100%):** Induce **Liveliness Lost** by blocking all packets.
 
 
