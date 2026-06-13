@@ -449,13 +449,13 @@ The experiment proves that setting an excessively high `max_samples_per_instance
 * **DATA:** 1kB, 10Hz
 * **QoS:** RELIABILITY(`RELIABLE`), HISTORY(`KEEP_ALL`), OWNERSHIP(`EXCLUSIVE`)
 * **Variable:** Deadline Period (`100ms` vs `500ms`)
-* **Network Condition (Loss):** 100% -5s (Simulated via `tc`)
+* **Network Condition (Loss):** 100% -5s, 10% - 20s (Simulated via `tc`)
 
 
 **2. Test Scenario**
 
 1.  Configure two Publishers with different strengths for `EXCLUSIVE` ownership.
-2.  Introduce a constant 100% packet loss using the `tc` command.
+2.  Introduce a packet loss using the `tc` command.
 3.  **Case A:** Set the Deadline period to `100ms`.
 4.  **Case B:** Set the Deadline period to `500ms`.
 5.  Monitor the `on_requested_deadline_missed` callback and track how often the active owner is switched due to deadline timeouts.
