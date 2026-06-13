@@ -550,7 +550,7 @@ This page describes the QoS dependency rules derived from the specific implement
       <span style="font-size: 0.8em; color: #999;">Functional</span>
     </div>
     <div class="std-condition">
-      [autodispose = TRUE] ∧ [RELIAB = BEST_EFFORT]
+      [W.autodispose = TRUE] ∧ [RELIAB = BEST_EFFORT]
     </div>
     <div class="std-footer">
       <div class="std-tag"><b>Entity</b> Pub</div>
