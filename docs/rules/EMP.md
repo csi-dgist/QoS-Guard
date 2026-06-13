@@ -318,7 +318,7 @@ When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effectiv
 
 **2. Test Scenario**
 
-1.  Set the network packet loss to 5% and RTT to a range of 100ms to 500ms.
+1.  Set the network packet loss to 5%.
 2.  Perform a grid search by varying the **Publish Period (PP)** from 10ms to 100ms and **Lifespan duration** from 100ms to 1000ms.
 3.  Measure the total number of samples successfully received at the Subscriber.
 4.  Identify the threshold where sample reception starts to drop despite using `RELIABLE` QoS.
