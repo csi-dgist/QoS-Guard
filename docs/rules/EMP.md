@@ -389,7 +389,7 @@ The experimental results highlight two different causes of Deadline violations:<
 * **Deadline Period:** 200ms
 * **Total Samples:** 600 (Total duration: 60s)
 * **Liveliness Lease Duration**: Variable
-* * **Network Condition (Loss):** 100% (Simulated via `tc`)
+* **Network Condition (Loss):** 100% (Simulated via `tc`)
 
 **2. Test Scenario**
 
