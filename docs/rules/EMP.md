@@ -371,8 +371,8 @@ Even with `RELIABLE` settings, data loss occurs if the **Lifespan duration** is 
 
 **4. Empirical Conclusion**
 
-The experimental results highlight two different causes of Deadline violations:
-1. In **RELIABLE** mode, all 1,000 samples were received, but 25 samples violated the Deadline because the time taken for NACK-based retransmission exceeded the 150ms window.
+The experimental results highlight two different causes of Deadline violations:<br>
+1. In **RELIABLE** mode, all 1,000 samples were received, but 25 samples violated the Deadline because the time taken for NACK-based retransmission exceeded the 150ms window.<br>
 2. In **BEST_EFFORT** mode, violations nearly doubled (48 times) because lost packets created permanent gaps in the data stream, directly triggering the Deadline timer.
 
 <hr class="hr-dashed">
