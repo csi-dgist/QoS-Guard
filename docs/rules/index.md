@@ -126,11 +126,11 @@ These are implemented in **QoS Guard** for static verification.
 | 9 | RESLIM → DESTORD | $[DESTORD = BY\_SOURCE] \wedge [HIST.kind = KEEP\_ALL] \wedge [RESLIM.mpi = 1]$ | Functional | Sub | IMP |
 | 10 | DEADLN → OWNST | $[OWNST = EXCLUSIVE] \wedge [DEADLN.period = \infty]$ | Functional | Sub | IMP |
 | 11 | LIVENS → OWNST | $[OWNST = EXCLUSIVE] \wedge [LIVENS.lease = \infty]$ | Functional | Sub | IMP |
-| 12 | LIVENS → RDLIFE | $[autopurge\_nowriter > 0] \wedge [LIVENS.lease = \infty]$ | Functional | Sub | IMP |
-| 13 | RDLIFE → DURABL | $[DURABL \ge TRANSIENT] \wedge [autopurge\_disposed \neq \infty]$ | Functional | Sub | IMP |
+| 12 | LIVENS → RDLIFE | $[R.autopurge\_nowriter > 0] \wedge [LIVENS.lease = \infty]$ | Functional | Sub | IMP |
+| 13 | RDLIFE → DURABL | $[DURABL \ge TRANSIENT] \wedge [R.autopurge\_disposed \neq \infty]$ | Functional | Sub | IMP |
 | 14 | PART → DEADLN | $[DEADLN.period > 0] \wedge [PART.names \neq \emptyset]$ | Functional | Sub | IMP |
 | 15 | PART → LIVENS | $[LIVENS = MANUAL] \wedge [PART.names \neq \emptyset]$ | Functional | Sub | IMP |
-| 16 | OWNST → WDLIFE | $[autodispose = TRUE] \wedge [OWNST = EXCLUSIVE]$ | Functional | Sub | IMP |
+| 16 | OWNST → WDLIFE | $[W.autodispose = TRUE] \wedge [OWNST = EXCLUSIVE]$ | Functional | Pub | IMP |
 | 17 | HIST → LFSPAN | $[HIST.kind=KEEP\_LAST] \wedge [LFSPAN.duration > HIST.depth \times PP]$ | Operational | Pub, Sub | IMP |
 | 18 | RESLIM → LFSPAN | $[HIST.kind=KEEP\_ALL] \wedge [LFSPAN.duration > RESLIM.mpi \times PP]$ | Operational | Pub, Sub | IMP |
 | 19 | ENTFAC → DURABL | $[DURABL = VOLATILE] \wedge [autoenable = FALSE]$ | Operational | Pub, Sub | IMP |
@@ -164,13 +164,13 @@ These are implemented in **QoS Guard** for static verification.
 | 31 | HIST → RELIAB | $[RELIABLE] \wedge [HIST.kind=KEEP\_LAST] \wedge [HIST.depth < \lceil 2 \times RTT/PP \rceil + 1]$ | Functional | Pub | EMP |
 | 32 | RESLIM → RELIAB | $[RELIABLE] \wedge [HIST.kind=KEEP\_ALL] \wedge [RESLIM.mpi < \lceil 2 \times RTT/PP \rceil + 1]$ | Functional | Pub | EMP |
 | 33 | LFSPAN → RELIAB | $[RELIABLE] \wedge [LFSPAN.duration < PP + 2 \times RTT]$ | Functional | Pub | EMP |
-| 34 | RELIAB → WDLIFE | $[autodispose = TRUE] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub | IMP |
-| 35 | RELIAB → DEADLN | $[DEADLN.period > 0] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub ↔ Sub | IMP |
+| 34 | RELIAB → WDLIFE | $[W.autodispose = TRUE] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub | IMP |
+| 35 | RELIAB → DEADLN | $[DEADLN.period > 0] \wedge [RELIAB = BEST\_EFFORT]$ | Functional | Pub ↔ Sub | EMP |
 | 36 | LIVENS → DEADLN | $[DEADLN.period > 0] \wedge [LIVENS.lease < DEADLN.period]$ | Functional | Sub | EMP |
 | 37 | HIST → DURABL | $[DURABL \ge TRAN\_LOCAL] \wedge [HIST.kind=KEEP\_ALL] \wedge [RESLIM.mpi \ge default]$ | Operational | Pub | EMP |
 | 38 | DEADLN → OWNST | $[OWNST = EXCLUSIVE] \wedge [DEADLN.period < PP +  2 \times RTT]$ | Operational | Sub | EMP |
 | 39 | LIVENS → OWNST | $[OWNST = EXCLUSIVE] \wedge [LIVENS.lease < PP +  2 \times RTT]$ | Operational | Sub | EMP |
-| 40 | DURABL → DEADLN | $[DEADLN.period > 0] \wedge [DURABL \ge TRAN\_LOCAL]$ | Operational | Sub | EMP |
+| 40 | DURABL → DEADLN | $[DEADLN.period > 0] \wedge [DURABL \ge TRAN\_LOCAL]$ | Operational | Sub | IMP |
 
 <hr class="hr-grad-left">
 
