@@ -314,12 +314,12 @@ When using `KEEP_ALL`, the `max_samples_per_instance` (mpi) acts as the effectiv
 * **QoS:** RELIABILITY(`RELIABLE`), HISTORY(`KEEP_ALL`)
 * **Publication Period (PP):** 10ms to 100ms
 * **Lifespan Duration:** 100ms to 1000ms
-* **Network Condition (Loss):** 5% Packet Loss (Simulated via `tc`)
+* **Network Condition (Loss):** 20% Packet Loss (Simulated via `tc`)
 * **Total Samples:** 10,000
 
 **2. Test Scenario**
 
-1.  Set the network packet loss to 5%.
+1.  Set the network packet loss to 20%.
 2.  Perform a grid search by varying the **Publish Period (PP)** from 10ms to 100ms and **Lifespan duration** from 100ms to 1000ms.
 3.  Measure the total number of samples successfully received at the Subscriber.
 4.  Identify the threshold where sample reception starts to drop despite using `RELIABLE` QoS.
