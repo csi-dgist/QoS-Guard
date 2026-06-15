@@ -450,7 +450,7 @@ The RELIAB QoS can be used to balance safety and efficiency by configuring topic
 <div class="req-container">
   <div class="req-item">
     <span class="req-label">Parameter</span>
-    <span class="req-value"><code>kind</code> (default: VOLATILE)</span>
+    <span class="req-value"><code>kind</code> (default: Publisher-transient_local, Subscriber-volatile)</span>
   </div>
   <div class="req-item">
     <span class="req-label">Mutability</span>
