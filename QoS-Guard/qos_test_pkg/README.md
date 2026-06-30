@@ -90,10 +90,12 @@ colcon build --packages-select qos_test_pkg
 source install/setup.bash
 
 # Launch all nodes
-ros2 launch qos_test_pkg test_all.launch.py```
+ros2 launch qos_test_pkg test_all.launch.py
+```
 
 ## Verification with QoS-Guard
 ```bash
 # Static analysis at the package path
-qos_guard scan /path/to/qos_test_pkg```
+qos_guard scan /path/to/qos_test_pkg
+```
 
