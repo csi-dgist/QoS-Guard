@@ -1,0 +1,95 @@
+
+<!--
+RTI Data Distribution Service Deployment
+-->
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/6.0.1/rti_dds_profiles.xsd">
+         
+    <!-- Qos Library -->
+    <qos_library name="qosLibrary">
+        <qos_profile name="TransientDurability" 
+                     is_default_qos="true">
+            <datawriter_qos>
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>20</depth>
+                </history>
+            </datawriter_qos>
+            <datareader_qos>
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>10</depth>
+                </history>
+            </datareader_qos>
+        </qos_profile>
+    </qos_library>
+
+    <!-- types -->
+    <types>
+         <const name="MAX_NAME_LEN" type="long" value="64"/>
+         <const name="MAX_MSG_LEN"  type="long" value="128"/>
+
+         <struct name="HelloWorld">
+             <member name="sender"  key="true"
+                     type="string"  stringMaxLength="MAX_NAME_LEN"/>
+             <member name="message"
+                     type="string"  stringMaxLength="MAX_MSG_LEN"/>
+             <member name="count"   type="long"/>
+          </struct>
+    </types>
+
+    <!-- Domain Library -->
+    <domain_library name="HomeDomainLibrary" >
+
+        <domain name="HelloWorldDomain" domain_id="0">
+            <register_type name="HelloWorldType"
+                           type_ref="HelloWorld" />
+
+            <topic name="HelloWorldTopic"
+                   register_type_ref="HelloWorldType"/>
+        </domain>
+    </domain_library>
+
+    <!-- Participant library -->
+    <domain_participant_library name="HomeParticipantLibrary">
+
+        <domain_participant name="PublicationParticipant" 
+                      domain_ref="HomeDomainLibrary::HelloWorldDomain">
+
+            <publisher name="MyPublisher">
+                <data_writer name="HelloWorldWriter" 
+                             topic_ref="HelloWorldTopic">
+                    <datawriter_qos name="HelloWorld_writer_qos" 
+                         base_name="qosLibrary::TransientDurability"/>  
+                </data_writer>
+            </publisher>
+        </domain_participant>
+        
+         <domain_participant name="SubscriptionParticipant" 
+                       domain_ref="HomeDomainLibrary::HelloWorldDomain">                        
+                     
+            <subscriber name="MySubscriber">
+
+                <data_reader name="HelloWorldReader" 
+                             topic_ref="HelloWorldTopic">
+                    <datareader_qos name="HelloWorld_reader_qos" 
+                         base_name="qosLibrary::TransientDurability"/>  
+                </data_reader>
+            </subscriber>
+        </domain_participant>
+       
+    </domain_participant_library>
+
+</dds>

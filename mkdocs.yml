@@ -1,0 +1,73 @@
+site_name: QoS Guard
+site_description: ROS 2 QoS Dependency Conflict Detector
+site_url: https://csi-dgist.github.io/QoS-Guard/
+repo_url: https://github.com/csi-dgist/QoS-Guard
+
+theme:
+  name: material
+  language: en
+  palette:
+    - scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Dark mode
+    - scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - toc.follow
+    - content.code.copy
+
+use_directory_urls: true
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - javascript/vendor/cytoscape.min.js
+  - javascript/rules-table.js
+  - javascript/dependency-graph.js
+  - javascript/header-home.js
+
+extra_css:
+  - stylesheets/extra.css
+  - stylesheets/rules-table.css
+  - stylesheets/dependency-graph.css
+  - stylesheets/nav-toc.css
+
+nav:
+  - Home: index.md
+  - QoS Encyclopedia:
+    - Overview: qos/index.md
+    - Entity Factory: qos/entity-factory.md
+    - Partition: qos/partition.md
+    - User Data: qos/user-data.md
+    - Group Data: qos/group-data.md
+    - Topic Data: qos/topic-data.md
+    - Reliability: qos/reliability.md
+    - Durability: qos/durability.md
+    - Deadline: qos/deadline.md
+    - Liveliness: qos/liveliness.md
+    - History: qos/history.md
+    - Resource Limits: qos/resource-limits.md
+    - Lifespan: qos/lifespan.md
+    - Ownership: qos/ownership.md
+    - Destination Order: qos/destination-order.md
+    - Writer Data Lifecycle: qos/writer-data-lifecycle.md
+    - Reader Data Lifecycle: qos/reader-data-lifecycle.md
+  - Dependency Map: chain.md
+  - Rules & Evidence:
+    - Rules: rules/index.md
+    - Evidence: evidence.md
+  - Paper: paper.md

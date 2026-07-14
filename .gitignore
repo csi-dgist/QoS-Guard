@@ -1,0 +1,12 @@
+# Byte-compiled / optimized
+__pycache__/
+*.py[cod]
+
+# Packaging / build
+*.egg-info/
+build/
+dist/
+
+# Test / tooling caches
+.pytest_cache/
+site/

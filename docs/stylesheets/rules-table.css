@@ -1,0 +1,209 @@
+.rules-filter-bar {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #f8fafc;
+    box-sizing: border-box;
+}
+
+.rules-table-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    background: #ffffff;
+}
+
+.rules-table-controls {
+    overflow: visible;
+}
+
+.rules-table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+}
+
+.rules-filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+}
+
+.rules-filter-row + .rules-filter-row {
+    margin-top: 10px;
+}
+
+.rules-filter-row-search {
+    margin-bottom: 2px;
+}
+
+.rules-filter-row-actions {
+    justify-content: space-between;
+}
+
+.rules-filter-field {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-size: 13px;
+    color: #334155;
+}
+
+.rules-filter-field-search {
+    flex: 1 1 240px;
+    min-width: 220px;
+}
+
+.rules-filter-label {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.rules-filter-input,
+.rules-filter-select {
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+    color: #334155;
+    background: #ffffff;
+}
+
+.rules-filter-input {
+    flex: 1 1 auto;
+    min-width: 180px;
+}
+
+.rules-filter-input:focus,
+.rules-filter-select:focus {
+    outline: 2px solid rgba(78, 94, 180, 0.25);
+    border-color: #4E5EB4;
+}
+
+.rules-filter-select {
+    min-width: 110px;
+}
+
+.rules-filter-reset {
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.rules-filter-reset:hover {
+    background: #4E5EB4;
+    border-color: #4E5EB4;
+    color: #ffffff;
+}
+
+.rules-filter-count {
+    margin: 0;
+    font-size: 13px;
+    color: #64748b;
+    text-align: right;
+}
+
+.rules-master-table tbody tr.rules-master-row-clickable {
+    cursor: pointer;
+}
+
+.rules-master-table tbody tr.rules-master-row-clickable:hover {
+    background-color: #e8eef6 !important;
+}
+
+.rules-master-table tbody tr.rules-master-row-clickable:hover td {
+    background-color: transparent !important;
+}
+
+.rules-filter-block-hidden {
+    display: none !important;
+}
+
+.md-typeset h4:has(+ .rule-card).rules-visible-first {
+    margin-top: 16px;
+    padding-top: 0;
+    border-top: none;
+}
+
+@media (max-width: 900px) {
+    .rules-filter-row-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .rules-filter-count {
+        text-align: left;
+    }
+}
+
+.rules-basis-col {
+    width: 52px !important;
+    min-width: 52px !important;
+    max-width: 52px !important;
+    text-align: center !important;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+}
+
+.rules-master-table td.rules-basis-cell,
+.rules-master-table .rules-basis-col + td,
+.rules-master-table td:nth-child(n+7):nth-child(-n+10) {
+    text-align: center !important;
+    font-size: 13px !important;
+    color: #475569;
+    width: 52px !important;
+    min-width: 52px !important;
+    max-width: 52px !important;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+}
+
+.evidence-basis-badges {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+}
+
+.evidence-basis-badge {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+    border: 1px solid transparent;
+    white-space: nowrap;
+}
+
+.evidence-basis-std {
+    color: #475569;
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+.evidence-basis-imp-f {
+    color: #1e4a72;
+    background: #e8f1fb;
+    border-color: #c7daf0;
+}
+
+.evidence-basis-imp-c {
+    color: #1a5568;
+    background: #e6f4f8;
+    border-color: #bfe3ec;
+}
+
+.evidence-basis-emp {
+    color: #7f3b4a;
+    background: #faecef;
+    border-color: #f0cbd3;
+}

@@ -1,0 +1,382 @@
+{
+  "meta": {
+    "schema": "qos-guard-evidence-basis-v1",
+    "source": "uploaded_files/Table4_근거_통합_웹.html",
+    "extracted": "2026-07-09",
+    "description": "Review artifact for multi-evidence basis mapping. Merge into rules.json after approval. Does not include rule conditions.",
+    "column_totals": {
+      "std": 22,
+      "imp_fast": 18,
+      "imp_cyclone": 23,
+      "emp": 20
+    },
+    "notes": [
+      "imp_fast_version_dependent applies only to rule 4 (Table4 △).",
+      "basis field in rules.json is not updated here; retained as deprecated alias until UI migration.",
+      "2026-07-13. Booleans synced to main.tex Table III per the rule-pack change spec. Changed std for rules 10, 11, 38, 39. Changed imp_fast for 40. Changed imp_cyclone for 6, 17, 18. Changed emp for 3. Column totals recomputed."
+    ]
+  },
+  "rules": [
+    {
+      "id": 1,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": false
+      }
+    },
+    {
+      "id": 2,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": false
+      }
+    },
+    {
+      "id": 3,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": true
+      }
+    },
+    {
+      "id": 4,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": true,
+        "imp_fast_version_dependent": true,
+        "imp_cyclone": false,
+        "emp": true
+      }
+    },
+    {
+      "id": 5,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": false,
+        "imp_cyclone": false,
+        "emp": true
+      }
+    },
+    {
+      "id": 6,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": false,
+        "imp_cyclone": true,
+        "emp": true
+      }
+    },
+    {
+      "id": 7,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": false,
+        "imp_cyclone": false,
+        "emp": true
+      }
+    },
+    {
+      "id": 8,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": false,
+        "imp_cyclone": true,
+        "emp": false
+      }
+    },
+    {
+      "id": 9,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": false,
+        "imp_cyclone": true,
+        "emp": false
+      }
+    },
+    {
+      "id": 10,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": true
+      }
+    },
+    {
+      "id": 11,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": true
+      }
+    },
+    {
+      "id": 12,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": false,
+        "imp_cyclone": false,
+        "emp": false
+      }
+    },
+    {
+      "id": 13,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": false,
+        "imp_cyclone": false,
+        "emp": false
+      }
+    },
+    {
+      "id": 14,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": false
+      }
+    },
+    {
+      "id": 15,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": false
+      }
+    },
+    {
+      "id": 16,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": true
+      }
+    },
+    {
+      "id": 17,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": false,
+        "imp_cyclone": true,
+        "emp": true
+      }
+    },
+    {
+      "id": 18,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": false,
+        "imp_cyclone": true,
+        "emp": true
+      }
+    },
+    {
+      "id": 19,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": true,
+        "imp_cyclone": false,
+        "emp": false
+      }
+    },
+    {
+      "id": 20,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": false
+      }
+    },
+    {
+      "id": 21,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": false
+      }
+    },
+    {
+      "id": 22,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": false
+      }
+    },
+    {
+      "id": 23,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": false
+      }
+    },
+    {
+      "id": 24,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": false
+      }
+    },
+    {
+      "id": 25,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": false
+      }
+    },
+    {
+      "id": 26,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": false
+      }
+    },
+    {
+      "id": 27,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": false,
+        "imp_cyclone": true,
+        "emp": false
+      }
+    },
+    {
+      "id": 28,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": false,
+        "imp_cyclone": false,
+        "emp": false
+      }
+    },
+    {
+      "id": 29,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": false,
+        "imp_cyclone": false,
+        "emp": false
+      }
+    },
+    {
+      "id": 30,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": false,
+        "imp_cyclone": false,
+        "emp": false
+      }
+    },
+    {
+      "id": 31,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": false,
+        "imp_cyclone": false,
+        "emp": true
+      }
+    },
+    {
+      "id": 32,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": false,
+        "imp_cyclone": false,
+        "emp": true
+      }
+    },
+    {
+      "id": 33,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": false,
+        "imp_cyclone": false,
+        "emp": true
+      }
+    },
+    {
+      "id": 34,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": false,
+        "imp_cyclone": false,
+        "emp": true
+      }
+    },
+    {
+      "id": 35,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": false,
+        "imp_cyclone": false,
+        "emp": true
+      }
+    },
+    {
+      "id": 36,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": false,
+        "imp_cyclone": false,
+        "emp": true
+      }
+    },
+    {
+      "id": 37,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": false,
+        "imp_cyclone": true,
+        "emp": true
+      }
+    },
+    {
+      "id": 38,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": false,
+        "imp_cyclone": false,
+        "emp": true
+      }
+    },
+    {
+      "id": 39,
+      "evidence_basis": {
+        "std": true,
+        "imp_fast": false,
+        "imp_cyclone": false,
+        "emp": true
+      }
+    },
+    {
+      "id": 40,
+      "evidence_basis": {
+        "std": false,
+        "imp_fast": true,
+        "imp_cyclone": true,
+        "emp": true
+      }
+    }
+  ]
+}

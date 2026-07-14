@@ -1,0 +1,94 @@
+<!-- 
+RTI DDS Ping QoS Profiles
+-->
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/6.0.1/rti_dds_qos_profiles.xsd">
+    <!-- Qos Library -->
+    <qos_library name="DefaultPingLibrary">
+        <qos_profile name="DefaultPingProfile" is_default_qos="false">
+            <participant_qos>
+                <property>
+                    <value>
+                        <element>
+                            <name> dds.transport.UDPv4.builtin.ignore_loopback_interface </name>
+                            <value> 0 </value>
+                        </element>
+                    </value>
+                </property>
+                <participant_name>
+                    <name>RTI Data Distribution Service Ping</name>
+                </participant_name>
+                <wire_protocol>
+                    <participant_id>-1</participant_id>
+                    <rtps_app_id>
+                        RTPS_AUTO_ID
+                    </rtps_app_id>
+                </wire_protocol>
+                <transport_builtin>
+                    <mask>
+                        MASK_DEFAULT
+                    </mask>
+                </transport_builtin>
+                <discovery_config>
+                    <participant_liveliness_assert_period>
+                        <sec>2</sec>
+                        <nanosec>0</nanosec>
+                    </participant_liveliness_assert_period>
+                    <participant_liveliness_lease_duration>
+                        <sec>6</sec>
+                        <nanosec>500000000</nanosec>
+                    </participant_liveliness_lease_duration>
+                </discovery_config>
+                <resource_limits>
+                    <type_code_max_serialized_length>
+                        4096
+                    </type_code_max_serialized_length>
+                </resource_limits>
+            </participant_qos>
+            <datawriter_qos>
+                <reliability>
+                    <kind>
+                        BEST_EFFORT_RELIABILITY_QOS
+                    </kind>
+                </reliability>
+                <history>
+                    <kind>
+                        KEEP_LAST_HISTORY_QOS
+                    </kind>
+                    <depth>
+                        1
+                    </depth>
+                </history>
+                <durability>
+                    <kind>
+                        TRANSIENT_LOCAL_DURABILITY_QOS
+                    </kind>
+                </durability>
+                <deadline>
+                    <period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </period>
+                </deadline>
+            </datawriter_qos>
+            <datareader_qos>
+                <reliability>
+                    <kind>
+                        BEST_EFFORT_RELIABILITY_QOS
+                    </kind>
+                </reliability>
+                <history>
+                    <kind>
+                        KEEP_LAST_HISTORY_QOS
+                    </kind>
+                    <depth>1</depth>
+                 </history>
+                 <durability>
+                    <kind>
+                        TRANSIENT_LOCAL_DURABILITY_QOS
+                    </kind>
+                 </durability>
+            </datareader_qos>
+        </qos_profile>
+    </qos_library>
+</dds>
