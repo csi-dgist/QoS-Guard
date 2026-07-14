@@ -1,0 +1,39 @@
+/* ------------------------------------------------------------------ *
+ * Navigation + table-of-contents polish
+ * Theme-agnostic (spacing / line-height only, no colour overrides) so
+ * both light and slate schemes are unaffected.
+ * ------------------------------------------------------------------ */
+
+/* Right-hand table of contents: give wrapped items room to breathe and
+ * tighten the vertical rhythm so long entries read cleanly. */
+.md-nav--secondary .md-nav__title {
+  font-size: 0.66rem;
+  letter-spacing: 0.02em;
+  opacity: 0.75;
+}
+.md-nav--secondary .md-nav__link {
+  line-height: 1.4;
+  margin-top: 0.45em;
+  padding-right: 0.4rem;
+}
+.md-nav--secondary .md-nav__item .md-nav__item .md-nav__link {
+  margin-top: 0.3em;
+  font-size: 0.62rem;
+}
+
+/* Left-hand navigation (now the primary sidebar): a touch more breathing
+ * room between items and clearer nesting. */
+.md-nav--primary .md-nav__item {
+  padding-top: 0.05rem;
+}
+.md-nav--primary .md-nav__item .md-nav__item > .md-nav__link {
+  font-size: 0.68rem;
+}
+
+/* The header title now behaves as a home link (see header-home.js). */
+.md-header__title {
+  transition: opacity 0.15s ease;
+}
+.md-header__title:hover {
+  opacity: 0.85;
+}
